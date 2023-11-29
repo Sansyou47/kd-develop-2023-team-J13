@@ -7,6 +7,10 @@ app = Flask(__name__)
 def index():
     return 'Test'
 
+@app.route('/create_storeis')
+def storeis():
+    return render_template('/templates/stories/create_stories.html')
+
 @app.route('/action/create_stories',methods=['POST'])
 def add_stories():
     stories = request.form.get('stories')
