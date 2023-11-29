@@ -10,6 +10,7 @@ app.register_blueprint(test.app)
 def index():
     return 'Test'
 
+<<<<<<< HEAD
 @app.route('/create_storeis')
 def storeis():
     return render_template('/templates/stories/create_stories.html')
@@ -25,6 +26,11 @@ def add_stories():
     conn.commit()
     cur.close()
     return render_template('/templates/stories/create_stories.html')
+=======
+@app.route('/suica')
+def suica():
+    return render_template('/project/createproject.html')
+>>>>>>> 68dbc1fa6d5d65c890e47cdd8f2976a88283d4da
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
