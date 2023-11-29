@@ -29,4 +29,4 @@ services:
     hostname: mysql
     volumes:
       - ./db/data:/work
-      - ./db/data/:/docker-entrypoint-initdb.d/
+      - ./db/data/sql:/docker-entrypoint-initdb.d/
