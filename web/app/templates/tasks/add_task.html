@@ -10,15 +10,8 @@
 <body>
     <h1>タスク追加フォーム</h1>
     <form action="/action/submit" method="post">
-        ユーザーID: <input type="text" name="id" required><br>
-        希望する日: <input type="date" name="date" required><br>
-        休みの種類:
-        <select name="holiday_type" required>
-            <option value="年次有給休暇">年次有給休暇</option>
-            <option value="希望休">希望休</option>
-            <option value="忌引き">忌引き</option>
-            <option value="リフレッシュ">リフレッシュ</option>
-        </select><br>
+        タスク名: <input type="text" name="task_name" required><br>
+        担当者名: <input type="text" name="task_manager" required><br>
         <input type="submit" value="登録">
     </form>
 </body>
