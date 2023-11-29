@@ -30,3 +30,4 @@ services:
     volumes:
       - ./db/sql:/work
       - ./db/data:/docker-entrypoint-initdb.d/
+      #hogefuga
