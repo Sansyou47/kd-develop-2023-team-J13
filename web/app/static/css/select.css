@@ -1,0 +1,35 @@
+/*ページの上部の隙間を無くすおまじない*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#header {
+    width: 100vw;
+    height: 60px;
+    margin: 0;
+    flex-shrink: 0;
+    background-color: #C4D8F6;
+}
+
+#sidemenu {
+    width: 100vw;
+    height: 40px;
+    background-color: #C4D8F6;
+}
+
+.title {
+    font-size: 40px;
+    color: #000;
+    font-weight: 400;
+    line-height: normal;
+    padding: 5px;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    /* 3つの列を指定 */
+    grid-gap: 10px;
+    /* 要素間のスペース */
+}
