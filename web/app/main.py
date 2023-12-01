@@ -10,6 +10,10 @@ app.register_blueprint(test.app)
 def index():
     return 'Test'
 
+@app.route('/project')
+def project():
+    return render_template('select_project.html')
+
 @app.route('/create_storeis')
 def storeis():
     return render_template('/templates/stories/create_stories.html')
