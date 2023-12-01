@@ -19,8 +19,10 @@ create table project(
     name    varchar(100)
 );
 
-INSERT INTO project(name) VALUES ('開発支援アプリ');
-INSERT INTO project(name) VALUES ('タスク管理アプリ');
+INSERT INTO project(name) VALUES('開発支援アプリ');
+INSERT INTO project(name) VALUES('タスク管理アプリ');
+INSERT INTO project(name) VALUES('シフト表作成支援アプリ');
+INSERT INTO project(name) VALUES('マインクラフトサーバー');
 
 drop table if exists task;
 create table task(
@@ -34,6 +36,9 @@ INSERT INTO task(name) VALUES('プロジェクト選択画面');
 INSERT INTO task(name) VALUES('新規プロジェクト設定画面');
 INSERT INTO task(name) VALUES('ストーリー登録画面');
 INSERT INTO task(name) VALUES('タスク登録画面');
+INSERT INTO task(name) VALUES('タスクを受ける画面');
+INSERT INTO task(name) VALUES('進捗状況のグラフ化');
+INSERT INTO task(name) VALUES('タスクボード出力画面');
 
 drop table if exists story;
 create table story(
