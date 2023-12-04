@@ -47,5 +47,9 @@ def create_project1():
 def create_project2():
     return render_template('/project/createproject2.html')
 
+@app.route('/create_project3')
+def create_project3():
+    return render_template('/project/createproject3.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
