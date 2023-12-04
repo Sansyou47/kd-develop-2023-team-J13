@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 app.register_blueprint(test.app)
 
+
 @app.route('/')
 def index():
     return 'Test'
@@ -21,7 +22,7 @@ def add_stories():
     conn=mysql.get_db()
     cur=conn.cursor()
     # SQL実行
-    cur.execute("INSERT INTO employee(project_int,stories_name,stories) VALUES(%s,%s,%s)",(hoge,stories,hoge))
+    cur.execute("INSERT INTO employee(stories_name,project) VALUES(%s,%s)",(stories,hoge))
     conn.commit()
     cur.close()
     return render_template('/templates/stories/create_stories.html')
