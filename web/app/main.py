@@ -48,5 +48,10 @@ def select_project():
     data = cur.fetchall()
     return render_template('/select_project.html', data=data)
 
+@app.route('/action/select_project',methods=['POST'])
+def select_project_action():
+    project = request.form.get('project')
+    return str(project)
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

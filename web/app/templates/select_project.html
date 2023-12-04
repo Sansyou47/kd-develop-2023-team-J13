@@ -12,11 +12,12 @@
 
 <body>
     <h1>プロジェクト選択</h1>
-    <!-- <form action="/select_project" method="post"> -->
-    {% for row in data %}
-    <p> {{ row }} </p>
-    {% endfor %}
-    </select>
+    <form action="/action/select_project" method="post">
+        {% for row in data %}
+        <input type="submit" name="project" value="{{ row[1] }}">
+        <p></p>
+        {% endfor %}
+    </form>
     <input type="submit" value="選択">
 </body>
 
