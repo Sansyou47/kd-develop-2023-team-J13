@@ -21,7 +21,9 @@ drop table if exists project;
 create table project(
     number  int auto_increment primary key,
     name    varchar(100),
-    owner   varchar(100)
+    owner   varchar(100),
+    start_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    update_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO project(name, owner) VALUES('開発支援アプリ', '橋本俊平');
