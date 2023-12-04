@@ -35,6 +35,7 @@ def add_stories():
     cur.close()
     return render_template('/templates/stories/create_stories.html')
 
+# task追加画面
 @app.route('/add_task')
 def add_task():
     return render_template('/templates/tasks/add_task.html')
