@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -9,9 +8,11 @@
 <!-- プロジェクト番号の取得  ストーリー番号、名前の入力 -->
 <body>
     <h2>ストーリーの表示</h2>
-        <table>
-            
-        </table>
+        {% for row in story_data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+        </tr>
+        {% endfor %}
     <h2>ストーリーの内容を入力</h2>
     <form action="/action/create_stories" method="post">
         <input type="text" name="stories" required><br>

@@ -26,10 +26,10 @@ def storeis():
     cur=conn.cursor()
     # SQL実行 SQLに追加：WHEREでprojectを指定
     cur.execute("SELECT name FROM story")
-    story_data = cur.fechAll()
+    story_data = cur.fechall()
     conn.commit()
     cur.close()
-    return render_template('/stories/create_stories.html',story_data = story_Data)
+    return render_template('/stories/create_stories.html',story_data = story_data)
 
 @app.route('/action/create_stories',methods=['POST'])
 def add_stories():
