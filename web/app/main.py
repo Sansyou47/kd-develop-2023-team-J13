@@ -38,7 +38,7 @@ def add_stories():
 # task追加画面
 @app.route('/add_task')
 def add_task():
-    return render_template('/templates/tasks/add_task.html')
+    return render_template('/tasks/add_task.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
