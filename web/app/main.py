@@ -5,12 +5,13 @@ import os
 
 app = Flask(__name__)
 
-app.config['MYSQL_DATABASE_HOST'] = 'mysql'
+# MySQL設定(環境変数から読み取り)
 app.config['MYSQL_DATABASE_USER'] = os.getenv('MYSQL_USER')
 app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
 app.config['MYSQL_DATABASE_DB'] = os.getenv('MYSQL_DATABASE')
+app.config['MYSQL_DATABASE_HOST'] = 'mysql'
 
-mysql=MySQL(app)
+mysql = MySQL(app)
 
 app.register_blueprint(test.app)
 
