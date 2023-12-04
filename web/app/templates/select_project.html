@@ -1,3 +1,6 @@
+<!-- phpを利用せずにFlaskを利用する。 -->
+<!-- jinja2を利用可能 -->
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -8,16 +11,13 @@
 </head>
 
 <body>
-    <div id="header">
-        <h1 class="title">Dashboard</h1>
-        <p class="menu">HOME</p>
-        <p class="menu">Project</p>
-        <p class="menu">Task</p>
-        <p class="menu">Story</p>
-    </div>
-    <div id="sidemenu">
-
-    </div>
+    <h1>プロジェクト選択</h1>
+    <!-- <form action="/select_project" method="post"> -->
+    {% for row in data %}
+    <p> {{ row }} </p>
+    {% endfor %}
+    </select>
+    <input type="submit" value="選択">
 </body>
 
 </html>
