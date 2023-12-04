@@ -38,6 +38,7 @@ def add_stories():
 # task追加画面
 @app.route('/add_task')
 def add_task():
+    p1 = request.POST.get('storyName','')
     return render_template('/tasks/add_task.html')
 
 # ストーリー選択画面
