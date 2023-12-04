@@ -9,7 +9,7 @@ create table users(
 
 ) auto_increment = 100000;
 
-INSERT INTO users(name, mail, gender, class) VALUES('嫁阪雄大', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
+INSERT INTO users(name, mail, gender, class) VALUES('嫁阪雄大', 'kd1297402@st.kobedenshi.ac.jp', 0, 'student');
 INSERT INTO users(name, mail, gender, class) VALUES('中川浩太郎', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
 INSERT INTO users(name, mail, gender, class) VALUES('中井禅', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
 INSERT INTO users(name, mail, gender, class) VALUES('橋本俊平', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');

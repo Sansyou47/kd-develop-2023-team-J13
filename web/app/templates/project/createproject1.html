@@ -7,11 +7,32 @@
 </head>
 
 <body>
-    <h1>プロジェクトタイトルを入力してください</h1>
+    <h1>プロジェクト情報を入力してください</h1>
+
+
     <form>
         <label for="projectTitle">プロジェクトタイトル:</label>
-        <input type="text" id="projectTitle" name="projectTitle">
+        <input type="text" id="projectTitle" name="projectTitle"><br><br>
+
+        <label for="startDate">プロジェクト開始日:</label>
+        <input type="date" id="startDate" name="startDate" value=""><br><br>
+
+        <label for="endDate">プロジェクト完成予定日:</label>
+        <input type="date" id="endDate" name="endDate"><br><br>
+
+        <label for="sprint">スプリント回数:</label>
+        <input type="text" id="sprint" name="sprint"><br><br>
+
+        <input type="submit" value="プロジェクトを開始する">
     </form>
+
+    <script>
+        // プロジェクト開始日に現在の日時をセットする
+        document.getElementById('startDate').valueAsDate = new Date();
+
+    </script>
+
+
 </body>
 
 </html>
