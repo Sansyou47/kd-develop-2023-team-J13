@@ -26,5 +26,9 @@ def add_stories():
     cur.close()
     return render_template('/templates/stories/create_stories.html')
 
+@app.route('/add_task')
+def add_task():
+    return render_template('/templates/tasks/add_task.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
