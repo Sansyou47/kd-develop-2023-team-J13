@@ -26,9 +26,17 @@ def add_stories():
     cur.close()
     return render_template('/templates/stories/create_stories.html')
 
-@app.route('/suica')
-def suica():
+@app.route('/create_project')
+def create_project():
     return render_template('/project/createproject.html')
+
+@app.route('/create_project1')
+def create_project1():
+    return render_template('/project/createproject1.html')
+
+@app.route('/create_project2')
+def create_project2():
+    return render_template('/project/createproject2.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
