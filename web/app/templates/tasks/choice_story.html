@@ -7,28 +7,26 @@
 </head>
 
 <body>
-    <table>
+    <table border="1" cellpadding="10">
         <tr>
             <th>ストーリー名</th>
             <th>プロジェクト名</th>
             <th>タスク追加</th>
         </tr>
-        {% for row in data %}
+        {% for row in storyData %}
         <tr>
             <td>{{ row[0] }}</td>
             <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-            {% if row[3] == 0 %}
-            <td>受理</td>
-            {% elif row[3] == 1 %}
-            <td>却下</td>
-            {% else %}
-            <td>申請中</td>
-            {% endif %}
-            <td>{{ row[4] }}</td>
+            <form method="POST" action="add_task">
+                <td>
+                    <input type="hidden" name="storyName" value="{{ row[0] }}">
+                    <input type="submit" value="追加">
+                </td>
+            </form>
         </tr>
         {% endfor %}
     </table>
+
 </body>
 
 </html>

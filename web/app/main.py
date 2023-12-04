@@ -40,5 +40,22 @@ def add_stories():
 def add_task():
     return render_template('/tasks/add_task.html')
 
+# ストーリー選択画面
+@app.route('/choice_story')
+def choice_story():
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("SELECT * FROM story")
+    storyData = cur.fetchall()
+
+    conn.commit()
+    cur.close()
+
+    return render_template('/tasks/choice_story.html', storyData = storyData)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
