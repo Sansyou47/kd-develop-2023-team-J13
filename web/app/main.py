@@ -18,24 +18,34 @@ app.register_blueprint(test.app)
 
 @app.route('/')
 def index():
-    return 'Test'
+    return render_template('/stories/create_stories.html')
 
 @app.route('/create_storeis')
 def storeis():
-    return render_template('/templates/stories/create_stories.html')
+    conn=mysql.get_db()
+    cur=conn.cursor()
+    # SQL実行 SQLに追加：WHEREでprojectを指定
+    cur.execute("SELECT name FROM story")
+    story_data = cur.fechAll()
+    conn.commit()
+    cur.close()
+    return render_template('/stories/create_stories.html',story_data = story_Data)
 
 @app.route('/action/create_stories',methods=['POST'])
 def add_stories():
     stories = request.form.get('stories')
-    project = request.form.get('project')
+    #project = request.form.get('project')
     # MySQLへ接続
     conn=mysql.get_db()
     cur=conn.cursor()
     # SQL実行
-    cur.execute("INSERT INTO employee(stories_name,project) VALUES(%s,%s)",(stories,project))
+    #cur.execute("INSERT INTO employee(name,project) VALUES(%s,%s)",(stories,project))
+    cur.execute("INSERT INTO story(name,) VALUES(%s)",(stories))
     conn.commit()
     cur.close()
-    return render_template('/templates/stories/create_stories.html')
+    return render_template('/stories/create_stories.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
