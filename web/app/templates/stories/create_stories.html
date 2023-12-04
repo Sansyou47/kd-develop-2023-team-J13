@@ -11,6 +11,7 @@
     <h1>ストーリーの内容を入力</h1>
     <form action="/action/create_stories" method="post">
         <input type="text" name="stories" required><br>
+        <input type="hidden" name="project" value="$_GET['project']"><br>
         <input type="submit" value="追加">
     </form>
 </body>

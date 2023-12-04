@@ -27,11 +27,12 @@ def storeis():
 @app.route('/action/create_stories',methods=['POST'])
 def add_stories():
     stories = request.form.get('stories')
+    project = request.form.get('project')
     # MySQLへ接続
     conn=mysql.get_db()
     cur=conn.cursor()
     # SQL実行
-    cur.execute("INSERT INTO employee(stories_name,project) VALUES(%s,%s)",(stories,hoge))
+    cur.execute("INSERT INTO employee(stories_name,project) VALUES(%s,%s)",(stories,project))
     conn.commit()
     cur.close()
     return render_template('/templates/stories/create_stories.html')
