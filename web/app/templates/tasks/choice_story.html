@@ -21,6 +21,7 @@
             <form method="POST" action="/add_task">
                 <td>
                     <input type="hidden" name="storyName" value="{{ row[0] }}">
+                    <input type="hidden" name="projectName" value="{{ row[1] }}">
                     <input type="submit" value="追加">
                 </td>
             </form>
