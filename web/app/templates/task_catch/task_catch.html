@@ -1,31 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Catch</title>
+    <title>タスクステータス更新</title>
 </head>
 <body>
-    <h1>Task List</h1>
 
-    <!-- テーブル一覧を表示 -->
+<h1>タスクステータス更新</h1>
+
+<form action="/update_status" method="post">
     <table>
         <tr>
-            <th>Task Name</th>
             <th>Project</th>
+            <th>Name</th>
             <th>Status</th>
-            <th>Action</th>
         </tr>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.name }}</td>
-                <td>{{ task.project }}</td>
-                <td>{{ task.status }}</td>
-                <td><a href="{{ url_for('change_status', task_id=task.id) }}">Change Status</a></td>
-            </tr>
-        {% endfor %}
+        <tr>
+            <td>
+                <select name="project1" id="project1">
+                    <!-- プロジェクトの選択肢 -->
+                    <option value="プロジェクト1">プロジェクト1</option>
+                    <option value="プロジェクト2">プロジェクト2</option>
+                    <!-- 他のプロジェクトも続けて追加 -->
+                </select>
+            </td>
+            <td>
+                <select name="name1" id="name1">
+                    <!-- 名前の選択肢 -->
+                    <option value="名前1">名前1</option>
+                    <option value="名前2">名前2</option>
+                    <!-- 他の名前も続けて追加 -->
+                </select>
+            </td>
+            <td>
+                <select name="status1" id="status1">
+                    <!-- ステータスの選択肢 -->
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select name="project2" id="project2">
+                    <!-- プロジェクトの選択肢 -->
+                    <option value="プロジェクト1">プロジェクト1</option>
+                    <option value="プロジェクト2">プロジェクト2</option>
+                    <!-- 他のプロジェクトも続けて追加 -->
+                </select>
+            </td>
+            <td>
+                <select name="name2" id="name2">
+                    <!-- 名前の選択肢 -->
+                    <option value="名前1">名前1</option>
+                    <option value="名前2">名前2</option>
+                    <!-- 他の名前も続けて追加 -->
+                </select>
+            </td>
+            <td>
+                <select name="status2" id="status2">
+                    <!-- ステータスの選択肢 -->
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select>
+            </td>
+        </tr>
     </table>
+
+    <input type="submit" value="更新">
+</form>
 
 </body>
 </html>

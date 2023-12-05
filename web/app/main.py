@@ -19,6 +19,11 @@ app.register_blueprint(test.app)
 app.secret_key = "your_secret_key"
 
 
+@app.route("/task_task")
+def task_catch():
+    return render_template("/templates/task_catch/task_catch.html")
+
+
 # セッションに値を格納
 @app.route("/set_session")
 def set_session():
