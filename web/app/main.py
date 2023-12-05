@@ -24,7 +24,7 @@ def project():
     return render_template('select_project.html')
 
 @app.route('/create_storeis')
-def storeis():
+def storeis():  
     return render_template('/templates/stories/create_stories.html')
 
 @app.route('/action/create_stories',methods=['POST'])
