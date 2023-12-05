@@ -33,13 +33,16 @@ create table project(
     name    varchar(100),
     owner   varchar(100),
     start_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    update_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    update_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    github  varchar(200),
+    googleDrive varchar(200),
+    logo    varchar(200)
 );
 
-INSERT INTO project(name, owner) VALUES('開発支援アプリ', '橋本俊平');
-INSERT INTO project(name, owner) VALUES('タスク管理アプリ', '中井禅');
-INSERT INTO project(name, owner) VALUES('シフト表作成支援アプリ', '嫁阪雄大');
-INSERT INTO project(name, owner) VALUES('マインクラフトサーバー', '嫁阪雄大');
+INSERT INTO project(name, owner, github, googleDrive) VALUES('開発支援アプリ', '橋本俊平', 'https://github.com/Sansyou47/kd-develop-2023-team-J13.git', 'https://drive.google.com/drive/folders/0AOWOMUXeZizTUk9PVA');
+INSERT INTO project(name, owner, github) VALUES('タスク管理アプリ', '中井禅', 'https://github.com/Sansyou47/team-J13-shooting-range.git');
+INSERT INTO project(name, owner, github) VALUES('シフト表作成支援アプリ', '嫁阪雄大', 'https://github.com/Sansyou47/PythonWebApp.git');
+INSERT INTO project(name, owner, github) VALUES('マインクラフトサーバー', '嫁阪雄大', 'https://github.com/Sansyou47/Minecraftserver-for-Docker.git');
 
 drop table if exists task;
 create table task(
