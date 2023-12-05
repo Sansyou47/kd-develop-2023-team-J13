@@ -16,11 +16,13 @@
 
 |項目名|型|例|説明|
 |---|---|---|---|
-|number|int|100000|ユーザーが追加されたら自動で割り当てられる。|
-|name|varchar(50)|岸辺露伴|ユーザー名を格納する。not-null|
-|mail|varchar(50)|kd0000000@st.ac.jp|登録されているメールアドレスを格納する。|
+|~~number~~userId|~~int~~varchar(50)|~~100000~~kd00@st.jp|~~ユーザーが追加されたら自動で割り当てられる。~~メールアドレスをIDとして利用する|
+|~~name~~userName|varchar(50)|岸辺露伴|ユーザー名を格納する。not-null|
+|~~mail~~|~~varchar(50)~~|~~kd0000000@st.ac.jp~~|~~登録されているメールアドレスを格納する。~~当該項目は削除|
+|kana|varchar(50)|キシベロハン|ユーザー名の読みがなを格納する。not-null|
 |password|varchar(300)|None|パスワードをハッシュ化して格納する。ハッシュ化はPythonスクリプトで実行する|
 |gender|int|0:male, 1:female, 2:none|性別を整数値で格納する。|
+|gitAccount|varchar(50)|Sansyou47|GitHubアカウントを持っていればアカウント名を登録する|
 |class|varchar(10)|student|ユーザー登録時にclassテーブルから選択する。教師、生徒、企業など。|
 
 2. projectテーブル
@@ -30,6 +32,8 @@
 |number|int|1|自動割り当ての項目。主キー|
 |name|varchar(100)|開発支援アプリ|プロジェクトの題名|
 |owner|varchar(50)|木下秀吉|プロジェクトを作成した人の名前が入る。後から所有者を変更できる必要あり？|
+|start_date|datetime|2020-10-10|プロジェクトが作成された日付|
+|update_date|datetime|2020-10-10|プロジェクトが更新された日付|
 
 3. taskテーブル
 
