@@ -7,6 +7,7 @@
 </head>
 
 <body>
+    <h1>ストーリー選択画面</h1>
     <table border="1" cellpadding="10">
         <tr>
             <th>ストーリー名</th>
@@ -17,7 +18,7 @@
         <tr>
             <td>{{ row[0] }}</td>
             <td>{{ row[1] }}</td>
-            <form method="POST" action="add_task">
+            <form method="POST" action="/add_task">
                 <td>
                     <input type="hidden" name="storyName" value="{{ row[0] }}">
                     <input type="submit" value="追加">

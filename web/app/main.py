@@ -36,10 +36,10 @@ def add_stories():
     return render_template('/templates/stories/create_stories.html')
 
 # task追加画面
-@app.route('/add_task')
+@app.route('/add_task', methods=['POST'])
 def add_task():
-    p1 = request.POST.get('storyName','')
-    return render_template('/tasks/add_task.html')
+    storyName = request.form.get('storyName')
+    return render_template('/tasks/add_task.html', storyName = storyName )
 
 # ストーリー選択画面
 @app.route('/choice_story')
