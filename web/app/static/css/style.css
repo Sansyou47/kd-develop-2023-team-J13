@@ -1,16 +1,42 @@
 .project-info {
+    /* 背景色を指定 */
     background-color: #C4E7F6;
+    /* 四角形の大きさを指定 */
     width: 300px;
     height: 150px;
     margin-bottom: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    /* 横並びに配置する */
+    white-space: normal;
+    /* 画面サイズに応じて自動で折り返す */
+}
+
+.project-click-area {
     cursor: pointer;
+}
+
+.project-title {
+    font-size: 25px;
+    margin-bottom: 0px;
+    margin-left: 2px;
 }
 
 .project-info p {
     color: #000000;
     font-size: 15px;
+    margin-top: 0px;
+    margin-left: 5px;
 }
 
-.submit {
-    background-color: aquamarine;
+.project-resource {
+    margin-left: 5px;
+}
+
+.project-repository-logo {
+    display: inline-block;
+}
+
+.project-resource-logo {
+    display: inline-block;
 }
