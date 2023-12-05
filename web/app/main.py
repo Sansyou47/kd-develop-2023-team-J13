@@ -21,13 +21,15 @@ app.secret_key = 'your_secret_key'
 # セッションに値を格納
 @app.route('/set_session')
 def set_session():
+    # getメソッドで取得した値をセッションに格納
     project = request.args.get('project')
     session['project'] = project
-    #テストのため一時的に変更
-    return redirect('/create_stories')
+    # とりあえずインデックスへリダイレクト
+    return redirect('/')
 
 @app.route('/')
 def index():
+    # セッションから値を取得
     data=str(session.get('project'))
     return data
 
@@ -35,23 +37,21 @@ def index():
 def project():
     return render_template('select_project.html')
 
-@app.route('/create_stories', methods=['GET', 'POST'])#ストーリー追加、表示処理
+@app.route('/create_storeis')
 def storeis():
-    project=str(session.get('project'))
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    if request.method == 'POST':
-        # POSTメソッドでの処理
-        stories = request.form.get('stories')
-        #projectの追加が必要
-        cur.execute("INSERT INTO story(name,project) VALUES(%s,%s)", (stories,project))
-        conn.commit()
-    # 共通の処理（GETメソッドでの処理）
-    cur.execute("SELECT name FROM story WHERE project = %s",project)
-    story_data = cur.fetchall()
+    return render_template('/templates/stories/create_stories.html')
+
+@app.route('/action/create_stories',methods=['POST'])
+def add_stories():
+    stories = request.form.get('stories')
+    # MySQLへ接続
+    conn=mysql.get_db()
+    cur=conn.cursor()
+    # SQL実行
+    cur.execute("INSERT INTO employee(project_int,stories_name,stories) VALUES(%s,%s,%s)",(hoge,stories,hoge))
+    conn.commit()
     cur.close()
-    conn.close()
-    return render_template('stories/create_stories.html', story_data=story_data,project=project)
+    return render_template('/templates/stories/create_stories.html')
 
 @app.route('/select_project')
 def select_project():
