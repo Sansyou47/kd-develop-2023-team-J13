@@ -1,13 +1,13 @@
 drop table if exists users;
 create table users(
-    number	int auto_increment primary key,
-	name	varchar(50) not null,
-    mail    varchar(50),
+    userId	varchar(50) primary key,
+	userName	varchar(50) not null,
+    kana	varchar(50) not null,
     password    varchar(300),
     gender  int,
+    gitAccount  varchar(50),
     class   varchar(10)
-
-) auto_increment = 100000;
+);
 
 INSERT INTO users(name, mail, gender, class) VALUES('嫁阪雄大', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
 INSERT INTO users(name, mail, gender, class) VALUES('中川浩太郎', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
