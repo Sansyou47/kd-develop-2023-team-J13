@@ -23,7 +23,7 @@ app.secret_key = 'your_secret_key'
 def set_session():
     project = request.args.get('project')
     session['project'] = project
-    return redirect('/')
+    return redirect('/select_project')
 
 @app.route('/')
 def index():
@@ -71,22 +71,23 @@ def add_task():
     projectName = request.form.get('projectName')
     return render_template('/tasks/add_task.html', storyName = storyName, projectName = projectName)
 
+#task追加アクション
 @app.route('/action/add_task', methods=['POST'])
 def action_add_task():
     taskName = request.form.get('taskName')
     taskManager = request.form.get('taskManager')
     sprint = int(request.form.get('sprint'))
-    projectName = request.form.get('projectName')
+    storyName = request.form.get('storyName')
 
     # MySQLへ接続
     conn=mysql.get_db()
     cur=conn.cursor()
     # SQL実行
-    cur.execute("INSERT INTO task(name, manager, project, sprint) VALUES(%s, %s ,%s ,%s)",(taskName, taskManager, projectName, sprint))
+    cur.execute("INSERT INTO task(name, manager, project, sprint) VALUES(%s, %s ,%s ,%s)",(taskName, taskManager, storyName, sprint))
     conn.commit()
     cur.close()
 
-    return get_task()
+    return  redirect('/get_task')
     #return render_template('/choice_story')
 
 # ストーリー選択画面
