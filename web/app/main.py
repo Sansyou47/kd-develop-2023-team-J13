@@ -83,7 +83,7 @@ def action_add_task():
     conn=mysql.get_db()
     cur=conn.cursor()
     # SQL実行
-    cur.execute("INSERT INTO task(name, manager, project, sprint) VALUES(%s, %s ,%s ,%s)",(taskName, taskManager, storyName, sprint))
+    cur.execute("INSERT INTO task(name, manager, story, sprint) VALUES(%s, %s ,%s ,%s)",(taskName, taskManager, storyName, sprint))
     conn.commit()
     cur.close()
 
