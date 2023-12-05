@@ -25,7 +25,9 @@
                     作成日：{{ row[3] }}<br>
                     所有者：{{ row[2] }}</p>
             </div>
+            <!-- 各リソースへのURLをロゴで表示する -->
             <div class="project-resource">
+                <!-- GitHubのリポジトリが登録されている場合のみ処理 -->
                 {% if row[5] is not none %}
                 <div class="project-repository-logo">
                     <a href="{{ row[5] }}" target="_blank">
@@ -33,6 +35,7 @@
                     </a>
                 </div>
                 {% endif %}
+                <!-- GoogleDriveが登録されている場合のみ処理 -->
                 {% if row[6] is not none %}
                 <div class="project-resource-logo">
                     <a href="{{ row[6] }}" target="_blank">
