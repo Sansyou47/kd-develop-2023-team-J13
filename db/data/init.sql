@@ -39,17 +39,17 @@ create table task(
     name    varchar(2000),
     status  int default 2,
     manager varchar(50),
-    project varchar(100),
+    story varchar(2000),
     sprint  int
 );
 
-INSERT INTO task(name, project, sprint) VALUES('プロジェクト選択画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('新規プロジェクト設定画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('ストーリー登録画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('タスク登録画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('タスクを受ける画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('進捗状況のグラフ化', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('タスクボード出力画面', '開発支援アプリ', 1);
+INSERT INTO task(name, story, sprint) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('新規プロジェクト設定画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('ストーリー登録画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('タスク登録画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('タスクを受ける画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('進捗状況のグラフ化', '各員の進行状況を逐次把握したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('タスクボード出力画面', '各員の進行状況を逐次把握したい', 1);
 
 drop table if exists story;
 create table story(
