@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>プロジェクト選択</title>
     <link rel="stylesheet" href="../static/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- 選択したプロジェクト名をGetメソッドで送信 -->
     <script>
@@ -19,11 +18,30 @@
     <h1>プロジェクト選択</h1>
     <form action="/action/select_project" method="post">
         {% for row in data %}
-        <div class="project-info" onclick="redirectToPage('{{ row[1] }}')">
-            <div class="project-title">{{ row[1] }}</div>
-            <p>更新日：{{ row[4] }}<br>
-                作成日：{{ row[3] }}<br>
-                所有者：{{ row[2] }}</p>
+        <div class="project-info">
+            <div class="project-click-area" onclick="redirectToPage('{{ row[1] }}')">
+                <div class="project-title">{{ row[1] }}</div>
+                <p>更新日：{{ row[4] }}<br>
+                    作成日：{{ row[3] }}<br>
+                    所有者：{{ row[2] }}</p>
+            </div>
+            <div class="project-resource">
+                {% if row[5] is not none %}
+                <div class="project-repository-logo">
+                    <a href="{{ row[5] }}" target="_blank">
+                        <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
+                    </a>
+                </div>
+                {% endif %}
+                {% if row[6] is not none %}
+                <div class="project-resource-logo">
+                    <a href="{{ row[6] }}" target="_blank">
+                        <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
+                            height="25">
+                    </a>
+                </div>
+                {% endif %}
+            </div>
         </div>
         {% endfor %}
     </form>
