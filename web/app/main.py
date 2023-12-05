@@ -20,7 +20,7 @@ def index():
     return 'Test'
 
 @app.route('/create_storeis')
-def storeis():
+def storeis():  
     return render_template('/templates/stories/create_stories.html')
 
 @app.route('/action/create_stories',methods=['POST'])
