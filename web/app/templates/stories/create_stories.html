@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -8,9 +7,16 @@
 
 <!-- プロジェクト番号の取得  ストーリー番号、名前の入力 -->
 <body>
-    <h1>ストーリーの内容を入力</h1>
-    <form action="/action/create_stories" method="post">
+    <h2>ストーリーの表示</h2>
+    {% for row in story_data %}
+    <tr>
+        <td>{{ row[0] }}</td><br>
+    </tr>
+    {% endfor %}
+    <h2>ストーリーの内容を入力</h2>
+    <form action="/create_stories" method="post">
         <input type="text" name="stories" required><br>
+        <input type="hidden" name="project" value="$_GET['project']"><br>
         <input type="submit" value="追加">
     </form>
 </body>
