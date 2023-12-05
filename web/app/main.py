@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
+from flask import jsonify
 from function import test
 import os
 
@@ -15,38 +16,31 @@ mysql = MySQL(app)
 
 app.register_blueprint(test.app)
 
+app.secret_key = "your_secret_key"
+
+
+# セッションに値を格納
+@app.route("/set_session")
+def set_session():
+    project = request.args.get("project")
+    session["project"] = project
+    return redirect("/")
+
 
 @app.route("/")
 def index():
-    return "Test"
+    data = str(session.get("project"))
+    return data
 
 
-@app.route("/task_task")
-def task():
-    # データベースからタスク一覧を取得
-    connection = mysql.get_db()
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM task")
-    tasks = cursor.fetchall()
-    return render_template("/templates/task_catch/task_catch.html", tasks=tasks)
+@app.route("/project")
+def project():
+    return render_template("select_project.html")
 
 
-@app.route("/change_status/<int:task_id>")
-def change_status(task_id):
-    # データベースから対象のタスクを取得
-    connection = mysql.get_db()
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM task WHERE id = %s", (task_id,))
-    task = cursor.fetchone()
-
-    # タスクのステータスを変更
-    new_status = 1 if task["status"] == 0 else 0
-
-    # データベースに変更を保存
-    cursor.execute("UPDATE task SET status = %s WHERE id = %s", (new_status, task_id))
-    connection.commit()
-
-    return redirect(url_for("task"))
+@app.route("/create_storeis")
+def storeis():
+    return render_template("/templates/stories/create_stories.html")
 
 
 @app.route("/action/create_stories", methods=["POST"])
@@ -63,6 +57,22 @@ def add_stories():
     conn.commit()
     cur.close()
     return render_template("/templates/stories/create_stories.html")
+
+
+@app.route("/select_project")
+def select_project():
+    # MySQLへ接続
+    cur = mysql.get_db().cursor()
+    # SQL実行
+    cur.execute("SELECT * FROM project")
+    data = cur.fetchall()
+    return render_template("/select_project.html", data=data)
+
+
+@app.route("/action/select_project", methods=["POST"])
+def select_project_action():
+    project = request.form.get("project")
+    return str(project)
 
 
 if __name__ == "__main__":
