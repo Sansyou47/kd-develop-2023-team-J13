@@ -23,30 +23,33 @@ create table project(
     name    varchar(100),
     owner   varchar(100),
     start_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    update_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    update_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    github  varchar(200),
+    googleDrive varchar(200),
+    logo    varchar(200)
 );
 
-INSERT INTO project(name, owner) VALUES('開発支援アプリ', '橋本俊平');
-INSERT INTO project(name, owner) VALUES('タスク管理アプリ', '中井禅');
-INSERT INTO project(name, owner) VALUES('シフト表作成支援アプリ', '嫁阪雄大');
-INSERT INTO project(name, owner) VALUES('マインクラフトサーバー', '嫁阪雄大');
+INSERT INTO project(name, owner, github, googleDrive) VALUES('開発支援アプリ', '橋本俊平', 'https://github.com/Sansyou47/kd-develop-2023-team-J13.git', 'https://drive.google.com/drive/folders/0AOWOMUXeZizTUk9PVA');
+INSERT INTO project(name, owner, github) VALUES('タスク管理アプリ', '中井禅', 'https://github.com/Sansyou47/team-J13-shooting-range.git');
+INSERT INTO project(name, owner, github) VALUES('シフト表作成支援アプリ', '嫁阪雄大', 'https://github.com/Sansyou47/PythonWebApp.git');
+INSERT INTO project(name, owner, github) VALUES('マインクラフトサーバー', '嫁阪雄大', 'https://github.com/Sansyou47/Minecraftserver-for-Docker.git');
 
 drop table if exists task;
 create table task(
     name    varchar(2000),
     status  int default 2,
     manager varchar(50),
-    project varchar(100),
+    story varchar(2000),
     sprint  int
 );
 
-INSERT INTO task(name, project, sprint) VALUES('プロジェクト選択画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('新規プロジェクト設定画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('ストーリー登録画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('タスク登録画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('タスクを受ける画面', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('進捗状況のグラフ化', '開発支援アプリ', 1);
-INSERT INTO task(name, project, sprint) VALUES('タスクボード出力画面', '開発支援アプリ', 1);
+INSERT INTO task(name, story, sprint) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('新規プロジェクト設定画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('ストーリー登録画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('タスク登録画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('タスクを受ける画面', 'ファイルを一括で管理したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('進捗状況のグラフ化', '各員の進行状況を逐次把握したい', 1);
+INSERT INTO task(name, story, sprint) VALUES('タスクボード出力画面', '各員の進行状況を逐次把握したい', 1);
 
 drop table if exists story;
 create table story(
