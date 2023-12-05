@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task List</title>
+    <title>Task Catch</title>
 </head>
 <body>
     <h1>Task List</h1>
-    <form method="post">
-        <ul>
-            {% for task in tasks %}
-                <li>
-                    {{ task.name }} - Status: {{ task.status }}
-                    <label for="status">Change Status:</label>
-                    <select name="new_status" id="status">
-                        <option value="1">To Do</option>
-                        <option value="2">In Progress</option>
-                        <option value="3">Done</option>
-                    </select>
-                    <input type="hidden" name="task_name" value="{{ task.name }}">
-                    <input type="submit" value="Update Status">
-                </li>
-            {% endfor %}
-        </ul>
-    </form>
+
+    <!-- テーブル一覧を表示 -->
+    <table>
+        <tr>
+            <th>Task Name</th>
+            <th>Project</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.name }}</td>
+                <td>{{ task.project }}</td>
+                <td>{{ task.status }}</td>
+                <td><a href="{{ url_for('change_status', task_id=task.id) }}">Change Status</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
 </body>
 </html>
