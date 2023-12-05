@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from flaskext.mysql import MySQL
+from flask import jsonify
 from function import test
 import os
 
@@ -15,9 +16,19 @@ mysql = MySQL(app)
 
 app.register_blueprint(test.app)
 
+app.secret_key = 'your_secret_key'
+
+# セッションに値を格納
+@app.route('/set_session')
+def set_session():
+    project = request.args.get('project')
+    session['project'] = project
+    return redirect('/')
+
 @app.route('/')
 def index():
-    return 'Test'
+    data=str(session.get('project'))
+    return data
 
 @app.route('/project')
 def project():
