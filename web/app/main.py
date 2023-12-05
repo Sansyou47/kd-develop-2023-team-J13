@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from flaskext.mysql import MySQL
+from flask import jsonify
 from function import test
 import os
 
@@ -15,9 +16,23 @@ mysql = MySQL(app)
 
 app.register_blueprint(test.app)
 
+app.secret_key = 'your_secret_key'
+
+# セッションに値を格納
+@app.route('/set_session')
+def set_session():
+    project = request.args.get('project')
+    session['project'] = project
+    return redirect('/')
+
 @app.route('/')
 def index():
-    return 'Test'
+    data=str(session.get('project'))
+    return data
+
+@app.route('/project')
+def project():
+    return render_template('select_project.html')
 
 @app.route('/create_storeis')
 def storeis():  
@@ -34,6 +49,20 @@ def add_stories():
     conn.commit()
     cur.close()
     return render_template('/templates/stories/create_stories.html')
+
+@app.route('/select_project')
+def select_project():
+    # MySQLへ接続
+    cur = mysql.get_db().cursor()
+    # SQL実行
+    cur.execute("SELECT * FROM project")
+    data = cur.fetchall()
+    return render_template('/select_project.html', data=data)
+
+@app.route('/action/select_project',methods=['POST'])
+def select_project_action():
+    project = request.form.get('project')
+    return str(project)
 
 # task追加画面
 @app.route('/add_task', methods=['POST'])
