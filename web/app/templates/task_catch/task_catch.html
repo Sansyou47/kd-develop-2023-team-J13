@@ -1,0 +1,51 @@
+<!-- <!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>タスクDo</title>
+</head>
+
+<body>
+
+<button onclick="alert('ボタンがクリックされました')">クリック</button>
+
+<select>
+    <option value="option1">選択肢1</option>
+    <option value="option2">選択肢2</option>
+    <option value="option3">選択肢3</option>
+</select>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タスクステータス更新</title>
+</head>
+<body>
+
+<h1>タスクステータス更新</h1>
+
+<form action="/update_status" method="post">
+    <label for="project">プロジェクト選択:</label>
+    <select name="project" id="project">
+        {% for project in projects %}
+            <option value="{{ project.name }}">{{ project.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="status">ステータス更新:</label>
+    <select name="status" id="status">
+        <option value="1">完了</option>
+        <option value="0">未完了</option>
+    </select>
+
+    <input type="submit" value="更新">
+</form>
+
+</body>
+</html>
