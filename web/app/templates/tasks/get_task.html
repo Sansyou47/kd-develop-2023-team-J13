@@ -1,0 +1,32 @@
+<!--ストーリー一覧を表示する-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ストーリー一覧</title>
+</head>
+
+<body>
+    <h1>ストーリー選択画面</h1>
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>タスク名</th>
+            <th>状態</th>
+            <th>タスク責任者</th>
+            <th>プロジェクト名</th>
+            <th>スプリント数</th>
+        </tr>
+        {% for row in taskData %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

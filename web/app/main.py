@@ -42,6 +42,24 @@ def add_task():
     projectName = request.form.get('projectName')
     return render_template('/tasks/add_task.html', storyName = storyName, projectName = projectName)
 
+@app.route('/action/add_task', methods=['POST'])
+def action_add_task():
+    taskName = request.form.get('taskName')
+    taskManager = request.form.get('taskManager')
+    sprint = int(request.form.get('sprint'))
+    projectName = request.form.get('projectName')
+
+    # MySQLへ接続
+    conn=mysql.get_db()
+    cur=conn.cursor()
+    # SQL実行
+    cur.execute("INSERT INTO task(name, manager, project, sprint) VALUES(%s, %s ,%s ,%s)",(taskName, taskManager, projectName, sprint))
+    conn.commit()
+    cur.close()
+
+    return get_task()
+    #return render_template('/choice_story')
+
 # ストーリー選択画面
 @app.route('/choice_story')
 def choice_story():
@@ -57,6 +75,19 @@ def choice_story():
 
     return render_template('/tasks/choice_story.html', storyData = storyData)
 
+@app.route('/get_task')
+def get_task():
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("SELECT * FROM task")
+    taskData = cur.fetchall()
+
+    conn.commit()
+    cur.close()
+
+    return render_template('/tasks/get_task.html', taskData = taskData)
 
 
 if __name__ == '__main__':
