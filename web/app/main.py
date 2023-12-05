@@ -35,7 +35,7 @@ def index():
 def project():
     return render_template('select_project.html')
 
-@app.route('/create_stories', methods=['GET', 'POST'])
+@app.route('/create_stories', methods=['GET', 'POST'])#ストーリー追加、表示処理
 def storeis():
     project=str(session.get('project'))
     conn = mysql.get_db()
