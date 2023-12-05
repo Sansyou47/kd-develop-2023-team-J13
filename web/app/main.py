@@ -23,7 +23,8 @@ app.secret_key = 'your_secret_key'
 def set_session():
     project = request.args.get('project')
     session['project'] = project
-    return redirect('/')
+    #テストのため一時的に変更
+    return redirect('/create_stories')
 
 @app.route('/')
 def index():
@@ -36,36 +37,21 @@ def project():
 
 @app.route('/create_stories', methods=['GET', 'POST'])
 def storeis():
-    project = session['poject']
+    project=str(session.get('project'))
+    conn = mysql.get_db()
+    cur = conn.cursor()
     if request.method == 'POST':
         # POSTメソッドでの処理
         stories = request.form.get('stories')
-        conn = mysql.get_db()
-        cur = conn.cursor()
-        try:
-            #projectの追加が必要
-            cur.execute("INSERT INTO story(name,project) VALUES(%s,%s)", (stories,project))
-            conn.commit()
-        except mysql.Error as e:
-            print(f"MySQL Error: {e}")
-            conn.rollback()
-        finally:
-            cur.close()
-            conn.close()
-
+        #projectの追加が必要
+        cur.execute("INSERT INTO story(name,project) VALUES(%s,%s)", (stories,project))
+        conn.commit()
     # 共通の処理（GETメソッドでの処理）
-    conn = mysql.get_db()
-    cur = conn.cursor()
     cur.execute("SELECT name FROM story WHERE project = %s",project)
     story_data = cur.fetchall()
     cur.close()
     conn.close()
-
-    return render_template('stories/create_stories.html', story_data=story_data)
-
-
-
-
+    return render_template('stories/create_stories.html', story_data=story_data,project=project)
 
 @app.route('/select_project')
 def select_project():

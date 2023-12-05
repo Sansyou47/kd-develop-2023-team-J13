@@ -8,11 +8,11 @@
 <!-- プロジェクト番号の取得  ストーリー番号、名前の入力 -->
 <body>
     <h2>ストーリーの表示</h2>
-        {% for row in story_data %}
-        <tr>
-            <td>{{ row[0] }}</td><br>
-        </tr>
-        {% endfor %}
+    {% for row in story_data %}
+    <tr>
+        <td>{{ row[0] }}</td><br>
+    </tr>
+    {% endfor %}
     <h2>ストーリーの内容を入力</h2>
     <form action="/create_stories" method="post">
         <input type="text" name="stories" required><br>
