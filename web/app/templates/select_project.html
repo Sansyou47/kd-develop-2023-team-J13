@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>プロジェクト選択</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- 選択したプロジェクト名をGetメソッドで送信 -->
+    <script>
+        function redirectToPage(project) {
+            window.location.href = "/set_session?project=" + encodeURIComponent(project);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>プロジェクト選択</h1>
+    <form action="/action/select_project" method="post">
+        {% for row in data %}
+        <div class="project-info" onclick="redirectToPage('{{ row[1] }}')">
+            <div class="project-title">{{ row[1] }}</div>
+            <p>更新日：{{ row[4] }}<br>
+                作成日：{{ row[3] }}<br>
+                所有者：{{ row[2] }}</p>
+        </div>
+        {% endfor %}
+    </form>
+</body>
+
+</html>
