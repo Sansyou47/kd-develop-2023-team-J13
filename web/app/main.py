@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect ,session
 from flaskext.mysql import MySQL
 from function import test
 import os
@@ -15,35 +15,38 @@ mysql = MySQL(app)
 
 app.register_blueprint(test.app)
 
-
 @app.route('/')
 def index():
-    return render_template('/stories/create_stories.html')
+    return 'test'
 
-@app.route('/create_storeis')
+@app.route('/create_stories', methods=['GET', 'POST'])
 def storeis():
-    conn=mysql.get_db()
-    cur=conn.cursor()
-    # SQL実行 SQLに追加：WHEREでprojectを指定
-    cur.execute("SELECT name FROM story")
-    story_data = cur.fechall()
-    conn.commit()
-    cur.close()
-    return render_template('/stories/create_stories.html',story_data = story_data)
+    project = session['poject']
+    if request.method == 'POST':
+        # POSTメソッドでの処理
+        stories = request.form.get('stories')
+        conn = mysql.get_db()
+        cur = conn.cursor()
+        try:
+            #projectの追加が必要
+            cur.execute("INSERT INTO story(name,project) VALUES(%s,%s)", (stories,project))
+            conn.commit()
+        except mysql.Error as e:
+            print(f"MySQL Error: {e}")
+            conn.rollback()
+        finally:
+            cur.close()
+            conn.close()
 
-@app.route('/action/create_stories',methods=['POST'])
-def add_stories():
-    stories = request.form.get('stories')
-    #project = request.form.get('project')
-    # MySQLへ接続
-    conn=mysql.get_db()
-    cur=conn.cursor()
-    # SQL実行
-    #cur.execute("INSERT INTO employee(name,project) VALUES(%s,%s)",(stories,project))
-    cur.execute("INSERT INTO story(name,) VALUES(%s)",(stories))
-    conn.commit()
+    # 共通の処理（GETメソッドでの処理）
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT name FROM story WHERE project = %s",project)
+    story_data = cur.fetchall()
     cur.close()
-    return render_template('/stories/create_stories.html')
+    conn.close()
+
+    return render_template('stories/create_stories.html', story_data=story_data)
 
 
 
