@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Project 1</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 
 <body>
     <h1>プロジェクト情報を入力してください</h1>
 
 
-    <form action="/invite_user" method="post">
+    <form id="projectForm">
         <label for="projectTitle">プロジェクトタイトル:</label>
         <input type="text" id="projectTitle" name="projectTitle"><br><br>
 
@@ -23,21 +24,17 @@
         <label for="sprint">スプリント回数:</label>
         <input type="text" id="sprint" name="sprint"><br><br>
 
-        <form action="/search_user" method="post">
-            <label for="searchUser">共同作業者:</label>
-            <input type="text" id="searchUser" name="searchUser">
-            <input type="submit" value="検索">
-        </form>
+        <label for="collaborator">共同作業者:</label>
+        <input type="text" id="collaborator" name="collaborator"><br><br>
+
+        <label for="urlInput">GitHubリポジトリ:</label>
+        <input type="url" id="urlInput" name="urlInput"><br><br>
+
+        <label for="sharedFolderInput">共有フォルダ:</label>
+        <input type="text" id="sharedFolderInput" name="sharedFolderInput"><br><br>
 
         <input type="submit" value="プロジェクトを開始する">
     </form>
-
-
-    {% for user in search_result %}
-    <label>{{ user[0] }}</label>
-    <input type="checkbox" name="selected_user" value="{{ user[0] }}"><br>
-    {% endfor %}
-
 
 
     <script>

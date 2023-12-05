@@ -20,7 +20,7 @@ def index():
     return 'Test'
 
 @app.route('/create_storeis')
-def storeis():  
+def storeis():
     return render_template('/templates/stories/create_stories.html')
 
 @app.route('/action/create_stories',methods=['POST'])
@@ -39,19 +39,9 @@ def add_stories():
 def create_project():
     return render_template('/project/createproject.html')
 
-@app.route('/create_project1', methods=['GET', 'POST'])
+@app.route('/create_project1')
 def create_project1():
     return render_template('/project/createproject1.html')
-
-@app.route('/search_user', methods=['POST'])
-def search_user():
-    search_query = request.form['searchUser']
-    cursor = mysql.get_db().cursor()
-    cursor.execute("SELECT userName FROM users WHERE userName LIKE %s", ('%' + search_query + '%',))
-    search_result = cursor.fetchall()
-    return render_template('createproject1.html', search_result=search_result)
-
-
 
 @app.route('/create_project2')
 def create_project2():
