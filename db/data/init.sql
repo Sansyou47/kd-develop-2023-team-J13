@@ -10,12 +10,12 @@ create table users(
 );
 
 INSERT INTO users(name, mail, gender, class) VALUES('嫁阪雄大', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
-INSERT INTO users(name, mail, gender, class) VALUES('中川浩太郎', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
-INSERT INTO users(name, mail, gender, class) VALUES('中井禅', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
-INSERT INTO users(name, mail, gender, class) VALUES('橋本俊平', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
-INSERT INTO users(name, mail, gender, class) VALUES('林敦啓', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
-INSERT INTO users(name, mail, gender, class) VALUES('山田真豊', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
-INSERT INTO users(name, mail, gender, class) VALUES('米津大也', 'kd1297401@st.kobedenshi.ac.jp', 0, 'student');
+INSERT INTO users(name, mail, gender, class) VALUES('中川浩太郎', 'kd1297402@st.kobedenshi.ac.jp', 0, 'student');
+INSERT INTO users(name, mail, gender, class) VALUES('中井禅', 'kd1297403@st.kobedenshi.ac.jp', 0, 'student');
+INSERT INTO users(name, mail, gender, class) VALUES('橋本俊平', 'kd1297404@st.kobedenshi.ac.jp', 0, 'student');
+INSERT INTO users(name, mail, gender, class) VALUES('林敦啓', 'kd1297405@st.kobedenshi.ac.jp', 0, 'student');
+INSERT INTO users(name, mail, gender, class) VALUES('山田真豊', 'kd1297406@st.kobedenshi.ac.jp', 0, 'student');
+INSERT INTO users(name, mail, gender, class) VALUES('米津大也', 'kd1297407@st.kobedenshi.ac.jp', 0, 'student');
 
 drop table if exists project;
 create table project(
