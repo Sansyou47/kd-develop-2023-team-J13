@@ -1,0 +1,41 @@
+.story-info {
+    /* 背景色を指定 */
+    background-color: hsl(83, 74%, 87%);
+    /* 四角形の大きさを指定 */
+    width: 300px;
+    height: 150px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    /* 横並びに配置する */
+    white-space: normal;
+    /* 画面サイズに応じて自動で折り返す */
+    position: relative;
+}
+
+.story-info p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform : translate(-50%,-50%);
+    transform : translate(-50%,-50%);
+    color: #000000;
+    font-size: 15px;
+    margin-top: 0px;
+    margin-left: 5px;
+    text-align: center;
+}
+
+.textbox-001 {
+    width: 75%;
+    padding: 8px 10px;
+    border: 1px solid #969da3;
+    border-radius: 25px;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.textbox-001::placeholder {
+    color: #999;
+}

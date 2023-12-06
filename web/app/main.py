@@ -24,7 +24,8 @@ app.secret_key = "your_secret_key"
 def set_session():
     project = request.args.get("project")
     session["project"] = project
-    return redirect("/")
+    # テストのため一時的に変更
+    return redirect("/create_stories")
 
 
 @app.route("/")
@@ -43,25 +44,25 @@ def task():
     return render_template("/task_catch/task_catch.html")
 
 
-@app.route("/create_storeis")
+@app.route("/create_stories", methods=["GET", "POST"])  # ストーリー追加、表示処理
 def storeis():
-    return render_template("/templates/stories/create_stories.html")
-
-
-@app.route("/action/create_stories", methods=["POST"])
-def add_stories():
-    stories = request.form.get("stories")
-    # MySQLへ接続
+    project = str(session.get("project"))
     conn = mysql.get_db()
     cur = conn.cursor()
-    # SQL実行
-    cur.execute(
-        "INSERT INTO employee(project_int,stories_name,stories) VALUES(%s,%s,%s)",
-        (hoge, stories, hoge),
-    )
-    conn.commit()
+    if request.method == "POST":
+        # POSTメソッドでの処理
+        stories = request.form.get("stories")
+        # projectの追加が必要
+        cur.execute("INSERT INTO story(name,project) VALUES(%s,%s)", (stories, project))
+        conn.commit()
+    # 共通の処理（GETメソッドでの処理）
+    cur.execute("SELECT name FROM story WHERE project = %s", project)
+    story_data = cur.fetchall()
     cur.close()
-    return render_template("/templates/stories/create_stories.html")
+    conn.close()
+    return render_template(
+        "stories/create_stories.html", story_data=story_data, project=project
+    )
 
 
 @app.route("/select_project")
@@ -78,6 +79,70 @@ def select_project():
 def select_project_action():
     project = request.form.get("project")
     return str(project)
+
+
+# task追加画面
+@app.route("/add_task", methods=["POST"])
+def add_task():
+    storyName = request.form.get("storyName")
+    projectName = request.form.get("projectName")
+    return render_template(
+        "/tasks/add_task.html", storyName=storyName, projectName=projectName
+    )
+
+
+# task追加アクション
+@app.route("/action/add_task", methods=["POST"])
+def action_add_task():
+    taskName = request.form.get("taskName")
+    taskManager = request.form.get("taskManager")
+    sprint = int(request.form.get("sprint"))
+    storyName = request.form.get("storyName")
+
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute(
+        "INSERT INTO task(name, manager, story, sprint) VALUES(%s, %s ,%s ,%s)",
+        (taskName, taskManager, storyName, sprint),
+    )
+    conn.commit()
+    cur.close()
+
+    return redirect("/get_task")
+    # return render_template('/choice_story')
+
+
+# ストーリー選択画面
+@app.route("/choice_story")
+def choice_story():
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("SELECT * FROM story")
+    storyData = cur.fetchall()
+
+    conn.commit()
+    cur.close()
+
+    return render_template("/tasks/choice_story.html", storyData=storyData)
+
+
+@app.route("/get_task")
+def get_task():
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("SELECT * FROM task")
+    taskData = cur.fetchall()
+
+    conn.commit()
+    cur.close()
+
+    return render_template("/tasks/get_task.html", taskData=taskData)
 
 
 if __name__ == "__main__":
