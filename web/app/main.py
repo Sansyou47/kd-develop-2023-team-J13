@@ -39,11 +39,6 @@ def project():
     return render_template("select_project.html")
 
 
-@app.route("/task_task")
-def task():
-    return render_template("/task_catch/task_catch.html")
-
-
 @app.route("/create_stories", methods=["GET", "POST"])  # ストーリー追加、表示処理
 def storeis():
     project = str(session.get("project"))
@@ -143,6 +138,30 @@ def get_task():
     cur.close()
 
     return render_template("/tasks/get_task.html", taskData=taskData)
+
+
+@app.route("/update_status", methods=["POST"])
+def update_status():
+    task_name = request.form["name"]
+    task_status = request.form["status"]
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    cur.execute("UPDATE task SET status = %s WHERE name = %s", (task_status, task_name))
+    conn.commit()
+    cur.close()
+    return redirect("/task_catch")
+
+
+@app.route("/task_catch", methods=["GET"])
+def task_catch():
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT name FROM task")
+    names = [item[0] for item in cur.fetchall()]
+    cur.close()
+    return render_template("/task_catch/task_catch.html", names=names)
 
 
 if __name__ == "__main__":
