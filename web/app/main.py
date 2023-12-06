@@ -122,6 +122,38 @@ def get_task():
 
     return render_template('/tasks/get_task.html', taskData = taskData)
 
+@app.route('/create_project')
+def create_project():
+    return render_template('/project/createproject.html')
+
+@app.route('/create_project1', methods=['GET', 'POST'])
+def create_project1():
+''' 
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    if request.method == 'POST':
+        # POSTメソッドでの処理
+        projectTitle = request.form.get('projectTitle')
+        startDate = request.form.get('startDate')
+        endDate = request.form.get('endDate')
+        collaborator = request.form.get('collaborator')
+        urlInput = request.form.get('urlInput')
+        sharedFolderInput = request.form.get('sharedFolderInput')
+        #projectの追加が必要
+        cur.execute("INSERT INTO project(name,start_date,update_date,owner,github,googleDrive) VALUES(%s,%s,%s,%s,%s,%s)", (projectTitle,startDate,endDate,collaborator,urlInput,sharedFolderInput))
+        conn.commit()
+    # 共通の処理（GETメソッドでの処理）
+    cur.execute("SELECT * FROM project")
+    project_data = cur.fetchall()
+    cur.close()
+    conn.close()
+'''
+    return render_template('/project/createproject1.html')
+
+
+@app.route('/create_project2')
+def create_project2():
+    return render_template('/project/createproject2.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
