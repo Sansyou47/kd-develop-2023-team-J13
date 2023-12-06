@@ -150,7 +150,7 @@ def action_create_project1():
     conn.close()
 
 
-    return render_template('/select_project.html')
+    return redirect('/select_project')
 
 
 @app.route('/create_project2')
