@@ -126,9 +126,13 @@ def get_task():
 def create_project():
     return render_template('/project/createproject.html')
 
-@app.route('/create_project1', methods=['GET', 'POST'])
+@app.route('/create_project1')
 def create_project1():
-''' 
+    return render_template('/project/createproject1.html')
+
+@app.route('/action/create_project1', methods=['POST'])
+def action_create_project1():
+
     conn = mysql.get_db()
     cur = conn.cursor()
     if request.method == 'POST':
@@ -142,13 +146,11 @@ def create_project1():
         #projectの追加が必要
         cur.execute("INSERT INTO project(name,start_date,update_date,owner,github,googleDrive) VALUES(%s,%s,%s,%s,%s,%s)", (projectTitle,startDate,endDate,collaborator,urlInput,sharedFolderInput))
         conn.commit()
-    # 共通の処理（GETメソッドでの処理）
-    cur.execute("SELECT * FROM project")
-    project_data = cur.fetchall()
     cur.close()
     conn.close()
-'''
-    return render_template('/project/createproject1.html')
+
+
+    return render_template('/select_project.html')
 
 
 @app.route('/create_project2')
