@@ -68,7 +68,7 @@ def select_project_action():
 def create_project():
     return render_template('/project/createproject.html')
 
-@app.route('/create_project1')
+@app.route('/create_project1', methods=['GET', 'POST'])
 def create_project1():
     return render_template('/project/createproject1.html')
 
