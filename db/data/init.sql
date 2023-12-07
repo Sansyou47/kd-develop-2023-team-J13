@@ -40,6 +40,7 @@ create table task(
     status  int default 2,
     manager varchar(50),
     story varchar(2000),
+    start_task_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
     sprint  int
 );
 
