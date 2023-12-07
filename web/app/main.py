@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask import jsonify
-from function import story, project, task, init_session
+from function import story, project, task, init_session, apple
 import os
 
 app = Flask(__name__)
@@ -18,11 +18,13 @@ app.register_blueprint(story.story)
 app.register_blueprint(project.project)
 app.register_blueprint(task.task)
 app.register_blueprint(init_session.init_session)
+app.register_blueprint(apple.apple)
 
 story.mysql = mysql
 project.mysql = mysql
 task.mysql = mysql
 init_session.mysql = mysql
+apple.mysql = mysql
 
 app.secret_key = "your_secret_key"
 
@@ -30,41 +32,6 @@ app.secret_key = "your_secret_key"
 def index():
     data = str(session.get("project"))
     return data
-
-@app.route('/create_project')
-def create_project():
-    return render_template('/project/createproject.html')
-
-@app.route('/create_project1')
-def create_project1():
-    return render_template('/project/createproject1.html')
-
-@app.route('/action/create_project1', methods=['POST'])
-def action_create_project1():
-
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    if request.method == 'POST':
-        # POSTメソッドでの処理
-        projectTitle = request.form.get('projectTitle')
-        startDate = request.form.get('startDate')
-        endDate = request.form.get('endDate')
-        collaborator = request.form.get('collaborator')
-        urlInput = request.form.get('urlInput')
-        sharedFolderInput = request.form.get('sharedFolderInput')
-        #projectの追加が必要
-        cur.execute("INSERT INTO project(name,start_date,update_date,owner,github,googleDrive) VALUES(%s,%s,%s,%s,%s,%s)", (projectTitle,startDate,endDate,collaborator,urlInput,sharedFolderInput))
-        conn.commit()
-    cur.close()
-    conn.close()
-
-
-    return redirect('/select_project')
-
-
-@app.route('/create_project2')
-def create_project2():
-    return render_template('/project/createproject2.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
