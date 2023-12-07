@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask import jsonify
-from function import test
+from function import story, project, task, init_session
 import os
 
 app = Flask(__name__)
@@ -14,155 +14,22 @@ app.config["MYSQL_DATABASE_HOST"] = "mysql"
 
 mysql = MySQL(app)
 
-app.register_blueprint(test.app)
+app.register_blueprint(story.story)
+app.register_blueprint(project.project)
+app.register_blueprint(task.task)
+app.register_blueprint(init_session.init_session)
+
+story.mysql = mysql
+project.mysql = mysql
+task.mysql = mysql
+init_session.mysql = mysql
 
 app.secret_key = "your_secret_key"
-
-
-# セッションに値を格納
-@app.route("/set_session")
-def set_session():
-    project = request.args.get("project")
-    session["project"] = project
-    # テストのため一時的に変更
-    return redirect("/create_stories")
-
 
 @app.route("/")
 def index():
     data = str(session.get("project"))
     return data
-
-
-@app.route("/project")
-def project():
-    return render_template("select_project.html")
-
-
-@app.route("/create_stories", methods=["GET", "POST"])  # ストーリー追加、表示処理
-def storeis():
-    project = str(session.get("project"))
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    if request.method == "POST":
-        # POSTメソッドでの処理
-        stories = request.form.get("stories")
-        # projectの追加が必要
-        cur.execute("INSERT INTO story(name,project) VALUES(%s,%s)", (stories, project))
-        conn.commit()
-    # 共通の処理（GETメソッドでの処理）
-    cur.execute("SELECT name FROM story WHERE project = %s", project)
-    story_data = cur.fetchall()
-    cur.close()
-    conn.close()
-    return render_template(
-        "stories/create_stories.html", story_data=story_data, project=project
-    )
-
-
-@app.route("/select_project")
-def select_project():
-    # MySQLへ接続
-    cur = mysql.get_db().cursor()
-    # SQL実行
-    cur.execute("SELECT * FROM project")
-    data = cur.fetchall()
-    return render_template("/select_project.html", data=data)
-
-
-@app.route("/action/select_project", methods=["POST"])
-def select_project_action():
-    project = request.form.get("project")
-    return str(project)
-
-
-# task追加画面
-@app.route("/add_task", methods=["POST"])
-def add_task():
-    storyName = request.form.get("storyName")
-    projectName = request.form.get("projectName")
-    return render_template(
-        "/tasks/add_task.html", storyName=storyName, projectName=projectName
-    )
-
-
-# task追加アクション
-@app.route("/action/add_task", methods=["POST"])
-def action_add_task():
-    taskName = request.form.get("taskName")
-    taskManager = request.form.get("taskManager")
-    sprint = int(request.form.get("sprint"))
-    storyName = request.form.get("storyName")
-
-    # MySQLへ接続
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    # SQL実行
-    cur.execute(
-        "INSERT INTO task(name, manager, story, sprint) VALUES(%s, %s ,%s ,%s)",
-        (taskName, taskManager, storyName, sprint),
-    )
-    conn.commit()
-    cur.close()
-
-    return redirect("/get_task")
-    # return render_template('/choice_story')
-
-
-# ストーリー選択画面
-@app.route("/choice_story")
-def choice_story():
-    # MySQLへ接続
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    # SQL実行
-    cur.execute("SELECT * FROM story")
-    storyData = cur.fetchall()
-
-    conn.commit()
-    cur.close()
-
-    return render_template("/tasks/choice_story.html", storyData=storyData)
-
-
-@app.route("/get_task")
-def get_task():
-    # MySQLへ接続
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    # SQL実行
-    cur.execute("SELECT * FROM task")
-    taskData = cur.fetchall()
-
-    conn.commit()
-    cur.close()
-
-    return render_template("/tasks/get_task.html", taskData=taskData)
-
-
-@app.route("/update_status", methods=["POST"])
-def update_status():
-    task_name = request.form["name"]
-    task_status = request.form["status"]
-    # MySQLへ接続
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    cur.execute("UPDATE task SET status = %s WHERE name = %s", (task_status, task_name))
-    conn.commit()
-    cur.close()
-    return redirect("/task_catch")
-
-
-@app.route("/task_catch", methods=["GET"])
-def task_catch():
-    # MySQLへ接続
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    cur.execute("SELECT name FROM task")
-    names = [item[0] for item in cur.fetchall()]
-    cur.close()
-    return render_template("/task_catch/task_catch.html", names=names)
-
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
