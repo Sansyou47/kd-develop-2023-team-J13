@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask import jsonify
-from function import story, project, task, init_session
+from function import story, project, task, init_session, apple
 import os
 
 app = Flask(__name__)
@@ -18,11 +18,13 @@ app.register_blueprint(story.story)
 app.register_blueprint(project.project)
 app.register_blueprint(task.task)
 app.register_blueprint(init_session.init_session)
+app.register_blueprint(apple.apple)
 
 story.mysql = mysql
 project.mysql = mysql
 task.mysql = mysql
 init_session.mysql = mysql
+apple.mysql = mysql
 
 app.secret_key = "your_secret_key"
 
@@ -31,5 +33,5 @@ def index():
     data = str(session.get("project"))
     return data
 
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
