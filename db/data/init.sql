@@ -40,6 +40,7 @@ create table task(
     status  int default 2,
     manager varchar(50),
     story varchar(2000),
+    start_task_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
     sprint  int
 );
 
@@ -69,3 +70,35 @@ INSERT INTO class(name) VALUES('student');
 INSERT INTO class(name) VALUES('teacher');
 INSERT INTO class(name) VALUES('company');
 INSERT INTO class(name) VALUES('recruiter');
+
+drop table if exists project_users;
+create table project_users(
+    project varchar(100),
+    userId    varchar(50)
+);
+
+INSERT INTO project_users(project, userId) VALUES('開発支援アプリ', 'kd1297401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('開発支援アプリ', 'kd1397401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('開発支援アプリ', 'kd1497401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('開発支援アプリ', 'kd1597401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('開発支援アプリ', 'kd1697401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('開発支援アプリ', 'kd1797401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('開発支援アプリ', 'kd1897401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1297401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1397401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1497401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1597401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1697401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1797401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1897401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1297401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1397401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1497401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1597401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1697401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1797401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1897401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('シフト表作成支援アプリ', 'kd1297401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('シフト表作成支援アプリ', 'kd1397401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('シフト表作成支援アプリ', 'kd1497401@st.kobedenshi.ac.jp');
+INSERT INTO project_users(project, userId) VALUES('シフト表作成支援アプリ', 'kd1597401@st.kobedenshi.ac.jp');

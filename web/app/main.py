@@ -1,26 +1,34 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask import jsonify
-from function import test
+from function import story, project, task, init_session
 import os
 
 app = Flask(__name__)
 
 # MySQL設定(環境変数から読み取り)
-app.config['MYSQL_DATABASE_USER'] = os.getenv('MYSQL_USER')
-app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
-app.config['MYSQL_DATABASE_DB'] = os.getenv('MYSQL_DATABASE')
-app.config['MYSQL_DATABASE_HOST'] = 'mysql'
+app.config["MYSQL_DATABASE_USER"] = os.getenv("MYSQL_USER")
+app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
+app.config["MYSQL_DATABASE_DB"] = os.getenv("MYSQL_DATABASE")
+app.config["MYSQL_DATABASE_HOST"] = "mysql"
 
 mysql = MySQL(app)
 
-app.register_blueprint(test.app)
+app.register_blueprint(story.story)
+app.register_blueprint(project.project)
+app.register_blueprint(task.task)
+app.register_blueprint(init_session.init_session)
 
-app.secret_key = 'your_secret_key'
+story.mysql = mysql
+project.mysql = mysql
+task.mysql = mysql
+init_session.mysql = mysql
 
-@app.route('/')
+app.secret_key = "your_secret_key"
+
+@app.route("/")
 def index():
-    data=str(session.get('project'))
+    data = str(session.get("project"))
     return data
 
 @app.route('/create_project')
