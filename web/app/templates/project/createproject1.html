@@ -16,7 +16,7 @@
         <input type="text" id="projectTitle" name="projectTitle"><br><br>
 
         <label for="startDate">プロジェクト開始日:</label>
-        <input type="date" id="startDate" name="startDate" value=""><br><br>
+        <input type="datetime-local" id="startDate" name="startDate" value=""><br><br>
 
         <label for="endDate">プロジェクト完成予定日:</label>
         <input type="date" id="endDate" name="endDate"><br><br>
@@ -24,7 +24,7 @@
         <!--<label for="sprint">スプリント回数:</label>
         <input type="text" id="sprint" name="sprint"><br><br>-->
 
-        <label for="collaborator">共同作業者:</label>
+        <label for="collaborator">所有者:</label>
         <input type="text" id="collaborator" name="collaborator"><br><br>
 
         <label for="urlInput">GitHubリポジトリ:</label>
@@ -38,10 +38,21 @@
 
 
     <script>
-        // プロジェクト開始日に現在の日時をセットする
-        document.getElementById('startDate').valueAsDate = new Date();
+        // 現在の日時を取得
+        var currentDate = new Date();
 
+        // 年月日時分をフォーマット
+        var year = currentDate.getFullYear();
+        var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+        var day = ('0' + currentDate.getDate()).slice(-2);
+        var hours = ('0' + currentDate.getHours()).slice(-2);
+        var minutes = ('0' + currentDate.getMinutes()).slice(-2);
+
+        // フォーマットした日時をセット
+        var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+        document.getElementById('startDate').value = formattedDate;
     </script>
+
 
 
 </body>
