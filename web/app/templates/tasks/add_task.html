@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>タスク追加フォーム</title>
+    <link rel="stylesheet" href="../static/css/add_task.css">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
             {% for i in range(1,11) %}
             <option value="{{ i }}">{{ i }}</option>
             {% endfor %}
-        </select>
+        </select><br>
         <input type="hidden" name="storyName" value="{{ storyName }}">
         <input type="submit" value="登録">
     </form>

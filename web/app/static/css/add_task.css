@@ -1,0 +1,22 @@
+form {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #9c9c9c;
+    padding: 50px;
+    box-sizing: border-box;
+}
+
+form input[type="text"] {
+    padding: 10px;
+    width: 65%;
+}
+
+form input[type="submit"] {
+    background: #5250e0;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 20px;
+    margin: auto;
+}
