@@ -1,37 +1,35 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask import jsonify
-from function import select_project, task, indexp, story
+from function import story, project, task, init_session
 import os
 
 app = Flask(__name__)
 
 # MySQL設定(環境変数から読み取り)
-app.config['MYSQL_DATABASE_USER'] = os.getenv('MYSQL_USER')
-app.config['MYSQL_DATABASE_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
-app.config['MYSQL_DATABASE_DB'] = os.getenv('MYSQL_DATABASE')
-app.config['MYSQL_DATABASE_HOST'] = 'mysql'
+app.config["MYSQL_DATABASE_USER"] = os.getenv("MYSQL_USER")
+app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
+app.config["MYSQL_DATABASE_DB"] = os.getenv("MYSQL_DATABASE")
+app.config["MYSQL_DATABASE_HOST"] = "mysql"
 
 mysql = MySQL(app)
 
-select_project.mysql = mysql
-task.mysql = mysql
-story.mysql = mysql
-
-app.register_blueprint(select_project.select_project)
+app.register_blueprint(story.story)
+app.register_blueprint(project.project)
 app.register_blueprint(task.task)
-app.register_blueprint(indexp.indexp)
+app.register_blueprint(init_session.init_session)
 
-app.secret_key = 'your_secret_key'
+story.mysql = mysql
+project.mysql = mysql
+task.mysql = mysql
+init_session.mysql = mysql
 
-# セッションに値を格納
-@app.route('/set_session')
-def set_session():
-    # getメソッドで取得した値をセッションに格納
-    project = request.args.get('project')
-    session['project'] = project
-    # とりあえずインデックスへリダイレクト
-    return redirect('/')
+app.secret_key = "your_secret_key"
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+@app.route("/")
+def index():
+    data = str(session.get("project"))
+    return data
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
