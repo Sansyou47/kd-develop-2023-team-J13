@@ -5,6 +5,7 @@ task = Blueprint("task", __name__)
 
 mysql = None
 
+
 # task追加画面
 @task.route("/add_task", methods=["POST"])
 def add_task():
@@ -13,7 +14,8 @@ def add_task():
     return render_template(
         "/tasks/add_task.html", storyName=storyName, projectName=projectName
     )
-    
+
+
 # task追加アクション
 @task.route("/action/add_task", methods=["POST"])
 def action_add_task():
@@ -33,6 +35,7 @@ def action_add_task():
     cur.close()
     return redirect("/get_task")
 
+
 @task.route("/get_task")
 def get_task():
     # MySQLへ接続
@@ -47,24 +50,40 @@ def get_task():
 
     return render_template("/tasks/get_task.html", taskData=taskData)
 
+
 @task.route("/update_status", methods=["POST"])
 def update_status():
     task_name = request.form["name"]
     task_status = request.form["status"]
+    task_users = request.form["users"]
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
-    cur.execute("UPDATE task SET status = %s WHERE name = %s", (task_status, task_name))
+    cur.execute(
+        "UPDATE task SET status = %s ,manager = %s WHERE name = %s",
+        (task_status, task_users, task_name),
+    )
     conn.commit()
     cur.close()
     return redirect("/task_catch")
 
+
 @task.route("/task_catch", methods=["GET"])
 def task_catch():
+    # project = str(session.get("project")) セッションを受け取れるようになったら(画面遷移が決まったら)コメントアウトを外しsql文を修正する
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
+
+    # namesの取得
     cur.execute("SELECT name FROM task")
     names = [item[0] for item in cur.fetchall()]
+
+    # usersの取得
+    cur.execute(
+        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.project = '開発支援アプリ'"
+    )
+    users = [item[0] for item in cur.fetchall()]
+
     cur.close()
-    return render_template("/task_catch/task_catch.html", names=names)
+    return render_template("/task_catch/task_catch.html", names=names, users=users)
