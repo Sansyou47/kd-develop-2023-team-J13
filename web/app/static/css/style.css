@@ -39,6 +39,7 @@
 
 .content {
     margin-left: 300px;
+    margin-top: 90px;
 }
 
 .project-info {
@@ -82,4 +83,8 @@
 
 .project-resource-logo {
     display: inline-block;
+}
+
+.content .error {
+    color: red;
 }
