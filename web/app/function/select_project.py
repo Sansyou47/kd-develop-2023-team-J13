@@ -12,20 +12,20 @@ def my_route():
     # MySQLへ接続
     cur = mysql.get_db().cursor()
     # SQL実行
-    cur.execute("SELECT * FROM project_users WHERE userId = %s", (current_user.id))
-    data = cur.fetchall()
-    if data:
-        output_data = []
-        for i in data:
-            cur.execute("SELECT * FROM project WHERE name = %s", (i[0]))
-            output_data.append(cur.fetchall())
-        return render_template('/select_project.html', data = output_data)
-    else:
-        cur.execute("SELECT * FROM project")
-        data = cur.fetchall()
+    cur.execute("SELECT projectName FROM project_users WHERE userId = %s", (current_user.id))
+    project_names = cur.fetchall()
+    
+    data = []
+    for project_name in project_names:
+        cur.execute("SELECT * FROM project WHERE name = %s", (project_name[0],))
+        project_data = cur.fetchall()
+        if project_data:
+            data.append(project_data[0])
+    
     return render_template('/select_project.html', data=data)
 
 @select_project.route('/action/select_project',methods=['POST'])
+@login_required
 def select_project_action():
     project = request.form.get('project')
     return str(project)

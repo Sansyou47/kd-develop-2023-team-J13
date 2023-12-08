@@ -55,7 +55,7 @@ def login():
         user = cursor.fetchone()
         if user and password == user[4]:
             login_user(User(userid))
-            return redirect('/auth')
+            return redirect('/select_project')
         else:
             return 'Invalid username or password'
     else:
