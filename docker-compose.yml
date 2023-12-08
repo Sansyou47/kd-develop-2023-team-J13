@@ -4,7 +4,7 @@ services:
   web:
     build: web
     ports:
-      - "80:5000"
+      - "9047:5000"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
