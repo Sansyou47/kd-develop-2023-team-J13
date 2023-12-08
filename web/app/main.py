@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
-from flask import jsonify
-from function import story, project, task, init_session, apple
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
+from function import story, select_project, task, init_session, apple, users
+from werkzeug.security import check_password_hash
 import os
 
 app = Flask(__name__)
@@ -18,19 +18,22 @@ app.secret_key = os.getenv("SECRET_KEY")
 mysql = MySQL(app)
 
 app.register_blueprint(story.story)
-app.register_blueprint(project.project)
+app.register_blueprint(select_project.select_project)
 app.register_blueprint(task.task)
 app.register_blueprint(init_session.init_session)
 app.register_blueprint(apple.apple)
+app.register_blueprint(users.users)
 
 story.mysql = mysql
-project.mysql = mysql
+select_project.mysql = mysql
 task.mysql = mysql
 init_session.mysql = mysql
 apple.mysql = mysql
+users.mysql = mysql
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = '/login'
 
 class User(UserMixin):
     def __init__(self, user_id):
@@ -54,10 +57,13 @@ def login():
         cursor = mysql.get_db().cursor()
         cursor.execute('SELECT * FROM users WHERE userId = %s', (userid))
         user = cursor.fetchone()
-        if user and password == user[4]:
+        
+        # パスワードをハッシュ値と照合して一致した場合
+        if user and check_password_hash(user[4], password):
+            login_user(User(userid))
             return redirect('/select_project')
         else:
-            return 'Invalid username or password'
+            return redirect('/login')
     else:
         return render_template('login.html')
 
@@ -65,17 +71,18 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect('/login')
 
-@app.route('/')
+@app.route("/auth")
+@login_required
+def auth():
+    user_id=current_user.id
+    return user_id
+
+@app.route("/")
 @login_required
 def index():
-    return 'Logged in as: ' + current_user.id
-
-# @app.route("/")
-# def index():
-#     data = str(session.get("project"))
-#     return data
+    return "ok"
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
