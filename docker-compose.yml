@@ -11,6 +11,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: ${default_timezone}
+      SECRET_KEY: ${SECRET_KEY}
     volumes:
       - ./web/app:/app
     depends_on:
