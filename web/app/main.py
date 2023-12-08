@@ -13,6 +13,8 @@ app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
 app.config["MYSQL_DATABASE_DB"] = os.getenv("MYSQL_DATABASE")
 app.config["MYSQL_DATABASE_HOST"] = "mysql"
 
+app.secret_key = os.getenv("SECRET_KEY")
+
 mysql = MySQL(app)
 
 app.register_blueprint(story.story)
@@ -52,9 +54,8 @@ def login():
         cursor = mysql.get_db().cursor()
         cursor.execute('SELECT * FROM users WHERE userId = %s', (userid))
         user = cursor.fetchone()
-        if user and check_password_hash(user['password'], password):
-            login_user(User(user['id']))
-            return redirect(url_for('index'))
+        if user and password == user[4]:
+            return redirect('/select_project')
         else:
             return 'Invalid username or password'
     else:

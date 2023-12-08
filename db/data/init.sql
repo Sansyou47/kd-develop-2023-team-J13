@@ -1,6 +1,6 @@
 drop table if exists users;
 create table users(
-    number  int auto_increment primary key,
+    userNumber  int auto_increment primary key,
     userId	varchar(50),
 	userName	varchar(50) not null,
     kana	varchar(50) not null,
@@ -41,8 +41,9 @@ create table task(
     status  int default 2,
     manager varchar(50),
     story varchar(2000),
+    sprint  int,
     start_task_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    sprint  int
+    finish_task_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO task(name, story, sprint) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1);
