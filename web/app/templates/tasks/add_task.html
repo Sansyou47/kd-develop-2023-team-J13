@@ -15,13 +15,13 @@
     <form action="/action/add_task" method="post">
         タスク名: <input type="text" name="taskName" required><br>
         担当者名: <input type="text" name="taskManager" required><br>
-        スプリント数 <select name="sprint">
+        スプリント <select name="sprint">
             {% for i in range(1,11) %}
             <option value="{{ i }}">{{ i }}</option>
             {% endfor %}
         </select><br>
         <input type="hidden" name="storyName" value="{{ storyName }}">
-        <input type="submit" value="登録">
+        <div><input type="submit" value="登録"></div>
     </form>
 </body>
 

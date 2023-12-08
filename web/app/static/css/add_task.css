@@ -1,7 +1,10 @@
 form {
-    width: 100%;
+    width: 80%;
+    /* border外の余白 */
     margin: 0 auto;
+    /* 境界線 */
     border: 1px solid #9c9c9c;
+    /* border内の余白 */
     padding: 50px;
     box-sizing: border-box;
 }
@@ -9,6 +12,7 @@ form {
 form input[type="text"] {
     padding: 10px;
     width: 65%;
+    margin: 10px;
 }
 
 form input[type="submit"] {
@@ -18,5 +22,8 @@ form input[type="submit"] {
     font-weight: bold;
     text-align: center;
     padding: 10px 20px;
-    margin: auto;
+}
+
+div {
+    text-align: center;
 }
