@@ -4,13 +4,14 @@ services:
   web:
     build: web
     ports:
-      - "80:5000"
+      - "9047:5000"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: ${default_timezone}
+      SECRET_KEY: ${SECRET_KEY}
     volumes:
       - ./web/app:/app
     depends_on:
