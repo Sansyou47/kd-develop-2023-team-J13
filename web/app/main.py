@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
-from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin
-from flask import jsonify
-from function import story, project, task, init_session, apple
+from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
+from function import story, select_project, task, init_session, apple
 import os
 
 app = Flask(__name__)
@@ -18,13 +17,13 @@ app.secret_key = os.getenv("SECRET_KEY")
 mysql = MySQL(app)
 
 app.register_blueprint(story.story)
-app.register_blueprint(project.project)
+app.register_blueprint(select_project.select_project)
 app.register_blueprint(task.task)
 app.register_blueprint(init_session.init_session)
 app.register_blueprint(apple.apple)
 
 story.mysql = mysql
-project.mysql = mysql
+select_project.mysql = mysql
 task.mysql = mysql
 init_session.mysql = mysql
 apple.mysql = mysql
@@ -55,7 +54,8 @@ def login():
         cursor.execute('SELECT * FROM users WHERE userId = %s', (userid))
         user = cursor.fetchone()
         if user and password == user[4]:
-            return redirect('/select_project')
+            login_user(User(userid))
+            return redirect('/auth')
         else:
             return 'Invalid username or password'
     else:
@@ -65,17 +65,18 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect('/login')
 
-@app.route('/')
+@app.route("/auth")
+@login_required
+def auth():
+    user_id=current_user.id
+    return user_id
+
+@app.route("/")
 @login_required
 def index():
-    return 'Logged in as: ' + current_user.id
-
-# @app.route("/")
-# def index():
-#     data = str(session.get("project"))
-#     return data
+    return "ok"
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
