@@ -10,7 +10,6 @@
 <body>
     <h1>プロジェクト情報を入力してください</h1>
 
-
     <form id="projectForm" method="POST" action="/action/create_project1">
         <label for="projectTitle">プロジェクトタイトル:</label>
         <input type="text" id="projectTitle" name="projectTitle"><br><br>
@@ -36,14 +35,25 @@
         <input type="submit" value="プロジェクトを開始する">
     </form>
 
-
     <script>
         // プロジェクト開始日に現在の日時をセットする
         document.getElementById('startDate').valueAsDate = new Date();
 
+        // プロジェクト開始日とプロジェクト完成予定日の変更を監視
+        document.getElementById('startDate').addEventListener('change', checkDateValidity);
+        document.getElementById('endDate').addEventListener('change', checkDateValidity);
+
+        function checkDateValidity() {
+            var startDate = new Date(document.getElementById('startDate').value);
+            var endDate = new Date(document.getElementById('endDate').value);
+            var sevenDaysLater = new Date();
+            sevenDaysLater.setDate(sevenDaysLater.getDate() + 6);
+
+            if (startDate <= sevenDaysLater && endDate <= sevenDaysLater) {
+                alert("プロジェクト開始日とプロジェクト完成予定日は7日以上で設定してください。");
+            }
+        }
     </script>
-
-
 
 </body>
 
