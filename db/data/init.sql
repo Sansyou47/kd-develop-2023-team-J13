@@ -1,6 +1,7 @@
 drop table if exists users;
 create table users(
-    userId	varchar(50) primary key,
+    userNumber  int auto_increment primary key,
+    userId	varchar(50),
 	userName	varchar(50) not null,
     kana	varchar(50) not null,
     password    varchar(300),
@@ -9,13 +10,13 @@ create table users(
     class   varchar(10)
 );
 
-INSERT INTO users(userId, userName, kana, gender, class) VALUES('kd1297401@st.kobedenshi.ac.jp', '嫁阪雄大', 'ヨメサカカズヒロ', 0, 'student');
-INSERT INTO users(userId, userName, kana, gender, class) VALUES('kd1397401@st.kobedenshi.ac.jp', '中川浩太郎', 'ナカガワコウタロウ', 0, 'student');
-INSERT INTO users(userId, userName, kana, gender, class) VALUES('kd1497401@st.kobedenshi.ac.jp', '中井禅', 'ナカイゼン', 0, 'student');
-INSERT INTO users(userId, userName, kana, gender, class) VALUES('kd1597401@st.kobedenshi.ac.jp', '橋本俊平', 'ハシモトシュンペイ', 0, 'student');
-INSERT INTO users(userId, userName, kana, gender, class) VALUES('kd1697401@st.kobedenshi.ac.jp', '林敦啓', 'ハヤシノブヒロ', 0, 'student');
-INSERT INTO users(userId, userName, kana, gender, class) VALUES('kd1797401@st.kobedenshi.ac.jp', '山田真豊', 'ヤマダマナト', 0, 'student');
-INSERT INTO users(userId, userName, kana, gender, class) VALUES('kd1897401@st.kobedenshi.ac.jp', '米津大也', 'ヨネヅダイヤ', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1297401@st.kobedenshi.ac.jp', '嫁阪雄大', 'ヨメサカカズヒロ', 'test', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1397401@st.kobedenshi.ac.jp', '中川浩太郎', 'ナカガワコウタロウ', 'test', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1497401@st.kobedenshi.ac.jp', '中井禅', 'ナカイゼン', 'test', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1597401@st.kobedenshi.ac.jp', '橋本俊平', 'ハシモトシュンペイ', 'test', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1697401@st.kobedenshi.ac.jp', '林敦啓', 'ハヤシノブヒロ', 'test', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1797401@st.kobedenshi.ac.jp', '山田真豊', 'ヤマダマナト', 'test', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1897401@st.kobedenshi.ac.jp', '米津大也', 'ヨネヅダイヤ', 'test', 0, 'student');
 
 drop table if exists project;
 create table project(
@@ -40,8 +41,9 @@ create table task(
     status  int default 2,
     manager varchar(50),
     story varchar(2000),
+    sprint  int,
     start_task_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    sprint  int
+    finish_task_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO task(name, story, sprint) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1);
