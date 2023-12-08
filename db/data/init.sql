@@ -94,13 +94,4 @@ INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'k
 INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1797401@st.kobedenshi.ac.jp');
 INSERT INTO project_users(project, userId) VALUES('タスク管理アプリ', 'kd1897401@st.kobedenshi.ac.jp');
 INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1297401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1397401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1497401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1597401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1697401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1797401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('マインクラフトサーバー', 'kd1897401@st.kobedenshi.ac.jp');
 INSERT INTO project_users(project, userId) VALUES('シフト表作成支援アプリ', 'kd1297401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('シフト表作成支援アプリ', 'kd1397401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('シフト表作成支援アプリ', 'kd1497401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(project, userId) VALUES('シフト表作成支援アプリ', 'kd1597401@st.kobedenshi.ac.jp');
