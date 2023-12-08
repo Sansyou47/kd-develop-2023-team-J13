@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
-from function import story, select_project, task, init_session, apple
+from function import story, select_project, task, init_session, apple, users
+from werkzeug.security import check_password_hash
 import os
 
 app = Flask(__name__)
@@ -21,15 +22,18 @@ app.register_blueprint(select_project.select_project)
 app.register_blueprint(task.task)
 app.register_blueprint(init_session.init_session)
 app.register_blueprint(apple.apple)
+app.register_blueprint(users.users)
 
 story.mysql = mysql
 select_project.mysql = mysql
 task.mysql = mysql
 init_session.mysql = mysql
 apple.mysql = mysql
+users.mysql = mysql
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = '/login'
 
 class User(UserMixin):
     def __init__(self, user_id):
@@ -53,11 +57,13 @@ def login():
         cursor = mysql.get_db().cursor()
         cursor.execute('SELECT * FROM users WHERE userId = %s', (userid))
         user = cursor.fetchone()
-        if user and password == user[4]:
+        
+        # パスワードをハッシュ値と照合して一致した場合
+        if user and check_password_hash(user[4], password):
             login_user(User(userid))
-            return redirect('/auth')
+            return redirect('/select_project')
         else:
-            return 'Invalid username or password'
+            return redirect('/login')
     else:
         return render_template('login.html')
 
