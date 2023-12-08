@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
-from function import story, select_project, task, init_session, apple
+from function import story, select_project, task, init_session, apple, mypage
 import os
 
 app = Flask(__name__)
@@ -21,62 +21,71 @@ app.register_blueprint(select_project.select_project)
 app.register_blueprint(task.task)
 app.register_blueprint(init_session.init_session)
 app.register_blueprint(apple.apple)
+app.register_blueprint(mypage.mypage)
 
 story.mysql = mysql
 select_project.mysql = mysql
 task.mysql = mysql
 init_session.mysql = mysql
 apple.mysql = mysql
+mypage.mysql = mysql
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 class User(UserMixin):
     def __init__(self, user_id):
         self.id = user_id
 
+
 @login_manager.user_loader
 def load_user(user_id):
     cursor = mysql.get_db().cursor()
-    cursor.execute('SELECT * FROM users WHERE userId = %s', (user_id))
+    cursor.execute("SELECT * FROM users WHERE userId = %s", (user_id))
     user = cursor.fetchone()
     if user:
         return User(user_id)
     else:
         return None
 
-@app.route('/login', methods=['GET', 'POST'])
+
+@app.route("/login", methods=["GET", "POST"])
 def login():
-    if request.method == 'POST':
-        userid = request.form['userid']
-        password = request.form['password']
+    if request.method == "POST":
+        userid = request.form["userid"]
+        password = request.form["password"]
         cursor = mysql.get_db().cursor()
-        cursor.execute('SELECT * FROM users WHERE userId = %s', (userid))
+        cursor.execute("SELECT * FROM users WHERE userId = %s", (userid))
         user = cursor.fetchone()
         if user and password == user[4]:
             login_user(User(userid))
-            return redirect('/auth')
+            return redirect("/auth")
         else:
-            return 'Invalid username or password'
+            return "Invalid username or password"
     else:
-        return render_template('login.html')
+        return render_template("login.html")
 
-@app.route('/logout')
+
+@app.route("/logout")
 @login_required
 def logout():
     logout_user()
-    return redirect('/login')
+    return redirect("/login")
+
 
 @app.route("/auth")
 @login_required
 def auth():
-    user_id=current_user.id
+    user_id = current_user.id
     return user_id
+
 
 @app.route("/")
 @login_required
 def index():
     return "ok"
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0")
