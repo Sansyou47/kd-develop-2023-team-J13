@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask import jsonify
-from function import story, project, task, init_session, apple
+from function import story, project, task, init_session, apple, graph
 import os
 
 app = Flask(__name__)
@@ -19,6 +19,7 @@ app.register_blueprint(project.project)
 app.register_blueprint(task.task)
 app.register_blueprint(init_session.init_session)
 app.register_blueprint(apple.apple)
+app.register_blueprint(graph.graph)
 
 story.mysql = mysql
 project.mysql = mysql
