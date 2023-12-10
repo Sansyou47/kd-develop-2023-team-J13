@@ -2,30 +2,46 @@
 <html>
 <link rel="stylesheet" href="../static/css/style.css">
 
-<head>
-    <meta charset="UTF-8">
-
-    {% if title is not none %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>Attache</title>
-    {% endif %}
-</head>
-
 <body>
     <div class="header-main">
         <div class="header-title">
-            Attache
+            {% if project %}
+            <div class="header-title-inproject">
+                Attache > {{project}}
+            </div>
+            {% else %}
+            <div class="header-title-outproject">
+                Attache
+            </div>
+            {% endif %}
         </div>
+        <div class="login-user">
+            {% if uid %}
+            <p>{{uid}}でログイン中</p>
+
+            {% else %}
+
+            {% endif %}
+        </div>
+
+
     </div>
     <div class="header-tab">
-        <p>HOME</p>
+        <p><a href="/select_project">HOME</a></p>
         <p>Project</p>
         <p>Story</p>
         <p>Task</p>
         <p>Doing</p>
         <p>Done</p>
-        <a href="/logout">ログアウト</a>
+        {% if uid %}
+        <div class="header-tab-user">
+            <a href="/logout">ログアウト</a>
+        </div>
+        {% else %}
+        <div class="header-tab-user">
+            <a href="/login">ログイン</a>
+        </div>
+        {% endif %}
     </div>
 </body>
 
