@@ -63,7 +63,8 @@ def login():
             login_user(User(userid))
             return redirect('/select_project')
         else:
-            return redirect('/login')
+            error_message = "ユーザーIDまたはパスワードが間違っています。"
+            return render_template('login.html', error_message=error_message)
     else:
         return render_template('login.html')
 
