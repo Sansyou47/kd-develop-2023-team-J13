@@ -65,7 +65,8 @@ create table task(
     story varchar(2000),
     sprint  int,
     start_task_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    finish_task_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    finish_task_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    comment varchar(2000)
 );
 
 INSERT INTO task(name, story, sprint) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1);
