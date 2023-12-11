@@ -21,10 +21,8 @@ def my_route():
         project_data = cur.fetchall()
         if project_data:
             data.append(project_data[0])
-            
-    # ユーザーIDを取得し、戻り値に設定する（メアドから"@"以降を削除する処理を追加）
-    uid=str(current_user.id)
-    return render_template('/select_project.html', data=data, uid=uid.split('@')[0])
+
+    return render_template('/select_project.html', data=data)
 
 # プロジェクトを選択したときの処理
 @select_project.route('/action/select_project',methods=['POST'])

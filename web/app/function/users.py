@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, session
 from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash
+from flask_login import current_user
 
 users = Blueprint("users", __name__)
 
@@ -38,3 +39,4 @@ def register():
     # POSTメソッドに値が渡されていない場合、登録画面へ遷移
     else:
         return render_template("register.html")
+    
