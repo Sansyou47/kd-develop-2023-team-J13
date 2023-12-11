@@ -1,11 +1,13 @@
 from flask import Blueprint, render_template, request, redirect, session
 from flaskext.mysql import MySQL
+from flask_login import login_required, current_user
 
 story = Blueprint("story", __name__)
 
 mysql = None
 
 @story.route("/create_stories", methods=["GET", "POST"])  # ストーリー追加、表示処理
+@login_required
 def storeis():
     project = str(session.get("project"))
     conn = mysql.get_db()
@@ -27,6 +29,7 @@ def storeis():
     
 # ストーリー選択画面
 @story.route("/choice_story")
+@login_required
 def choice_story():
     # MySQLへ接続
     conn = mysql.get_db()

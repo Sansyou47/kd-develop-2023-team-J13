@@ -21,6 +21,7 @@ def my_route():
         project_data = cur.fetchall()
         if project_data:
             data.append(project_data[0])
+
     return render_template('/select_project.html', data=data)
 
 # プロジェクトを選択したときの処理
