@@ -22,5 +22,6 @@ def my_route():
         if project_data:
             data.append(project_data[0])
 
+    session.pop('project_users', None)
     return render_template('/select_project.html', data=data)
     
