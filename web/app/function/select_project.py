@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, session
 from flaskext.mysql import MySQL
 from flask_login import login_required, current_user
 
@@ -29,4 +29,15 @@ def my_route():
 @login_required
 def select_project_action():
     project = request.form.get('project')
+    cur = mysql.get_db().cursor()
+    cur.execute("SELECT userId FROM project_users WHERE projectName = %s", (project))
+    userId = cur.fetchall()
+    uName = []
+    for userid in userId:
+        cur.execute("SELECT userName FROM users WHERE userId = %s", (userid))
+        userName = cur.fetchall()
+        if userName:
+            uName.append(userName)
+    
+    session['project_users'] = uName
     return str(project)
