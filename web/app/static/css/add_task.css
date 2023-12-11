@@ -6,6 +6,10 @@ body {
     padding: 0;
 }
 
+h1 {
+    text-align: center;
+}
+
 form {
     width: 80%;
     /* border外の余白 */
@@ -53,9 +57,11 @@ form input[type="submit"] {
 label {
     display: block;
     margin-bottom: 8px;
+    margin-top: 30px;
     font-weight: bold;
 }
 
 div {
     text-align: center;
+    padding-top: 50px;
 }
