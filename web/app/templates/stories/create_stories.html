@@ -23,6 +23,12 @@
     <form action="/create_stories" method="post">
         <input type="text" class="textbox-001" name="stories" required><br>
         <input type="hidden" name="project" value="$_GET['project']"><br>
+        <label for="priority">優先度</label>
+            <select name="priority" id="priority">
+            <option value="0">高</option>
+            <option value="1">中</option>
+            <option value="2">低</option>
+        </select>
         <input type="submit" class="submit-button" value="追加">
     </form>
 </body>

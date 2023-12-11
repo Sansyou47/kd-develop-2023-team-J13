@@ -78,11 +78,12 @@ INSERT INTO task(name, story, sprint) VALUES('タスクボード出力画面', '
 drop table if exists story;
 create table story(
     name    varchar(2000),
-    project varchar(100)
+    project varchar(100),
+    priorit int
 );
 
-INSERT INTO story(name, project) VALUES('ファイルを一括で管理したい', '開発支援アプリ');
-INSERT INTO story(name, project) VALUES('各員の進行状況を逐次把握したい', '開発支援アプリ');
+INSERT INTO story(name, project,priorit) VALUES('ファイルを一括で管理したい', '開発支援アプリ',0);
+INSERT INTO story(name, project,priorit) VALUES('各員の進行状況を逐次把握したい', '開発支援アプリ',1);
 
 drop table if exists class;
 create table class(
