@@ -8,7 +8,7 @@
         <summary>参加中のユーザー</summary>
         <ul>
             {% for user in session['project_users'] %}
-            <li>{{ user }}</li>
+            <li>{{ user[0] }}</li>
             {% endfor %}
         </ul>
     </details>

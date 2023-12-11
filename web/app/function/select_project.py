@@ -23,21 +23,4 @@ def my_route():
             data.append(project_data[0])
 
     return render_template('/select_project.html', data=data)
-
-# プロジェクトを選択したときの処理
-@select_project.route('/action/select_project',methods=['POST'])
-@login_required
-def select_project_action():
-    project = request.form.get('project')
-    cur = mysql.get_db().cursor()
-    cur.execute("SELECT userId FROM project_users WHERE projectName = %s", ('開発支援アプリ'))
-    userId = cur.fetchall()
-    uName = []
-    for userid in userId:
-        cur.execute("SELECT userName FROM users WHERE userId = %s", (userid[0],))
-        userName = cur.fetchall()
-        if userName:
-            uName.append(userName[0])
     
-    session['project_users'] = 'uName'
-    return str(project)
