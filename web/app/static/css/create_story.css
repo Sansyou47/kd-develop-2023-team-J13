@@ -1,6 +1,13 @@
-body, h2, p {
+
+Certainly! Here are some improvements to your CSS file:
+
+css
+Copy code
+/* Reset some default styles */
+body, h2, p, div, select, label {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 body {
@@ -12,6 +19,10 @@ h2 {
     color: #333;
 }
 
+.content {
+    margin: 20px; /* Add some margin to the content for better spacing */
+}
+
 .story-info {
     background-color: hsl(82, 89%, 79%);
     width: 300px;
@@ -21,8 +32,8 @@ h2 {
     display: inline-block;
     white-space: normal;
     position: relative;
-    border-radius: 15px; 
-    overflow: hidden; 
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .story-info p {
@@ -65,12 +76,34 @@ h2 {
     background-color: #45a049;
 }
 
+/* Add a bit of spacing between form elements */
+form {
+    margin-top: 20px;
+}
+
+/* Improve select styling */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #969da3;
+    border-radius: 25px;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* Responsive styles */
 @media (max-width: 600px) {
-    .form-container {
-        width: 90%;
+    .content {
+        margin: 10px; /* Adjust margin for smaller screens */
     }
 
-    .textbox-001 {
+    .textbox-001,
+    select {
         width: 100%;
     }
 }
