@@ -4,7 +4,14 @@
     <div class="side-project-info">
         <div class="project-title">{{project}}</div>
     </div>
-
+    <details>
+        <summary>参加中のユーザー</summary>
+        <ul>
+            {% for user in session['project_users'] %}
+            <li>{{ user[0] }}</li>
+            {% endfor %}
+        </ul>
+    </details>
     {% endif %}
 </div>
 <div class="sidebar-contents">
@@ -18,6 +25,4 @@
     {% elif project %}
     <p>ストーリーはありません</p>
     {% endif %}
-
-</div>
 </div>
