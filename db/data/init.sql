@@ -25,36 +25,37 @@ create table project(
     owner   varchar(100),
     start_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
     update_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    finish_date DATETIME,
     github  varchar(200),
     googleDrive varchar(200),
     logo    varchar(200)
 );
 
-INSERT INTO project(name, owner, github, googleDrive) VALUES('開発支援アプリ', '橋本俊平', 'https://github.com/Sansyou47/kd-develop-2023-team-J13.git', 'https://drive.google.com/drive/folders/0AOWOMUXeZizTUk9PVA');
-INSERT INTO project(name, owner, github) VALUES('タスク管理アプリ', '中井禅', 'https://github.com/Sansyou47/team-J13-shooting-range.git');
-INSERT INTO project(name, owner, github) VALUES('シフト表作成支援アプリ', '嫁阪雄大', 'https://github.com/Sansyou47/PythonWebApp.git');
-INSERT INTO project(name, owner, github) VALUES('マインクラフトサーバー', '嫁阪雄大', 'https://github.com/Sansyou47/Minecraftserver-for-Docker.git');
-INSERT INTO project(name, owner) VALUES('音楽再生ソフト', '米津大也');
-INSERT INTO project(name, owner) VALUES('音楽編集ソフト', '米津大也');
-INSERT INTO project(name, owner) VALUES('音楽リミックスソフト', '米津大也');
-INSERT INTO project(name, owner) VALUES('原神聖遺物計算アプリ', '中川浩太郎');
-INSERT INTO project(name, owner) VALUES('原神ガチャ課金計算', '中川浩太郎');
-INSERT INTO project(name, owner) VALUES('原神キャラクター育成計算', '中川浩太郎');
-INSERT INTO project(name, owner) VALUES('原神武器育成計算', '中川浩太郎');
-INSERT INTO project(name, owner) VALUES('原神素材計算', '中川浩太郎');
-INSERT INTO project(name, owner) VALUES('ビジュネル暗号計算機', '林敦啓');
-INSERT INTO project(name, owner) VALUES('ビジュネル暗号解読機', '林敦啓');
-INSERT INTO project(name, owner) VALUES('デレステキャラ育成計画表', '中井禅');
-INSERT INTO project(name, owner) VALUES('デレステガチャ課金計算', '中井禅');
-INSERT INTO project(name, owner) VALUES('デレステガチャ確率計算', '中井禅');
-INSERT INTO project(name, owner) VALUES('デレステガチャユニット編成表', '中井禅');
-INSERT INTO project(name, owner) VALUES('ブルアカロリボイス集', '橋本俊平');
-INSERT INTO project(name, owner) VALUES('ブルアカガチャ課金計算', '橋本俊平');
-INSERT INTO project(name, owner) VALUES('ブルアカガチャ確率計算', '橋本俊平');
-INSERT INTO project(name, owner) VALUES('ブルアカユニット編成表', '橋本俊平');
-INSERT INTO project(name, owner) VALUES('漫画感想共有アプリ', '山田真豊');
-INSERT INTO project(name, owner) VALUES('漫画価格一覧アプリ', '山田真豊');
-INSERT INTO project(name, owner) VALUES('漫画ガチャ課金計算', '山田真豊');
+INSERT INTO project(name, owner, finish_date, github, googleDrive, logo) VALUES('開発支援アプリ', '橋本俊平', '2024-01-15', 'https://github.com/Sansyou47/kd-develop-2023-team-J13.git', 'https://drive.google.com/drive/folders/0AOWOMUXeZizTUk9PVA', 'bird.png');
+INSERT INTO project(name, owner, finish_date, github) VALUES('タスク管理アプリ', '中井禅', '2024-01-15', 'https://github.com/Sansyou47/team-J13-shooting-range.git');
+INSERT INTO project(name, owner, finish_date, github) VALUES('シフト表作成支援アプリ', '嫁阪雄大', '2024-01-15', 'https://github.com/Sansyou47/PythonWebApp.git');
+INSERT INTO project(name, owner, finish_date, github, logo) VALUES('マインクラフトサーバー', '嫁阪雄大', '2024-01-15', 'https://github.com/Sansyou47/Minecraftserver-for-Docker.git', 'minecraft.png');
+INSERT INTO project(name, owner, finish_date) VALUES('音楽再生ソフト', '米津大也', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('音楽編集ソフト', '米津大也', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('音楽リミックスソフト', '米津大也', '2024-01-15');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('原神聖遺物計算アプリ', '中川浩太郎', '2024-01-15', 'java_logo.png');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('原神ガチャ課金計算', '中川浩太郎', '2024-01-15', 'java_logo.png');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('原神キャラクター育成計算', '中川浩太郎', '2024-01-15', 'java_logo.png');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('原神武器育成計算', '中川浩太郎', '2024-01-15', 'java_logo.png');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('原神素材計算', '中川浩太郎', '2024-01-15', 'java_logo.png');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('ビジュネル暗号計算機', '林敦啓', '2024-01-15', 'lambda_logo.png');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('ビジュネル暗号解読機', '林敦啓', '2024-01-15', 'lambda_logo.png');
+INSERT INTO project(name, owner, finish_date) VALUES('デレステキャラ育成計画表', '中井禅', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('デレステガチャ課金計算', '中井禅', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('デレステガチャ確率計算', '中井禅', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('デレステガチャユニット編成表', '中井禅', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('ブルアカロリボイス集', '橋本俊平', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('ブルアカガチャ課金計算', '橋本俊平', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('ブルアカガチャ確率計算', '橋本俊平', '2024-01-15');
+INSERT INTO project(name, owner, finish_date) VALUES('ブルアカユニット編成表', '橋本俊平', '2024-01-15');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('漫画感想共有アプリ', '山田真豊', '2024-01-15', 'flask_logo.png');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('漫画価格一覧アプリ', '山田真豊', '2024-01-15', 'flask_logo.png');
+INSERT INTO project(name, owner, finish_date, logo) VALUES('漫画ガチャ課金計算', '山田真豊', '2024-01-15', 'flask_logo.png');
 
 drop table if exists task;
 create table task(
@@ -64,7 +65,8 @@ create table task(
     story varchar(2000),
     sprint  int,
     start_task_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    finish_task_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    finish_task_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    comment varchar(2000)
 );
 
 INSERT INTO task(name, story, sprint) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1);
@@ -78,11 +80,12 @@ INSERT INTO task(name, story, sprint) VALUES('タスクボード出力画面', '
 drop table if exists story;
 create table story(
     name    varchar(2000),
-    project varchar(100)
+    project varchar(100),
+    priorit int
 );
 
-INSERT INTO story(name, project) VALUES('ファイルを一括で管理したい', '開発支援アプリ');
-INSERT INTO story(name, project) VALUES('各員の進行状況を逐次把握したい', '開発支援アプリ');
+INSERT INTO story(name, project,priorit) VALUES('ファイルを一括で管理したい', '開発支援アプリ',0);
+INSERT INTO story(name, project,priorit) VALUES('各員の進行状況を逐次把握したい', '開発支援アプリ',1);
 
 drop table if exists class;
 create table class(

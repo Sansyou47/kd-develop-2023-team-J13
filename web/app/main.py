@@ -40,6 +40,13 @@ login_manager.login_view = '/login'
 class User(UserMixin):
     def __init__(self, user_id):
         self.id = user_id
+        
+# ログイン中のユーザーIDを取得する関数
+def get_uid():
+    # ユーザーIDを取得し、戻り値に設定する（メアドから"@"以降を削除する処理を追加）
+    uid = str(current_user.id)
+    uid = uid.split('@')[0]
+    return uid
 
 
 @login_manager.user_loader
@@ -65,9 +72,13 @@ def login():
         # パスワードをハッシュ値と照合して一致した場合
         if user and check_password_hash(user[4], password):
             login_user(User(userid))
+            uid = str(current_user.id)
+            uid = uid.split('@')[0]
+            session['user_id'] = uid
             return redirect('/select_project')
         else:
-            return redirect('/login')
+            error_message = "ユーザーIDまたはパスワードが間違っています。"
+            return render_template('login.html', error_message=error_message)
     else:
         return render_template("login.html")
 
@@ -76,6 +87,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    session.pop('user_id', None)
     return redirect("/login")
 
 

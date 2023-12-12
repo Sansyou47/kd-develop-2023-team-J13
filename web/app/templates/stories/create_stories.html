@@ -8,23 +8,39 @@
     <link rel="stylesheet" href="../static/css/create_story.css">
 </head>
 
-<!-- プロジェクト番号の取得  ストーリー番号、名前の入力 -->
+<div class="header">
+    {% include 'header.html' %}
+</div>
 
-<body>
-    <h2>ストーリーの表示</h2>
-    {% for row in story_data %}
-    <tr>
-        <div class="story-info">
-            <p>{{ row[0] }}</p>
-        </div>
-    </tr>
-    {% endfor %}
-    <h2>ストーリーの内容を入力</h2>
-    <form action="/create_stories" method="post">
-        <input type="text" class="textbox-001" name="stories" required><br>
-        <input type="hidden" name="project" value="$_GET['project']"><br>
-        <input type="submit" value="追加">
-    </form>
-</body>
+<div class="sidebar">
+    {% include 'sidebar.html' %}
+</div>
+
+<!-- プロジェクト番号の取得  ストーリー番号、名前の入力 -->
+<div class="content">
+
+    <body>
+        <h2>ストーリーの表示</h2>
+        {% for row in story_data %}
+        <tr>
+            <div class="story-info">
+                <p>{{ row[0] }}</p>
+            </div>
+        </tr>
+        {% endfor %}
+        <h2>ストーリーの内容を入力</h2>
+        <form action="/create_stories" method="post">
+            <input type="text" class="textbox-001" name="stories" required><br>
+            <input type="hidden" name="project" value="$_GET['project']"><br>
+        <label for="priority">優先度</label>
+            <select name="priority" id="priority">
+            <option value="0">高</option>
+            <option value="1">中</option>
+            <option value="2">低</option>
+        </select>
+            <input type="submit" class="submit-button" value="追加">
+        </form>
+    </body>
+</div>
 
 </html>
