@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="../static/css/style.css">
+
+<body>
+    <div class="header-main">
+        <div class="header-title">
+            {% if project %}
+            <div class="header-title-inproject">
+                Attache > {{project}}
+            </div>
+            {% else %}
+            <div class="header-title-outproject">
+                Attache
+            </div>
+            {% endif %}
+        </div>
+        <div class="login-user">
+            {% if session['user_id'] %}
+            <div class="header-tab-user">
+                <a href="/mypage">{{session['user_id']}}でログイン中</a>
+                <a href="/logout">ログアウト</a>
+            </div>
+            {% else %}
+            <div class="header-tab-user">
+                <a href="/login">ログイン</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-tab">
+        <p><a href="/select_project">HOME</a></p>
+        <p>プロジェクト</p>
+        <p>ストーリー</p>
+        <p>タスク</p>
+        <p>進行中</p>
+        <p>Done</p>
+    </div>
+</body>
+
+</html>
