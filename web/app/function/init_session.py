@@ -9,6 +9,17 @@ mysql = None
 @init_session.route("/set_session")
 def set_session():
     project = request.args.get("project")
+    cur = mysql.get_db().cursor()
+    cur.execute("SELECT userId FROM project_users WHERE projectName = %s", ('開発支援アプリ'))
+    userId = cur.fetchall()
+    uName = []
+    for userid in userId:
+        cur.execute("SELECT userName FROM users WHERE userId = %s", (userid[0],))
+        userName = cur.fetchall()
+        if userName:
+            uName.append(userName[0])
+    
+    session['project_users'] = uName
     session["project"] = project
     # テストのため一時的に変更
     return redirect("/create_stories")

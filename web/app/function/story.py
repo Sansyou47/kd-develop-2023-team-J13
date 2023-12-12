@@ -15,8 +15,9 @@ def storeis():
     if request.method == "POST":
         # POSTメソッドでの処理
         stories = request.form.get("stories")
+        priority = request.form.get("priority")
         # projectの追加が必要
-        cur.execute("INSERT INTO story(name,project) VALUES(%s,%s)", (stories, project))
+        cur.execute("INSERT INTO story(name,project,priorit) VALUES(%s,%s,%s)", (stories, project,priority))
         conn.commit()
     # 共通の処理（GETメソッドでの処理）
     cur.execute("SELECT name FROM story WHERE project = %s", project)
