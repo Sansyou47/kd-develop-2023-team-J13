@@ -10,7 +10,21 @@ mysql = None
 @task.route("/add_task", methods=["POST"])
 def add_task():
     storyName = request.form.get("storyName")
-    projectName = request.form.get("projectName")
+
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+
+    # SQL実行
+    cur.execute("SELECT project FROM story WHERE name = %s", storyName)
+
+    #入手した配列を変数に代入する
+    for i in cur.fetchone() :
+        projectName = i
+
+    conn.commit()
+    cur.close()
+    #projectName = request.form.get("projectName")
     return render_template(
         "/tasks/add_task.html", storyName=storyName, projectName=projectName
     )
@@ -29,7 +43,7 @@ def action_add_task():
     # SQL実行
     cur.execute(
         "INSERT INTO task(name, manager, story, sprint) VALUES(%s, %s ,%s ,%s)",
-        (taskName, taskManager, storyName, sprint),
+        (taskName, taskManager, storyName, sprint)
     )
     conn.commit()
     cur.close()

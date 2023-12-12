@@ -23,21 +23,26 @@
         <h2>ストーリーの表示</h2>
         {% for row in story_data %}
         <tr>
-            <div class="story-info">
-                <p>{{ row[0] }}</p>
-            </div>
+            <form method="POST" action="/add_task">
+                <button>
+                    <div class="story-info">
+                        <p>{{ row[0] }}</p>
+                    </div>
+                </button>
+                <input type="hidden" name="storyName" value="{{ row[0] }}">
+            </form>
         </tr>
         {% endfor %}
         <h2>ストーリーの内容を入力</h2>
         <form action="/create_stories" method="post">
             <input type="text" class="textbox-001" name="stories" required><br>
             <input type="hidden" name="project" value="$_GET['project']"><br>
-        <label for="priority">優先度</label>
+            <label for="priority">優先度</label>
             <select name="priority" id="priority">
-            <option value="0">高</option>
-            <option value="1">中</option>
-            <option value="2">低</option>
-        </select>
+                <option value="0">高</option>
+                <option value="1">中</option>
+                <option value="2">低</option>
+            </select>
             <input type="submit" class="submit-button" value="追加">
         </form>
     </body>

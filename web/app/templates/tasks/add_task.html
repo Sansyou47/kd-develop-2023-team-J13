@@ -7,6 +7,13 @@
     <title>タスク追加フォーム</title>
     <link rel="stylesheet" href="../static/css/add_task.css">
 </head>
+<div class="header">
+    {% include 'header.html' %}
+</div>
+
+<div class="sidebar">
+    {% include 'sidebar.html' %}
+</div>
 
 <body>
     <h1>タスク追加フォーム</h1>
@@ -24,7 +31,7 @@
                 {% endfor %}
             </select></label>
         <input type="hidden" name="storyName" value="{{ storyName }}">
-        <div><input type="submit" value="登録"></div>
+        <div class="submit"><input type="submit" value="登録"></div>
     </form>
 </body>
 
