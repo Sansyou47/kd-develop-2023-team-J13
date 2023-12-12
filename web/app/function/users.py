@@ -16,10 +16,6 @@ def register():
         password = request.form.get("password")
         name = request.form.get("name")
         kana = request.form.get("kana")
-        
-        # パスワードをハッシュ化
-        hashed_password = generate_password_hash(password)
-        
         # MySQLへ接続
         conn = mysql.get_db()
         cur = conn.cursor()
@@ -27,9 +23,15 @@ def register():
         user = cur.fetchone()
         # メールアドレスが使用済みの場合
         if user:
-            error_message = "このユーザーIDは既に使用されています。"
-            return render_template("register.html", error_message=error_message)
+            error_message = "このメールアドレスは既に使用されています。"
+            return render_template("register.html", email=userid, name=name, kana=kana, error_message=error_message)
+        # パスワードが8文字未満の場合
+        elif len(password) < 8:
+            error_message = "メールアドレスは8文字以上で入力してください。"
+            return render_template("register.html", email=userid, name=name, kana=kana, error_message=error_message)
         else:
+            # パスワードをハッシュ化
+            hashed_password = generate_password_hash(password)
             # SQL実行
             cur.execute("INSERT INTO users(userId, userName, kana, password) VALUES(%s,%s,%s,%s)", (userid, name, kana, hashed_password))
             conn.commit()
