@@ -5,7 +5,7 @@ mypage = Blueprint("mypage", __name__)
 
 mysql = None
 
-userNumber = 4
+userNumber = 4  # 実装が進んだらsessionでuserNumberの値を受け取る
 
 @mypage.route("/register_skill", methods=["POST"])
 def register_skill():
@@ -32,7 +32,7 @@ def add_mypage():
     # userNumberがデータベースに存在するか確認
     cur.execute("SELECT * FROM skill WHERE userNumber = %s", (userNumber,))
     result = cur.fetchone()
-    # userNumberが存在しない場合、新しいエントリを作成
+    # userNumberが存在しない場合、新しいデータベースを作成
     if result is None:
         cur.execute("""
             INSERT INTO skill (userNumber)
