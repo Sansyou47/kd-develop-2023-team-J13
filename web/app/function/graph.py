@@ -1,8 +1,21 @@
 from flask import Blueprint, render_template, request, redirect
 from flaskext.mysql import MySQL
+import json
 
 graph = Blueprint("graph", __name__)
 
+mysql = None
+
 @graph.route("/graph")
 def graphs():
-    return render_template("graph.html")
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("SELECT * FROM task")
+    story_graph = cur.fetchall()
+
+    conn.commit()
+    cur.close()
+    # story_graphを取得するコード
+    return render_template('graph.html',story_graph = story_graph)

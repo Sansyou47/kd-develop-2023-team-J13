@@ -30,6 +30,7 @@ select_project.mysql = mysql
 task.mysql = mysql
 init_session.mysql = mysql
 apple.mysql = mysql
+graph.mysql = mysql
 users.mysql = mysql
 
 login_manager = LoginManager()

@@ -14,7 +14,15 @@
     </p>
     <div id="visualization"></div>
 
+    <script>
+        var storyGraph = JSON.parse('{{ story_graph | tojson | safe }}');//このへんから明日
+    </script>
+    <div id="output"></div>
+    <script>
+        document.getElementById('output').innerText = JSON.stringify(storyGraph, null, 2);
+    </script>
     <script src="../static/javascript/graph.js"></script>
+
 </body>
 
 </html>

@@ -1,21 +1,16 @@
 var container = document.getElementById("visualization"),
     items = new vis.DataSet();
+var groups = [];
+var te = [];
 
-//ここ配列
-items = [
-    { group: 'a', content: 'c', start: '2023-12-05', end: '2023-12-25' },
-    { group: 'b', content: 'd', start: '2023-12-10', end: '2023-12-31' }
-]
-//idの名前表示(一番左の部分)
-const groups = [
-    { id: 'a', content: 'CC' },
-    { id: 'b', content: 'DD' },
-];
+for (var i = 0; i < storyGraph.length; i++) {
+    te.push({ id: i, group: storyGraph[i][3], content: storyGraph[i][1], start: '2022-12-05', end: '2023-12-25' });
+    groups.push({ id: i, content: storyGraph[i][3] });
+}
 
-
-for (var i = 0; i < items.length; i++) {
-    //配列から追加しとるやつ
-    items.add = items[i].id + items[i].content + items[i].start + items[i].end;
+for (var j = 0; j < te.length; j++) {
+    console.log(te[j]);
+    items.add(te[j]);
 }
 
 
@@ -37,7 +32,7 @@ var options = {
 };
 //timelineに表示する項目を書く
 //groupsを書かないと一番左のCC,DD等が表示されなくなる
-var timeline = new vis.Timeline(container, items, groups, options);
+var timeline = new vis.Timeline(container, items, options, groups);
 
 timeline.addCustomTime('2014-02-20', 'v-bar');
 
@@ -47,3 +42,5 @@ timeline.addCustomTime('2014-02-20', 'v-bar');
 //   border-style: solid;
 //   box-sizing: border-box;
 // }
+
+
