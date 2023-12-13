@@ -1,24 +1,19 @@
-<div class="header">
-    {% include 'header.html' %}
-</div>
+{% include 'header.html' %}
 
-<div class="sidebar">
-    {% include 'sidebar.html' %}
-</div>
 
-<div class="content">
-    <form action="/login" method="POST">
-        <h1>ログイン</h1>
-        {% if error_message %}
-        <p class="error">{{ error_message }}</p>
-        {% endif %}
-        <label for="userid">ユーザーID:</label>
-        <input type="text" id="userid" name="userid" required><br><br>
+{% include 'sidebar.html' %}
+<form action="/login" method="POST">
+    <h1>ログイン</h1>
+    {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+    {% endif %}
+    <label for="userid">ユーザーID:</label>
+    <input type="text" id="userid" name="userid" required><br><br>
 
-        <label for="password">パスワード:</label>
-        <input type="password" id="password" name="password" required><br><br>
+    <label for="password">パスワード:</label>
+    <input type="password" id="password" name="password" required><br><br>
 
-        <input type="submit" value="ログイン">
-        <a href="/register">新規登録はこちら</a>
-    </form>
+    <input type="submit" value="ログイン">
+    <a href="/register">新規登録はこちら</a>
+</form>
 </div>
