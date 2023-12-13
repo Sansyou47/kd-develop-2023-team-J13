@@ -18,12 +18,12 @@
                 <th>skill</th>
                 <th>skill</th>
                 <th>skill</th>
-                <th></th>
+                <th></th> <!-- 送信ボタンのために空白-->
             </tr>
             <!-- ループを実行し、userNumberが指定したuserNumberと一致する時だけuserNumberを出力します。-->
-            {% for skill in skills if skill[0] == userNumber %}
+            <!-- {% for skill in skills if skill[0] == userNumber %} -->
             <tr>
-                <td>{{ userNumber }}</td>
+                <td>{{ name[0] }}</td>
             <!-- 得意不得意を6項目プルダウンメニューを作成 -->
             {% for skill_index in range(1, 7) %}
             <td>
