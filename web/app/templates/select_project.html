@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+{% include 'header.html' %}
 
 <head>
-    <meta charset="UTF-8">
-    <title>プロジェクト選択</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-
     <!-- 選択したプロジェクト名をGetメソッドで送信 -->
     <script>
         // プロジェクト名をセッションに保存する関数
@@ -15,63 +10,55 @@
     </script>
 </head>
 
-<div class="header">
-    {% include 'header.html' %}
-</div>
+{% include 'sidebar.html' %}
 
-<div class="sidebar">
-    {% include 'sidebar.html' %}
-</div>
-
-<div class="content">
-
-    <body>
-        <h1>プロジェクト選択</h1>
-        <form action="/action/select_project" method="post">
-            {% for row in data %}
-            <div class="project-info">
-                <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
-                <div class="project-click-area" onclick="redirectToPage('{{ row[1] }}')">
-                    <div class="project-title">{{ row[1] }}</div>
-                    <p>最終更新日：{{ row[4].strftime("%Y-%m-%d") }}<br>
-                        作成日：{{ row[3].strftime("%Y-%m-%d") }}<br>
-                        リリース予定日：{{ row[5].strftime("%Y-%m-%d") }}<br>
-                        所有者：{{ row[2] }}</p>
-                    <div class="project-logo">
-                        {% if row[8] is none %}
-                        {% else %}
-                        <img src="../static/images/{{row[8]}}" alt="arrow" width="100" height="100">
-                        {% endif %}
-                    </div>
-                </div>
-                <!-- 各リソースへのURLをロゴで表示する -->
-                <div class="project-resource">
-                    <!-- GitHubのリポジトリが登録されている場合のみ処理 -->
-                    {% if row[6] is not none %}
-                    <div class="project-repository-logo">
-                        <!-- GitHubリポジトリのURLをロゴで表示する -->
-                        <a href="{{ row[6] }}" target="_blank">
-                            <!-- ロゴデータの読み込み -->
-                            <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
-                        </a>
-                    </div>
-                    {% endif %}
-                    <!-- GoogleDriveが登録されている場合のみ処理 -->
-                    {% if row[7] is not none %}
-                    <div class="project-resource-logo">
-                        <!-- GoogleDriveのURLをロゴで表示する -->
-                        <a href="{{ row[7] }}" target="_blank">
-                            <!-- ロゴデータの読み込み -->
-                            <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark"
-                                width="25" height="25">
-                        </a>
-                    </div>
+<body>
+    <h1>プロジェクト選択</h1>
+    <form action="/action/select_project" method="post">
+        {% for row in data %}
+        <div class="project-info">
+            <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
+            <div class="project-click-area" onclick="redirectToPage('{{ row[1] }}')">
+                <div class="project-title">{{ row[1] }}</div>
+                <p>最終更新日：{{ row[4].strftime("%Y-%m-%d") }}<br>
+                    作成日：{{ row[3].strftime("%Y-%m-%d") }}<br>
+                    リリース予定日：{{ row[5].strftime("%Y-%m-%d") }}<br>
+                    所有者：{{ row[2] }}</p>
+                <div class="project-logo">
+                    {% if row[8] is none %}
+                    {% else %}
+                    <img src="../static/images/{{row[8]}}" alt="arrow" width="100" height="100">
                     {% endif %}
                 </div>
             </div>
-            {% endfor %}
-        </form>
-    </body>
+            <!-- 各リソースへのURLをロゴで表示する -->
+            <div class="project-resource">
+                <!-- GitHubのリポジトリが登録されている場合のみ処理 -->
+                {% if row[6] is not none %}
+                <div class="project-repository-logo">
+                    <!-- GitHubリポジトリのURLをロゴで表示する -->
+                    <a href="{{ row[6] }}" target="_blank">
+                        <!-- ロゴデータの読み込み -->
+                        <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
+                    </a>
+                </div>
+                {% endif %}
+                <!-- GoogleDriveが登録されている場合のみ処理 -->
+                {% if row[7] is not none %}
+                <div class="project-resource-logo">
+                    <!-- GoogleDriveのURLをロゴで表示する -->
+                    <a href="{{ row[7] }}" target="_blank">
+                        <!-- ロゴデータの読み込み -->
+                        <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
+                            height="25">
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </form>
+</body>
 </div>
 
 </html>

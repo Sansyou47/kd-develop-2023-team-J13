@@ -7,6 +7,7 @@ create table users(
     password    varchar(2000),
     gender  int,
     gitAccount  varchar(50),
+    userLogo    varchar(200),
     class   varchar(10)
 );
 
