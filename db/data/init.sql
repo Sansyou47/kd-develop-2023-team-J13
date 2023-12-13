@@ -138,3 +138,17 @@ INSERT INTO project_users(projectName, userId) VALUES('ブルアカユニット�
 INSERT INTO project_users(projectName, userId) VALUES('漫画感想共有アプリ', 'kd1334992@st.kobedenshi.ac.jp');
 INSERT INTO project_users(projectName, userId) VALUES('漫画価格一覧アプリ', 'kd1334992@st.kobedenshi.ac.jp');
 INSERT INTO project_users(projectName, userId) VALUES('漫画ガチャ課金計算', 'kd1334992@st.kobedenshi.ac.jp');
+
+drop table if exists skill;
+CREATE TABLE skill(
+    userNumber INT,
+    skill1 INT DEFAULT 2 CHECK (skill1 >= 1 AND skill1 <= 3),
+    skill2 INT DEFAULT 2 CHECK (skill2 >= 1 AND skill2 <= 3),
+    skill3 INT DEFAULT 2 CHECK (skill3 >= 1 AND skill3 <= 3),
+    skill4 INT DEFAULT 2 CHECK (skill4 >= 1 AND skill4 <= 3),
+    skill5 INT DEFAULT 2 CHECK (skill5 >= 1 AND skill5 <= 3),
+    skill6 INT DEFAULT 2 CHECK (skill6 >= 1 AND skill6 <= 3),
+    skill_TEXT TEXT
+);
+
+INSERT INTO skill(userNumber) VALUES('1');
