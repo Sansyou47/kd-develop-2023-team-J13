@@ -85,12 +85,15 @@ def update_status():
     task_name = request.form["name"]
     task_status = request.form["status"]
     task_users = request.form["users"]
+    start_date = request.form.get('start_date')
+    finish_date = request.form.get('finish_date')
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
+
     cur.execute(
-        "UPDATE task SET status = %s ,manager = %s WHERE name = %s",
-        (task_status, task_users, task_name),
+        "UPDATE task SET status = %s ,manager = %s WHERE name = %s AND start_task_date = %s AND finish_task_date = %s",
+        (task_status, task_users, task_name, start_date, finish_date),
     )
     conn.commit()
     cur.close()
@@ -110,7 +113,7 @@ def task_catch():
 
     # usersの取得
     cur.execute(
-        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.project = '開発支援アプリ'"
+        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.projectName = '開発支援アプリ'"
     )
     users = [item[0] for item in cur.fetchall()]
 
