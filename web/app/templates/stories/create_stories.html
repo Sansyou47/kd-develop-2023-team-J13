@@ -6,9 +6,14 @@
     <h2>ストーリーの表示</h2>
     {% for row in story_data %}
     <tr>
-        <div class="story-info">
-            <p>{{ row[0] }}</p>
-        </div>
+        <form method="POST" action="/add_task">
+            <button>
+                <div class="story-info">
+                    <p>{{ row[0] }}</p>
+                </div>
+            </button>
+            <input type="hidden" name="storyName" value="{{ row[0] }}">
+        </form>
     </tr>
     {% endfor %}
     <h2>ストーリーの内容を入力</h2>

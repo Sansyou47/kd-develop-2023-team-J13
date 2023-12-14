@@ -1,9 +1,13 @@
-
-
-body, h2, p, div, select, label {
+body,
+h2,
+p,
+div,
+select,
+label {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
 }
 
 body {
@@ -15,8 +19,14 @@ h2 {
     color: #333;
 }
 
+button {
+    border: none;
+    cursor: pointer;
+}
+
 .content {
-    margin: 20px; /* Add some margin to the content for better spacing */
+    margin: 20px;
+    /* Add some margin to the content for better spacing */
 }
 
 .story-info {
@@ -95,7 +105,8 @@ select {
 /* Responsive styles */
 @media (max-width: 600px) {
     .content {
-        margin: 10px; /* Adjust margin for smaller screens */
+        margin: 10px;
+        /* Adjust margin for smaller screens */
     }
 
     .textbox-001,
