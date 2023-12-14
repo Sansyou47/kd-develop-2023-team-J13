@@ -8,17 +8,18 @@
 </head>
 
 <body>
+    <!-- ヘッダー -->
     <h1>プロジェクト情報を入力してください</h1>
 
-
+    <!-- プロジェクト情報入力フォーム -->
     <form id="projectForm" method="POST" action="/action/create_project1">
         <label for="projectTitle">プロジェクトタイトル:</label>
         <input type="text" id="projectTitle" name="projectTitle"><br><br>
 
         <label for="startDate">プロジェクト開始日:</label>
-        <input type="datetime-local" id="startDate" name="startDate" value=""><br><br>
+        <input type="date" id="startDate" name="startDate" value=""><br><br>
 
-        <label for="endDate">プロジェクト完成予定日:</label>
+        <label for="endDate">リリース予定日:</label>
         <input type="date" id="endDate" name="endDate"><br><br>
 
         <!--<label for="sprint">スプリント回数:</label>
@@ -36,24 +37,28 @@
         <input type="submit" value="プロジェクトを開始する">
     </form>
 
-
+    <!-- スクリプト -->
     <script>
-        // 現在の日時を取得
-        var currentDate = new Date();
+        // プロジェクト開始日に現在の日時をセットする
+        document.getElementById('startDate').valueAsDate = new Date();
 
-        // 年月日時分をフォーマット
-        var year = currentDate.getFullYear();
-        var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-        var day = ('0' + currentDate.getDate()).slice(-2);
-        var hours = ('0' + currentDate.getHours()).slice(-2);
-        var minutes = ('0' + currentDate.getMinutes()).slice(-2);
+        // プロジェクト開始日とプロジェクト完成予定日の変更を監視して、チェックを行う関数を呼び出す
+        document.getElementById('startDate').addEventListener('change', checkDateValidity);
+        document.getElementById('endDate').addEventListener('change', checkDateValidity);
 
-        // フォーマットした日時をセット
-        var formattedDate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-        document.getElementById('startDate').value = formattedDate;
+        // 関数: プロジェクト開始日とプロジェクト完成予定日をチェックする
+        function checkDateValidity() {
+            var startDate = new Date(document.getElementById('startDate').value);
+            var endDate = new Date(document.getElementById('endDate').value);
+            var sevenDaysLater = new Date();
+            sevenDaysLater.setDate(sevenDaysLater.getDate() + 6);
+
+            // プロジェクト開始日とプロジェクト完成予定日が7日以内の場合、エラーメッセージを表示する
+            if (startDate <= sevenDaysLater && endDate <= sevenDaysLater) {
+                alert("プロジェクト開始日とプロジェクト完成予定日は7日以上で設定してください。");
+            }
+        }
     </script>
-
-
 
 </body>
 

@@ -8,9 +8,11 @@ mysql = None
 # セッションに値を格納
 @init_session.route("/set_session")
 def set_session():
+    # sessionを初期化
+    session.pop('project_users', None)
     project = request.args.get("project")
     cur = mysql.get_db().cursor()
-    cur.execute("SELECT userId FROM project_users WHERE projectName = %s", ('開発支援アプリ'))
+    cur.execute("SELECT userId FROM project_users WHERE projectName = %s", (project))
     userId = cur.fetchall()
     uName = []
     for userid in userId:

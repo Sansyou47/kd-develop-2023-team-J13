@@ -115,8 +115,8 @@ def update_status():
     cur = conn.cursor()
 
     cur.execute(
-        "UPDATE task SET status = %s ,manager = %s WHERE name = %s AND start_task_date = %s AND finish_task_date = %s",
-        (task_status, task_users, task_name, start_date, finish_date),
+        "UPDATE task SET status = %s ,manager = %s ,start_task_date = %s, finish_task_date = %s WHERE name = %s ",
+        (task_status, task_users, start_date, finish_date, task_name),
     )
     conn.commit()
     cur.close()
