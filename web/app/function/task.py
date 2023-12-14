@@ -108,7 +108,6 @@ def action_report():
     return redirect("/report_task")
 
 
-
 @task.route("/update_status", methods=["POST"])
 @login_required
 def update_status():
@@ -133,8 +132,7 @@ def update_status():
 @task.route("/task_catch", methods=["GET"])
 @login_required
 def task_catch():
-    # project = str(session.get("project")) セッションを受け取れるようになったら(画面遷移が決まったら)コメントアウトを外しsql文を修正する
-    # MySQLへ接続
+    project = str(session.get("project"))
     conn = mysql.get_db()
     cur = conn.cursor()
 
@@ -144,9 +142,9 @@ def task_catch():
 
     # usersの取得
     cur.execute(
-        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.projectName = '開発支援アプリ'"
+        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.projectName = 'タスク管理'"
     )
     users = [item[0] for item in cur.fetchall()]
 
     cur.close()
-    return render_template("/task_catch/task_catch.html", names=names, users=users, project=session.get("project"))
+    return render_template("/task_catch/task_catch.html", names=names, users=users, project=project)
