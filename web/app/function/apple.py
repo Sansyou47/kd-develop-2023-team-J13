@@ -31,6 +31,11 @@ def action_create_project1():
         cur.execute("INSERT INTO project(name, start_date, update_date, owner, github, googleDrive) VALUES (%s, %s, %s, %s, %s, %s)", (projectTitle, startDate, endDate, collaborator, urlInput, sharedFolderInput))
         conn.commit()
 
+    
+
+        cur.execute("INSERT INTO project_users(projectName, userId) VALUES (%s, %s)", (projectTitle,collaborator))
+        conn.commit()
+
     cur.close()
     conn.close()
 
