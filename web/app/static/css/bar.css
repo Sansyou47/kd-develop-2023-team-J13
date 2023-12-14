@@ -24,3 +24,15 @@ body {
     width: 1px;
     background-color: green;
 }
+
+/* 土曜日のスタイル */
+.vis-saturday {
+    background-color: #B0E0E6;
+    /* 例：PowderBlue */
+}
+
+/* 日曜日のスタイル */
+.vis-sunday {
+    background-color: #FFB6C1;
+    /* 例：LightPink */
+}
