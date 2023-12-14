@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, session
+from flask_login import login_required
 from flaskext.mysql import MySQL
 
 task = Blueprint("task", __name__)
@@ -8,6 +9,7 @@ mysql = None
 
 # task追加画面
 @task.route("/add_task", methods=["POST"])
+@login_required
 def add_task():
     storyName = request.form.get("storyName")
 
@@ -32,6 +34,7 @@ def add_task():
 
 # task追加アクション
 @task.route("/action/add_task", methods=["POST"])
+@login_required
 def action_add_task():
     taskName = request.form.get("taskName")
     taskManager = request.form.get("taskManager")
@@ -51,6 +54,7 @@ def action_add_task():
 
 # タスク一覧取得
 @task.route("/get_task")
+@login_required
 def get_task():
     # MySQLへ接続
     conn = mysql.get_db()
@@ -66,7 +70,7 @@ def get_task():
 
 #タスク状況報告画面
 @task.route("/report_task")
-
+@login_required
 def report_task():
     # MySQLへ接続
     conn = mysql.get_db()
@@ -81,11 +85,13 @@ def report_task():
     return render_template("/tasks/report_task.html", taskData=taskData)
 
 @task.route("/report", methods=["POST"])
+@login_required
 def report():
     taskName = request.form.get("taskName")
     return render_template("/tasks/report.html", taskName=taskName)
 
 @task.route("/action/report", methods=["POST"])
+@login_required
 def action_report():
     report = request.form.get("report")
     taskName = request.form.get("taskName")
@@ -104,6 +110,7 @@ def action_report():
 
 
 @task.route("/update_status", methods=["POST"])
+@login_required
 def update_status():
     task_name = request.form["name"]
     task_status = request.form["status"]
@@ -124,6 +131,7 @@ def update_status():
 
 
 @task.route("/task_catch", methods=["GET"])
+@login_required
 def task_catch():
     # project = str(session.get("project")) セッションを受け取れるようになったら(画面遷移が決まったら)コメントアウトを外しsql文を修正する
     # MySQLへ接続
@@ -141,4 +149,4 @@ def task_catch():
     users = [item[0] for item in cur.fetchall()]
 
     cur.close()
-    return render_template("/task_catch/task_catch.html", names=names, users=users)
+    return render_template("/task_catch/task_catch.html", names=names, users=users, project=session.get("project"))

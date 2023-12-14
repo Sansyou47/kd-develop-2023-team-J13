@@ -91,7 +91,8 @@ def login():
 @login_required
 def logout():
     logout_user()
-    session.pop('user_id', None)
+    
+    session.clear()
     return redirect("/login")
 
 
