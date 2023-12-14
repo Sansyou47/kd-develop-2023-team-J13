@@ -20,20 +20,28 @@
         {% for row in taskData %}
         <tr>
             <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{% if row[2] == 2 %}
+            <td>{% if row[1] == 2 %}
                 Task
-                {% elif row[2] == 1 %}
+                {% elif row[1] == 1 %}
                 Doing
-                {% elif row[2] == 0 %}
+                {% elif row[1] == 0 %}
                 Done
                 {% else %}
                 Unknown
                 {% endif %}
             </td>
+            <td>{{ row[2] }}</td>
             <td>{{ row[3] }}</td>
             <td>第{{ row[4] }}スプリント</td>
-            <td>{{ row[7] }}</td>
+            <form method="post" action="/report">
+
+                <td><button>
+                        <div class="report">
+                            {{ row[7] }}
+                        </div>
+                    </button></td>
+                <input type="hidden" name="taskName" value="{{ row[0] }}">
+            </form>
         </tr>
         {% endfor %}
     </table>

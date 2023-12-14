@@ -49,7 +49,7 @@ def action_add_task():
     cur.close()
     return redirect("/report_task")
 
-
+# タスク一覧取得
 @task.route("/get_task")
 def get_task():
     # MySQLへ接続
@@ -64,8 +64,10 @@ def get_task():
 
     return render_template("/tasks/get_task.html", taskData=taskData)
 
+#タスク状況報告画面
 @task.route("/report_task")
-def get_task():
+
+def report_task():
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
@@ -76,7 +78,28 @@ def get_task():
     conn.commit()
     cur.close()
 
-    return render_template("/tasks/get_task.html", taskData=taskData)
+    return render_template("/tasks/report_task.html", taskData=taskData)
+
+@task.route("/report", methods=["POST"])
+def report():
+    taskName = request.form.get("taskName")
+    return render_template("/tasks/report.html", taskName=taskName)
+
+@task.route("/action/report", methods=["POST"])
+def action_report():
+    report = request.form.get("report")
+    taskName = request.form.get("taskName")
+
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("UPDATE task SET comment = %s WHERE name = %s", (report, taskName))
+
+    conn.commit()
+    cur.close()
+
+    return redirect("/report_task")
 
 
 
