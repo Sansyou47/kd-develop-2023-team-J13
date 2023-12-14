@@ -1,6 +1,6 @@
 <div class="sidebar">
     <!-- プロジェクトを選択中の場合 -->
-    {% if project %}
+    {% if project is not none%}
     <div class="side-project-info">
         <div class="project-title">{{project}}</div>
     </div>
@@ -13,6 +13,8 @@
         </ul>
     </details>
     {% endif %}
+</div>
+    
 </div>
 <div class="sidebar-contents">
     {% if story_data %}
