@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
+{% include 'header.html' %}
 
-
-<head>
-    <meta charset="UTF-8">
-    <title>ストーリーの追加</title>
-    <link rel="stylesheet" href="../static/css/create_story.css">
-</head>
-
-<!-- プロジェクト番号の取得  ストーリー番号、名前の入力 -->
+{% include 'sidebar.html' %}
 
 <body>
     <h2>ストーリーの表示</h2>
@@ -23,8 +15,13 @@
     <form action="/create_stories" method="post">
         <input type="text" class="textbox-001" name="stories" required><br>
         <input type="hidden" name="project" value="$_GET['project']"><br>
-        <input type="submit" value="追加">
+        <label for="priority">優先度</label>
+        <select name="priority" id="priority">
+            <option value="0">高</option>
+            <option value="1">中</option>
+            <option value="2">低</option>
+        </select>
+        <input type="submit" class="submit-button" value="追加">
     </form>
 </body>
-
-</html>
+</div>

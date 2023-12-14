@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, session
 from flaskext.mysql import MySQL
 from flask_login import login_required, current_user
 
@@ -17,15 +17,11 @@ def my_route():
     data = []
     # 現在ログインしているユーザーが参加しているプロジェクトを取得
     for project_name in project_names:
-        cur.execute("SELECT * FROM project WHERE name = %s", (project_name[0],))
+        cur.execute("SELECT * FROM project WHERE name = %s", (project_name[0]))
         project_data = cur.fetchall()
         if project_data:
             data.append(project_data[0])
-    return render_template('/select_project.html', data=data)
 
-# プロジェクトを選択したときの処理
-@select_project.route('/action/select_project',methods=['POST'])
-@login_required
-def select_project_action():
-    project = request.form.get('project')
-    return str(project)
+    session.pop('project_users', None)
+    return render_template('/select_project.html', data=data)
+    

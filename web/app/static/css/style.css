@@ -20,23 +20,52 @@
     z-index: 1000;
 }
 
+.header-main {
+    display: flex;
+}
+
 .header-title {
-    font-size: 30px;
+    display: flex;
+    height: 45px;
     margin-left: 20px;
     margin-top: 5px;
+}
+
+.header-title-inproject {
+    font-size: 26px;
+}
+
+.header-title-outproject {
+    font-size: 30px;
+}
+
+.login-user {
+    float: right;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 0px;
 }
 
 .header-tab {
     display: flex;
     margin-top: 0px;
+    font-size: 16px;
 }
 
 .header-tab p {
     margin-left: 20px;
     margin-top: 0px;
-
 }
 
+.header-tab .header-tab-user {
+    float: right;
+}
+
+/* .content {
+    margin: 20px; /* Add some margin to the content for better spacing
+}
+*/
 .content {
     margin-left: 300px;
     margin-top: 90px;
@@ -46,7 +75,7 @@
     /* 背景色を指定 */
     background-color: #C4E7F6;
     /* 四角形の大きさを指定 */
-    width: 300px;
+    width: 340px;
     height: 150px;
     margin-bottom: 10px;
     margin-left: 10px;
@@ -61,16 +90,23 @@
 }
 
 .project-title {
-    font-size: 25px;
+    font-size: 20px;
     margin-bottom: 0px;
     margin-left: 2px;
 }
 
 .project-info p {
     color: #000000;
-    font-size: 15px;
+    font-size: 12px;
     margin-top: 0px;
     margin-left: 5px;
+    float: left;
+}
+
+.project-logo {
+    float: left;
+    margin-top: 5px;
+    margin-left: 25px;
 }
 
 .project-resource {
@@ -78,6 +114,7 @@
 }
 
 .project-repository-logo {
+    margin-top: 5px;
     display: inline-block;
 }
 
@@ -87,4 +124,123 @@
 
 .content .error {
     color: red;
+}
+
+.sidebar .title {
+    font-size: 22px;
+}
+
+.sidebar .product-backlog {
+    font-size: 10px;
+}
+
+
+/* <--- これより下はcreate_story.cssの内容をコピペ ---> */
+body,
+h2,
+p,
+div,
+select,
+label {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+h2 {
+    color: #333;
+}
+
+
+
+.story-info {
+    background-color: hsl(82, 89%, 79%);
+    width: 300px;
+    height: 150px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    white-space: normal;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.story-info p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000;
+    font-size: 15px;
+    margin: 0;
+    text-align: center;
+}
+
+.textbox-001 {
+    width: 75%;
+    padding: 10px;
+    border: 1px solid #969da3;
+    border-radius: 25px;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.textbox-001::placeholder {
+    color: #999;
+}
+
+.submit-button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+/* Add a bit of spacing between form elements */
+form {
+    margin-top: 20px;
+}
+
+/* Improve select styling */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #969da3;
+    border-radius: 25px;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .content {
+        margin: 10px;
+        /* Adjust margin for smaller screens */
+    }
+
+    .textbox-001,
+    select {
+        width: 100%;
+    }
 }
