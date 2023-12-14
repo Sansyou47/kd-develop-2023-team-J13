@@ -17,7 +17,7 @@
             <th>状態</th>
             <th>タスク責任者</th>
             <th>ストーリー名</th>
-            <th>スプリント数</th>
+            <th>スプリント</th>
         </tr>
         {% for row in taskData %}
         <tr>
@@ -25,7 +25,7 @@
             <td>{{ row[1] }}</td>
             <td>{{ row[2] }}</td>
             <td>{{ row[3] }}</td>
-            <td>{{ row[4] }}</td>
+            <td>第{{ row[4] }}スプリント</td>
         </tr>
         {% endfor %}
     </table>
