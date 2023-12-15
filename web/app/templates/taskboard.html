@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <link rel="stylesheet" href="../static/css/taskboard.css">
+    <title>タスクボード出力画面</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="rowhead">
+            <p>Story</p>
+        </div>
+        <div class="Story">
+            {% for row in story %}
+            <p>{{row[0]}}<br></p>
+            
+            {% endfor %}
+        </div>
+        <div class="rowhead">
+            <p>Task</p>
+        </div>
+        <div class="Task">
+            {% for row in task %}
+            {% if row[1] == 2 %}
+            <p>{{row[0]}}<br></p>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="rowhead">
+            <p>Doing</p>
+        </div>
+        <div class="Doing">
+            {% for row in task %}
+            {% if row[1] == 1 %}
+            <p>{{row[0]}}<br></p>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="rowhead">
+            <p>Done</p>
+        </div>
+        <div class="Done">
+            {% for row in task %}
+            {% if row[1] == 0 %}
+            <p>{{row[0]}}<br></p>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
