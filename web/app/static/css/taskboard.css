@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fdfdfd;
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+/* Story、Task、Doing、Doneのスタイル */
+.Story,
+.Task,
+.Doing,
+.Done {
+    background-color: #dddcdc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    margin: 0 10px;
+    flex-direction: column;
+    /* 内容を縦方向に並べる */
+}
+
+.row>.Story,
+.row>.Task,
+.row>.Doing,
+.row>.Done {
+    flex: 1;
+    /* 幅を均等にする */
+}
+
+.row>.Story p,
+.row>.Task p,
+.row>.Doing p,
+.row>.Done p {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

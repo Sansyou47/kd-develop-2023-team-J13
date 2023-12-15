@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
+
+<div class="header">
+    <div class="header-main">
+        <div class="header-title">
+            {% if project %}
+            <div class="header-title-inproject">
+                Attache > {{project}}
+            </div>
+            {% else %}
+            <div class="header-title-outproject">
+                Attache
+            </div>
+            {% endif %}
+        </div>
+        <div class="login-user">
+            {% if session['user_id'] %}
+            <div class="header-tab-user">
+                <a href="/mypage">{{session['user_name']}}でログイン中</a>
+                <a href="/logout">ログアウト</a>
+            </div>
+            {% else %}
+            <div class="header-tab-user">
+                <a href="/login">ログイン</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-tab">
+        <p><a href="/select_project">HOME</a></p>
+        <p><a href="/create_project">プロジェクト作成</a></p>
+        {% if project %}
+        <p><a href="/taskboard">タスクボード</a></p>
+        <p><a href="/create_stories">ストーリー追加</a></p>
+        <p><a href="/task_catch">タスク更新</a></p>
+        <p><a href="/graph">進捗状況表</a></p>
+        {% endif %}
+    </div>
+</div>
