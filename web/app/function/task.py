@@ -142,7 +142,7 @@ def task_catch():
 
     # usersの取得
     cur.execute(
-        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.projectName = 'タスク管理'"
+        "SELECT task.name FROM task INNER JOIN story ON task.story = story.name WHERE story.project = %s",(project,)
     )
     users = [item[0] for item in cur.fetchall()]
 
