@@ -137,12 +137,14 @@ def task_catch():
     cur = conn.cursor()
 
     # namesの取得
-    cur.execute("SELECT name FROM task")
+    cur.execute(
+        "SELECT task.name FROM task INNER JOIN story ON task.story = story.name WHERE story.project = %s",(project,)
+    )
     names = [item[0] for item in cur.fetchall()]
 
     # usersの取得
     cur.execute(
-        "SELECT task.name FROM task INNER JOIN story ON task.story = story.name WHERE story.project = %s",(project,)
+        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.projectName = %s",(project,)
     )
     users = [item[0] for item in cur.fetchall()]
 

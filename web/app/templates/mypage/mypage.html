@@ -21,7 +21,6 @@
                 <th>skill</th>
                 <th>skill</th>
                 <th>skill</th>
-                <th></th> <!-- 送信ボタンのために空白-->
             </tr>
             <!-- ループを実行し、userNumberが指定したuserNumberと一致する時だけuserNumberを出力します。-->
             <!-- {% for skill in skills if skill[0] == userNumber %} -->
@@ -37,10 +36,10 @@
                 </select>
                 </td>
             {% endfor %}
-            <td><input type="submit" value="送信"></td>
             </tr>
             {% endfor %}
         </table>
+        <td><input type="submit" value="送信"></td>
     </form>
 </body>
 </html>
