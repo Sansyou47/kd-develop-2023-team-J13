@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
-from function import story, select_project, task, init_session, apple, mypage, graph, users,taskboard
+from function import story, select_project, task, init_session, apple, mypage, graph, users,taskboard, to_email
 from werkzeug.security import check_password_hash
 import os
 
@@ -26,6 +26,7 @@ app.register_blueprint(mypage.mypage)
 app.register_blueprint(graph.graph)
 app.register_blueprint(users.users)
 app.register_blueprint(taskboard.taskboard)
+app.register_blueprint(to_email.to_email)
 
 story.mysql = mysql
 select_project.mysql = mysql
@@ -36,6 +37,7 @@ mypage.mysql = mysql
 graph.mysql = mysql
 users.mysql = mysql
 taskboard.mysql = mysql
+to_email.mysql = mysql
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -51,7 +53,6 @@ def get_uid():
     uid = str(current_user.id)
     uid = uid.split('@')[0]
     return uid
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -77,8 +78,12 @@ def login():
         if user and check_password_hash(user[4], password):
             login_user(User(userid))
             uid = str(current_user.id)
-            uid = uid.split('@')[0]
+            # ユーザー名を取得
+            cursor.execute("SELECT userName FROM users WHERE userId = %s", (userid))
+            uName = cursor.fetchone()
+            # セッションにメールアドレス、名前を格納
             session['user_id'] = uid
+            session['user_name'] = uName[0]
             return redirect('/select_project')
         else:
             error_message = "ユーザーIDまたはパスワードが間違っています。"
@@ -90,9 +95,8 @@ def login():
 @app.route("/logout")
 @login_required
 def logout():
-    logout_user()
-    
     session.clear()
+    logout_user()
     return redirect("/login")
 
 
