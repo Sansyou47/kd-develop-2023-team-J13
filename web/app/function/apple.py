@@ -1,19 +1,24 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from flaskext.mysql import MySQL
+from flask_login import login_required
 
 apple = Blueprint("apple", __name__)
 
 mysql = None
 
 @apple.route('/create_project')
+@login_required
 def create_project():
     return render_template('/project/createproject.html')
 
+# 新しいプロジェクトを作成する
 @apple.route('/create_project1')
+@login_required
 def create_project1():
-    return render_template('/project/createproject1.html')
+    return render_template('/project/createproject1.html', user_id=session['user_id'])
 
 @apple.route('/action/create_project1', methods=['POST'])
+@login_required
 def action_create_project1():
 
     conn = mysql.get_db()
@@ -35,7 +40,7 @@ def action_create_project1():
 
     return redirect('/select_project')
 
-
+# テンプレートから作成する
 @apple.route('/create_project2')
 def create_project2():
     return render_template('/project/createproject2.html')
