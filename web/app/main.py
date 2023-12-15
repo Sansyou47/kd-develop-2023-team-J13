@@ -77,7 +77,7 @@ def login():
         if user and check_password_hash(user[4], password):
             login_user(User(userid))
             uid = str(current_user.id)
-            uid = uid.split('@')[0]
+            #uid = uid.split('@')[0]
             session['user_id'] = uid
             return redirect('/select_project')
         else:

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect
+from flask import Blueprint, render_template, request, redirect, session
 from flaskext.mysql import MySQL
 
 apple = Blueprint("apple", __name__)
@@ -15,6 +15,7 @@ def create_project1():
 
 @apple.route('/action/create_project1', methods=['POST'])
 def action_create_project1():
+    project_users = str(session.get("user_id"))
     conn = mysql.get_db()
     cur = conn.cursor()
 
@@ -28,12 +29,12 @@ def action_create_project1():
         sharedFolderInput = request.form.get('sharedFolderInput')
 
         # プロジェクト情報を保存
-        cur.execute("INSERT INTO project(name, start_date, update_date, owner, github, googleDrive) VALUES (%s, %s, %s, %s, %s, %s)", (projectTitle, startDate, endDate, collaborator, urlInput, sharedFolderInput))
+        cur.execute("INSERT INTO project(name, owner, start_date, finish_date, github, googleDrive) VALUES (%s, %s, %s, %s, %s, %s)", (projectTitle, collaborator, startDate, endDate, urlInput, sharedFolderInput))
         conn.commit()
 
     
 
-        cur.execute("INSERT INTO project_users(projectName, userId) VALUES (%s, %s)", (projectTitle,collaborator))
+        cur.execute("INSERT INTO project_users(projectName, userId) VALUES (%s, %s)", (projectTitle,project_users))
         conn.commit()
 
     cur.close()
