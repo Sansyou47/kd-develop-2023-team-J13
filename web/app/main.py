@@ -52,7 +52,6 @@ def get_uid():
     uid = uid.split('@')[0]
     return uid
 
-
 @login_manager.user_loader
 def load_user(user_id):
     cursor = mysql.get_db().cursor()
@@ -77,8 +76,12 @@ def login():
         if user and check_password_hash(user[4], password):
             login_user(User(userid))
             uid = str(current_user.id)
-            uid = uid.split('@')[0]
+            # ユーザー名を取得
+            cursor.execute("SELECT userName FROM users WHERE userId = %s", (userid))
+            uName = cursor.fetchone()
+            # セッションにメールアドレス、名前を格納
             session['user_id'] = uid
+            session['user_name'] = uName[0]
             return redirect('/select_project')
         else:
             error_message = "ユーザーIDまたはパスワードが間違っています。"
@@ -90,9 +93,8 @@ def login():
 @app.route("/logout")
 @login_required
 def logout():
-    logout_user()
-    
     session.clear()
+    logout_user()
     return redirect("/login")
 
 
