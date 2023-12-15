@@ -20,7 +20,8 @@ def create_project1():
 @apple.route('/action/create_project1', methods=['POST'])
 @login_required
 def action_create_project1():
-    project_users = str(session.get("user_id"))
+    userId = str(session.get("user_id"))
+    uName = str(session.get("user_name"))
     conn = mysql.get_db()
     cur = conn.cursor()
 
@@ -29,17 +30,15 @@ def action_create_project1():
         projectTitle = request.form.get('projectTitle')
         startDate = request.form.get('startDate')
         endDate = request.form.get('endDate')
-        collaborator = request.form.get('collaborator')
+        # collaborator = request.form.get('collaborator')
         urlInput = request.form.get('urlInput')
         sharedFolderInput = request.form.get('sharedFolderInput')
 
         # プロジェクト情報を保存
-        cur.execute("INSERT INTO project(name, owner, start_date, finish_date, github, googleDrive) VALUES (%s, %s, %s, %s, %s, %s)", (projectTitle, collaborator, startDate, endDate, urlInput, sharedFolderInput))
+        cur.execute("INSERT INTO project(name, owner, start_date, finish_date, github, googleDrive) VALUES (%s, %s, %s, %s, %s, %s)", (projectTitle, uName, startDate, endDate, urlInput, sharedFolderInput))
         conn.commit()
 
-    
-
-        cur.execute("INSERT INTO project_users(projectName, userId) VALUES (%s, %s)", (projectTitle,project_users))
+        cur.execute("INSERT INTO project_users(projectName, userId) VALUES (%s, %s)", (projectTitle, userId))
         conn.commit()
 
     cur.close()
@@ -51,4 +50,3 @@ def action_create_project1():
 @apple.route('/create_project2')
 def create_project2():
     return render_template('/project/createproject2.html')
-
