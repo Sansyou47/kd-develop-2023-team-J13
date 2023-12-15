@@ -158,6 +158,10 @@ h2 {
 }
 
 
+.story-button {
+    border: none;
+    cursor: pointer;
+}
 
 .story-info {
     background-color: hsl(82, 89%, 79%);
