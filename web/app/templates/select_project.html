@@ -26,9 +26,9 @@
                 所有者：{{ row[2] }}</p>
             <div class="project-logo">
                 {% if row[8] is none %}
-                <img src="../static/images/default.svg" alt="arrow" width="100" height="100">
+                <img src="../static/images/default.svg" alt="arrow" width="70" height="70">
                 {% else %}
-                <img src="../static/images/{{row[8]}}" alt="arrow" width="100" height="100">
+                <img src="../static/images/{{row[8]}}" alt="arrow" width="70" height="70">
                 {% endif %}
             </div>
         </div>
@@ -36,28 +36,25 @@
         <div class="project-resource">
             <!-- GitHubのリポジトリが登録されている場合のみ処理 -->
             {% if row[6] is not none %}
-            <div class="project-repository-logo">
-                <!-- GitHubリポジトリのURLをロゴで表示する -->
-                <a href="{{ row[6] }}" target="_blank">
-                    <!-- ロゴデータの読み込み -->
-                    <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
-                </a>
-            </div>
+            <!-- GitHubリポジトリのURLをロゴで表示する -->
+            <a href="{{ row[6] }}" target="_blank">
+                <!-- ロゴデータの読み込み -->
+                <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
+            </a>
             {% endif %}
             <!-- GoogleDriveが登録されている場合のみ処理 -->
             {% if row[7] is not none %}
-            <div class="project-resource-logo">
-                <!-- GoogleDriveのURLをロゴで表示する -->
-                <a href="{{ row[7] }}" target="_blank">
-                    <!-- ロゴデータの読み込み -->
-                    <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
-                        height="25">
-                </a>
-            </div>
+            <!-- GoogleDriveのURLをロゴで表示する -->
+            <a href="{{ row[7] }}" target="_blank">
+                <!-- ロゴデータの読み込み -->
+                <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
+                    height="25">
+            </a>
             {% endif %}
         </div>
     </div>
     {% endfor %}
+
     <!-- </form> -->
 </body>
 </div>
