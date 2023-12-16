@@ -10,7 +10,7 @@
     margin-top: 80px;
 }
 
-.side-userinfo-head {
+.side-head {
     text-align: center;
 }
 
@@ -22,11 +22,6 @@
     font-size: 30px;
 }
 
-.sidebar img {
-    border-radius: 50%;
-    background-color: cornflowerblue;
-}
-
 .header {
     position: fixed;
     top: 0;
@@ -35,6 +30,11 @@
     height: 80px;
     background-color: #8cb9e5;
     z-index: 1000;
+}
+
+.icon {
+    border-radius: 50%;
+    background-color: cornflowerblue;
 }
 
 .header-main {
@@ -62,6 +62,10 @@
     margin-left: auto;
     margin-right: 20px;
     margin-top: 0px;
+}
+
+.login-user img {
+    margin-top: 15px;
 }
 
 .header-tab {
