@@ -10,6 +10,19 @@
     margin-top: 80px;
 }
 
+.side-user-info {
+    text-align: center;
+}
+
+.sidebar .username {
+    font-size: 30px;
+}
+
+.sidebar img {
+    border-radius: 50%;
+    background-color: cornflowerblue;
+}
+
 .header {
     position: fixed;
     top: 0;
