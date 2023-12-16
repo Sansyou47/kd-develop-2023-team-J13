@@ -79,11 +79,16 @@ def login():
             login_user(User(userid))
             uid = str(current_user.id)
             # ユーザー名を取得
-            cursor.execute("SELECT userName FROM users WHERE userId = %s", (userid))
-            uName = cursor.fetchone()
+            cursor.execute("SELECT userName, gitAccount, userIcon FROM users WHERE userId = %s", (userid))
+            userInfo = cursor.fetchone()
             # セッションにメールアドレス、名前を格納
             session['user_id'] = uid
-            session['user_name'] = uName[0]
+            session['user_name'] = userInfo[0]
+            session['git_account'] = userInfo[1]
+            if userInfo[2] == None:
+                session['user_icon'] = "default.svg"
+            else:
+                session['user_icon'] = userInfo[2]
             return redirect('/select_project')
         else:
             error_message = "ユーザーIDまたはパスワードが間違っています。"
