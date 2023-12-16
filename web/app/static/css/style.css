@@ -99,7 +99,13 @@
 }
 
 .project-click-area {
+    width: 340px;
+    height: 120px;
     cursor: pointer;
+    display: inline-block;
+    /* 横並びに配置する */
+    white-space: normal;
+    /* 画面サイズに応じて自動で折り返す */
 }
 
 .project-title {
@@ -117,13 +123,16 @@
 }
 
 .project-logo {
-    float: left;
+    width: 70;
+    height: 70;
     margin-top: 5px;
-    margin-left: 25px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    text-align: right;
 }
 
 .project-resource {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .project-repository-logo {
