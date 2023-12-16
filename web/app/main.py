@@ -89,7 +89,7 @@ def login():
             session['user_name'] = userInfo[1]
             session['git_account'] = userInfo[2]
             session['achievement'] = achieve
-            if userInfo[2] == None:
+            if userInfo[2] is None:
                 session['user_icon'] = "default.svg"
             else:
                 session['user_icon'] = userInfo[3]
