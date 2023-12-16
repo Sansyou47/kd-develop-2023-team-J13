@@ -10,8 +10,12 @@
     margin-top: 80px;
 }
 
-.side-user-info {
+.side-userinfo-head {
     text-align: center;
+}
+
+.side-userinfo-body {
+    margin-top: 20px;
 }
 
 .sidebar .username {
@@ -152,8 +156,18 @@
     font-size: 22px;
 }
 
+.sidebar .caption {
+    font-size: 18px;
+}
+
 .sidebar .product-backlog {
     font-size: 10px;
+}
+
+.sidebar .caption-content {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
 }
 
 
