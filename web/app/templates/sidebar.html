@@ -13,21 +13,16 @@
         </ul>
     </details>
     <a href="/project/addusers">プロジェクトに招待</a>
+    <!-- プロジェクトを選択していない場合はユーザー情報を表示する -->
+    {% else %}
+    {% if session['user_id'] %}
+    <div class="side-user-info">
+        <img src="../static/images/{{session['user_icon']}}" alt="arrow" width="150" height="150">
+        <p class="username">{{session['user_name']}}</p>
+    </div>
     {% endif %}
-</div>
+    {% endif %}
+
 
 </div>
-<div class="sidebar-contents">
-    {% if story_data %}
-    <select name="product-backlog">
-        <option value="">プロダクトバックログ</option>
-        {% for item in story_data %}
-        <option value="{{item[0]}}">{{item[0]}}</option>
-        {% endfor %}
-    </select>
-    {% elif project %}
-    <p>ストーリーはありません</p>
-    {% endif %}
-</div>
-
 <div class="content">
