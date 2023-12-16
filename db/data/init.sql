@@ -7,11 +7,11 @@ create table users(
     password    varchar(2000),
     gender  int,
     gitAccount  varchar(50),
-    userLogo    varchar(200),
+    userIcon    varchar(200),
     class   varchar(10)
 );
 
-INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1297401@st.kobedenshi.ac.jp', '嫁阪雄大', 'ヨメサカカズヒロ', 'scrypt:32768:8:1$VZxfAUUjh2pszMZt$17489509bff761a9785b4970d2a23199b2c8f12ad146ffe7a2445ba2c6ab7a28c538e40547cff7e77c27362c85bbfa4c66a9ddcfe1891cb3fd4235a6370aa21f', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, gitAccount, userIcon, class) VALUES('kd1297401@st.kobedenshi.ac.jp', '嫁阪雄大', 'ヨメサカカズヒロ', 'scrypt:32768:8:1$VZxfAUUjh2pszMZt$17489509bff761a9785b4970d2a23199b2c8f12ad146ffe7a2445ba2c6ab7a28c538e40547cff7e77c27362c85bbfa4c66a9ddcfe1891cb3fd4235a6370aa21f', 0, 'Sansyou47', 'thumb.png', 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1323949@st.kobedenshi.ac.jp', '中川浩太郎', 'ナカガワコウタロウ', 'scrypt:32768:8:1$Yi8rt9mSA9ZMky5s$12347afc795e57ca589ca92a83f92b83824f4d818487e06859fc01d939a896a0ccf1788d1c591d6ee71fa6238b34052a87f6b0e9d0e8814cd6b0119c6229d9b7', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1293049@st.kobedenshi.ac.jp', '中井禅', 'ナカイゼン', 'scrypt:32768:8:1$onB8u37TCPnrwQLh$f3861a96e6d7a9aa53a8221d0e7f0ba66a60b30fd7367d88a454e566fdc56a63e70990c2422b76d8f7f881c45df8fa6517a62c05564359c59441cb48efee651d', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1299164@st.kobedenshi.ac.jp', '橋本俊平', 'ハシモトシュンペイ', 'scrypt:32768:8:1$byfc1LS3xJyTrxCB$6739f9c929beb23c0549c298f275948cf0506df6db47d01475d5f605f4f31f0ccdf610e7e64df649351f2a98f1f77b6165ecfdb9614b2ee3cdb143c5db9ebae8', 0, 'student');
@@ -152,3 +152,9 @@ CREATE TABLE skill(
 );
 
 INSERT INTO skill(userNumber) VALUES('1');
+
+-- drop table if exists achievement;
+-- create table achievement(
+--     userNumber  int,
+--     achievement int default 0
+-- );
