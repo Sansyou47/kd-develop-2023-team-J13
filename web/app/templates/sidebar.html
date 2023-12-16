@@ -1,7 +1,21 @@
 <div class="sidebar">
     <!-- プロジェクトを選択中の場合 -->
     {% if session['project'] %}
-    <div class="side-project-info">
+    <div class="side-head">
+        <div class="project-title">
+            <img src="../static/images/{{session['project_icon']}}" alt="arrow" width="100" height="100">
+            {% if session['project_github'] %}
+            <a href="{{ session['project_github'] }}" target="_blank">
+                <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
+            </a>
+            {% endif %}
+            {% if session['project_googleDrive'] %}
+            <a href="{{ session['project_googledrive'] }}" target="_blank">
+                <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
+                    height="25">
+            </a>
+            {% endif %}
+        </div>
         <div class="project-title">{{session['project']}}</div>
     </div>
     <details>
@@ -16,8 +30,8 @@
     <!-- プロジェクトを選択していない場合はユーザー情報を表示する -->
     {% else %}
     {% if session['user_id'] %}
-    <div class="side-userinfo-head">
-        <img src="../static/images/{{session['user_icon']}}" alt="arrow" width="150" height="150">
+    <div class="side-head">
+        <img class="icon" src="../static/images/{{session['user_icon']}}" alt="arrow" width="150" height="150">
         <p class="username">{{session['user_name']}}</p>
     </div>
     <div class="side-userinfo-body">
