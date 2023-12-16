@@ -5,9 +5,9 @@
 <div class="header">
     <div class="header-main">
         <div class="header-title">
-            {% if project %}
+            {% if session['project'] %}
             <div class="header-title-inproject">
-                Attache > {{project}}
+                Attache > {{session['project']}}
             </div>
             {% else %}
             <div class="header-title-outproject">
@@ -31,7 +31,7 @@
     <div class="header-tab">
         <p><a href="/select_project">HOME</a></p>
         <p><a href="/create_project">プロジェクト作成</a></p>
-        {% if project %}
+        {% if session['project'] %}
         <p><a href="/taskboard">タスクボード</a></p>
         <p><a href="/create_stories">ストーリー追加</a></p>
         <p><a href="/task_catch">タスク更新</a></p>
