@@ -9,6 +9,8 @@ mysql = None
 @apple.route('/create_project')
 @login_required
 def create_project():
+    session.pop('project_users', None)
+    session.pop('project', None)
     return render_template('/project/createproject.html')
 
 # 新しいプロジェクトを作成する
@@ -43,8 +45,10 @@ def action_create_project1():
 
     cur.close()
     conn.close()
-
-    return redirect('/select_project')
+    
+    session['project_users'] = uName
+    session["project"] = projectTitle
+    return redirect("/create_stories")
 
 # テンプレートから作成する
 @apple.route('/create_project2')
