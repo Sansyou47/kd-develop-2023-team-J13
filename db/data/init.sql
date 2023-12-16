@@ -153,8 +153,20 @@ CREATE TABLE skill(
 
 INSERT INTO skill(userNumber) VALUES('1');
 
--- drop table if exists achievement;
--- create table achievement(
---     userNumber  int,
---     achievement int default 0
--- );
+drop table if exists achievement;
+create table achievement(
+    userNumber  int,
+    scrumMaster int default 0,
+    productOwner int default 0,
+    developer   int default 0,
+    presenter   int default 0,
+    teamLeader  int default 0
+);
+
+INSERT INTO achievement(userNumber, scrumMaster, developer, presenter) VALUES(1, 3, 1, 3);
+INSERT INTO achievement(userNumber, developer, presenter) VALUES(2, 3, 1);
+INSERT INTO achievement(userNumber, developer, productOwner, presenter) VALUES(3, 3, 1, 1);
+INSERT INTO achievement(userNumber, productOwner, developer, teamLeader) VALUES(4, 3, 1, 3);
+INSERT INTO achievement(userNumber, developer, presenter, teamLeader) VALUES(5, 3, 4, 3);
+INSERT INTO achievement(userNumber, developer, presenter) VALUES(6, 3, 1);
+INSERT INTO achievement(userNumber, productOwner, developer, presenter) VALUES(7, 3, 2, 1);
