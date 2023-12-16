@@ -21,8 +21,10 @@ def my_route():
         project_data = cur.fetchall()
         if project_data:
             data.append(project_data[0])
-
+    session.pop('project_icon', None)
     session.pop('project_users', None)
+    session.pop('project_github', None)
+    session.pop('project_googleDrive', None)
     session.pop('project', None)
     return render_template('/select_project.html', data=data)
     
