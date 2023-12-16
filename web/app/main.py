@@ -78,17 +78,21 @@ def login():
         if user and check_password_hash(user[4], password):
             login_user(User(userid))
             uid = str(current_user.id)
-            # ユーザー名を取得
-            cursor.execute("SELECT userName, gitAccount, userIcon FROM users WHERE userId = %s", (userid))
+            # ユーザー情報を取得
+            cursor.execute("SELECT userNumber, userName, gitAccount, userIcon FROM users WHERE userId = %s", (userid))
             userInfo = cursor.fetchone()
-            # セッションにメールアドレス、名前を格納
+            # アチーブメント情報を取得
+            cursor.execute("SELECT * FROM achievement WHERE userNumber = %s", (userInfo[0]))
+            achieve = cursor.fetchone()
+            # セッションに情報を格納
             session['user_id'] = uid
-            session['user_name'] = userInfo[0]
-            session['git_account'] = userInfo[1]
+            session['user_name'] = userInfo[1]
+            session['git_account'] = userInfo[2]
+            session['achievement'] = achieve
             if userInfo[2] == None:
                 session['user_icon'] = "default.svg"
             else:
-                session['user_icon'] = userInfo[2]
+                session['user_icon'] = userInfo[3]
             return redirect('/select_project')
         else:
             error_message = "ユーザーIDまたはパスワードが間違っています。"
