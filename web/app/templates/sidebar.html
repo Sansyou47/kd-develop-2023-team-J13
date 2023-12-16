@@ -1,8 +1,8 @@
 <div class="sidebar">
     <!-- プロジェクトを選択中の場合 -->
-    {% if project %}
+    {% if session['project'] %}
     <div class="side-project-info">
-        <div class="project-title">{{project}}</div>
+        <div class="project-title">{{session['project']}}</div>
     </div>
     <details>
         <summary>参加中のユーザー</summary>
@@ -16,9 +16,29 @@
     <!-- プロジェクトを選択していない場合はユーザー情報を表示する -->
     {% else %}
     {% if session['user_id'] %}
-    <div class="side-user-info">
+    <div class="side-userinfo-head">
         <img src="../static/images/{{session['user_icon']}}" alt="arrow" width="150" height="150">
         <p class="username">{{session['user_name']}}</p>
+    </div>
+    <div class="side-userinfo-body">
+        <p class="caption">得意分野</p>
+        <p class="caption-content">
+            プレゼンテーション<br>
+            スライド作成<br>
+            C<br>
+            C#<br>
+            Python<br>
+            Docker<br>
+            HTML<br>
+        </p>
+        <p class="caption">アチーブメント</p>
+        <p class="caption-content">
+            {% for row in session['achievement'] %}
+            {% if row > 0 %}
+            {{row}}<br>
+            {% endif %}
+            {% endfor %}
+        </p>
     </div>
     {% endif %}
     {% endif %}
