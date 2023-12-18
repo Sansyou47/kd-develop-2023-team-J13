@@ -6,12 +6,12 @@ taskboard = Blueprint("taskboard", __name__)
 mysql = None
 @taskboard.route("/taskboard", methods=["GET","POST"])
 def outtaskboard():
-    project = str(session.get("project"))
+    projectNumber = str(session.get("project_number"))
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("SELECT name FROM story WHERE project = %s",project)
+    cur.execute("SELECT name FROM story WHERE projectNumber = %s",projectNumber)
     Story = cur.fetchall()
 
     all_tasks = []
@@ -23,4 +23,4 @@ def outtaskboard():
     conn.commit()
     cur.close()
 
-    return render_template("/taskboard.html", story=Story,task=all_tasks)
+    return render_template("/taskboard.html", story=Story,task=all_tasks,project=project)

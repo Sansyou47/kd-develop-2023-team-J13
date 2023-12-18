@@ -16,13 +16,8 @@ def add_task():
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
-
-    # SQL実行
-    cur.execute("SELECT project FROM story WHERE name = %s", storyName)
-
-    #入手した配列を変数に代入する
-    for i in cur.fetchone() :
-        projectName = i
+    
+    projectName = session.get("project")
 
     conn.commit()
     cur.close()
