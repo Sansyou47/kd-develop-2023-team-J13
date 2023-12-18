@@ -41,6 +41,23 @@
     display: flex;
 }
 
+.product-backlog {
+    margin-top: 80px;
+}
+
+.product-backlog .caption {
+    border-bottom: solid 1px #000000;
+}
+
+.sprint-backlog .caption {
+    border-bottom: solid 1px #000000;
+}
+
+.task .caption {
+    border-bottom: solid 1px #000000;
+
+}
+
 .header-title {
     display: flex;
     height: 45px;
