@@ -32,16 +32,16 @@ def add_task():
 @login_required
 def action_add_task():
     taskName = request.form.get("taskName")
-    taskManager = request.form.get("taskManager")
     sprint = int(request.form.get("sprint"))
     storyName = request.form.get("storyName")
+    projectNumber = str(session.get("project_number"))
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
     cur.execute(
-        "INSERT INTO task(name, manager, story, sprint) VALUES(%s, %s ,%s ,%s)",
-        (taskName, taskManager, storyName, sprint)
+        "INSERT INTO task(name, story, sprint, projectNumber) VALUES(%s, %s ,%s ,%s)",
+        (taskName, storyName, sprint, projectNumber)
     )
     conn.commit()
     cur.close()
@@ -128,12 +128,13 @@ def update_status():
 @login_required
 def task_catch():
     project = str(session.get("project"))
+    projectNumber = str(session.get("project_number"))
     conn = mysql.get_db()
     cur = conn.cursor()
 
     # namesの取得
     cur.execute(
-        "SELECT task.name FROM task INNER JOIN story ON task.story = story.name WHERE story.project = %s",(project,)
+        "SELECT name FROM task WHERE projectNumber = %s",(projectNumber,)
     )
     names = [item[0] for item in cur.fetchall()]
 
@@ -144,4 +145,4 @@ def task_catch():
     users = [item[0] for item in cur.fetchall()]
 
     cur.close()
-    return render_template("/task_catch/task_catch.html", names=names, users=users, project=project)
+    return render_template("/task_catch/task_catch.html", names=names, users=users, projectNumber=projectNumber, project=project)
