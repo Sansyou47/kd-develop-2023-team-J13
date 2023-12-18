@@ -14,12 +14,11 @@ form {
     width: 80%;
     /* border外の余白 */
     margin: 0 auto;
-    margin-left: 15%;
     /* 背景色 */
     background-color: white;
     /* 境界線 */
     border: none;
-    /* 境界線の角の丸み */
+    /* 境線の角の丸み */
     border-radius: 4px;
     /* border内の余白 */
     padding: 20px;

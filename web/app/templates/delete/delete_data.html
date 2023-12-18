@@ -1,0 +1,30 @@
+{% include 'header.html' %}
+
+{% include 'sidebar.html' %}
+<!-- タスクの追加を行う画面　タスクの遷移などは別画面-->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>削除フォーム</title>
+</head>
+
+
+<body>
+    <h1>削除フォーム</h1>
+    <h2>{{ storyName }}</h2>
+
+    <table border="3">
+        <tr>プロジェクト一覧</tr>
+        {% for row in projectName %}
+        <tr>
+            <td>{{ row[0] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+
+</html>
