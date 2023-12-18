@@ -65,8 +65,8 @@ create table task(
     manager varchar(50),
     story varchar(2000),
     sprint  int,
-    start_task_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    finish_task_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    start_task_date DATE,
+    finish_task_date DATE,
     comment varchar(2000)
 );
 
