@@ -24,4 +24,18 @@ def outtaskboard():
     conn.commit()
     cur.close()
 
-    return render_template("/taskboard.html", story=Story,task=all_tasks,project=projectNumber)
+    return render_template("/taskboard.html", story=Story,task=all_tasks)
+
+# taskbordをDoingやDoneに移動させる
+@taskboard.route("/taskboardjs", methods=["POST"])
+def taskboardjs():
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    data = request.get_json()
+    cur.execute(
+        "UPDATE task SET status = %s WHERE name = %s ",
+        (data['st'] ,data['taskname']),
+    )
+
+    conn.commit()
+    cur.close()
