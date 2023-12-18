@@ -21,7 +21,7 @@ INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd132
 
 drop table if exists project;
 create table project(
-    number  int auto_increment primary key,
+    projectNumber  int auto_increment primary key,
     name    varchar(100),
     owner   varchar(100),
     start_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
