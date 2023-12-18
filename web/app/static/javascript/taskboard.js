@@ -1,16 +1,25 @@
 window.onload = function () {
     var tasks = document.querySelectorAll('.Task p');
     var doing = document.querySelector('.Doing');
+    var doings = document.querySelectorAll('.Doing p');
     var done = document.querySelector('.Done');
     var taskname;
+    // tasksとdoingsを一つの配列に結合
+    var allTasks = Array.from(tasks).concat(Array.from(doings));
 
-    tasks.forEach(function (task, index) {
+    // allTasksの各タスクに対して処理
+    allTasks.forEach(function (task, index) {
         task.id = 'task' + index;
-        // "ストーリー登録画面"のタスクだけをドラッグ可能にする
-        if (task.textContent === task.textContent) {
-            task.draggable = true;
-        }
+        task.draggable = true; // すべてのタスクをドラッグ可能にする
     });
+
+    allTasks.forEach(function (task) {
+        task.addEventListener('dragstart', function (e) {
+            e.dataTransfer.setData('taskname', e.target.textContent); // タスク名を保存
+            taskname = e.dataTransfer.getData('taskname');
+        });
+    });
+
 
     [doing, done].forEach(function (element) {
         element.addEventListener('dragover', function (e) {
@@ -20,9 +29,9 @@ window.onload = function () {
         element.addEventListener('drop', function (e) {
             e.preventDefault();
             var id = e.dataTransfer.getData('text');
-            var taskname = e.dataTransfer.getData('taskname');
             if (id) {
                 var elem = document.getElementById(id);
+
                 element.appendChild(elem);
 
                 var st = element;
@@ -47,9 +56,9 @@ window.onload = function () {
         });
     });
 
-    tasks.forEach(function (task) {
+    allTasks.forEach(function (task) {
         task.addEventListener('dragstart', function (e) {
-            console.log('Drag started, target id:', e.target.id); // 追加
+            console.log('Drag started, target id:', taskname); // 追加
             e.dataTransfer.setData('text', e.target.id);
         });
     });
