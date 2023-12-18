@@ -26,5 +26,6 @@ def my_route():
     session.pop('project_github', None)
     session.pop('project_googleDrive', None)
     session.pop('project', None)
+    session.pop('project_number', None)
     return render_template('/select_project.html', data=data)
     
