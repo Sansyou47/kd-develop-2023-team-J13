@@ -3,12 +3,16 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 210px;
+    width: 280px;
     background-color: #f8f9fa;
     overflow: auto;
     padding: 20px;
     margin-top: 80px;
 }
+
+/* ここから下は、.headerと.sidebarに影響しないスタイル */
+/* 例えば、.content、.login-form、その他のクラスや要素に関連するスタイル */
+
 
 .side-head {
     text-align: center;
@@ -22,11 +26,18 @@
     font-size: 30px;
 }
 
+
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
     background-color: #8cb9e5;
-    color: #fff;
-    padding: 10px;
+    z-index: 1000;
 }
+
+
 
 .icon {
     border-radius: 50%;
@@ -35,17 +46,29 @@
 
 .header-main {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .header-title {
-    font-size: 24px;
-    font-weight: bold;
+    display: flex;
+    height: 45px;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.header-title-inproject {
+    font-size: 26px;
+}
+
+.header-title-outproject {
+    font-size: 30px;
 }
 
 .login-user {
-    text-align: right;
+    float: right;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 0px;
 }
 
 .login-user img {
@@ -54,23 +77,18 @@
 
 .header-tab {
     display: flex;
-    justify-content: center;
-    margin-top: 10px;
+    margin-top: 0px;
+    font-size: 16px;
 }
 
 .header-tab p {
-    margin: 0 10px;
+    margin-left: 20px;
+    margin-top: 0px;
 }
 
-.header-tab a {
-    color: #fff;
-    text-decoration: none;
+.header-tab .header-tab-user {
+    float: right;
 }
-
-.header-tab a:hover {
-    text-decoration: underline;
-}
-
 
 /* .content {
     margin: 20px; /* Add some margin to the content for better spacing
@@ -81,65 +99,7 @@
     margin-top: 90px;
 }
 
-.project-info {
-    /* 背景色を指定 */
-    background-color: #C4E7F6;
-    /* 四角形の大きさを指定 */
-    width: 340px;
-    height: 150px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    display: inline-block;
-    /* 横並びに配置する */
-    white-space: normal;
-    /* 画面サイズに応じて自動で折り返す */
-}
 
-.project-click-area {
-    width: 340px;
-    height: 120px;
-    cursor: pointer;
-    display: inline-block;
-    /* 横並びに配置する */
-    white-space: normal;
-    /* 画面サイズに応じて自動で折り返す */
-}
-
-.project-title {
-    font-size: 20px;
-    margin-bottom: 0px;
-    margin-left: 2px;
-}
-
-.project-info p {
-    color: #000000;
-    font-size: 12px;
-    margin-top: 0px;
-    margin-left: 5px;
-    float: left;
-}
-
-.project-logo {
-    width: 70;
-    height: 70;
-    margin-top: 5px;
-    margin-right: 20px;
-    margin-bottom: 5px;
-    text-align: right;
-}
-
-.project-resource {
-    margin-left: 10px;
-}
-
-.project-repository-logo {
-    margin-top: 5px;
-    display: inline-block;
-}
-
-.project-resource-logo {
-    display: inline-block;
-}
 
 .content .error {
     color: red;
@@ -283,5 +243,182 @@ select {
     .textbox-001,
     select {
         width: 100%;
+    }
+}
+
+/* Login form specific styles */
+.login-form {
+    max-width: 320px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* 中央配置 */
+}
+
+.login-form h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #333333;
+}
+
+.login-form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #555555;
+    display: block;
+    text-align: left;
+    /* テキストを左寄せ */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-form input[type="submit"] {
+    background-color: #4caf50;
+    color: #ffffff;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    display: block;
+    margin: 20px auto;
+    /* 中央配置 */
+    transition: background-color 0.3s ease;
+    /* カラー変化のアニメーション */
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.login-form a {
+    display: block;
+    margin-top: 25px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+
+/* Reset CSS for basic styles */
+body,
+h1,
+p,
+div,
+img {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles specific to the project selection */
+body:not(#header):not(#sidebar) {
+    font-family: 'Arial', sans-serif;
+    background-color: #fcefee;
+    /* 薄いピンク */
+    margin: 0;
+    padding: 30px;
+    /* パディングを大きく */
+    font-size: 18px;
+    /* フォントサイズを大きく */
+    color: #333;
+}
+
+h1:not(#header h1) {
+    text-align: center;
+    margin-bottom: 40px;
+    /* マージンを大きく */
+    font-size: 32px;
+    /* フォントサイズを大きく */
+    color: #ff7b54;
+    /* オレンジ */
+}
+
+.project-info {
+    background-color: #fff;
+    border-radius: 16px;
+    /* 角丸を大きく */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    /* 影を大きく */
+    padding: 30px;
+    /* パディングを大きく */
+    margin-bottom: 30px;
+    /* マージンを大きく */
+}
+
+/* ... （他のスタイル） ... */
+
+.project-click-area {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.project-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #ff7b54;
+}
+
+.project-info p {
+    color: #777;
+    font-size: 16px;
+    margin: 0;
+}
+
+.project-logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.project-resource {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.project-resource a {
+    margin-left: 15px;
+}
+
+/* Responsiveness for smaller screens */
+@media screen and (max-width: 768px) {
+    .project-click-area {
+        padding: 15px;
+    }
+
+    .project-logo img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .project-resource {
+        margin-top: 10px;
+    }
+
+    .project-resource a {
+        margin-left: 10px;
     }
 }
