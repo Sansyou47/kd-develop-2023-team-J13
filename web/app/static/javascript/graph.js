@@ -30,9 +30,9 @@ for (var j = 0; j < task.length; j++) {
 var options = {
     start: '2023-12-01',  // timeline軸が表す期間の範囲の開始日
     end: '2023-12-30',
-    editable: true,
+    editable: false,
     //zoomの有無
-    zoomable: true,
+    zoomable: false,
     //時間の配置場所
     orientation: 'top',
     zoomMin: 1000 * 60 * 60 * 24 * 7, //1週間
