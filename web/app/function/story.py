@@ -9,7 +9,7 @@ mysql = None
 @story.route("/create_stories", methods=["GET", "POST"])  # ストーリー追加、表示処理
 @login_required
 def storeis():
-    project = str(session.get("project"))
+    project = str(session.get("project_number"))
     conn = mysql.get_db()
     cur = conn.cursor()
     if request.method == "POST":
@@ -20,7 +20,7 @@ def storeis():
         cur.execute("INSERT INTO story(name,project,priorit) VALUES(%s,%s,%s)", (stories, project,priority))
         conn.commit()
     # 共通の処理（GETメソッドでの処理）
-    cur.execute("SELECT name FROM story WHERE project = %s", project)
+    cur.execute("SELECT name FROM story WHERE projectNumber = %s", project)
     story_data = cur.fetchall()
     cur.close()
     conn.close()
