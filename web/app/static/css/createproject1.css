@@ -1,54 +1,88 @@
-/* createproject1.css */
-
+/* 全体のスタイル */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+    background-color: #f0f0f0;
+    /* ライトグレー */
     margin: 0;
     padding: 0;
 }
 
+/* タイトル */
 h1 {
     text-align: center;
     color: #333;
+    /* 黒に近いダークグレー */
+    font-size: 2em;
 }
 
+/* プロジェクトフォーム */
 #projectForm {
     max-width: 600px;
-    margin: 20px auto;
+    margin: auto;
     padding: 20px;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
+/* ラベル */
 label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     font-weight: bold;
+    color: #333;
+    /* 黒に近いダークグレー */
 }
 
+/* 入力フィールド */
 input[type="text"],
 input[type="date"],
 input[type="url"] {
     width: calc(100% - 12px);
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #666;
+    /* グレー */
+    border-radius: 8px;
+    box-shadow: 0 0 5px 2px #666;
+    /* グレー */
+    transition: all 0.3s ease;
 }
 
+/* 入力フォーカス時 */
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="url"]:focus {
+    outline: none;
+    border-color: #333;
+    /* 黒に近いダークグレー */
+    box-shadow: 0 0 10px 3px #333;
+    /* 黒に近いダークグレー */
+}
+
+/* 送信ボタン */
 input[type="submit"] {
     width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #007bff;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: #333;
+    /* 黒に近いダークグレー */
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* ホバーエフェクトの追加 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* 影の追加 */
 }
 
+/* 送信ボタンホバー時 */
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #555;
+    /* 黒に近いダークグレーの明るいハイライト */
+    transform: translateY(-3px);
+    /* ホバー時の微妙な動き */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    /* ホバー時の影の変化 */
 }

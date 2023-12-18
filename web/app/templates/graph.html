@@ -1,10 +1,13 @@
+{% include 'header.html' %}
+
+{% include 'sidebar.html' %}
 <html>
 
 <head>
     <title>Timeline | editing | itemsAlwaysDraggable Option</title>
     <meta charset="utf-8">
     <!-- グラフ動かすのにこの2行は必要 CSSとvis.js-->
-    <link rel="stylesheet" type="text/css" href="/web/app/static/css/bar.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bar.css">
     <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
 
 </head>
@@ -14,7 +17,11 @@
     </p>
     <div id="visualization"></div>
 
-    <script src="/web/app/javascript/graph.js"></script>
+    <script>
+        var storyGraph = JSON.parse('{{ story_graph | tojson | safe }}');//このへんから明日
+    </script>
+    <script src="../static/javascript/graph.js"></script>
+
 </body>
 
 </html>

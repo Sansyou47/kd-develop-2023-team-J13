@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
-from function import story, select_project, task, init_session, apple, mypage, users,taskboard
+from function import story, select_project, task, init_session, apple, mypage, graph, users,taskboard, to_email
 from werkzeug.security import check_password_hash
 import os
 
@@ -23,8 +23,10 @@ app.register_blueprint(task.task)
 app.register_blueprint(init_session.init_session)
 app.register_blueprint(apple.apple)
 app.register_blueprint(mypage.mypage)
+app.register_blueprint(graph.graph)
 app.register_blueprint(users.users)
 app.register_blueprint(taskboard.taskboard)
+app.register_blueprint(to_email.to_email)
 
 taskboard.mysql = mysql
 story.mysql = mysql
@@ -33,7 +35,10 @@ task.mysql = mysql
 init_session.mysql = mysql
 apple.mysql = mysql
 mypage.mysql = mysql
+graph.mysql = mysql
 users.mysql = mysql
+taskboard.mysql = mysql
+to_email.mysql = mysql
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -49,7 +54,6 @@ def get_uid():
     uid = str(current_user.id)
     uid = uid.split('@')[0]
     return uid
-
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -75,8 +79,21 @@ def login():
         if user and check_password_hash(user[4], password):
             login_user(User(userid))
             uid = str(current_user.id)
-            uid = uid.split('@')[0]
+            # ユーザー情報を取得
+            cursor.execute("SELECT userNumber, userName, gitAccount, userIcon FROM users WHERE userId = %s", (userid))
+            userInfo = cursor.fetchone()
+            # アチーブメント情報を取得
+            cursor.execute("SELECT * FROM achievement WHERE userNumber = %s", (userInfo[0]))
+            achieve = cursor.fetchone()
+            # セッションに情報を格納
             session['user_id'] = uid
+            session['user_name'] = userInfo[1]
+            session['git_account'] = userInfo[2]
+            session['achievement'] = achieve
+            if userInfo[3] is None:
+                session['user_icon'] = "default.svg"
+            else:
+                session['user_icon'] = userInfo[3]
             return redirect('/select_project')
         else:
             error_message = "ユーザーIDまたはパスワードが間違っています。"
@@ -88,8 +105,8 @@ def login():
 @app.route("/logout")
 @login_required
 def logout():
+    session.clear()
     logout_user()
-    session.pop('user_id', None)
     return redirect("/login")
 
 

@@ -3,11 +3,23 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 210px;
+    width: 280px;
     background-color: #f8f9fa;
     overflow: auto;
     padding: 20px;
     margin-top: 80px;
+}
+
+.side-head {
+    text-align: center;
+}
+
+.side-userinfo-body {
+    margin-top: 20px;
+}
+
+.sidebar .username {
+    font-size: 30px;
 }
 
 .header {
@@ -18,6 +30,11 @@
     height: 80px;
     background-color: #8cb9e5;
     z-index: 1000;
+}
+
+.icon {
+    border-radius: 50%;
+    background-color: cornflowerblue;
 }
 
 .header-main {
@@ -45,6 +62,10 @@
     margin-left: auto;
     margin-right: 20px;
     margin-top: 0px;
+}
+
+.login-user img {
+    margin-top: 15px;
 }
 
 .header-tab {
@@ -86,7 +107,13 @@
 }
 
 .project-click-area {
+    width: 340px;
+    height: 120px;
     cursor: pointer;
+    display: inline-block;
+    /* 横並びに配置する */
+    white-space: normal;
+    /* 画面サイズに応じて自動で折り返す */
 }
 
 .project-title {
@@ -104,13 +131,16 @@
 }
 
 .project-logo {
-    float: left;
+    width: 70;
+    height: 70;
     margin-top: 5px;
-    margin-left: 25px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    text-align: right;
 }
 
 .project-resource {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .project-repository-logo {
@@ -130,8 +160,18 @@
     font-size: 22px;
 }
 
+.sidebar .caption {
+    font-size: 18px;
+}
+
 .sidebar .product-backlog {
     font-size: 10px;
+}
+
+.sidebar .caption-content {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
 }
 
 
@@ -157,18 +197,30 @@ h2 {
     color: #333;
 }
 
+.story-area {
+    width: 100%;
+    height: 600px;
+    background-color: antiquewhite;
+    display: inline-block;
+}
 
-
-.story-info {
-    background-color: hsl(82, 89%, 79%);
+.story-button {
+    border: none;
+    cursor: pointer;
     width: 300px;
     height: 150px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    display: inline-block;
+    background-color: hsl(82, 89%, 79%);
+    border-radius: 15px;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.story-info {
+    width: 300px;
+    height: 150px;
     white-space: normal;
     position: relative;
-    border-radius: 15px;
     overflow: hidden;
 }
 
@@ -178,7 +230,7 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
     color: #000000;
-    font-size: 15px;
+    font-size: 20px;
     margin: 0;
     text-align: center;
 }

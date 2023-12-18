@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    /* 背景色 */
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    width: 80%;
+    /* border外の余白 */
+    margin: 0 auto;
+    margin-left: 15%;
+    /* 背景色 */
+    background-color: white;
+    /* 境界線 */
+    border: none;
+    /* 境界線の角の丸み */
+    border-radius: 4px;
+    /* border内の余白 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+
+form input[type="text"] {
+    padding: 10px;
+    width: 65%;
+    margin: 10px;
+}
+
+form input[type="submit"] {
+    /* 背景色 */
+    background: #007bff;
+    /* 文字色 */
+    color: white;
+    /* 文字サイズ */
+    font-size: 16px;
+    /* 文字の太さ */
+    font-weight: bold;
+    /* 文字の位置 */
+    text-align: center;
+    /* 境界線の種類 */
+    border: none;
+    /* 境界線の角の丸み */
+    border-radius: 4px;
+    /* カーソルの種類 */
+    cursor: pointer;
+
+    padding: 10px 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+div.submit {
+    text-align: center;
+    padding-top: 50px;
+}

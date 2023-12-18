@@ -1,46 +1,35 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <link rel="stylesheet" href="../static/css/taskboard.css">
-    <title>タスクボード出力画面</title>
-</head>
+{% include 'header.html' %}
+{% include 'sidebar.html' %}
 
 <body>
     <div class="row">
-        <div class="rowhead">
-            <p>Story</p>
-        </div>
         <div class="Story">
+            <p>Story</p>
             {% for row in story %}
             <p>{{row[0]}}<br></p>
-            
             {% endfor %}
         </div>
-        <div class="rowhead">
-            <p>Task</p>
-        </div>
+
         <div class="Task">
+            <p>Task</p>
             {% for row in task %}
             {% if row[1] == 2 %}
             <p>{{row[0]}}<br></p>
             {% endif %}
             {% endfor %}
         </div>
-        <div class="rowhead">
-            <p>Doing</p>
-        </div>
+
         <div class="Doing">
+            <p>Doing</p>
             {% for row in task %}
             {% if row[1] == 1 %}
             <p>{{row[0]}}<br></p>
             {% endif %}
             {% endfor %}
         </div>
-        <div class="rowhead">
-            <p>Done</p>
-        </div>
+
         <div class="Done">
+            <p>Done</p>
             {% for row in task %}
             {% if row[1] == 0 %}
             <p>{{row[0]}}<br></p>
@@ -50,4 +39,4 @@
     </div>
 </body>
 
-</html>
+</div>
