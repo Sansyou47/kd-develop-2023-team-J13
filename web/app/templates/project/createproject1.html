@@ -1,10 +1,5 @@
 {% include 'header.html' %}
 
-{% include 'sidebar.html' %}
-
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Create Project 1</title>
@@ -18,25 +13,22 @@
     <!-- プロジェクト情報入力フォーム -->
     <form id="projectForm" method="POST" action="/action/create_project1">
         <label for="projectTitle">プロジェクトタイトル:</label>
-        <input type="text" id="projectTitle" name="projectTitle"><br><br>
+        <input type="text" id="projectTitle" name="projectTitle">
 
         <label for="startDate">プロジェクト開始日:</label>
-        <input type="date" id="startDate" name="startDate" value=""><br><br>
+        <input type="date" id="startDate" name="startDate" value="">
 
         <label for="endDate">リリース予定日:</label>
-        <input type="date" id="endDate" name="endDate"><br><br>
+        <input type="date" id="endDate" name="endDate">
 
-        <!--<label for="sprint">スプリント回数:</label>
-        <input type="text" id="sprint" name="sprint"><br><br>-->
-
-        <label for="collaborator">所有者:</label>
-        <input type="text" id="collaborator" name="collaborator"><br><br>
+        <label for="sprint">スプリント回数:</label>
+        <input type="text" id="sprint" name="sprint">
 
         <label for="urlInput">GitHubリポジトリ:</label>
-        <input type="url" id="urlInput" name="urlInput"><br><br>
+        <input type="url" id="urlInput" name="urlInput">
 
         <label for="sharedFolderInput">共有フォルダ:</label>
-        <input type="text" id="sharedFolderInput" name="sharedFolderInput"><br><br>
+        <input type="text" id="sharedFolderInput" name="sharedFolderInput">
 
         <input type="submit" value="プロジェクトを開始する">
     </form>
