@@ -8,7 +8,7 @@
 }
 
 .subtitle {
-    font-size: 30px; /* サブタイトルの文字サイズを大きくする */
+    font-size: 20px; /* サブタイトルの文字サイズを大きくする */
     font-weight: bold; /* サブタイトルのテキストを太字にする */
     margin-bottom: 15px; /* サブタイトルの下部に余白を追加 */
 }
@@ -17,7 +17,7 @@
 .Task p,
 .Doing p,
 .Done p {
-    font-size: 20px; /* 各列内のテキストの文字サイズを設定 */
+    font-size: 18px; /* 各列内のテキストの文字サイズを設定 */
     margin-bottom: 10px; /* 各列内のテキストの下部に余白を追加 */
 }
 
