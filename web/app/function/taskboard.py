@@ -20,6 +20,7 @@ def outtaskboard():
         cur.execute("SELECT * FROM task WHERE story = %s",row)
         tasks_for_story = cur.fetchall()
         all_tasks.extend(tasks_for_story)
+
     conn.commit()
     cur.close()
 
