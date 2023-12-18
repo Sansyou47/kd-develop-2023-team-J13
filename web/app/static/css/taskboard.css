@@ -1,17 +1,26 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fdfdfd;
-}
+/* taskboard.css */
 
+/* General styles */
 .row {
     display: flex;
     justify-content: space-around;
     margin: 20px;
 }
 
-/* Story、Task、Doing、Doneのスタイル */
+.subtitle {
+    font-size: 30px; /* サブタイトルの文字サイズを大きくする */
+    font-weight: bold; /* サブタイトルのテキストを太字にする */
+    margin-bottom: 15px; /* サブタイトルの下部に余白を追加 */
+}
+
+.Story p,
+.Task p,
+.Doing p,
+.Done p {
+    font-size: 20px; /* 各列内のテキストの文字サイズを設定 */
+    margin-bottom: 10px; /* 各列内のテキストの下部に余白を追加 */
+}
+
 .Story,
 .Task,
 .Doing,
@@ -23,70 +32,8 @@ body {
     width: 200px;
     margin: 0 10px;
     flex-direction: column;
+    flex: 1;
     /* 内容を縦方向に並べる */
 }
 
-.row>.Story,
-.row>.Task,
-.row>.Doing,
-.row>.Done {
-    flex: 1;
-    /* 幅を均等にする */
-}
-
-.row>.Story p,
-.row>.Task p,
-.row>.Doing p,
-.row>.Done p {
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #fdfdfd;
-}
-
-.row {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px;
-}
-
-/* Story、Task、Doing、Doneのスタイル */
-.Story,
-.Task,
-.Doing,
-.Done {
-    background-color: #dddcdc;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    margin: 0 10px;
-    flex-direction: column;
-    /* 内容を縦方向に並べる */
-}
-
-.row>.Story,
-.row>.Task,
-.row>.Doing,
-.row>.Done {
-    flex: 1;
-    /* 幅を均等にする */
-}
-
-.row>.Story p,
-.row>.Task p,
-.row>.Doing p,
-.row>.Done p {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-.rowhead {
-    font-weight: bold; /* テキストを太字にする */
-    font-size: 30px; /* テキストのサイズを少し大きくする */
-    color: #333; /* テキストの色を変更する（黒色に） */
-}
+/* Additional styles or overrides can be added based on your needs */
