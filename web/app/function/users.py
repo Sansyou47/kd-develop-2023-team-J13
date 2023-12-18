@@ -38,7 +38,13 @@ def register():
             # パスワードをハッシュ化
             hashed_password = generate_password_hash(password)
             # SQL実行
-            cur.execute("INSERT INTO users(userId, userName, kana, password, gitAccount, userLogo, class) VALUES(%s,%s,%s,%s,%s,%s,%s)", (userid, name, kana, hashed_password, gitId, image, userClass))
+            cur.execute("INSERT INTO users(userId, userName, kana, password, gitAccount, userIcon, class) VALUES(%s,%s,%s,%s,%s,%s,%s)", (userid, name, kana, hashed_password, gitId, image, userClass))
+            conn.commit()
+            # 自動割り当てされたuserNumberを取得
+            cur.execute("SELECT userNumber FROM users WHERE userId = %s", (userid))
+            userNumber = cur.fetchone()
+            # アチーブメントテーブルへ新規登録
+            cur.execute("INSERT INTO achievement(userNumber) VALUES(%s)", (userNumber[0]))
             conn.commit()
             # ユーザーID（メールアドレス）を新規登録用のセッションに格納
             session['register_uid'] = userid
