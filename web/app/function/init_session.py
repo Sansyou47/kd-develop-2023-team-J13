@@ -12,7 +12,7 @@ def set_session():
     session.pop('project_users', None)
     project = request.args.get("project")
     cur = mysql.get_db().cursor()
-    cur.execute("SELECT github, googleDrive, logo FROM project WHERE name = %s", (project))
+    cur.execute("SELECT projectNumber, github, googleDrive, logo FROM project WHERE name = %s", (project))
     data = cur.fetchone()
     cur.execute("SELECT userId FROM project_users WHERE projectName = %s", (project))
     userId = cur.fetchall()
@@ -22,13 +22,14 @@ def set_session():
         userName = cur.fetchall()
         if userName:
             uName.append(userName[0])
-    if data[2] == None:
+    if data[3] == None:
         session['project_icon'] = "default.svg"
     else:
-        session['project_icon'] = data[2]
-    session['project_github'] = data[0]
-    session['project_googleDrive'] = data[1]
+        session['project_icon'] = data[3]
+    session['project_github'] = data[1]
+    session['project_googleDrive'] = data[2]
     session['project_users'] = uName
     session["project"] = project
+    session["project_number"] = data[0]
     # テストのため一時的に変更
     return redirect("/create_stories")

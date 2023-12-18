@@ -18,6 +18,28 @@
         </div>
         <div class="project-title">{{session['project']}}</div>
     </div>
+    <div class="product-backlog">
+        <p class="caption">プロダクトバックログ</p>
+        {% if story_data %}
+        {% for row in story_data %}
+        <p class="caption-content">
+            {{ row[0] }}<br>
+        </p>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="sprint-backlog">
+        <p class="caption">スプリントバックログ</p>
+        <p class="caption-content">
+            test
+        </p>
+    </div>
+    <div class="task">
+        <p class="caption">タスク</p>
+        <p class="caption-content">
+            test
+        </p>
+    </div>
     <details>
         <summary>参加中のユーザー</summary>
         <ul>

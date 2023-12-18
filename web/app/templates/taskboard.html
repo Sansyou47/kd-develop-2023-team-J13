@@ -1,6 +1,6 @@
 {% include 'header.html' %}
 {% include 'sidebar.html' %}
-<link rel="stylesheet" href="/static/css/taskboard.css">
+<link rel="stylesheet" href="../static/css/taskboard.css">
 
 <body>
     <div class="row">
@@ -43,19 +43,15 @@
         </div>
 
         <div class="Done">
-            <div class="subtitle">
-                <p>Done</p>
-            </div>
-            <div class="substance">
-                {% for row in task %}
-                {% if row[1] == 0 %}
-                <p>{{row[0]}}<br></p>
-                {% endif %}
-                {% endfor %}
-            </div>
+            <p>Done</p>
+            {% for row in task %}
+            {% if row[1] == 0 %}
+            <p>{{row[0]}}<br></p>
+            {% endif %}
+            {% endfor %}
         </div>
-
     </div>
+    <script src="../static/javascript/taskboard.js"></script>
 </body>
 
-</div>
+</html>
