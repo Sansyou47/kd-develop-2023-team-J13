@@ -23,4 +23,4 @@ def outtaskboard():
     conn.commit()
     cur.close()
 
-    return render_template("/taskboard.html", story=Story,task=all_tasks,project=project)
+    return render_template("/taskboard.html", story=Story,task=all_tasks,project=projectNumber)
