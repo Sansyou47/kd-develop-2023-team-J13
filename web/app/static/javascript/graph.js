@@ -7,7 +7,7 @@ var container = document.getElementById("visualization"),
 //storyGraphの各要素に対して処理
 for (var i = 0; i < storyGraph.length; i++) {
     //taskに必要な情報を格納
-    task.push({ id: i, group: storyGraph[i][3], content: storyGraph[i][0], start: storyGraph[i][5], end: storyGraph[i][6] });
+    task.push({ id: i, group: storyGraph[i][3], content: storyGraph[i][0], start: storyGraph[i][5], end: '2023-12-30' });
     //これ例"プロジェクト選択画面",2,null,"ファイルを一括で管理したい",1,"Tue, 12 Dec 2023 11:59:50 GMT","Tue, 12 Dec 2023 11:59:50 GMT"
     // groupsに既に同じcontent(例:プロジェクト選択画面)があるかを確認
     var existingGroups = groups.get({
@@ -30,9 +30,9 @@ for (var j = 0; j < task.length; j++) {
 var options = {
     start: '2023-12-01',  // timeline軸が表す期間の範囲の開始日
     end: '2023-12-30',
-    editable: true,
+    editable: false,
     //zoomの有無
-    zoomable: true,
+    zoomable: false,
     //時間の配置場所
     orientation: 'top',
     zoomMin: 1000 * 60 * 60 * 24 * 7, //1週間

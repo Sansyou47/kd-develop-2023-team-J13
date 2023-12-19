@@ -32,7 +32,7 @@ body {
 }
 
 /* 日曜日のスタイル */
-.vis-sunday {
+.vis-time-axis .vis-grid.vis-sunday {
     background-color: #FFB6C1;
     /* 例：LightPink */
 }
