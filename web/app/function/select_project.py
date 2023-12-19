@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, session
+from flask import Blueprint, request, render_template, session, redirect
 from flaskext.mysql import MySQL
 from flask_login import login_required, current_user
 
@@ -29,3 +29,7 @@ def my_route():
     session.pop('project_number', None)
     return render_template('/select_project.html', data=data)
     
+@select_project.route('/action/rename_project', methods=['POST'])
+@login_required
+def rename_project():
+    return redirect('/select_project')
