@@ -107,7 +107,8 @@ INSERT INTO class(name) VALUES('recruiter');
 drop table if exists project_users;
 create table project_users(
     projectName varchar(100),
-    userId    varchar(50)
+    userId    varchar(50),
+    projectNumber int
 );
 
 INSERT INTO project_users(projectName, userId) VALUES('開発支援アプリ', 'kd1297401@st.kobedenshi.ac.jp');
