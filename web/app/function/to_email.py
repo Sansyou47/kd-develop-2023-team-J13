@@ -44,6 +44,7 @@ def acaddusers():
     cur = conn.cursor()
     email = request.form.get('email')
     project = str(session.get('project'))
+    projectNumber = str(session.get("project_number"))
         
     # 入力されたメールアドレスが登録されているか確認
     cur.execute("SELECT * FROM users WHERE userId = %s", (email))
@@ -55,7 +56,7 @@ def acaddusers():
         if onuser:
             error_message = 'そのユーザーは既にプロジェクトに参加しています。'
             return render_template('/project/addusers.html', error_message=error_message)
-        cur.execute('INSERT INTO project_users(projectName, userId) VALUES(%s, %s)', (project, email))
+        cur.execute('INSERT INTO project_users(projectName, userId, projectNumber) VALUES(%s, %s, %s)', (project, email, projectNumber))
         conn.commit()
         subject = project + 'プロジェクトへの招待が来ています'
         body = 'あなたへの招待が来ています。' + '\n' + '以下のリンクからプロジェクトに参加してください。' + '\n' + 'http://localhost:9047/'
