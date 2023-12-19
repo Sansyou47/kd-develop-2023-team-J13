@@ -32,4 +32,5 @@ def my_route():
 @select_project.route('/action/rename_project', methods=['POST'])
 @login_required
 def rename_project():
+    
     return redirect('/select_project')
