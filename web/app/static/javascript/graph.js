@@ -36,7 +36,7 @@ var options = {
     //時間の配置場所
     orientation: 'top',
     zoomMin: 1000 * 60 * 60 * 24 * 7, //1週間
-    zoomMax: 1000 * 60 * 60 * 24 * 31 * 3, //3カ月
+    zoomMax: 1000 * 60 * 60 * 24 * 7, //3カ月
     itemsAlwaysDraggable: {
         item: false, //選択なしでアイテムをドラッグできる
         range: false, //選択なしで範囲を変更できる

@@ -81,7 +81,7 @@ INSERT INTO task(name, story, sprint) VALUES('タスクボード出力画面', '
 drop table if exists story;
 create table story(
     name    varchar(2000),
-    projectNumber varchar(100),
+    projectNumber int,
     priorit int
 );
 
