@@ -5,7 +5,54 @@
     <script>
         // プロジェクト名をセッションに保存する関数
         function redirectToPage(project) {
-            window.location.href = "/set_session?project=" + encodeURIComponent(project);
+            if (project == "新規プロジェクト") {
+                window.location.href = "/create_project";
+            }
+            else {
+                window.location.href = "/set_session?project=" + encodeURIComponent(project);
+            }
+        }
+
+        // 右クリックメニューを表示する関数
+        window.onload = function () {
+            var elements = document.getElementsByClassName('project-info');
+            var contextMenu = document.querySelector('.contextmenu');
+            var renameForm = document.querySelector('.projectrename-form');
+
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].addEventListener('contextmenu', function (e) {
+                    e.preventDefault();
+
+                    // メニューをマウスポインタの座標に表示
+                    contextMenu.style.top = e.clientY + 'px';
+                    contextMenu.style.left = e.clientX + 'px';
+                    contextMenu.style.display = 'block';
+
+                    // マウスオーバーしている要素内のproject-title要素の内容を取得
+                    var projectArea = e.target.closest('.project-click-area');
+                    var projectTitle = projectArea.querySelector('.project-title').textContent;
+
+                    // 他の要素から使用できるようにする
+                    window.projectTitle = projectTitle;
+                    console.log(projectTitle);
+
+                    return false;
+                });
+            }
+
+            // 名前を変更の<p>タグをクリックしたらprojectrename-form要素を表示
+            contextMenu.children[0].addEventListener('click', function (e) {
+                renameForm.style.display = 'block';
+                overlay.style.display = 'block';
+                contextMenu.style.display = 'none';
+            });
+
+            // 他の場所をクリックしたときにメニューを非表示にする
+            window.addEventListener('click', function (e) {
+                if (e.button !== 2) { // Not right click
+                    contextMenu.style.display = 'none';
+                }
+            });
         }
     </script>
 </head>
@@ -13,6 +60,7 @@
 {% include 'sidebar.html' %}
 
 <body>
+
     <h1>プロジェクト選択</h1>
     <!-- <form action="/action/select_project" method="post"> -->
     {% for row in data %}
@@ -54,8 +102,43 @@
         </div>
     </div>
     {% endfor %}
+    <div class="new-project">
+        <div class="project-click-area" onclick="redirectToPage('新規プロジェクト')">
+            <div class="project-title">新規プロジェクト</div>
+            <p>新しいプロジェクトを立ち上げます。</p>
+            <div class="project-logo">
+                <img src="../static/images/walk.svg" alt="arrow" width="70" height="70">
+            </div>
+        </div>
+    </div>
 
-    <!-- </form> -->
+    <div class="contextmenu">
+        <p class="rename">
+            <img src="../static/images/pen.svg" alt="rename" width="14" height="14">
+            <a href="/"></a> 名前を変更
+        </p>
+        <p>
+            <img src="../static/images/share.svg" alt="share" width="14" height="14">
+            プロジェクトに招待する
+        </p>
+        <p class="properties" onclick="redirectToPage(projectTitle)">
+            <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
+            プロジェクト詳細
+        </p>
+        <p class="delete">
+            <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
+            プロジェクトを削除
+        </p>
+    </div>
+
+    <div class="projectrename-form">
+        <form action="/action/rename_project" method="post">
+            <p>プロジェクト名を変更</p>
+            <input type="text" name="project_name" value="projectTitle"><br>
+            <input type="hidden" name="project_title" value="{{ projectTitle }}">
+            <input type="submit" value="OK">
+        </form>
+    </div>
 </body>
 </div>
 
