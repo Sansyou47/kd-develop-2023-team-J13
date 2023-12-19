@@ -16,8 +16,6 @@
         <h4>プロジェクト名：{{ projectName }}</h4>
         <label for="task">タスク名:</label>
         <input type="text" name="taskName" required><br>
-        <label for="manager">担当者名:</label>
-        <input type="text" name="taskManager" required><br>
         <label>スプリント <select name="sprint">
                 {% for i in range(1,11) %}
                 <option value="{{ i }}">{{ i }}</option>

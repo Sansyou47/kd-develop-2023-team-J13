@@ -65,28 +65,34 @@ create table task(
     manager varchar(50),
     story varchar(2000),
     sprint  int,
-    start_task_date  DATETIME DEFAULT CURRENT_TIMESTAMP,
-    finish_task_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    comment varchar(2000)
+    start_task_date DATE,
+    finish_task_date DATE,
+    comment varchar(2000),
+    projectNumber int
 );
 
-INSERT INTO task(name, story, sprint) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1);
-INSERT INTO task(name, story, sprint) VALUES('新規プロジェクト設定画面', 'ファイルを一括で管理したい', 1);
-INSERT INTO task(name, story, sprint) VALUES('ストーリー登録画面', 'ファイルを一括で管理したい', 1);
-INSERT INTO task(name, story, sprint) VALUES('タスク登録画面', 'ファイルを一括で管理したい', 1);
-INSERT INTO task(name, story, sprint) VALUES('タスクを受ける画面', 'ファイルを一括で管理したい', 1);
-INSERT INTO task(name, story, sprint) VALUES('進捗状況のグラフ化', '各員の進行状況を逐次把握したい', 1);
-INSERT INTO task(name, story, sprint) VALUES('タスクボード出力画面', '各員の進行状況を逐次把握したい', 1);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1,1);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('新規プロジェクト設定画面', 'ファイルを一括で管理したい', 1, 1);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('ストーリー登録画面', 'ファイルを一括で管理したい', 1, 1);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('タスク登録画面', 'ファイルを一括で管理したい', 1, 1);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('タスクを受ける画面', 'ファイルを一括で管理したい', 1, 1);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('進捗状況のグラフ化', '各員の進行状況を逐次把握したい', 1, 1);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('タスクボード出力画面', '各員の進行状況を逐次把握したい', 1, 1);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('キノコ派選別作業', 'キノコ派救済作業', 1, 2);
+INSERT INTO task(name, story, sprint, projectNumber) VALUES('キノコ派偽装作業', 'キノコ派救済作業', 1, 19);
 
 drop table if exists story;
 create table story(
     name    varchar(2000),
-    projectNumber varchar(100),
+    projectNumber int,
     priorit int
 );
 
 INSERT INTO story(name, projectNumber,priorit) VALUES('ファイルを一括で管理したい',1 ,0);
 INSERT INTO story(name, projectNumber,priorit) VALUES('各員の進行状況を逐次把握したい', 1,1);
+INSERT INTO story(name, projectNumber,priorit) VALUES('キノコ派救済作業', 2,1);
+INSERT INTO story(name, projectNumber,priorit) VALUES('キノコ派救済作業', 19,1);
+
 
 drop table if exists class;
 create table class(
