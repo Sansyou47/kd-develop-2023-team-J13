@@ -113,6 +113,22 @@
     margin-top: 90px;
 }
 
+.new-project {
+    /* マウスオーバー時の背景色変化を指定 */
+    transition: background-color 0.3s ease;
+    /* 背景色を指定 */
+    background-color: #f6ffa4;
+    /* 四角形の大きさを指定 */
+    width: 340px;
+    height: 155px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+
+.new-project:hover {
+    background-color: #c9d36f;
+}
+
 
 
 .content .error {
@@ -123,15 +139,15 @@
     font-size: 22px;
 }
 
-.sidebar .caption {
+.side-userinfo-body .caption {
     font-size: 18px;
 }
 
 .sidebar .product-backlog {
-    font-size: 10px;
+    font-size: 16px;
 }
 
-.sidebar .caption-content {
+.side-userinfo-body .caption-content {
     margin-left: 10px;
     margin-bottom: 20px;
     font-size: 16px;
@@ -257,177 +273,5 @@ select {
     .textbox-001,
     select {
         width: 100%;
-    }
-}
-
-/* Login form specific styles */
-.login-form {
-    max-width: 320px;
-    margin: 100px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    /* 中央配置 */
-}
-
-.login-form h1 {
-    margin-bottom: 30px;
-    font-size: 28px;
-    color: #333333;
-}
-
-.login-form label {
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-size: 18px;
-    color: #555555;
-    display: block;
-    text-align: left;
-    /* テキストを左寄せ */
-}
-
-.login-form input[type="text"],
-.login-form input[type="password"] {
-    width: calc(100% - 22px);
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 2px solid #cccccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.login-form input[type="submit"] {
-    background-color: #4caf50;
-    color: #ffffff;
-    padding: 14px 28px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    display: block;
-    margin: 20px auto;
-    /* 中央配置 */
-    transition: background-color 0.3s ease;
-    /* カラー変化のアニメーション */
-}
-
-.login-form input[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.login-form a {
-    display: block;
-    margin-top: 25px;
-    color: #007bff;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.login-form a:hover {
-    text-decoration: underline;
-}
-
-/* select_project.css*/
-body,
-h1,
-p,
-div,
-img {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* プロジェクト選択に特化したスタイル */
-body:not(#header):not(#sidebar) {
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
-    /* より薄いグレーの背景 */
-    padding: 20px;
-    font-size: 16px;
-    color: #333;
-}
-
-h1:not(#header h1) {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 36px;
-    color: #ff5a5f;
-    /* コーラルレッド */
-}
-
-.project-info {
-    background-color: #ffffff;
-    /* 白い背景 */
-    border-radius: 12px;
-    /* わずかに丸みを帯びた角 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 微妙な影 */
-    padding: 25px;
-    margin-bottom: 25px;
-}
-
-.project-click-area {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    border-bottom: 1px solid #eeeeee;
-    /* より薄いボーダー */
-    border-radius: 8px;
-}
-
-.project-title {
-    font-size: 22px;
-    margin-bottom: 5px;
-    color: #ff5a5f;
-    /* コーラルレッド */
-}
-
-.project-info p {
-    color: #777777;
-    /* やや濃いめのグレー */
-    font-size: 14px;
-    margin: 0;
-}
-
-.project-logo img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.project-resource {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-
-.project-resource a {
-    margin-left: 10px;
-}
-
-/* スマートフォンやタブレットなどの小さな画面向けレスポンシブ対応 */
-@media screen and (max-width: 768px) {
-    .project-click-area {
-        padding: 10px;
-    }
-
-    .project-logo img {
-        width: 40px;
-        height: 40px;
-    }
-
-    .project-resource {
-        margin-top: 5px;
-    }
-
-    .project-resource a {
-        margin-left: 8px;
     }
 }
