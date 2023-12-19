@@ -7,7 +7,7 @@ var container = document.getElementById("visualization"),
 //storyGraphの各要素に対して処理
 for (var i = 0; i < storyGraph.length; i++) {
     //taskに必要な情報を格納
-    task.push({ id: i, group: storyGraph[i][3], content: storyGraph[i][0], start: storyGraph[i][5], end: '2023-12-30' });
+    task.push({ id: i, group: storyGraph[i][3], content: storyGraph[i][0], start: storyGraph[i][5], end: storyGraph[i][6]});
     //これ例"プロジェクト選択画面",2,null,"ファイルを一括で管理したい",1,"Tue, 12 Dec 2023 11:59:50 GMT","Tue, 12 Dec 2023 11:59:50 GMT"
     // groupsに既に同じcontent(例:プロジェクト選択画面)があるかを確認
     var existingGroups = groups.get({
@@ -36,7 +36,7 @@ var options = {
     //時間の配置場所
     orientation: 'top',
     zoomMin: 1000 * 60 * 60 * 24 * 7, //1週間
-    zoomMax: 1000 * 60 * 60 * 24 * 31 * 3, //3カ月
+    zoomMax: 1000 * 60 * 60 * 24 * 7, //3カ月
     itemsAlwaysDraggable: {
         item: false, //選択なしでアイテムをドラッグできる
         range: false, //選択なしで範囲を変更できる

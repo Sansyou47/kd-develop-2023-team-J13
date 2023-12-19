@@ -5,8 +5,6 @@ mypage = Blueprint("mypage", __name__)
 
 mysql = None
 
-userNumber = 4  # 実装が進んだらsessionでuserNumberの値を受け取る
-
 @mypage.route("/register_skill", methods=["POST"])
 def register_skill():
     # MySQLへ接続
@@ -25,9 +23,18 @@ def register_skill():
 
 @mypage.route("/mypage")
 def add_mypage():
+    # メアドを取得
+    user_id = str(session.get("user_id"))
+    # 名前を取得
+    user_name = str(session.get("user_name"))
+
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
+
+    # userNumberを取得
+    cur.execute("SELECT userNumber From users WHERE userId = %s", (user_id,))
+    userNumber = cur.fetchone()
 
     # userNumberがデータベースに存在するか確認
     cur.execute("SELECT * FROM skill WHERE userNumber = %s", (userNumber,))
@@ -41,11 +48,9 @@ def add_mypage():
     # SQL実行
     cur.execute("SELECT * FROM skill")
     skills = cur.fetchall()
-    # userNumberから名前を取り出す
-    cur.execute("SELECT users.userName FROM users JOIN skill ON users.userNumber = skill.userNumber WHERE users.userNumber = %s", (userNumber,))
-    name = cur.fetchone()
-
+    # userNumberから名前を取り出す  セッションで持ってこれるからいらない
+    # cur.execute("SELECT users.userName FROM users JOIN skill ON users.userNumber = skill.userNumber WHERE users.userNumber = %s", (userNumber,))
+    # name = cur.fetchone()
     conn.commit()
     cur.close()
-
-    return render_template("/mypage/mypage.html", skills=skills, userNumber=userNumber, name=name)
+    return render_template("/mypage/mypage.html", skills=skills, userNumber=userNumber, name=user_name)
