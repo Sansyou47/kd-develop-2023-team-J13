@@ -1,0 +1,68 @@
+/* Login form specific styles */
+.login-form {
+    max-width: 320px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* 中央配置 */
+}
+
+.login-form h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #333333;
+}
+
+.login-form label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #555555;
+    display: block;
+    text-align: left;
+    /* テキストを左寄せ */
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #cccccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-form input[type="submit"] {
+    background-color: #4caf50;
+    color: #ffffff;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    display: block;
+    margin: 20px auto;
+    /* 中央配置 */
+    transition: background-color 0.3s ease;
+    /* カラー変化のアニメーション */
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.login-form a {
+    display: block;
+    margin-top: 25px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
