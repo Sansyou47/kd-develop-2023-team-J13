@@ -10,9 +10,6 @@
     margin-top: 80px;
 }
 
-/* ここから下は、.headerと.sidebarに影響しないスタイル */
-/* 例えば、.content、.login-form、その他のクラスや要素に関連するスタイル */
-
 
 .side-head {
     text-align: center;
@@ -332,7 +329,7 @@ select {
     text-decoration: underline;
 }
 
-/* Reset CSS for basic styles */
+/* select_project.css*/
 body,
 h1,
 p,
@@ -343,68 +340,63 @@ img {
     box-sizing: border-box;
 }
 
-/* Styles specific to the project selection */
+/* プロジェクト選択に特化したスタイル */
 body:not(#header):not(#sidebar) {
     font-family: 'Arial', sans-serif;
-    background-color: #fcefee;
-    /* 薄いピンク */
-    margin: 0;
-    padding: 30px;
-    /* パディングを大きく */
-    font-size: 18px;
-    /* フォントサイズを大きく */
+    background-color: #f7f7f7;
+    /* より薄いグレーの背景 */
+    padding: 20px;
+    font-size: 16px;
     color: #333;
 }
 
 h1:not(#header h1) {
     text-align: center;
-    margin-bottom: 40px;
-    /* マージンを大きく */
-    font-size: 32px;
-    /* フォントサイズを大きく */
-    color: #ff7b54;
-    /* オレンジ */
+    margin-bottom: 30px;
+    font-size: 36px;
+    color: #ff5a5f;
+    /* コーラルレッド */
 }
 
 .project-info {
-    background-color: #fff;
-    border-radius: 16px;
-    /* 角丸を大きく */
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    /* 影を大きく */
-    padding: 30px;
-    /* パディングを大きく */
-    margin-bottom: 30px;
-    /* マージンを大きく */
+    background-color: #ffffff;
+    /* 白い背景 */
+    border-radius: 12px;
+    /* わずかに丸みを帯びた角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 微妙な影 */
+    padding: 25px;
+    margin-bottom: 25px;
 }
-
-/* ... （他のスタイル） ... */
 
 .project-click-area {
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
-    border-radius: 10px;
+    padding: 15px;
+    border-bottom: 1px solid #eeeeee;
+    /* より薄いボーダー */
+    border-radius: 8px;
 }
 
 .project-title {
-    font-size: 24px;
-    margin-bottom: 8px;
-    color: #ff7b54;
+    font-size: 22px;
+    margin-bottom: 5px;
+    color: #ff5a5f;
+    /* コーラルレッド */
 }
 
 .project-info p {
-    color: #777;
-    font-size: 16px;
+    color: #777777;
+    /* やや濃いめのグレー */
+    font-size: 14px;
     margin: 0;
 }
 
 .project-logo img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -413,29 +405,29 @@ h1:not(#header h1) {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .project-resource a {
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
-/* Responsiveness for smaller screens */
+/* スマートフォンやタブレットなどの小さな画面向けレスポンシブ対応 */
 @media screen and (max-width: 768px) {
     .project-click-area {
-        padding: 15px;
+        padding: 10px;
     }
 
     .project-logo img {
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
 
     .project-resource {
-        margin-top: 10px;
+        margin-top: 5px;
     }
 
     .project-resource a {
-        margin-left: 10px;
+        margin-left: 8px;
     }
 }
