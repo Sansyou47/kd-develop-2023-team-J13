@@ -27,12 +27,76 @@ def delete_data():
     
     for i in range(len(storyName)):
         if storyName[i] == '0':
-            taskName += ('0',)
+            pass
         else :
             cur.execute("SELECT name FROM task WHERE story = %s", (storyName[i]))
             taskName += cur.fetchall()
+            taskName += ('1',)
     
 
     conn.commit()
     cur.close()
-    return render_template("/delete/delete_data.html", projectName = projectName, storyName = storyName, taskName = taskName)
+    lenProject = len(projectName)
+    numStory = []
+    numTask = []
+    spanProject = []
+    w1 = 0
+    w2 = 0
+    j = 0
+
+    for i in range(len(taskName)):
+        if taskName[i] == '1':
+            numTask.append(w1)
+            w1 = 0
+        else:
+            w1 += 1
+    
+
+    for i in range(len(storyName)):
+        if storyName[i] == '0':
+            numStory.append(w1)
+            spanProject.append(w2)
+            w1 = 0
+            w2 = 0
+        else:
+            w1 += 1
+            w2 += numTask[j]
+            j += 1
+
+    #作業用タプルを宣言
+    w1t = ()
+    w2t = ()
+
+    #taskの配列から区切り文字'1'を排除
+    for i in range(len(taskName)):
+        if taskName[i] == '1':
+            pass
+        else:
+            w1t += (taskName[i],)
+    
+    #storyの配列から区切り文字'0'を排除
+    for i in range(len(storyName)):
+        if storyName[i] == '0':
+            pass
+        else:
+            w2t += (storyName[i],)
+    
+    #プロジェクト名タプルをリストに変換
+    projectList = []
+    for i in range(len(projectName)):
+        projectList += projectName[i]
+
+    #storyList = [w2t[i] for i in range(len(w2t))]
+    #ストーリー名タプルをリストに変換
+    storyList = []
+    for i in range(len(w2t)):
+        storyList += w2t[i]
+
+    #タスク名タプルをリストに変換
+    taskList = []
+    for i in range(len(w1t)):
+        taskList += w1t[i]
+    
+    #これはList内包表記 -> taskList = [i for sublist in w1t for i in sublist]
+
+    return render_template("/delete/delete_data.html", projectName = projectList, storyName = storyList, taskName = taskList, lenProject = lenProject, numStory = numStory, numTask = numTask, spanProject = spanProject)
