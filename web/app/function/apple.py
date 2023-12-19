@@ -40,7 +40,10 @@ def action_create_project1():
         cur.execute("INSERT INTO project(name, owner, start_date, finish_date, github, googleDrive) VALUES (%s, %s, %s, %s, %s, %s)", (projectTitle, uName, startDate, endDate, urlInput, sharedFolderInput))
         conn.commit()
 
-        cur.execute("INSERT INTO project_users(projectName, userId) VALUES (%s, %s)", (projectTitle, userId))
+        # 直前のINSERT操作で生成されたIDを取得
+        projectNumber = cur.lastrowid
+
+        cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (projectTitle, userId, projectNumber))
         conn.commit()
 
     cur.close()

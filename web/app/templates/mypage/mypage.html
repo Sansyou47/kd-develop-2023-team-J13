@@ -10,22 +10,20 @@
     <link rel="stylesheet" href="../static/css/mypage.css">
 </head>
 <body>
-    <h1>Mypage</h1>
+    <h1>MySkill</h1>
     <form action="/register_skill" method="post">
         <table>
             <tr>
-                <th>userId</th>
-                <th>skill</th>
-                <th>skill</th>
-                <th>skill</th>
-                <th>skill</th>
-                <th>skill</th>
-                <th>skill</th>
+                <th>名前</th>
+                <th>進行まとめ</th>
+                <th>発表</th>
+                <th>アイデア発想</th>
+                <th>プロトタイプ作成</th>
+                <th>資料作成</th>
+                <th>スクラム好き度</th>
             </tr>
-            <!-- ループを実行し、userNumberが指定したuserNumberと一致する時だけuserNumberを出力します。-->
-            {% for skill in skills if skill[0] == userNumber %}
             <tr>
-                <th>{{ name }}</th>
+                <td>{{ name }}</td>
                 <!-- 得意不得意を6項目プルダウンメニューを作成 -->
                 {% for skill_index in range(1, 7) %}
                 <td>
@@ -36,8 +34,6 @@
                     </select>
                 </td>
                 {% endfor %}
-            </tr>
-            {% endfor %}
         </table>
         <td><input type="submit" value="送信"></td>
     </form>
