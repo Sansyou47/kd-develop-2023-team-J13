@@ -5,11 +5,21 @@
     <script>
         // プロジェクト名をセッションに保存する関数
         function redirectToPage(project) {
-            window.location.href = "/set_session?project=" + encodeURIComponent(project);
+            if (project == "新規プロジェクト") {
+                window.location.href = "/create_project";
+            }
+            else {
+                window.location.href = "/set_session?project=" + encodeURIComponent(project);
+            }
+        }
+        // クリックした要素内の特定の要素のテキストを読み取る関数
+        function getProjectName() {
+            var projectTitle = e.target.querySelector('.project-title').textContent;
+            return projectTitle;
         }
         // 右クリックメニューを表示する関数
         window.onload = function () {
-            var elements = document.getElementsByClassName('project-click-area');
+            var elements = document.getElementsByClassName('project-info');
             var contextMenu = document.querySelector('.contextmenu');
 
             for (var i = 0; i < elements.length; i++) {
@@ -20,6 +30,8 @@
                     contextMenu.style.top = e.clientY + 'px';
                     contextMenu.style.left = e.clientX + 'px';
                     contextMenu.style.display = 'block';
+
+                    var projectTitle = e.target.querySelector('.project-title').textContent;
 
                     return false;
                 });
@@ -79,12 +91,33 @@
         </div>
     </div>
     {% endfor %}
+    <div class="new-project">
+        <div class="project-click-area" onclick="redirectToPage('新規プロジェクト')">
+            <div class="project-title">新規プロジェクト</div>
+            <p>新しいプロジェクトを立ち上げます。</p>
+            <div class="project-logo">
+                <img src="../static/images/walk.svg" alt="arrow" width="70" height="70">
+            </div>
+        </div>
+    </div>
 
     <div class="contextmenu">
-        <ul>
-            <li>プロジェクトを削除</li>
-            <li>プロジェクトを編集</li>
-        </ul>
+        <p>
+            <img src="../static/images/pen.svg" alt="rename" width="14" height="14">
+            名前を変更
+        </p>
+        <p>
+            <img src="../static/images/share.svg" alt="share" width="14" height="14">
+            プロジェクトに招待する
+        </p>
+        <p>
+            <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
+            プロジェクト詳細
+        </p>
+        <p>
+            <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
+            プロジェクトを削除
+        </p>
     </div>
 </body>
 </div>

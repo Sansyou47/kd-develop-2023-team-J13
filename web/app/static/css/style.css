@@ -109,7 +109,25 @@
     margin-top: 90px;
 }
 
+.new-project {
+    /* マウスオーバー時の背景色変化を指定 */
+    transition: background-color 0.3s ease;
+    /* 背景色を指定 */
+    background-color: #f6ffa4;
+    /* 四角形の大きさを指定 */
+    width: 340px;
+    height: 155px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+
+.new-project:hover {
+    background-color: #c9d36f;
+}
+
 .project-info {
+    /* マウスオーバー時の背景色変化を指定 */
+    transition: background-color 0.3s ease;
     /* 背景色を指定 */
     background-color: #C4E7F6;
     /* 四角形の大きさを指定 */
@@ -121,6 +139,11 @@
     /* 横並びに配置する */
     white-space: normal;
     /* 画面サイズに応じて自動で折り返す */
+}
+
+/* マウスオーバー時の背景色を指定 */
+.project-info:hover {
+    background-color: #dcf2ff;
 }
 
 .project-click-area {
@@ -139,7 +162,7 @@
     margin-left: 2px;
 }
 
-.project-info p {
+.project-click-area p {
     color: #000000;
     font-size: 12px;
     margin-top: 0px;
@@ -317,12 +340,16 @@ select {
     position: fixed;
     left: 0px;
     top: 0px;
-    width: 200px;
-    height: 100px;
-    border: 1px solid #000;
-    background-color: #fff;
+    width: 250px;
+    height: 150px;
+    background-color: #ffffff;
+    border-radius: 5%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-.contextmenu li {
+.contextmenu p {
     cursor: pointer;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 16px;
 }
