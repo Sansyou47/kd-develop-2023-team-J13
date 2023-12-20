@@ -133,9 +133,9 @@
 
     <div class="projectrename-form">
         <form action="/action/rename_project" method="post">
-            <p>プロジェクト名を変更</p>
-            <input type="text" name="project_name" value="projectTitle"><br>
-            <input type="hidden" name="project_title" value="{{ projectTitle }}">
+            <p class="title">プロジェクト名を変更</p>
+            <input type="text" name="newname" value="projectTitle"><br>
+            <input type="hidden" name="oldname" value="{{ projectTitle }}">
             <input type="submit" value="OK">
         </form>
     </div>
