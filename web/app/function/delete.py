@@ -9,6 +9,7 @@ mysql = None
 @delete.route("/delete_data")
 @login_required
 def delete_data():
+    projectNumber = str(session.get("project_number"))
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
