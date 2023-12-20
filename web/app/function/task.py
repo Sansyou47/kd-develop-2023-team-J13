@@ -16,13 +16,8 @@ def add_task():
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
-
-    # SQL実行
-    cur.execute("SELECT project FROM story WHERE name = %s", storyName)
-
-    #入手した配列を変数に代入する
-    for i in cur.fetchone() :
-        projectName = i
+    
+    projectName = session.get("project")
 
     conn.commit()
     cur.close()
@@ -37,16 +32,16 @@ def add_task():
 @login_required
 def action_add_task():
     taskName = request.form.get("taskName")
-    taskManager = request.form.get("taskManager")
     sprint = int(request.form.get("sprint"))
     storyName = request.form.get("storyName")
+    projectNumber = str(session.get("project_number"))
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
     cur.execute(
-        "INSERT INTO task(name, manager, story, sprint) VALUES(%s, %s ,%s ,%s)",
-        (taskName, taskManager, storyName, sprint)
+        "INSERT INTO task(name, story, sprint, projectNumber) VALUES(%s, %s ,%s ,%s)",
+        (taskName, storyName, sprint, projectNumber)
     )
     conn.commit()
     cur.close()
@@ -108,7 +103,6 @@ def action_report():
     return redirect("/report_task")
 
 
-
 @task.route("/update_status", methods=["POST"])
 @login_required
 def update_status():
@@ -133,20 +127,22 @@ def update_status():
 @task.route("/task_catch", methods=["GET"])
 @login_required
 def task_catch():
-    # project = str(session.get("project")) セッションを受け取れるようになったら(画面遷移が決まったら)コメントアウトを外しsql文を修正する
-    # MySQLへ接続
+    project = str(session.get("project"))
+    projectNumber = str(session.get("project_number"))
     conn = mysql.get_db()
     cur = conn.cursor()
 
     # namesの取得
-    cur.execute("SELECT name FROM task")
+    cur.execute(
+        "SELECT name FROM task WHERE projectNumber = %s",(projectNumber,)
+    )
     names = [item[0] for item in cur.fetchall()]
 
     # usersの取得
     cur.execute(
-        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.projectName = '開発支援アプリ'"
+        "SELECT users.userName FROM users INNER JOIN project_users ON users.userId = project_users.userId WHERE project_users.projectName = %s",(project,)
     )
     users = [item[0] for item in cur.fetchall()]
 
     cur.close()
-    return render_template("/task_catch/task_catch.html", names=names, users=users, project=session.get("project"))
+    return render_template("/task_catch/task_catch.html", names=names, users=users, projectNumber=projectNumber, project=project)

@@ -29,6 +29,7 @@ app.register_blueprint(taskboard.taskboard)
 app.register_blueprint(to_email.to_email)
 app.register_blueprint(delete.delete)
 
+taskboard.mysql = mysql
 story.mysql = mysql
 select_project.mysql = mysql
 task.mysql = mysql
