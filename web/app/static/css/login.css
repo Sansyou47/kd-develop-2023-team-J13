@@ -1,9 +1,9 @@
 /* ログインフォームのスタイル */
 .login-form {
     max-width: 400px;
-    margin: 100px auto;
+    margin: 200px auto;
     padding: 30px;
-    background: linear-gradient(135deg, #000000, #545454);
+    background: linear-gradient(135deg, #002d9f, #5a57ff);
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -80,7 +80,7 @@
 .login-form a {
     display: block;
     margin-top: 25px;
-    color: #1586ff;
+    color: #ffffff;
     /* 青いリンク */
     text-decoration: none;
     font-size: 18px;
@@ -88,6 +88,6 @@
 
 .login-form a:hover {
     text-decoration: underline;
-    color: #5eacff;
+    color: #5efaff;
     /* ホバー時の濃い青 */
 }
