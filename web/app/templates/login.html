@@ -1,6 +1,5 @@
 {% include 'header.html' %}
 {% include 'sidebar.html' %}
-
 <link rel="stylesheet" href="../static/css/login.css">
 
 <body>
@@ -9,12 +8,12 @@
         {% if error_message %}
         <p class="error">{{ error_message }}</p>
         {% endif %}
-        <label for="userid">ユーザーID:</label>
-        <input type="text" id="userid" name="userid" required><br><br>
-
-        <label for="password">パスワード:</label>
-        <input type="password" id="password" name="password" required><br><br>
-
+        <div class="input-wrapper">
+            <input type="text" id="userid" name="userid" required placeholder="ユーザーID">
+        </div>
+        <div class="input-wrapper">
+            <input type="password" id="password" name="password" required placeholder="パスワード">
+        </div>
         <input type="submit" value="ログイン">
         <a href="/register">新規登録はこちら</a>
     </form>
