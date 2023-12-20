@@ -139,6 +139,7 @@
     /* 横並びに配置する */
     white-space: normal;
     /* 画面サイズに応じて自動で折り返す */
+    vertical-align: top;
 }
 
 /* マウスオーバー時の背景色を指定 */
@@ -154,6 +155,7 @@
     /* 横並びに配置する */
     white-space: normal;
     /* 画面サイズに応じて自動で折り返す */
+
 }
 
 .project-title {
@@ -343,7 +345,7 @@ select {
     width: 250px;
     height: 150px;
     background-color: #ffffff;
-    border-radius: 5%;
+    border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -360,10 +362,10 @@ select {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 300px;
-    height: 170px;
+    width: 320px;
+    height: 150px;
     background-color: #ffffff;
-    border-radius: 5%;
+    border-radius: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
@@ -375,4 +377,13 @@ select {
 
 .projectrename-form input {
     font-size: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.projectrename-form .button {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+    background-color: #5eb9ff;
 }
