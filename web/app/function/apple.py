@@ -51,6 +51,8 @@ def action_create_project1():
     
     session['project_users'] = uName
     session["project"] = projectTitle
+    session["project_number"] = projectNumber
+    session['project_icon'] = "default.svg"
     return redirect("/create_stories")
 
 # テンプレートから作成する
