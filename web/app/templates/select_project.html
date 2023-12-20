@@ -28,13 +28,17 @@
                     contextMenu.style.left = e.clientX + 'px';
                     contextMenu.style.display = 'block';
 
-                    // マウスオーバーしている要素内のproject-title要素の内容を取得
+                    // マウスオーバーしている要素内のinput hidden要素の内容を取得
                     var projectArea = e.target.closest('.project-click-area');
                     var projectTitle = projectArea.querySelector('.project-title').textContent;
+                    var projectNumber = projectArea.querySelector('input[type="hidden"]').value;
 
                     // 他の要素から使用できるようにする
                     window.projectTitle = projectTitle;
+                    window.projectNumber = projectNumber;
+
                     console.log(projectTitle);
+                    console.log(projectNumber);
 
                     return false;
                 });
@@ -68,6 +72,7 @@
         <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
         <div class="project-click-area" onclick="redirectToPage('{{ row[1] }}')">
             <div class="project-title">{{ row[1] }}</div>
+            <input type="hidden" name="id" value="{{ row[0] }}">
             <p>最終更新日：{{ row[4].strftime("%Y-%m-%d") }}<br>
                 作成日：{{ row[3].strftime("%Y-%m-%d") }}<br>
                 リリース予定日：{{ row[5].strftime("%Y-%m-%d") }}<br>
@@ -134,9 +139,12 @@
     <div class="projectrename-form">
         <form action="/action/rename_project" method="post">
             <p class="title">プロジェクト名を変更</p>
-            <input type="text" name="newname" value="projectTitle"><br>
-            <input type="hidden" name="oldname" value="{{ projectTitle }}">
+            <input type="text" name="newname" value="{{projectNumber}}"><br>
+            <input type="hidden" name="project_number" value="{{ projectNumber }}">
             <input type="submit" value="OK">
+            <script>
+
+            </script>
         </form>
     </div>
 </body>
