@@ -10,7 +10,7 @@
 
     <title>{{session['project']}}</title>
     <meta name="description" content="${description}" />
-    
+    <!-- CSSファイルとFrappe Ganttの取得 -->
     <link rel="stylesheet" href="../static/css/bar.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/frappe-gantt/0.5.0/frappe-gantt.min.js"></script>
 
@@ -18,17 +18,17 @@
 
 <body>
     <h1>進捗状況表</h1>
-    <p>{{session['project']}}</p>
+    <p>{{session['project']}}</p><!-- プロジェクト名の表示 -->
     <div class='gantt-wrap'>
-        <svg id="gantt"></svg>
+        <svg id="gantt"></svg><!-- SVGでJSで実行できるようにする -->
     </div>
     
     <script>
-        // storyGraph を定義
+        // storyGraphにPythonから送られた値を格納
         var storyGraph = JSON.parse('{{ story_graph | tojson | safe }}');
     </script>
 
-    <!-- Include your external JavaScript file -->
+    <!-- JSの処理を実行 -->
     <script src="../static/javascript/graph.js"></script>
 
 </body>
