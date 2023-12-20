@@ -1,11 +1,11 @@
 {% include 'header.html' %}
 
-{% include 'sidebar.html' %}
+<link rel="stylesheet" href="../static/css/register.css">
 
 
 <body>
-    <h1>新規ユーザー登録</h1>
-    <form action="/register" method="post">
+    <form action="/register" method="post" class="register-form">
+        <h1>新規ユーザー登録</h1>
         <!-- 同じメールアドレスが使用されたらエラーの表示と名前、読みがなを入力状態に戻す -->
         {% if error_message %}
         <p class="error">{{ error_message }}</p>
