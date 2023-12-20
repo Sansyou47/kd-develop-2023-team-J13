@@ -10,11 +10,11 @@ mysql = None
 def set_session():
     # sessionを初期化
     session.pop('project_users', None)
-    project = request.args.get("project")
+    project_number = int(request.args.get("project_number"))
     cur = mysql.get_db().cursor()
-    cur.execute("SELECT projectNumber, github, googleDrive, logo FROM project WHERE name = %s", (project))
+    cur.execute("SELECT name, github, googleDrive, logo FROM project WHERE projectNumber = %s", (project_number))
     data = cur.fetchone()
-    cur.execute("SELECT userId FROM project_users WHERE projectName = %s", (project))
+    cur.execute("SELECT userId FROM project_users WHERE projectNumber = %s", (project_number))
     userId = cur.fetchall()
     uName = []
     for userid in userId:
@@ -29,7 +29,7 @@ def set_session():
     session['project_github'] = data[1]
     session['project_googleDrive'] = data[2]
     session['project_users'] = uName
-    session["project"] = project
-    session["project_number"] = data[0]
+    session["project"] = data[0]
+    session["project_number"] = project_number
     # テストのため一時的に変更
     return redirect("/create_stories")
