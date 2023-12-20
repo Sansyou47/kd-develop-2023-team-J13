@@ -34,12 +34,15 @@ def my_route():
 def rename_project():
     newname = request.form.get('newname')
     project_number = request.form.get('project_number')
-    conn = mysql.get_db()
-    cur = conn.cursor()
-    cur.execute("UPDATE project SET name = %s WHERE projectNumber = %s", (newname, project_number))
-    conn.commit()
-    cur.execute("UPDATE project_users SET projectName = %s WHERE projectNumber = %s", (newname, project_number))
-    conn.commit()
-    cur.close()
+    if newname == "":
+        return redirect('/select_project')
+    else:
+        conn = mysql.get_db()
+        cur = conn.cursor()
+        cur.execute("UPDATE project SET name = %s WHERE projectNumber = %s", (newname, project_number))
+        conn.commit()
+        cur.execute("UPDATE project_users SET projectName = %s WHERE projectNumber = %s", (newname, project_number))
+        conn.commit()
+        cur.close()
     
     return redirect('/select_project')
