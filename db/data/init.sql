@@ -107,43 +107,44 @@ INSERT INTO class(name) VALUES('recruiter');
 drop table if exists project_users;
 create table project_users(
     projectName varchar(100),
-    userId    varchar(50)
+    userId    varchar(50),
+    projectNumber int
 );
 
-INSERT INTO project_users(projectName, userId) VALUES('開発支援アプリ', 'kd1297401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('開発支援アプリ', 'kd1323949@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('開発支援アプリ', 'kd1293049@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('開発支援アプリ', 'kd1299164@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('開発支援アプリ', 'kd1334632@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('開発支援アプリ', 'kd1334992@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('開発支援アプリ', 'kd1329246@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('タスク管理アプリ', 'kd1297401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('タスク管理アプリ', 'kd1323949@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('タスク管理アプリ', 'kd1293049@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('タスク管理アプリ', 'kd1299164@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('タスク管理アプリ', 'kd1334632@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('タスク管理アプリ', 'kd1334992@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('タスク管理アプリ', 'kd1329246@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('マインクラフトサーバー', 'kd1297401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('シフト表作成支援アプリ', 'kd1297401@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('原神聖遺物計算アプリ', 'kd1323949@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('原神ガチャ課金計算', 'kd1323949@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('原神キャラクター育成計算', 'kd1323949@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('原神武器育成計算', 'kd1323949@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('原神素材計算', 'kd1323949@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('ビジュネル暗号計算機', 'kd1334632@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('ビジュネル暗号解読機', 'kd1334632@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('デレステキャラ育成計画表', 'kd1293049@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('デレステガチャ課金計算', 'kd1293049@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('デレステガチャ確率計算', 'kd1293049@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('デレステガチャユニット編成表', 'kd1293049@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('ブルアカロリボイス集', 'kd1299164@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('ブルアカガチャ課金計算', 'kd1299164@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('ブルアカガチャ確率計算', 'kd1299164@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('ブルアカユニット編成表', 'kd1299164@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('漫画感想共有アプリ', 'kd1334992@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('漫画価格一覧アプリ', 'kd1334992@st.kobedenshi.ac.jp');
-INSERT INTO project_users(projectName, userId) VALUES('漫画ガチャ課金計算', 'kd1334992@st.kobedenshi.ac.jp');
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1297401@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1323949@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1293049@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1299164@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1334632@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1334992@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1329246@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1297401@st.kobedenshi.ac.jp',2);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1323949@st.kobedenshi.ac.jp',2);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1293049@st.kobedenshi.ac.jp',2);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1299164@st.kobedenshi.ac.jp',2);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1334632@st.kobedenshi.ac.jp',2);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1334992@st.kobedenshi.ac.jp',2);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1329246@st.kobedenshi.ac.jp',2);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('マインクラフトサーバー', 'kd1297401@st.kobedenshi.ac.jp',4);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('シフト表作成支援アプリ', 'kd1297401@st.kobedenshi.ac.jp',3);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('原神聖遺物計算アプリ', 'kd1323949@st.kobedenshi.ac.jp',8);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('原神ガチャ課金計算', 'kd1323949@st.kobedenshi.ac.jp',9);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('原神キャラクター育成計算', 'kd1323949@st.kobedenshi.ac.jp',10);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('原神武器育成計算', 'kd1323949@st.kobedenshi.ac.jp',11);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('原神素材計算', 'kd1323949@st.kobedenshi.ac.jp',12);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('ビジュネル暗号計算機', 'kd1334632@st.kobedenshi.ac.jp',13);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('ビジュネル暗号解読機', 'kd1334632@st.kobedenshi.ac.jp',14);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('デレステキャラ育成計画表', 'kd1293049@st.kobedenshi.ac.jp',15);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('デレステガチャ課金計算', 'kd1293049@st.kobedenshi.ac.jp',16);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('デレステガチャ確率計算', 'kd1293049@st.kobedenshi.ac.jp',17);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('デレステガチャユニット編成表', 'kd1293049@st.kobedenshi.ac.jp',18);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('ブルアカロリボイス集', 'kd1299164@st.kobedenshi.ac.jp',19);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('ブルアカガチャ課金計算', 'kd1299164@st.kobedenshi.ac.jp',20);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('ブルアカガチャ確率計算', 'kd1299164@st.kobedenshi.ac.jp',21);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('ブルアカユニット編成表', 'kd1299164@st.kobedenshi.ac.jp',22);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('漫画感想共有アプリ', 'kd1334992@st.kobedenshi.ac.jp',23);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('漫画価格一覧アプリ', 'kd1334992@st.kobedenshi.ac.jp',24);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('漫画ガチャ課金計算', 'kd1334992@st.kobedenshi.ac.jp',25);
 
 drop table if exists skill;
 CREATE TABLE skill(
