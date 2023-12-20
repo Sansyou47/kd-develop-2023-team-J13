@@ -17,6 +17,7 @@
 .Task p,
 .Doing p,
 .Done p {
+    background-color: #c1fcff;
     font-size: 18px; /* 各列内のテキストの文字サイズを設定 */
     margin-bottom: 10px; /* 各列内のテキストの下部に余白を追加 */
 }
@@ -25,7 +26,7 @@
 .Task,
 .Doing,
 .Done {
-    background-color: #dddcdc;
+    background-color: #e3e3e3;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

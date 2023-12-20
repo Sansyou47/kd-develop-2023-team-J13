@@ -4,12 +4,12 @@
     <!-- 選択したプロジェクト名をGetメソッドで送信 -->
     <script>
         // プロジェクト名をセッションに保存する関数
-        function redirectToPage(project) {
-            if (project == "新規プロジェクト") {
+        function redirectToPage(project_number) {
+            if (project_number == -1) {
                 window.location.href = "/create_project";
             }
             else {
-                window.location.href = "/set_session?project=" + encodeURIComponent(project);
+                window.location.href = "/set_session?project_number=" + encodeURIComponent(project_number);
             }
         }
 
@@ -78,7 +78,7 @@
     {% for row in data %}
     <div class="project-info">
         <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
-        <div class="project-click-area" onclick="redirectToPage('{{ row[1] }}')">
+        <div class="project-click-area" onclick="redirectToPage('{{row[0]}}')">
             <div class="project-title">{{ row[1] }}</div>
             <input type="hidden" name="id" value="{{ row[0] }}">
             <p>最終更新日：{{ row[4].strftime("%Y-%m-%d") }}<br>
@@ -116,7 +116,7 @@
     </div>
     {% endfor %}
     <div class="new-project">
-        <div class="project-click-area" onclick="redirectToPage('新規プロジェクト')">
+        <div class="project-click-area" onclick="redirectToPage(-1)">
             <div class="project-title">新規プロジェクト</div>
             <p>新しいプロジェクトを立ち上げます。</p>
             <div class="project-logo">
@@ -149,7 +149,7 @@
             <p class="title">プロジェクト名を変更</p>
             <input type="text" name="newname"><br>
             <input type="hidden" name="project_number">
-            <input type="submit" value="OK">
+            <input class="button" type="submit" value="OK">
         </form>
     </div>
 </body>

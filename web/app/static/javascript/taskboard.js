@@ -37,9 +37,11 @@ window.onload = function () {
                 var st = element;
                 if (st === doing) {
                     st = 1;
+                    location.reload();
                 }
                 else if (st === done) {
                     st = 0;
+                    location.reload();
                 }
                 console.log('taskname:', taskname, 'Type of taskname:', typeof taskname);
                 console.log('st:', st, 'Type of st:', typeof st);
