@@ -1,26 +1,12 @@
-//HTML要素の取得
-
-    // var tasks = [
-    //     {
-    //         id: 'id1',
-    //         name: '確定申告する',
-    //         description: '必ずやる!!',
-    //         start: '2021-01-01',
-    //         end: '2021-01-7',
-    //         progress: 100,
-    //     },
-        
-    // ];
-    
-
-
+    // tasks配列を定義
     var tasks=[];
+    //受け取った日付データをJSで処理できるように再定義用の関数 
     function formatDate(dateString) {
         const date = new Date(dateString);
         return isNaN(date) ? null : date.toISOString();
     };
     
-
+    // storyGraphにあるデータをtasksに格納
     for (var i = 0; i < storyGraph.length; i++) {
         tasks.push({
             id: i,
@@ -31,8 +17,8 @@
             progress: 100,
         });
     };
-    console.log(tasks);
-    //これ例"プロジェクト選択画面",2,null,"ファイルを一括で管理したい",1,"Tue, 12 Dec 2023 11:59:50 GMT","Tue, 12 Dec 2023 11:59:50 GMT"
-
+    // console.log(tasks);デバッグ用
+    
+    // ガントチャート表示
     var gantt = new Gantt("#gantt", tasks, {
         });
