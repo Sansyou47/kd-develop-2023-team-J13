@@ -71,15 +71,15 @@ create table task(
     projectNumber int
 );
 
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', 1,1);
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('新規プロジェクト設定画面', 'ファイルを一括で管理したい', 1, 1);
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('ストーリー登録画面', 'ファイルを一括で管理したい', 1, 1);
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('タスク登録画面', 'ファイルを一括で管理したい', 1, 1);
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('タスクを受ける画面', 'ファイルを一括で管理したい', 1, 1);
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('進捗状況のグラフ化', '各員の進行状況を逐次把握したい', 1, 1);
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('タスクボード出力画面', '各員の進行状況を逐次把握したい', 1, 1);
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('キノコ派選別作業', 'キノコ派救済作業', 1, 2);
-INSERT INTO task(name, story, sprint, projectNumber) VALUES('キノコ派偽装作業', 'キノコ派救済作業', 1, 19);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('プロジェクト選択画面', 'ファイルを一括で管理したい', '2023-12-15', '2024-01-1', 1,1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('新規プロジェクト設定画面', 'ファイルを一括で管理したい', '2023-12-16', '2024-01-2', 1, 1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('ストーリー登録画面', 'ファイルを一括で管理したい', '2023-12-17', '2024-01-3', 1, 1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('タスク登録画面', 'ファイルを一括で管理したい', '2023-12-18', '2024-01-4', 1, 1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('タスクを受ける画面', 'ファイルを一括で管理したい', '2023-12-19', '2024-01-5', 1, 1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('進捗状況のグラフ化', '各員の進行状況を逐次把握したい', '2023-12-20', '2024-01-6', 1, 1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('タスクボード出力画面', '各員の進行状況を逐次把握したい', '2023-12-21', '2024-01-7', 1, 1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('キノコ派選別作業', 'キノコ派救済作業', '2023-12-22', '2024-01-8', 1, 2);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('キノコ派偽装作業', 'キノコ派救済作業', '2023-12-16', '2023-12-31', 1, 19);
 
 drop table if exists story;
 create table story(

@@ -28,13 +28,17 @@
                     contextMenu.style.left = e.clientX + 'px';
                     contextMenu.style.display = 'block';
 
-                    // マウスオーバーしている要素内のproject-title要素の内容を取得
+                    // マウスオーバーしている要素内のinput hidden要素の内容を取得
                     var projectArea = e.target.closest('.project-click-area');
                     var projectTitle = projectArea.querySelector('.project-title').textContent;
+                    var projectNumber = projectArea.querySelector('input[type="hidden"]').value;
 
                     // 他の要素から使用できるようにする
                     window.projectTitle = projectTitle;
+                    window.projectNumber = projectNumber;
+
                     console.log(projectTitle);
+                    console.log(projectNumber);
 
                     return false;
                 });
@@ -42,8 +46,15 @@
 
             // 名前を変更の<p>タグをクリックしたらprojectrename-form要素を表示
             contextMenu.children[0].addEventListener('click', function (e) {
+                // input要素を取得します。ここではname属性が"project_number"の要素を取得します。
+                var inputElement = document.querySelector('input[name="newname"]');
+                var hiddenElement = document.querySelector('input[name="project_number"]');
+
+                // input要素のvalue属性にprojectNumberを設定します。
+                inputElement.value = projectTitle;
+                hiddenElement.value = projectNumber;
+
                 renameForm.style.display = 'block';
-                overlay.style.display = 'block';
                 contextMenu.style.display = 'none';
             });
 
@@ -54,6 +65,7 @@
                 }
             });
         }
+
     </script>
 </head>
 
@@ -68,6 +80,7 @@
         <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
         <div class="project-click-area" onclick="redirectToPage('{{ row[1] }}')">
             <div class="project-title">{{ row[1] }}</div>
+            <input type="hidden" name="id" value="{{ row[0] }}">
             <p>最終更新日：{{ row[4].strftime("%Y-%m-%d") }}<br>
                 作成日：{{ row[3].strftime("%Y-%m-%d") }}<br>
                 リリース予定日：{{ row[5].strftime("%Y-%m-%d") }}<br>
@@ -133,9 +146,9 @@
 
     <div class="projectrename-form">
         <form action="/action/rename_project" method="post">
-            <p>プロジェクト名を変更</p>
-            <input type="text" name="project_name" value="projectTitle"><br>
-            <input type="hidden" name="project_title" value="{{ projectTitle }}">
+            <p class="title">プロジェクト名を変更</p>
+            <input type="text" name="newname"><br>
+            <input type="hidden" name="project_number">
             <input type="submit" value="OK">
         </form>
     </div>

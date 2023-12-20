@@ -12,12 +12,12 @@ def my_route():
     # MySQLへ接続
     cur = mysql.get_db().cursor()
     # SQL実行
-    cur.execute("SELECT projectName FROM project_users WHERE userId = %s", (current_user.id))
-    project_names = cur.fetchall()
+    cur.execute("SELECT projectNumber FROM project_users WHERE userId = %s", (current_user.id))
+    project_number = cur.fetchall()
     data = []
     # 現在ログインしているユーザーが参加しているプロジェクトを取得
-    for project_name in project_names:
-        cur.execute("SELECT * FROM project WHERE name = %s", (project_name[0]))
+    for row in project_number:
+        cur.execute("SELECT * FROM project WHERE projectNumber = %s", (row[0]))
         project_data = cur.fetchall()
         if project_data:
             data.append(project_data[0])
@@ -32,5 +32,14 @@ def my_route():
 @select_project.route('/action/rename_project', methods=['POST'])
 @login_required
 def rename_project():
+    newname = request.form.get('newname')
+    project_number = request.form.get('project_number')
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    cur.execute("UPDATE project SET name = %s WHERE projectNumber = %s", (newname, project_number))
+    conn.commit()
+    cur.execute("UPDATE project_users SET projectName = %s WHERE projectNumber = %s", (newname, project_number))
+    conn.commit()
+    cur.close()
     
     return redirect('/select_project')
