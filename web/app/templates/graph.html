@@ -4,24 +4,32 @@
 <html>
 
 <head>
-    <title>Timeline | editing | itemsAlwaysDraggable Option</title>
-    <meta charset="utf-8">
-    <!-- グラフ動かすのにこの2行は必要 CSSとvis.js-->
-    <link rel="stylesheet" type="text/css" href="../static/css/bar.css">
-    <script src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>{{session['project']}}</title>
+    <meta name="description" content="${description}" />
+    
+    <link rel="stylesheet" href="../static/css/bar.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/frappe-gantt/0.5.0/frappe-gantt.min.js"></script>
 
 </head>
 
 <body>
-    <h1>進捗状況</h1>
-    </p>
-    <div id="visualization"></div>
-
+    <h1>進捗状況表</h1>
+    <p>{{session['project']}}</p>
+    <div class='gantt-wrap'>
+        <svg id="gantt"></svg>
+    </div>
+    
     <script>
-        var storyGraph = JSON.parse('{{ story_graph | tojson | safe }}');//このへんから明日
+        // storyGraph を定義
+        var storyGraph = JSON.parse('{{ story_graph | tojson | safe }}');
     </script>
+
+    <!-- Include your external JavaScript file -->
     <script src="../static/javascript/graph.js"></script>
 
 </body>
-
 </html>
