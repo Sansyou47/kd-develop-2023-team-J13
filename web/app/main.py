@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flaskext.mysql import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
-from function import story, select_project, task, init_session, apple, mypage, graph, users,taskboard, to_email
+from function import story, select_project, task, init_session, apple, mypage, graph, users,taskboard, send_email
 from werkzeug.security import check_password_hash
 import os
 
@@ -26,7 +26,7 @@ app.register_blueprint(mypage.mypage)
 app.register_blueprint(graph.graph)
 app.register_blueprint(users.users)
 app.register_blueprint(taskboard.taskboard)
-app.register_blueprint(to_email.to_email)
+app.register_blueprint(send_email.send_email)
 
 taskboard.mysql = mysql
 story.mysql = mysql
@@ -38,7 +38,7 @@ mypage.mysql = mysql
 graph.mysql = mysql
 users.mysql = mysql
 taskboard.mysql = mysql
-to_email.mysql = mysql
+send_email.mysql = mysql
 
 login_manager = LoginManager()
 login_manager.init_app(app)
