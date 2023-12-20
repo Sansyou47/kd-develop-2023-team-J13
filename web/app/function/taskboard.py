@@ -17,7 +17,7 @@ def outtaskboard():
     all_tasks = []
 
     for row in Story:
-        cur.execute("SELECT * FROM task WHERE story = %s",row)
+        cur.execute("SELECT * FROM task WHERE projectNumber = %s",projectNumber)
         tasks_for_story = cur.fetchall()
         all_tasks.extend(tasks_for_story)
 

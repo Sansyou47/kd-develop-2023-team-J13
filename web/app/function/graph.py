@@ -11,11 +11,12 @@ mysql = None
 @login_required
 def graphs():
     project = str(session.get("project"))
+    projectNumber = str(session.get("project_number"))
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("SELECT * FROM task")
+    cur.execute("SELECT * FROM task WHERE projectNumber = %s", (projectNumber,))
     story_graph = cur.fetchall()
 
     conn.commit()
