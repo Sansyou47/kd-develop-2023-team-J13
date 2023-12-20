@@ -32,7 +32,14 @@ def my_route():
 @select_project.route('/action/rename_project', methods=['POST'])
 @login_required
 def rename_project():
-    oldname = request.form.get('oldname')
     newname = request.form.get('newname')
+    project_number = request.form.get('project_number')
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    cur.execute("UPDATE project SET name = %s WHERE projectNumber = %s", (newname, project_number))
+    conn.commit()
+    cur.execute("UPDATE project_users SET projectName = %s WHERE projectNumber = %s", (newname, project_number))
+    conn.commit()
+    cur.close()
     
     return redirect('/select_project')
