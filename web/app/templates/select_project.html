@@ -46,8 +46,15 @@
 
             // 名前を変更の<p>タグをクリックしたらprojectrename-form要素を表示
             contextMenu.children[0].addEventListener('click', function (e) {
+                // input要素を取得します。ここではname属性が"project_number"の要素を取得します。
+                var inputElement = document.querySelector('input[name="newname"]');
+                var hiddenElement = document.querySelector('input[name="project_number"]');
+
+                // input要素のvalue属性にprojectNumberを設定します。
+                inputElement.value = projectTitle;
+                hiddenElement.value = projectNumber;
+
                 renameForm.style.display = 'block';
-                overlay.style.display = 'block';
                 contextMenu.style.display = 'none';
             });
 
@@ -58,6 +65,7 @@
                 }
             });
         }
+
     </script>
 </head>
 
@@ -139,12 +147,9 @@
     <div class="projectrename-form">
         <form action="/action/rename_project" method="post">
             <p class="title">プロジェクト名を変更</p>
-            <input type="text" name="newname" value="{{projectNumber}}"><br>
-            <input type="hidden" name="project_number" value="{{ projectNumber }}">
+            <input type="text" name="newname"><br>
+            <input type="hidden" name="project_number">
             <input type="submit" value="OK">
-            <script>
-
-            </script>
         </form>
     </div>
 </body>
