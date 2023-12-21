@@ -181,6 +181,10 @@
     text-align: right;
 }
 
+.project-info:hover .project-logo {
+    animation: bounce 0.3s;
+}
+
 .project-resource {
     margin-left: 12px;
     width: 300px;
@@ -228,6 +232,10 @@ label {
     /* Include padding and border in the element's total width and height */
 }
 
+.story_body {
+    display: flex;
+}
+
 .story_body .body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -237,12 +245,43 @@ label {
     color: #333;
 }
 
+.persona-area {
+    transition: all 0.3s ease;
+    margin-right: 10px;
+    background-color: #e7ffa4;
+    width: 220px;
+    height: 100%;
+    border-radius: 10px;
+    cursor: default;
+}
+
+.persona-area :hover {
+    background-color: #ffffff;
+}
+
+.persona-area h2 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.persona-area p {
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
 .story-area {
-    width: 100%;
-    height: 600px;
+    width: 1000px;
+    height: 400px;
     background-color: rgb(191, 211, 220);
     display: inline-block;
     cursor: pointer;
+    border-radius: 10px;
+}
+
+.story-area h2 {
+    text-align: center;
+    margin-top: 10px;
 }
 
 .story-button {
@@ -401,4 +440,17 @@ select {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     padding: 10px;
+}
+
+/* 弾むアニメーションを定義 */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
 }
