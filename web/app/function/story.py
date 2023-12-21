@@ -22,10 +22,17 @@ def storeis():
     # 共通の処理（GETメソッドでの処理）
     cur.execute("SELECT name FROM story WHERE projectNumber = %s", projectNumber)
     story_data = cur.fetchall()
+    # ペルソナの情報を取得
+    cur.execute("SELECT personaNumber FROM project WHERE projectNumber = %s", projectNumber)
+    tmp = cur.fetchone()
+    persona = []
+    if tmp:
+        cur.execute("SELECT * FROM persona WHERE personaNumber = %s", tmp[0])
+        persona = cur.fetchone()
     cur.close()
     conn.close()
-    return render_template("stories/create_stories.html", story_data=story_data, project=projectNumber
-    )
+    return render_template("stories/create_stories.html", story_data=story_data, project=projectNumber, persona=persona)
+    
     
 # ストーリー選択画面
 @story.route("/choice_story")
