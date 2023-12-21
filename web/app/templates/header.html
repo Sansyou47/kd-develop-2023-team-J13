@@ -35,9 +35,7 @@
         <p><a href="/task_catch">タスク更新</a></p>
         <p><a href="/graph">進捗状況表</a></p>
         {% else %}
-        {% if session['user_id'] %}
-        <p><a href="/create_project">新規プロジェクト</a></p>
-        {% endif %}
+        <p><a href="/select_project">HOME</a></p>
         {% endif %}
     </div>
 </div>
