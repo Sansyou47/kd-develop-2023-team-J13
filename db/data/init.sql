@@ -177,3 +177,18 @@ INSERT INTO achievement(userNumber, productOwner, developer, teamLeader) VALUES(
 INSERT INTO achievement(userNumber, developer, presenter, teamLeader) VALUES(5, 3, 4, 3);
 INSERT INTO achievement(userNumber, developer, presenter) VALUES(6, 3, 1);
 INSERT INTO achievement(userNumber, productOwner, developer, presenter) VALUES(7, 3, 2, 1);
+
+drop table if exists persona;
+create table persona(
+    personaNumber int auto_increment primary key,
+    name    varchar(50),
+    age     int,
+    gender  int,
+    job     varchar(50),
+    hobby   varchar(50),
+    income  int,
+    family  varchar(50),
+    note    varchar(2000)
+);
+
+INSERT INTO persona(name, age, gender, job, hobby, income, family, note) VALUES('神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
