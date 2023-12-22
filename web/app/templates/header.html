@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
+
+<div class="header">
+    <div class="header-main">
+        <div class="header-title">
+            {% if session['project'] %}
+            <div class="header-title-inproject">
+                Attache > {{session['project']}}
+            </div>
+            {% else %}
+            <div class="header-title-outproject">
+                Attache
+            </div>
+            {% endif %}
+        </div>
+        <div class="login-user">
+            {% if session['user_id'] %}
+            <a href="/mypage_edit">
+                <img class="icon" src="../static/images/{{session['user_icon']}}" alt="arrow" width="34" height="34">
+            </a>
+            <a href="/logout">ログアウト</a>
+            {% else %}
+            <a href="/login">ログイン</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="header-tab">
+        
+        {% if session['project'] %}
+        <p><a href="/select_project">HOME</a></p>
+        <p><a href="/taskboard">タスクボード</a></p>
+        <p><a href="/create_stories">ストーリー追加</a></p>
+        <p><a href="/task_catch">タスク更新</a></p>
+        <p><a href="/graph">進捗状況表</a></p>
+        {% else %}
+        <p><a href="/create_project">新規プロジェクト</a></p>
+        {% endif %}
+    </div>
+</div>

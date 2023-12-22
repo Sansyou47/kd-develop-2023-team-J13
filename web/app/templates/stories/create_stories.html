@@ -1,18 +1,63 @@
-<!DOCTYPE html>
-<html lang="ja">
+{% include 'header.html' %}
 
 <head>
-    <meta charset="UTF-8">
-    <title>ストーリーの追加</title>
+    <script>
+        window.onload = function () {
+            var elements = document.getElementsByClassName('story-button');
+            var clickArea = document.querySelector('.story-area');
+            var addtaskForm = document.querySelector('.context-add-task-menu');
+
+            clickArea.addEventListener('click', function (e) {
+                addtaskForm.style.display = 'block';
+            });
+
+            window.addEventListener('click', function (e) {
+                if (e.button == 2) { // Not right click
+                    addtaskForm.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </head>
 
-<!-- プロジェクト番号の取得  ストーリー番号、名前の入力 -->
-<body>
-    <h1>ストーリーの内容を入力</h1>
-    <form action="/action/create_stories" method="post">
-        <input type="text" name="stories" required><br>
-        <input type="submit" value="追加">
-    </form>
-</body>
+{% include 'sidebar.html' %}
+<div class="story_body">
 
-</html>
+    <body>
+        <h2>ユーザーストーリー</h2>
+        <div class="story-area">
+            {% if story_data %}
+            {% for row in story_data %}
+            <tr>
+                <form method="POST" action="/add_task">
+                    <button class="story-button">
+                        <div class="story-info">
+                            <p>{{ row[0] }}</p>
+                        </div>
+                    </button>
+                    <input type="hidden" name="storyName" value="{{ row[0] }}">
+                </form>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <p>ストーリーがありません</p>
+            {% endif %}
+        </div>
+
+        <div class="context-add-task-menu">
+            <h2>ストーリーの内容を入力</h2>
+            <form action="/create_stories" method="post">
+                <input type="text" class="textbox-001" name="stories" required><br>
+                <input type="hidden" name="project" value="$_GET['project']"><br>
+                <label for="priority">優先度</label>
+                <select name="priority" id="priority">
+                    <option value="0">高</option>
+                    <option value="1">中</option>
+                    <option value="2">低</option>
+                </select>
+                <input type="submit" class="submit-button" value="追加">
+            </form>
+        </div>
+
+    </body>
+</div>

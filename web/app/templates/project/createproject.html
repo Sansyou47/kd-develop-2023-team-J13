@@ -1,0 +1,36 @@
+{% include 'header.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>ボタン表示</title>
+    <link rel="stylesheet" href="../static/css/createproject.css">
+</head>
+
+{% include 'sidebar.html' %}
+
+<body>
+    <button id="templateButton">テンプレート</button>
+    <button id="newProjectButton">新規プロジェクト作成</button>
+
+    <script>
+        // ボタン要素を取得
+        const templateButton = document.getElementById('templateButton');
+        const newProjectButton = document.getElementById('newProjectButton');
+
+        // createproject1.htmlに遷移する関数
+        function redirectToCreateProject1() {
+            window.location.href = 'create_project1';
+        }
+
+        // createproject2.htmlに遷移する関数
+        function redirectToCreateProject2() {
+            window.location.href = 'create_project2';
+        }
+
+        // ボタンがクリックされたときのイベントを追加
+        templateButton.addEventListener('click', redirectToCreateProject2);
+        newProjectButton.addEventListener('click', redirectToCreateProject1);
+    </script>
+</body>
+
+</html>

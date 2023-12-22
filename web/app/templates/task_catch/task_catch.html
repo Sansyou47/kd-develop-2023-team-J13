@@ -1,0 +1,104 @@
+{% include 'header.html' %}
+
+{% include 'sidebar.html' %}
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>タスクステータス更新</title>
+    <link rel="stylesheet" href="../static/css/task_catch.css">
+</head>
+
+<body>
+
+    <h1>タスクステータス更新</h1>
+
+    <!-- フォーム開始 -->
+    <form action="/update_status" method="post">
+        <!-- テーブル開始 -->
+        <table>
+            <!-- ヘッダー行 -->
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>manager</th>
+                <th>start_date</th>
+                <th>finish_date</th>
+            </tr>
+            <!-- データ行 -->
+            <tr>
+                <!-- タスク名選択 -->
+                <td>
+                    <select name="name" id="name">
+                        {% for task in names %}
+                        <option value="{{ task }}">{{ task }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <!-- ステータス選択 -->
+                <td>
+                    <select name="status" id="status">
+                        <option value="2">Task</option>
+                        <option value="1">Doing</option>
+                        <option value="0">Done</option>
+                    </select>
+                </td>
+                <!-- ユーザー選択 -->
+                <td>
+                    <select name="users" id="users">
+                        {% for user in users %}
+                        <option value="{{ user }}">{{ user }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <!-- 開始日選択 -->
+                <td>
+                    <input type="date" name="start_date" id="start_date">
+                    <!-- 現在は未選択だとエラーがでる。将来的にはタスク、ステータス、ユーザーを選択した後の画面で日付を入れれるようにする -->
+                    <!-- じゃないとエラーが出る(タスクが選択されないと絞れない) -->
+                    <!-- タスクに開始日が入ってたら初期値をその値にする(現在はタスクを選んでもらってないから入れれない) -->
+                </td>
+                <!-- 終了日選択 -->
+                <td>
+                    <input type="date" name="finish_date" id="finish_date">
+                    <!-- 現在は未選択だとエラーがでる。将来的にはタスク、ステータス、ユーザーを選択した後の画面で日付を入れれるようにする -->
+                    <!-- じゃないとエラーが出る(タスクが選択されないと絞れない) -->
+                    <!-- タスクに終了日が入ってたら初期値をその値にする(現在はタスクを選んでもらってないから入れれない) -->
+                </td>
+                <script>
+                    // 現在の日付を取得
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
+
+                    today = yyyy + '-' + mm + '-' + dd;
+
+                    // 現在の日付を取得し、1日追加
+                    var tomorrow = new Date();
+                    tomorrow.setDate(tomorrow.getDate() + 1);
+                    var dd = String(tomorrow.getDate()).padStart(2, '0');
+                    var mm = String(tomorrow.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = tomorrow.getFullYear();
+
+                    tomorrow = yyyy + '-' + mm + '-' + dd;
+
+                    // 開始日と終了日の初期値を現在の日付に設定
+                    document.getElementById("start_date").value = today;
+                    document.getElementById("finish_date").value = tomorrow;
+                </script>
+            </tr>
+        </table>
+        <!-- テーブル終了 -->
+
+        <!-- 更新ボタン -->
+        <input type="submit" value="更新">
+    </form>
+    <!-- フォーム終了 -->
+
+</body>
+
+</html>

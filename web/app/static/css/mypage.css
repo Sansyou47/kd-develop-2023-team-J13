@@ -1,0 +1,73 @@
+/* ページ全体のスタイル */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+}
+
+/* タイトルのスタイル */
+h1 {
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* フォーム全体のスタイル */
+form {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* テーブル全体のスタイル */
+table {
+    width: calc(100% + 18px); /* 全体の幅を3文字分広げる */
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: -9px; /* 負のマージンを追加して中央寄せを維持 */
+}
+
+/* テーブルヘッダのスタイル */
+th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* テーブルセルのスタイル */
+td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* プルダウンメニューのスタイル */
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* 送信ボタンのスタイル */
+input[type="submit"] {
+    width: 50%;
+    padding: 8px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 名前セルのスタイル */
+td:first-child {
+    white-space: nowrap;
+}

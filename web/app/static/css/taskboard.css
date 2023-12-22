@@ -1,0 +1,40 @@
+/* taskboard.css */
+
+/* General styles */
+.row {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.subtitle {
+    font-size: 20px; /* サブタイトルの文字サイズを大きくする */
+    font-weight: bold; /* サブタイトルのテキストを太字にする */
+    margin-bottom: 15px; /* サブタイトルの下部に余白を追加 */
+}
+
+.Story p,
+.Task p,
+.Doing p,
+.Done p {
+    background-color: #c1fcff;
+    font-size: 18px; /* 各列内のテキストの文字サイズを設定 */
+    margin-bottom: 10px; /* 各列内のテキストの下部に余白を追加 */
+}
+
+.Story,
+.Task,
+.Doing,
+.Done {
+    background-color: #e3e3e3;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    margin: 0 10px;
+    flex-direction: column;
+    flex: 1;
+    /* 内容を縦方向に並べる */
+}
+
+/* Additional styles or overrides can be added based on your needs */

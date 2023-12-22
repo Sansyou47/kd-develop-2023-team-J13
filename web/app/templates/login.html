@@ -1,0 +1,20 @@
+{% include 'header.html' %}
+{% include 'sidebar.html' %}
+<link rel="stylesheet" href="../static/css/login.css">
+
+<body>
+    <form action="/login" method="POST" class="login-form">
+        <h1>ログイン</h1>
+        {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+        {% endif %}
+        <div class="input-wrapper">
+            <input type="text" id="userid" name="userid" required placeholder="ユーザーID">
+        </div>
+        <div class="input-wrapper">
+            <input type="password" id="password" name="password" required placeholder="パスワード">
+        </div>
+        <input type="submit" value="ログイン">
+        <a href="/register">新規登録はこちら</a>
+    </form>
+</body>

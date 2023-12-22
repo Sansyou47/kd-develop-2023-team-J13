@@ -1,0 +1,37 @@
+/* styles.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+button {
+    width: 200px;
+    height: 200px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    /* ボタンの間に余白を追加 */
+}
+
+button#templateButton {
+    background-color: #3498db;
+    color: #fff;
+}
+
+button#newProjectButton {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}

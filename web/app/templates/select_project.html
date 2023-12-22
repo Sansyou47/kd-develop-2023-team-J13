@@ -1,0 +1,163 @@
+{% include 'header.html' %}
+
+<head>
+    <!-- 選択したプロジェクト名をGetメソッドで送信 -->
+    <script>
+        // プロジェクト名をセッションに保存する関数
+        function redirectToPage(project_number) {
+            if (project_number == -1) {
+                window.location.href = "/create_project";
+            }
+            else {
+                window.location.href = "/set_session?project_number=" + encodeURIComponent(project_number);
+            }
+        }
+
+        // 右クリックメニューを表示する関数
+        window.onload = function () {
+            var elements = document.getElementsByClassName('project-info');
+            var contextMenu = document.querySelector('.contextmenu');
+            var renameForm = document.querySelector('.projectrename-form');
+
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].addEventListener('contextmenu', function (e) {
+                    e.preventDefault();
+
+                    // メニューをマウスポインタの座標に表示
+                    contextMenu.style.top = e.clientY + 'px';
+                    contextMenu.style.left = e.clientX + 'px';
+                    contextMenu.style.display = 'block';
+
+                    // マウスオーバーしている要素内のinput hidden要素の内容を取得
+                    var projectArea = e.target.closest('.project-click-area');
+                    var projectTitle = projectArea.querySelector('.project-title').textContent;
+                    var projectNumber = projectArea.querySelector('input[type="hidden"]').value;
+
+                    // 他の要素から使用できるようにする
+                    window.projectTitle = projectTitle;
+                    window.projectNumber = projectNumber;
+
+                    console.log(projectTitle);
+                    console.log(projectNumber);
+
+                    return false;
+                });
+            }
+
+            // 名前を変更の<p>タグをクリックしたらprojectrename-form要素を表示
+            contextMenu.children[0].addEventListener('click', function (e) {
+                // input要素を取得します。ここではname属性が"project_number"の要素を取得します。
+                var inputElement = document.querySelector('input[name="newname"]');
+                var hiddenElement = document.querySelector('input[name="project_number"]');
+
+                // input要素のvalue属性にprojectNumberを設定します。
+                inputElement.value = projectTitle;
+                hiddenElement.value = projectNumber;
+
+                renameForm.style.display = 'block';
+                contextMenu.style.display = 'none';
+            });
+
+            // 他の場所をクリックしたときにメニューを非表示にする
+            window.addEventListener('click', function (e) {
+                if (e.button !== 2) { // Not right click
+                    contextMenu.style.display = 'none';
+                }
+            });
+        }
+
+    </script>
+</head>
+
+{% include 'sidebar.html' %}
+
+<body>
+
+    <h1>プロジェクト選択</h1>
+    <!-- <form action="/action/select_project" method="post"> -->
+    {% for row in data %}
+    <div class="project-info">
+        <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
+        <div class="project-click-area" onclick="redirectToPage('{{row[0]}}')">
+            <div class="project-title">{{ row[1] }}</div>
+            <input type="hidden" name="id" value="{{ row[0] }}">
+            <p>最終更新日：{{ row[4].strftime("%Y-%m-%d") }}<br>
+                作成日：{{ row[3].strftime("%Y-%m-%d") }}<br>
+                リリース予定日：{{ row[5].strftime("%Y-%m-%d") }}<br>
+                所有者：{{ row[2] }}</p>
+            <div class="project-logo">
+                {% if row[8] is none %}
+                <img src="../static/images/default.svg" alt="arrow" width="70" height="70">
+                {% else %}
+                <img src="../static/images/{{row[8]}}" alt="arrow" width="70" height="70">
+                {% endif %}
+            </div>
+        </div>
+        <!-- 各リソースへのURLをロゴで表示する -->
+        <div class="project-resource">
+            <!-- GitHubのリポジトリが登録されている場合のみ処理 -->
+            {% if row[6] is not none %}
+            <!-- GitHubリポジトリのURLをロゴで表示する -->
+            <a href="{{ row[6] }}" target="_blank">
+                <!-- ロゴデータの読み込み -->
+                <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
+            </a>
+            {% endif %}
+            <!-- GoogleDriveが登録されている場合のみ処理 -->
+            {% if row[7] is not none %}
+            <!-- GoogleDriveのURLをロゴで表示する -->
+            <a href="{{ row[7] }}" target="_blank">
+                <!-- ロゴデータの読み込み -->
+                <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
+                    height="25">
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="new-project">
+        <div class="project-click-area" onclick="redirectToPage(-1)">
+            <div class="project-title">新規プロジェクト</div>
+            <p>新しいプロジェクトを立ち上げます。</p>
+            <div class="project-logo">
+                <img src="../static/images/walk.svg" alt="arrow" width="70" height="70">
+            </div>
+        </div>
+    </div>
+
+    <div class="contextmenu">
+        <p class="rename">
+            <img src="../static/images/pen.svg" alt="rename" width="14" height="14">
+            <a href="/"></a> 名前を変更
+        </p>
+        <p>
+            <img src="../static/images/share.svg" alt="share" width="14" height="14">
+            プロジェクトに招待する
+        </p>
+        <p class="properties" onclick="redirectToPage(projectNumber)">
+            <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
+            プロジェクト詳細
+        </p>
+        <p class="delete">
+            <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
+            プロジェクトを削除
+        </p>
+    </div>
+
+    <div class="projectrename-form">
+        <form action="/action/rename_project" method="post">
+            <p class="title">プロジェクト名を変更</p>
+            <input type="text" name="newname"><br>
+            <input type="hidden" name="project_number">
+            <button name="cancel" tabindex="0">
+                キャンセル
+            </button>
+            <button name="ok" class="h-De-Vb h-De-Y" tabindex="0" formmethod="post">
+                OK
+            </button>
+        </form>
+    </div>
+</body>
+</div>
+
+</html>

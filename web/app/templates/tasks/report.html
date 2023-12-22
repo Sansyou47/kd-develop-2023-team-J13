@@ -1,0 +1,16 @@
+{% include 'header.html' %}
+
+{% include 'sidebar.html' %}
+
+<body>
+    <h1>コメント入力</h1>
+    <h3>{{ taskName }}</h3>
+
+    <form method="POST" action="/action/report">
+        <textarea name="report" cols="50" rows="4"></textarea><br>
+        <input type="hidden" name="taskName" value="{{ taskName }}">
+        <input type="submit" value="送信">
+    </form>
+</body>
+
+</html>

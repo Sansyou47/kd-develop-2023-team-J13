@@ -11,6 +11,9 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: ${default_timezone}
+      SECRET_KEY: ${SECRET_KEY}
+      SEND_MAIL_ADDRESS: ${SEND_MAIL_ADDRESS}
+      SEND_MAIL_PASSWORD: ${SEND_MAIL_PASSWORD}
     volumes:
       - ./web/app:/app
     depends_on:
@@ -29,4 +32,4 @@ services:
     hostname: mysql
     volumes:
       - ./db/data:/work
-      - ./db/data/sql:/docker-entrypoint-initdb.d/
+      - ./db/data:/docker-entrypoint-initdb.d/

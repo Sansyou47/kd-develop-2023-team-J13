@@ -1,0 +1,29 @@
+{% include 'header.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>タスク追加フォーム</title>
+    <link rel="stylesheet" href="../static/css/add_task.css">
+</head>
+
+{% include 'sidebar.html' %}
+
+<body>
+    <h1>タスク追加フォーム</h1>
+
+    <form action="/action/add_task" method="post">
+        <h3>ストーリー名：{{ storyName }}</h3>
+        <h4>プロジェクト名：{{ projectName }}</h4>
+        <label for="task">タスク名:</label>
+        <input type="text" name="taskName" required><br>
+        <label>スプリント <select name="sprint">
+                {% for i in range(1,11) %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select></label>
+        <input type="hidden" name="storyName" value="{{ storyName }}">
+        <div class="submit"><input type="submit" value="登録"></div>
+    </form>
+</body>
+
+</html>
