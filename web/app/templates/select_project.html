@@ -1,4 +1,6 @@
-{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
 
 <head>
     <!-- 選択したプロジェクト名をGetメソッドで送信 -->
@@ -69,93 +71,96 @@
     </script>
 </head>
 
-{% include 'sidebar.html' %}
-
 <body>
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
 
-    <h1>プロジェクト選択</h1>
-    <!-- <form action="/action/select_project" method="post"> -->
-    {% for row in data %}
-    <div class="project-info">
-        <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
-        <div class="project-click-area" onclick="redirectToPage('{{row[0]}}')">
-            <div class="project-title">{{ row[1] }}</div>
-            <input type="hidden" name="id" value="{{ row[0] }}">
-            <p>最終更新日：{{ row[4].strftime("%Y-%m-%d") }}<br>
-                作成日：{{ row[3].strftime("%Y-%m-%d") }}<br>
-                リリース予定日：{{ row[5].strftime("%Y-%m-%d") }}<br>
-                所有者：{{ row[2] }}</p>
-            <div class="project-logo">
-                {% if row[8] is none %}
-                <img src="../static/images/default.svg" alt="arrow" width="70" height="70">
-                {% else %}
-                <img src="../static/images/{{row[8]}}" alt="arrow" width="70" height="70">
+        {% if data %}
+        {% for row in data %}
+        <div class="project-info">
+            <h1>プロジェクト選択</h1>
+            <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
+            <div class="project-click-area" onclick="redirectToPage('{{row[0]}}')">
+                <div class="project-title">{{ row[1] }}</div>
+                <input type="hidden" name="id" value="{{ row[0] }}">
+                <p>最終更新日：{{ row[4].strftime("%Y-%m-%d") }}<br>
+                    作成日：{{ row[3].strftime("%Y-%m-%d") }}<br>
+                    リリース予定日：{{ row[5].strftime("%Y-%m-%d") }}<br>
+                    所有者：{{ row[2] }}</p>
+                <div class="project-logo">
+                    {% if row[8] is none %}
+                    <img src="../static/images/default.svg" alt="arrow" width="70" height="70">
+                    {% else %}
+                    <img src="../static/images/{{row[8]}}" alt="arrow" width="70" height="70">
+                    {% endif %}
+                </div>
+            </div>
+            <!-- 各リソースへのURLをロゴで表示する -->
+            <div class="project-resource">
+                <!-- GitHubのリポジトリが登録されている場合のみ処理 -->
+                {% if row[6] is not none %}
+                <!-- GitHubリポジトリのURLをロゴで表示する -->
+                <a href="{{ row[6] }}" target="_blank">
+                    <!-- ロゴデータの読み込み -->
+                    <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
+                </a>
+                {% endif %}
+                <!-- GoogleDriveが登録されている場合のみ処理 -->
+                {% if row[7] is not none %}
+                <!-- GoogleDriveのURLをロゴで表示する -->
+                <a href="{{ row[7] }}" target="_blank">
+                    <!-- ロゴデータの読み込み -->
+                    <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
+                        height="25">
+                </a>
                 {% endif %}
             </div>
         </div>
-        <!-- 各リソースへのURLをロゴで表示する -->
-        <div class="project-resource">
-            <!-- GitHubのリポジトリが登録されている場合のみ処理 -->
-            {% if row[6] is not none %}
-            <!-- GitHubリポジトリのURLをロゴで表示する -->
-            <a href="{{ row[6] }}" target="_blank">
-                <!-- ロゴデータの読み込み -->
-                <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
-            </a>
-            {% endif %}
-            <!-- GoogleDriveが登録されている場合のみ処理 -->
-            {% if row[7] is not none %}
-            <!-- GoogleDriveのURLをロゴで表示する -->
-            <a href="{{ row[7] }}" target="_blank">
-                <!-- ロゴデータの読み込み -->
-                <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
-                    height="25">
-            </a>
-            {% endif %}
-        </div>
-    </div>
-    {% endfor %}
-    <div class="new-project">
-        <div class="project-click-area" onclick="redirectToPage(-1)">
-            <div class="project-title">新規プロジェクト</div>
-            <p>新しいプロジェクトを立ち上げます。</p>
-            <div class="project-logo">
-                <img src="../static/images/walk.svg" alt="arrow" width="70" height="70">
+        {% endfor %}
+        {% endif %}
+        <div class="new-project">
+            <div class="project-click-area" onclick="redirectToPage(-1)">
+                <div class="project-title">新規プロジェクト</div>
+                <p>新しいプロジェクトを立ち上げます。</p>
+                <div class="project-logo">
+                    <img src="../static/images/walk.svg" alt="arrow" width="70" height="70">
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="contextmenu">
-        <p class="rename">
-            <img src="../static/images/pen.svg" alt="rename" width="14" height="14">
-            <a href="/"></a> 名前を変更
-        </p>
-        <p>
-            <img src="../static/images/share.svg" alt="share" width="14" height="14">
-            プロジェクトに招待する
-        </p>
-        <p class="properties" onclick="redirectToPage(projectNumber)">
-            <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
-            プロジェクト詳細
-        </p>
-        <p class="delete">
-            <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
-            プロジェクトを削除
-        </p>
-    </div>
+        <div class="contextmenu">
+            <p class="rename">
+                <img src="../static/images/pen.svg" alt="rename" width="14" height="14">
+                <a href="/"></a> 名前を変更
+            </p>
+            <p>
+                <img src="../static/images/share.svg" alt="share" width="14" height="14">
+                プロジェクトに招待する
+            </p>
+            <p class="properties" onclick="redirectToPage(projectNumber)">
+                <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
+                プロジェクト詳細
+            </p>
+            <p class="delete">
+                <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
+                プロジェクトを削除
+            </p>
+        </div>
 
-    <div class="projectrename-form">
-        <form action="/action/rename_project" method="post">
-            <p class="title">プロジェクト名を変更</p>
-            <input type="text" name="newname"><br>
-            <input type="hidden" name="project_number">
-            <button name="cancel" tabindex="0">
-                キャンセル
-            </button>
-            <button name="ok" class="h-De-Vb h-De-Y" tabindex="0" formmethod="post">
-                OK
-            </button>
-        </form>
+        <div class="projectrename-form">
+            <form action="/action/rename_project" method="post">
+                <p class="title">プロジェクト名を変更</p>
+                <input type="text" name="newname"><br>
+                <input type="hidden" name="project_number">
+                <button name="cancel" tabindex="0">
+                    キャンセル
+                </button>
+                <button name="ok" class="h-De-Vb h-De-Y" tabindex="0" formmethod="post">
+                    OK
+                </button>
+            </form>
+        </div>
     </div>
 </body>
 </div>

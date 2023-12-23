@@ -1,4 +1,6 @@
-{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
 
 <head>
     <script>
@@ -9,10 +11,11 @@
 
             clickArea.addEventListener('click', function (e) {
                 addtaskForm.style.display = 'block';
+                e.stopPropagation(); // 追加
             });
 
             window.addEventListener('click', function (e) {
-                if (e.button == 2) { // Not right click
+                if (e.target !== addtaskForm && !addtaskForm.contains(e.target)) {
                     addtaskForm.style.display = 'none';
                 }
             });
@@ -20,34 +23,37 @@
     </script>
 </head>
 
-{% include 'sidebar.html' %}
-<div class="story_body">
-
-    <body>
+<body>
+    {% include 'header.html' %}
+    {% include 'sidebar.html' %}
+    <div class="story">
         <div class="persona-area">
             {% if persona %}
             <h2>ペルソナ</h2>
-            <p>名前：{{persona[1]}}</p>
-            <p>年齢：{{persona[2]}}</p>
-            <p>性別：{{persona[3]}}</p>
-            <p>職業：{{persona[4]}}</p>
-            <p>趣味：{{persona[5]}}</p>
-            <p>年収：{{persona[6]}}</p>
-            <p>家族構成：{{persona[7]}}</p>
-            <p>その他：<br>{{persona[8]}}</p>
+            <img class="persona-img" src="../../static/images/human.svg" width="50px" height="50px">
+            <div class="persona-info">
+                <p class="name">名前：{{persona[1]}}</p>
+                <p class="age">年齢：{{persona[2]}}</p>
+                <p class="gender">性別：{{persona[3]}}</p>
+                <p class="job">職業：{{persona[4]}}</p>
+                <p class="hobby">趣味：{{persona[5]}}</p>
+                <p class="income">年収：{{persona[6]}}</p>
+                <p class="family">家族構成：{{persona[7]}}</p>
+                <p class="note">その他：<br>{{persona[8]}}</p>
+            </div>
             {% endif %}
         </div>
-        <div class="story-area">
-            <h2>ユーザーストーリー</h2>
+        <div class="story-body">
             <div class="story-area">
+                <h2>ユーザーストーリー</h2>
                 {% if story_data %}
                 {% for row in story_data %}
                 <tr>
                     <form method="POST" action="/add_task">
                         <button class="story-button">
-                            <div class="story-info">
-                                <p>{{ row[0] }}</p>
-                            </div>
+                            <!-- <div class="story-info"> -->
+                            <p>{{ row[0] }}</p>
+                            <!-- </div> -->
                         </button>
                         <input type="hidden" name="storyName" value="{{ row[0] }}">
                     </form>
@@ -57,21 +63,28 @@
                 <p>ストーリーがありません</p>
                 {% endif %}
             </div>
-
-            <div class="context-add-task-menu">
-                <h2>ストーリーの内容を入力</h2>
-                <form action="/create_stories" method="post">
-                    <input type="text" class="textbox-001" name="stories" required><br>
-                    <input type="hidden" name="project" value="$_GET['project']"><br>
-                    <label for="priority">優先度</label>
-                    <select name="priority" id="priority">
-                        <option value="0">高</option>
-                        <option value="1">中</option>
-                        <option value="2">低</option>
-                    </select>
-                    <input type="submit" class="submit-button" value="追加">
-                </form>
+            <div class="task-area">
+                <h2>タスク</h2>
+                <button class="task-button">
+                    <p>タスク名</p>
+                </button>
             </div>
         </div>
-    </body>
-</div>
+    </div>
+    </div>
+
+    <div class="context-add-task-menu">
+        <h2>ストーリーの内容を入力</h2>
+        <form action="/create_stories" method="post">
+            <input type="text" class="textbox-001" name="stories" required><br>
+            <input type="hidden" name="project" value="$_GET['project']"><br>
+            <label for="priority">優先度</label>
+            <select name="priority" id="priority">
+                <option value="0">高</option>
+                <option value="1">中</option>
+                <option value="2">低</option>
+            </select>
+            <input type="submit" class="submit-button" value="追加">
+        </form>
+    </div>
+</body>

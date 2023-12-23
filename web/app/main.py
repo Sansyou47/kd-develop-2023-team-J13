@@ -118,9 +118,8 @@ def auth():
 
 
 @app.route("/")
-@login_required
 def index():
-    return "ok"
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
