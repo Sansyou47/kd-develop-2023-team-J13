@@ -27,6 +27,7 @@ def my_route():
     session.pop('project_googleDrive', None)
     session.pop('project', None)
     session.pop('project_number', None)
+    session.pop('backlog', None)
     return render_template('/select_project.html', data=data)
     
 @select_project.route('/action/rename_project', methods=['POST'])
