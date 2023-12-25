@@ -22,6 +22,9 @@ def storeis():
     # 共通の処理（GETメソッドでの処理）
     cur.execute("SELECT name FROM story WHERE projectNumber = %s", projectNumber)
     story_data = cur.fetchall()
+    if story_data:
+        session.pop("backlog", None)
+        session["backlog"] = story_data
     # ペルソナの情報を取得
     cur.execute("SELECT personaNumber FROM project WHERE projectNumber = %s", projectNumber)
     tmp = cur.fetchone()
@@ -31,7 +34,7 @@ def storeis():
         persona = cur.fetchone()
     cur.close()
     conn.close()
-    return render_template("stories/create_stories.html", story_data=story_data, project=projectNumber, persona=persona)
+    return render_template("stories/create_stories.html", project=projectNumber, persona=persona)
     
     
 # ストーリー選択画面
