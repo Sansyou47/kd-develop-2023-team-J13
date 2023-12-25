@@ -47,8 +47,8 @@
             <div class="story-body">
                 <div class="story-area">
                     <h2>ユーザーストーリー</h2>
-                    {% if story_data %}
-                    {% for row in story_data %}
+                    {% if session['backlog'] %}
+                    {% for row in session['backlog'] %}
                     <tr>
                         <form method="POST" action="/add_task">
                             <button class="story-button">
