@@ -1,13 +1,27 @@
-.sidebar {
+html {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    display: block;
     margin: 0;
     padding: 0;
+}
+
+.sidebar {
+    margin-right: 10px;
     height: 100%;
     width: 280px;
-    background-color: #f8f9fa;
+    background-color: #5caeff;
+    flex-shrink: 0;
 }
 
 .side-head {
     text-align: center;
+    margin-top: 20px;
 }
 
 .side-userinfo-body {
@@ -69,7 +83,9 @@
 }
 
 .contents {
-    display: inline-flex;
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 80px);
 }
 
 .login-user {
@@ -105,9 +121,14 @@
 
 .main-content {
     display: flex;
+    width: 100%;
+    height: 100%;
 }
 
-
+.project-list-area {
+    width: 100%;
+    height: 100%;
+}
 
 .new-project {
     /* マウスオーバー時の背景色変化を指定 */
@@ -217,20 +238,6 @@
     margin-bottom: 20px;
     font-size: 16px;
 }
-
-
-/* <--- これより下はcreate_story.cssの内容をコピペ ---> */
-/* body,
-h2,
-p,
-div,
-select,
-label {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* Include padding and border in the element's total width and height
-} */
 
 .story {
     display: inline-flex;
@@ -468,14 +475,6 @@ select {
     }
 }
 
-body {
-    font-family: Arial, sans-serif;
-    width: 100%;
-    background-color: rgb(47, 47, 47);
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-}
 
 .test1 {
     background-color: rgb(255, 0, 0);
