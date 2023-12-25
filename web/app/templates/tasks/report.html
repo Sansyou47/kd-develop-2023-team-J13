@@ -1,16 +1,20 @@
-{% include 'header.html' %}
-
-{% include 'sidebar.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
 
 <body>
-    <h1>コメント入力</h1>
-    <h3>{{ taskName }}</h3>
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
+        <h1>コメント入力</h1>
+        <h3>{{ taskName }}</h3>
 
-    <form method="POST" action="/action/report">
-        <textarea name="report" cols="50" rows="4"></textarea><br>
-        <input type="hidden" name="taskName" value="{{ taskName }}">
-        <input type="submit" value="送信">
-    </form>
+        <form method="POST" action="/action/report">
+            <textarea name="report" cols="50" rows="4"></textarea><br>
+            <input type="hidden" name="taskName" value="{{ taskName }}">
+            <input type="submit" value="送信">
+        </form>
+    </div>
 </body>
 
 </html>

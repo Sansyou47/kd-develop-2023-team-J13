@@ -6,14 +6,14 @@ from email.mime.text import MIMEText
 from email.utils import formatdate
 import os
 
-to_email = Blueprint("to_email", __name__)
+send_email = Blueprint("send_email", __name__)
 
 mysql = None
 
 sendAddress = os.getenv("SEND_MAIL_ADDRESS")
 password = os.getenv("SEND_MAIL_PASSWORD")
 
-def send_email(to, subject, body):
+def create_email(to, subject, body):
     # SMTPサーバに接続
     smtpobj = smtplib.SMTP('smtp.gmail.com', 587)
     smtpobj.starttls()
@@ -32,12 +32,12 @@ def send_email(to, subject, body):
     
     return
 
-@to_email.route('/project/addusers')
+@send_email.route('/project/addusers')
 @login_required
 def addusers():
     return render_template('/project/addusers.html')
 
-@to_email.route('/action/project/addusers', methods=['POST'])
+@send_email.route('/action/project/addusers', methods=['POST'])
 @login_required
 def acaddusers():
     conn = mysql.get_db()
@@ -60,7 +60,7 @@ def acaddusers():
         conn.commit()
         subject = project + 'プロジェクトへの招待が来ています'
         body = 'あなたへの招待が来ています。' + '\n' + '以下のリンクからプロジェクトに参加してください。' + '\n' + 'http://localhost:9047/'
-        send_email(email, subject, body)
+        create_email(email, subject, body)
         
         return redirect('/select_project')
     else:
