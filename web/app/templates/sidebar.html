@@ -21,12 +21,16 @@
     </div>
     <div class="product-backlog">
         <p class="caption">プロダクトバックログ</p>
-        {% if story_data %}
-        {% for row in story_data %}
+        {% if session['backlog'] %}
+        {% for row in session['backlog'] %}
         <p class="caption-content">
             {{ row[0] }}<br>
         </p>
         {% endfor %}
+        {% else %}
+        <p class="caption-content">
+            プロダクトバックログがありません
+        </p>
         {% endif %}
     </div>
     <div class="sprint-backlog">
