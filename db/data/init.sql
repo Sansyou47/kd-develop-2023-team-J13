@@ -180,8 +180,7 @@ INSERT INTO achievement(userNumber, productOwner, developer, presenter) VALUES(7
 
 drop table if exists persona;
 create table persona(
-    personaNumber int auto_increment primary key,
-    projectNumber int,
+    projectNumber int primary key,
     name    varchar(50),
     age     int,
     gender  int,
@@ -192,4 +191,4 @@ create table persona(
     note    varchar(2000)
 );
 
-INSERT INTO persona(name, age, gender, job, hobby, income, family, note) VALUES('神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
+INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
