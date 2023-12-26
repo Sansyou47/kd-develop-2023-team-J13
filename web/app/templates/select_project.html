@@ -75,9 +75,9 @@
     {% include 'header.html' %}
     <div class="contents">
         {% include 'sidebar.html' %}
-        {% if data %}
         <div class="project-list-area">
             <h1>プロジェクト選択</h1>
+            {% if data %}
             {% for row in data %}
             <div class="project-info">
                 <!-- ここはJavaScriptで記述。"project-info"クラスをクリックした処理 -->
@@ -118,6 +118,7 @@
                 </div>
             </div>
             {% endfor %}
+            {% endif %}
             <div class="new-project">
                 <div class="project-click-area" onclick="redirectToPage(-1)">
                     <div class="project-title">新規プロジェクト</div>
@@ -128,8 +129,6 @@
                 </div>
             </div>
         </div>
-        {% endif %}
-
 
         <div class="contextmenu">
             <p class="rename">
