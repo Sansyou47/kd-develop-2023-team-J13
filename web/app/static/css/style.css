@@ -169,7 +169,6 @@ body {
 
 .project-list-area {
     width: 100%;
-    height: 100%;
 }
 
 .new-project {
@@ -302,6 +301,7 @@ body {
     border-radius: 50%;
     background-color: rgb(255, 139, 97);
     text-align: center;
+    margin-top: 10px;
 }
 
 .persona-area h2 {
@@ -380,7 +380,7 @@ body {
     width: 100%;
     height: 400px;
     background-color: rgb(255, 215, 114);
-    cursor: pointer;
+    cursor: default;
     border-radius: 10px;
 }
 
