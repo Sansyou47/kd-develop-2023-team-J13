@@ -16,7 +16,7 @@
             });
 
             window.addEventListener('click', function (e) {
-                if (e.target !== addtaskForm && !addtaskForm.contains(e.target)) {
+                if (e.target !== addstoryForm && !addstoryForm.contains(e.target)) {
                     addstoryForm.style.display = 'none';
                 }
             });
@@ -30,9 +30,8 @@
         {% include 'sidebar.html' %}
         <div class="story">
             <div class="persona-area">
-                <h2>ペルソナ</h2>
                 {% if persona %}
-                <img class="persona-img" src="../../static/images/human.svg" width="50px" height="50px">
+                <img class="persona-img" src="../../static/images/human.svg" width="80px" height="80px">
                 <div class="persona-info">
                     <p class="name">名前：{{persona[1]}}</p>
                     <p class="age">年齢：{{persona[2]}}</p>
