@@ -48,3 +48,31 @@ def choice_story():
     cur.close()
 
     return render_template("/tasks/choice_story.html", storyData=storyData)
+
+@story.route('/action/register_persona', methods=['POST'])
+@login_required
+def register_persona():
+    persona = []
+    if request.method == "POST":
+        persona.append(session.get("project_number"))
+        persona.append(request.form.get('name'))
+        persona.append(int(request.form.get('age')))
+        gender = request.form.get('gender')
+        if gender is not None:
+            if gender == 'men':
+                persona.append(0)
+            else:
+                persona.append(1)
+        persona.append(request.form.get('job'))
+        persona.append(request.form.get('hobby'))
+        persona.append(int(request.form.get('income')))
+        persona.append(request.form.get('family'))
+        persona.append(request.form.get('note'))
+        conn = mysql.get_db()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", (persona[0], persona[1], persona[2], persona[3], persona[4], persona[5], persona[6], persona[7], persona[8]))
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+    return redirect("/create_stories", persona=persona)
