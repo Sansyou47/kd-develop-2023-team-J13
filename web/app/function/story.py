@@ -26,12 +26,8 @@ def storeis():
         session.pop("backlog", None)
         session["backlog"] = story_data
     # ペルソナの情報を取得
-    cur.execute("SELECT personaNumber FROM project WHERE projectNumber = %s", projectNumber)
-    tmp = cur.fetchone()
-    persona = []
-    if tmp:
-        cur.execute("SELECT * FROM persona WHERE personaNumber = %s", tmp[0])
-        persona = cur.fetchone()
+    cur.execute("SELECT * FROM persona WHERE personaNumber = %s", (session.get("persona")))
+    persona = cur.fetchone()
     cur.close()
     conn.close()
     return render_template("stories/create_stories.html", project=projectNumber, persona=persona)
