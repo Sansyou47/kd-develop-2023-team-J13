@@ -26,12 +26,12 @@ def storeis():
         session.pop("backlog", None)
         session["backlog"] = story_data
     # ペルソナの情報を取得
-    cur.execute("SELECT * FROM persona WHERE personaNumber = %s", (session.get("persona")))
+    cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
     persona = cur.fetchone()
+    session["persona"] = persona
     cur.close()
     conn.close()
     return render_template("stories/create_stories.html", project=projectNumber, persona=persona)
-    
     
 # ストーリー選択画面
 @story.route("/choice_story")
