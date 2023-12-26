@@ -42,7 +42,7 @@ def action_create_project1():
 
         # 直前のINSERT操作で生成されたIDを取得
         projectNumber = cur.lastrowid
-
+        
         cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (projectTitle, userId, projectNumber))
         conn.commit()
 
@@ -53,6 +53,8 @@ def action_create_project1():
     session["project"] = projectTitle
     session["project_number"] = projectNumber
     session['project_icon'] = "default.svg"
+    # ペルソナはデフォルトで未定義にする
+    session['persona_number'] = None
     return redirect("/create_stories")
 
 # テンプレートから作成する
