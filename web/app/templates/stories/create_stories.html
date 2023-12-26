@@ -7,16 +7,36 @@
         window.onload = function () {
             var elements = document.getElementsByClassName('story-button');
             var clickArea = document.querySelector('.story-area');
-            var addtaskForm = document.querySelector('.context-add-task-menu');
+            var personaArea = document.querySelector('.persona-area');
+            var addstoryForm = document.querySelector('.context-add-story-menu');
+            var addpersonaForm = document.querySelector('.context-add-persona-menu');
+
+            var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
 
             clickArea.addEventListener('click', function (e) {
-                addtaskForm.style.display = 'block';
-                e.stopPropagation(); // 追加
+                if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
+                    addstoryForm.style.display = 'block';
+                    isFormVisible = true; // フォームが表示されていることを示す
+                    e.stopPropagation();
+                }
+            });
+
+            personaArea.addEventListener('click', function (e) {
+                if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
+                    addpersonaForm.style.display = 'block';
+                    isFormVisible = true; // フォームが表示されていることを示す
+                    e.stopPropagation();
+                }
             });
 
             window.addEventListener('click', function (e) {
-                if (e.target !== addtaskForm && !addtaskForm.contains(e.target)) {
-                    addtaskForm.style.display = 'none';
+                if (e.target !== addstoryForm && !addstoryForm.contains(e.target)) {
+                    addstoryForm.style.display = 'none';
+                    isFormVisible = false; // フォームが非表示になったことを示す
+                }
+                if (e.target !== addpersonaForm && !addpersonaForm.contains(e.target)) {
+                    addpersonaForm.style.display = 'none';
+                    isFormVisible = false; // フォームが非表示になったことを示す
                 }
             });
         }
@@ -30,8 +50,7 @@
         <div class="story">
             <div class="persona-area">
                 {% if persona %}
-                <h2>ペルソナ</h2>
-                <img class="persona-img" src="../../static/images/human.svg" width="50px" height="50px">
+                <img class="persona-img" src="../../static/images/human.svg" width="80px" height="80px">
                 <div class="persona-info">
                     <p class="name">名前：{{persona[1]}}</p>
                     <p class="age">年齢：{{persona[2]}}</p>
@@ -42,6 +61,8 @@
                     <p class="family">家族構成：{{persona[7]}}</p>
                     <p class="note">その他：<br>{{persona[8]}}</p>
                 </div>
+                {% else %}
+                <p>ペルソナを定義しましょう。</p>
                 {% endif %}
             </div>
             <div class="story-body">
@@ -74,8 +95,27 @@
         </div>
     </div>
 
-    <div class="context-add-task-menu">
-        <h2>ストーリーの内容を入力</h2>
+    <div class="contextmenu">
+        <p class="rename">
+            <img src="../static/images/pen.svg" alt="rename" width="14" height="14">
+            <a href="/"></a> ストーリーを変更
+        </p>
+        <p>
+            <img src="../static/images/share.svg" alt="share" width="14" height="14">
+            このストーリーにタスクを追加
+        </p>
+        <p class="properties" onclick="redirectToPage(projectNumber)">
+            <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
+            タスクにメッセージを追加
+        </p>
+        <p class="delete">
+            <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
+            タスクを削除
+        </p>
+    </div>
+
+    <div class="context-add-story-menu">
+        <h2>新しくストーリーを追加</h2>
         <form action="/create_stories" method="post">
             <input type="text" class="textbox-001" name="stories" required><br>
             <input type="hidden" name="project" value="$_GET['project']"><br>
@@ -86,6 +126,46 @@
                 <option value="2">低</option>
             </select>
             <input type="submit" class="submit-button" value="追加">
+        </form>
+    </div>
+
+    <div class="context-add-task-menu">
+        <h1>タスクを追加</h1>
+        <form action="/action/add_task" method="post">
+            <h3>対象ストーリー：{{ storyName }}</h3>
+            <label for="task">タスク名:</label>
+            <input type="text" name="taskName" required><br>
+            <label>スプリント <select name="sprint">
+                    {% for i in range(1,11) %}
+                    <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select></label>
+            <input type="hidden" name="storyName" value="{{ storyName }}">
+            <div class="submit"><input type="submit" value="登録"></div>
+        </form>
+    </div>
+
+    <div class="context-add-persona-menu">
+        <h1>ペルソナを定義</h1>
+        <form action="/action/register_persona" method="post">
+            <label for="name">名前</label>
+            <input type="text" name="name" placeholder="神戸太郎" required><br>
+            <label for="age">年齢</label>
+            <input type="text" name="age" placeholder="21" required><br>
+            <label for="gender">性別</label>
+            <input type="checkbox" name="gender" value="men">男性
+            <input type="checkbox" name="gender" value="women">女性<br>
+            <label for="job">職業</label>
+            <input type="text" name="job" placeholder="学生" required><br>
+            <label for="hobby">趣味</label>
+            <input type="text" name="hobby" placeholder="キャンプ" required><br>
+            <label for="income">年収（万円）</label>
+            <input type="text" name="income" placeholder="20" required><br>
+            <label for="family">家族構成</label>
+            <input type="text" name="family" placeholder="父、母" required><br>
+            <label for="note">その他</label>
+            <textarea name="note" placeholder="備考など記述"></textarea><br>
+            <input type="submit" value="登録">
         </form>
     </div>
 </body>

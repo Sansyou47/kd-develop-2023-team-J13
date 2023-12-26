@@ -15,13 +15,29 @@ body {
     margin-right: 10px;
     height: 100%;
     width: 280px;
-    background-color: #5caeff;
+    background-color: #cdcdcd;
     flex-shrink: 0;
 }
 
 .side-head {
     text-align: center;
     margin-top: 20px;
+}
+
+.side-head-source {
+    display: flex;
+    text-align: center;
+}
+
+.project-title {
+    font-size: 20px;
+    margin-bottom: 0px;
+    margin-left: 2px;
+    display: block;
+}
+
+.project-title a {
+    display: flex;
 }
 
 .side-userinfo-body {
@@ -52,14 +68,40 @@ body {
 
 .product-backlog {
     margin-top: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .product-backlog .caption {
     border-bottom: solid 1px #000000;
+    margin-bottom: 3px;
+    font-size: 16px;
 }
 
-.sprint-backlog .caption {
+.product-backlog .caption-content {
+    font-size: 14px;
+    margin-left: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.task {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.task .caption {
     border-bottom: solid 1px #000000;
+    margin-bottom: 3px;
+    font-size: 16px;
+}
+
+.task .caption-content {
+    font-size: 14px;
+    margin-left: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .task .caption {
@@ -127,7 +169,6 @@ body {
 
 .project-list-area {
     width: 100%;
-    height: 100%;
 }
 
 .new-project {
@@ -177,12 +218,6 @@ body {
     white-space: normal;
     /* 画面サイズに応じて自動で折り返す */
 
-}
-
-.project-title {
-    font-size: 20px;
-    margin-bottom: 0px;
-    margin-left: 2px;
 }
 
 .project-click-area p {
@@ -242,15 +277,17 @@ body {
 .story {
     display: inline-flex;
     width: 100%;
+    height: 100%;
 }
 
 
 .persona-area {
     transition: all 0.3s ease;
+    margin-top: 10px;
     margin-right: 10px;
-    background-color: #e7ffa4;
+    background-color: #fffca4;
     width: 220px;
-    height: 100%;
+    height: 95%;
     border-radius: 10px;
     cursor: default;
     text-align: center;
@@ -264,6 +301,7 @@ body {
     border-radius: 50%;
     background-color: rgb(255, 139, 97);
     text-align: center;
+    margin-top: 10px;
 }
 
 .persona-area h2 {
@@ -278,13 +316,23 @@ body {
     font-size: 18px;
 }
 
-.story-area {
+.story-body {
     width: 100%;
-    height: 400px;
-    background-color: rgb(191, 211, 220);
+    height: 100%;
+}
+
+.story-area {
+    transition: all 0.3s ease;
+    width: 100%;
+    height: 300px;
+    background-color: rgb(165, 203, 221);
     /* display: inline-block; */
     cursor: pointer;
     border-radius: 10px;
+}
+
+.story-area:hover {
+    background-color: rgb(191, 211, 220);
 }
 
 .story-area h2 {
@@ -337,8 +385,13 @@ body {
     width: 100%;
     height: 400px;
     background-color: rgb(255, 215, 114);
-    cursor: pointer;
+    cursor: default;
     border-radius: 10px;
+}
+
+.task-area h2 {
+    text-align: center;
+    margin-top: 10px;
 }
 
 .textbox-001 {
@@ -447,7 +500,7 @@ select {
     margin-left: 10px;
 }
 
-.context-add-task-menu {
+.context-add-story-menu {
     display: none;
     position: fixed;
     top: 50%;
@@ -460,6 +513,37 @@ select {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     padding: 10px;
+}
+
+.context-add-task-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 330px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 10px;
+}
+
+.context-add-persona-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 650px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 10px;
+
 }
 
 /* 弾むアニメーションを定義 */
