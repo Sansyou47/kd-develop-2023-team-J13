@@ -70,9 +70,15 @@ def register_persona():
         persona.append(request.form.get('note'))
         conn = mysql.get_db()
         cur = conn.cursor()
-        cur.execute("INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", (persona[0], persona[1], persona[2], persona[3], persona[4], persona[5], persona[6], persona[7], persona[8]))
-        conn.commit()
+        cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
+        # テーブルにデータがある場合は更新、ない場合は追加
+        if cur.fetchone():
+            cur.execute("UPDATE persona SET name = %s, age = %s, gender = %s, job = %s, hobby = %s, income = %s, family = %s, note = %s WHERE projectNumber = %s", (persona[1], persona[2], persona[3], persona[4], persona[5], persona[6], persona[7], persona[8], persona[0]))
+            conn.commit()
+        else:
+            cur.execute("INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", (persona[0], persona[1], persona[2], persona[3], persona[4], persona[5], persona[6], persona[7], persona[8]))
+            conn.commit()
         cur.close()
         conn.close()
         
-    return redirect("/create_stories", persona=persona)
+    return render_template("stories/create_stories.html", project=session.get("project_number"), persona=persona)

@@ -53,7 +53,7 @@ def register():
             cur.close()
             conn.close()
             
-            send_email.create_email(userid, "【GitStory】ユーザー登録完了のお知らせ", "ユーザー登録が完了しました。")
+            #send_email.create_email(userid, "【GitStory】ユーザー登録完了のお知らせ", "ユーザー登録が完了しました。")
             
             return redirect('/login')
     # POSTメソッドに値が渡されていない場合、登録画面へ遷移
