@@ -311,11 +311,17 @@ body {
     background-color: #ffffff;
 } */
 
+
 .persona-area img {
     border-radius: 50%;
     background-color: rgb(255, 139, 97);
     text-align: center;
     margin-top: 10px;
+    cursor: pointer;
+}
+
+.persona-area img:hover {
+    animation: bounce 0.3s;
 }
 
 .persona-area h2 {
