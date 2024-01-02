@@ -6,7 +6,7 @@
     <script>
         window.onload = function () {
             var storyArea = document.querySelector('.story-area');
-            var storyButton = document.querySelector('.story-button');
+            var storyButton = document.getElementsByClassName('story-button');
             var personaImage = document.querySelector('.persona-img');
             var addstoryForm = document.querySelector('.context-add-story-menu');
             var addpersonaForm = document.querySelector('.context-add-persona-menu');
@@ -24,14 +24,17 @@
                 }
             });
 
-            storyButton.addEventListener('click', function (e) {
-                if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
-                    addtaskForm.style.display = 'block';
-                    overlay.style.display = 'block';
-                    isFormVisible = true; // フォームが表示されていることを示す
-                    e.stopPropagation();
-                }
-            });
+            for (var i = 0; i < storyButton.length; i++) {
+                storyButton[i].addEventListener('click', function (e) {
+                    e.preventDefault();
+                    // フォームが表示されていないときだけ処理を実行
+                    if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
+                        addtaskForm.style.display = 'block';
+                        overlay.style.display = 'block';
+                        isFormVisible = true; // フォームが表示されていることを示す
+                    }
+                });
+            }
 
             personaImage.addEventListener('click', function (e) {
                 if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
@@ -43,12 +46,9 @@
             });
 
             window.addEventListener('click', function (e) {
-                if (addstoryForm.style.display == 'block' && e.target !== addstoryForm && !addstoryForm.contains(e.target)) {
+                if (e.target == overlay) {
                     addstoryForm.style.display = 'none';
-                    isFormVisible = false; // フォームが非表示になったことを示す
-                    overlay.style.display = 'none';
-                }
-                if (addpersonaForm.style.display == 'block' && e.target !== addpersonaForm && !addpersonaForm.contains(e.target)) {
+                    addtaskForm.style.display = 'none';
                     addpersonaForm.style.display = 'none';
                     isFormVisible = false; // フォームが非表示になったことを示す
                     overlay.style.display = 'none';
@@ -77,6 +77,7 @@
                     <p class="note">その他：<br>{{persona[8]}}</p>
                 </div>
                 {% else %}
+                <img class="persona-img" src="../../static/images/human.svg" width="80px" height="80px">
                 <p>ペルソナを定義しましょう。</p>
                 {% endif %}
             </div>

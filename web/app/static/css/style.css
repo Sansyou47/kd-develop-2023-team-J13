@@ -350,7 +350,6 @@ body {
     cursor: pointer;
     border-radius: 10px;
     display: flex;
-    justify-content: space-between;
 }
 
 .story-area:hover {
@@ -373,7 +372,6 @@ body {
     float: left;
     margin-left: 15px;
     margin-bottom: 15px;
-    flex-grow: 1;
 }
 
 .story-button:hover {
