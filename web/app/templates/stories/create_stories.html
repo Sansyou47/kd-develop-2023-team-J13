@@ -5,15 +5,17 @@
 <head>
     <script>
         window.onload = function () {
-            var clickArea = document.querySelector('.story-area');
-            var personaArea = document.querySelector('.persona-area');
+            var storyArea = document.querySelector('.story-area');
+            var storyButton = document.querySelector('.story-button');
+            var personaImage = document.querySelector('.persona-img');
             var addstoryForm = document.querySelector('.context-add-story-menu');
             var addpersonaForm = document.querySelector('.context-add-persona-menu');
+            var addtaskForm = document.querySelector('.context-add-task-menu');
             var overlay = document.getElementById('overlay');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
 
-            clickArea.addEventListener('click', function (e) {
+            storyArea.addEventListener('click', function (e) {
                 if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
                     addstoryForm.style.display = 'block';
                     overlay.style.display = 'block';
@@ -22,7 +24,16 @@
                 }
             });
 
-            personaArea.addEventListener('click', function (e) {
+            storyButton.addEventListener('click', function (e) {
+                if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
+                    addtaskForm.style.display = 'block';
+                    overlay.style.display = 'block';
+                    isFormVisible = true; // フォームが表示されていることを示す
+                    e.stopPropagation();
+                }
+            });
+
+            personaImage.addEventListener('click', function (e) {
                 if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
                     addpersonaForm.style.display = 'block';
                     overlay.style.display = 'block';
