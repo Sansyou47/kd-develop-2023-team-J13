@@ -101,3 +101,26 @@ def delete_data():
     #これはList内包表記 -> taskList = [i for sublist in w1t for i in sublist]
 
     return render_template("/delete/delete_data.html", projectName = projectList, storyName = storyList, taskName = taskList, lenProject = lenProject, numStory = numStory, numTask = numTask, spanProject = spanProject)
+
+
+@delete.route("/action/delete_project", methods=["POST"])
+@login_required
+def delete_project():
+    ok = request.form.get("ok")
+    project_number = request.form.get("project_number")
+    #ok 変数に値が入っているならDELETE処理実行
+    if ok :
+        return redirect("/get_task")
+        # MySQLへ接続
+        conn = mysql.get_db()
+        cur = conn.cursor()
+        # SQL実行
+
+        cur.execute("DELETE FROM task WHERE projectNumber = %s", (project_number))
+        cur.execute("DELETE FROM story WHERE projectNumber = %s", (project_number))
+        cur.execute("DELETE FROM project WHERE projectNumber = %s", (project_number))
+
+        conn.commit()
+        cur.close()
+
+    return redirect("/select_project")

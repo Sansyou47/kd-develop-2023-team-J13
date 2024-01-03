@@ -168,11 +168,12 @@
     </div>
 
     <div class="projectdelete-caution">
-        <form action="/action/delete-project" method="post">
+        <form action="/action/delete_project" method="post">
             <p class="caution">Caution!!</p>
             <p>本当に削除しますか?</p>
             <input type="hidden" name="project_number">
-            <input type="submit" value="OK">
+            <input type="submit" name="ok" value="OK">
+            <input type="submit" value="キャンセル">
         </form>
     </div>
 </body>
