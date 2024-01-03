@@ -1,32 +1,33 @@
-{% include 'header.html' %}
-
-{% include 'sidebar.html' %}
-<!--ストーリー一覧を表示する-->
-
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
 
 <body>
-    <h1>ストーリー選択画面</h1>
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>ストーリー名</th>
-            <th>プロジェクト名</th>
-            <th>タスク追加</th>
-        </tr>
-        {% for row in storyData %}
-        <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <form method="POST" action="/add_task">
-                <td>
-                    <input type="hidden" name="storyName" value="{{ row[0] }}">
-                    <input type="hidden" name="projectName" value="{{ row[1] }}">
-                    <input type="submit" value="追加">
-                </td>
-            </form>
-        </tr>
-        {% endfor %}
-    </table>
-
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
+        <h1>ストーリー選択画面</h1>
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>ストーリー名</th>
+                <th>プロジェクト名</th>
+                <th>タスク追加</th>
+            </tr>
+            {% for row in storyData %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <form method="POST" action="/add_task">
+                    <td>
+                        <input type="hidden" name="storyName" value="{{ row[0] }}">
+                        <input type="hidden" name="projectName" value="{{ row[1] }}">
+                        <input type="submit" value="追加">
+                    </td>
+                </form>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </body>
 
 </html>

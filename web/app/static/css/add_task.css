@@ -1,11 +1,43 @@
-body {
-    font-family: Arial, sans-serif;
-    /* 背景色 */
-    background-color: #f4f4f4;
+/* 基本スタイルのリセット */
+body,
+h1,
+h3,
+h4,
+form,
+label,
+input,
+select {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* body全体のスタイル */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* フォームのスタイル */
+form {
+    width: 90%;
+    /* 幅は90% */
+    max-width: 600px;
+    /* 最大幅は600px */
+    margin: 30px;
+    /* 余白30px */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 大見出しのスタイル */
 h1 {
     text-align: center;
 }
@@ -23,6 +55,25 @@ form {
     /* border内の余白 */
     padding: 20px;
     box-sizing: border-box;
+    margin: 30px 0 50px;
+    /* 上30px、下50px */
+    font-size: 42px;
+    color: #333;
+}
+
+/* 中見出しのスタイル */
+h3,
+h4 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* ラベルのスタイル */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #555;
 }
 
 
@@ -46,12 +97,10 @@ form input[type="submit"] {
     text-align: center;
     /* 境界線の種類 */
     border: none;
-    /* 境界線の角の丸み */
-    border-radius: 4px;
-    /* カーソルの種類 */
+    border-radius: 5px;
     cursor: pointer;
-
-    padding: 10px 20px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
 }
 
 label {
@@ -61,7 +110,7 @@ label {
     font-weight: bold;
 }
 
-div.submit {
-    text-align: center;
-    padding-top: 50px;
+input[type="text"],
+select {
+    width: 100%;
 }

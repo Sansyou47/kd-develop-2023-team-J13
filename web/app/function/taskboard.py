@@ -11,15 +11,15 @@ def outtaskboard():
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
+    # ストーリーの名前を取得
     cur.execute("SELECT name FROM story WHERE projectNumber = %s",projectNumber)
     Story = cur.fetchall()
 
+    # タスクの名前とステータスを取得(他人のコードいじるの怖いので*はこのままで)
     all_tasks = []
-
-    for row in Story:
-        cur.execute("SELECT * FROM task WHERE projectNumber = %s",projectNumber)
-        tasks_for_story = cur.fetchall()
-        all_tasks.extend(tasks_for_story)
+    cur.execute("SELECT * FROM task WHERE projectNumber = %s",projectNumber)
+    tasks_for_story = cur.fetchall()
+    all_tasks.extend(tasks_for_story)
 
     conn.commit()
     cur.close()

@@ -22,10 +22,16 @@ def storeis():
     # 共通の処理（GETメソッドでの処理）
     cur.execute("SELECT name FROM story WHERE projectNumber = %s", projectNumber)
     story_data = cur.fetchall()
+    if story_data:
+        session.pop("backlog", None)
+        session["backlog"] = story_data
+    # ペルソナの情報を取得
+    cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
+    persona = cur.fetchone()
+    session["persona"] = persona
     cur.close()
     conn.close()
-    return render_template("stories/create_stories.html", story_data=story_data, project=projectNumber
-    )
+    return render_template("stories/create_stories.html", project=projectNumber, persona=persona)
     
 # ストーリー選択画面
 @story.route("/choice_story")
@@ -42,3 +48,37 @@ def choice_story():
     cur.close()
 
     return render_template("/tasks/choice_story.html", storyData=storyData)
+
+@story.route('/action/register_persona', methods=['POST'])
+@login_required
+def register_persona():
+    persona = []
+    if request.method == "POST":
+        persona.append(session.get("project_number"))
+        persona.append(request.form.get('name'))
+        persona.append(int(request.form.get('age')))
+        gender = request.form.get('gender')
+        if gender is not None:
+            if gender == 'men':
+                persona.append(0)
+            else:
+                persona.append(1)
+        persona.append(request.form.get('job'))
+        persona.append(request.form.get('hobby'))
+        persona.append(int(request.form.get('income')))
+        persona.append(request.form.get('family'))
+        persona.append(request.form.get('note'))
+        conn = mysql.get_db()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
+        # テーブルにデータがある場合は更新、ない場合は追加
+        if cur.fetchone():
+            cur.execute("UPDATE persona SET name = %s, age = %s, gender = %s, job = %s, hobby = %s, income = %s, family = %s, note = %s WHERE projectNumber = %s", (persona[1], persona[2], persona[3], persona[4], persona[5], persona[6], persona[7], persona[8], persona[0]))
+            conn.commit()
+        else:
+            cur.execute("INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", (persona[0], persona[1], persona[2], persona[3], persona[4], persona[5], persona[6], persona[7], persona[8]))
+            conn.commit()
+        cur.close()
+        conn.close()
+        
+    return render_template("stories/create_stories.html", project=session.get("project_number"), persona=persona)

@@ -1,52 +1,56 @@
-{% include 'header.html' %}
-{% include 'sidebar.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
 <link rel="stylesheet" href="../static/css/taskboard.css">
 
 <body>
-    <div class="row">
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
+        <div class="row">
 
-        <div class="Story">
-            <div class="subtitle">
-                <h1>Story</h1>
+            <div class="Story">
+                <div class="subtitle">
+                    <h1>Story</h1>
+                </div>
+                <div class="substance">
+                    {% for row in story %}
+                    <p>{{row[0]}}<br></p>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="substance">
-                {% for row in story %}
-                <p>{{row[0]}}<br></p>
-                {% endfor %}
-            </div>
-        </div>
 
-        <div class="Task">    
-            <div class="subtitle">
-                <h1>Task</h1>
+            <div class="Task">
+                <div class="subtitle">
+                    <h1>Task</h1>
+                </div>
+                <div class="substance">
+                    {% for row in task %}
+                    {% if row[1] == 2 %}
+                    <p>{{row[0]}}<br></p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-            <div class="substance">
-                {% for row in task %}
-                {% if row[1] == 2 %}
-                <p>{{row[0]}}<br></p>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
 
-        <div class="Doing">
-            <div class="subtitle">
-                <h1>Doing</h1>
+            <div class="Doing">
+                <div class="subtitle">
+                    <h1>Doing</h1>
+                </div>
+                <div class="substance">
+                    {% for row in task %}
+                    {% if row[1] == 1 %}
+                    <p>{{row[0]}}<br></p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-            <div class="substance">
-                {% for row in task %}
-                {% if row[1] == 1 %}
-                <p>{{row[0]}}<br></p>
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
 
-        <div class="Done">
-            <div class="subtitle">
-                <h1>Done</h1>
-            </div>
-            <div class="substance"></div>
+            <div class="Done">
+                <div class="subtitle">
+                    <h1>Done</h1>
+                </div>
+                <div class="substance"></div>
                 {% for row in task %}
                 {% if row[1] == 0 %}
                 <p>{{row[0]}}<br></p>
