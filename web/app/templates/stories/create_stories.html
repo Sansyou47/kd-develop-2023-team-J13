@@ -27,6 +27,9 @@
             for (var i = 0; i < storyButton.length; i++) {
                 storyButton[i].addEventListener('click', function (e) {
                     e.preventDefault();
+                    var storyName = this.querySelector('input[type="hidden"]').value;
+                    window.storyName = storyName;
+                    console.log(storyName);
                     // フォームが表示されていないときだけ処理を実行
                     if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
                         addtaskForm.style.display = 'block';
@@ -144,7 +147,9 @@
     <div class="context-add-task-menu">
         <h1>タスクを設定</h1>
         <form action="/action/add_task" method="post">
-            <h3>対象ストーリー：{{ storyName }}</h3>
+            <h3>
+                対象ストーリー：
+            </h3>
             <label for="task">タスク名:</label>
             <input type="text" name="taskName" required><br>
             <label>スプリント <select name="sprint">
