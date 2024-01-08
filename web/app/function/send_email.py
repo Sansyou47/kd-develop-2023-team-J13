@@ -60,7 +60,7 @@ def acaddusers():
         conn.commit()
         subject = project + 'プロジェクトへの招待が来ています'
         body = 'あなたへの招待が来ています。' + '\n' + '以下のリンクからプロジェクトに参加してください。' + '\n' + 'http://localhost:9047/'
-        create_email(email, subject, body)
+        #create_email(email, subject, body)
         
         return redirect('/select_project')
     else:
