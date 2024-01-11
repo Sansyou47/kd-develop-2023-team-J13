@@ -9,7 +9,7 @@ mysql = None
 @delete.route("/delete_data")
 @login_required
 def delete_data():
-    projectNumber = str(session.get("project_number"))
+    projectNumber = str(session.get("projectNumber"))
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
@@ -107,20 +107,46 @@ def delete_data():
 @login_required
 def delete_project():
     ok = request.form.get("ok")
-    project_number = request.form.get("project_number")
+    project_number = request.form.get("projectNumber")
+    user_id = session['user_id']
+    user_name = session['user_name']
     #ok 変数に値が入っているならDELETE処理実行
     if ok :
-        return redirect("/get_task")
         # MySQLへ接続
         conn = mysql.get_db()
         cur = conn.cursor()
-        # SQL実行
 
-        cur.execute("DELETE FROM task WHERE projectNumber = %s", (project_number))
-        cur.execute("DELETE FROM story WHERE projectNumber = %s", (project_number))
-        cur.execute("DELETE FROM project WHERE projectNumber = %s", (project_number))
+        cur.execute("SELECT owner FROM project WHERE projectNumber = %s", (project_number))
+        
+        project_owner = cur.fetchone()
 
         conn.commit()
         cur.close()
+
+
+        if project_owner[0] == user_name: #プロジェクトのオーナとプロジェクト離脱者が同じならプロジェクトを削除する
+            # MySQLへ接続
+            conn = mysql.get_db()
+            cur = conn.cursor()
+
+            # SQL実行
+            cur.execute("DELETE FROM task WHERE projectNumber = %s", (project_number))
+            cur.execute("DELETE FROM story WHERE projectNumber = %s", (project_number))
+            cur.execute("DELETE FROM project WHERE projectNumber = %s", (project_number))
+
+            conn.commit()
+            cur.close()
+            
+        else: #プロジェクトのオーナとプロジェクト離脱者が違うならプロジェクトから離脱する
+
+            # MySQLへ接続
+            conn = mysql.get_db()
+            cur = conn.cursor()
+
+            # SQL実行
+            cur.execute("DELETE FROM project_users WHERE userId = %s AND projectNumber = %s", (user_id, project_number))
+
+            conn.commit()
+            cur.close()
 
     return redirect("/select_project")

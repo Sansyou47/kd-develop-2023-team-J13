@@ -61,6 +61,16 @@
                 renameForm.style.display = 'block';
                 contextMenu.style.display = 'none';
             });
+            contextMenu.children[3].addEventListener('click', function (e) {
+                // input要素を取得します。ここではname属性が"project_number"の要素を取得します。
+                var hiddenElement = document.querySelector('input[name="projectNumber"]');
+
+                // input要素のvalue属性にprojectNumberを設定します。
+                hiddenElement.value = projectNumber;
+
+                projectDelete.style.display = 'block';
+                contextMenu.style.display = 'none';
+            });
 
             // 他の場所をクリックしたときにメニューを非表示にする
             window.addEventListener('click', function (e) {
@@ -149,7 +159,7 @@
         </p>
         <p class="delete">
             <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
-            プロジェクトを削除
+            プロジェクトから抜ける
         </p>
     </div>
 
@@ -164,13 +174,15 @@
 
     <div class="projectdelete-caution">
         <form action="/action/delete_project" method="post">
-            <p class="caution">Caution!!</p>
-            <p>本当に削除しますか?</p>
-            <input type="hidden" name="project_number">
+            <p class="caution1">Caution!!</p>
+            <p class="caution2">所有者がプロジェクトから抜けるとプロジェクトが削除されます!!!</p>
+            <p>本当にプロジェクトから抜けますか?</p>
+            <input type="hidden" name="projectNumber">
             <input type="submit" name="ok" value="OK">
-            <input type="submit" value="キャンセル">
+            <input type="submit" name="ng" value="キャンセル">
         </form>
     </div>
+
 </body>
 </div>
 
