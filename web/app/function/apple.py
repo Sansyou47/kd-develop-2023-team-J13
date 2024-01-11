@@ -110,7 +110,7 @@ def create_template():
             #     endUserNumber.append(userNumber[count][0])
             #     count += 1
         
-        return render_template('/project/createproject2.html')
+        return redirect("/select_project")
     else:
         return "render_template('/project/createproject2.html')"
 
