@@ -37,11 +37,11 @@ window.onload = function () {
                 var st = element;
                 if (st === doing) {
                     st = 1;
-                    location.reload();
+
                 }
                 else if (st === done) {
                     st = 0;
-                    location.reload();
+
                 }
                 console.log('taskname:', taskname, 'Type of taskname:', typeof taskname);
                 console.log('st:', st, 'Type of st:', typeof st);
@@ -52,7 +52,17 @@ window.onload = function () {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ st: st, taskname: taskname }),
-                });
+                })
+                    .then(function (response) {
+                        if (!response.ok) {
+                            throw new Error("HTTP error " + response.status);
+                        }
+                        // リクエストが成功したらページをリロード
+                        location.reload();
+                    })
+                    .catch(function (error) {
+                        console.log('Request failed: ', error.message);
+                    });
 
             }
         });
