@@ -58,19 +58,55 @@ def action_create_project1():
     return redirect("/create_stories")
 
 # テンプレートから作成する
-@apple.route('/create_project2', methods=['POST'])
+@apple.route('/create_project2')
+@login_required
 def create_project2():
+    return render_template('/project/createproject2.html')
+
+@apple.route('/action/create_project2', methods=['POST'])
+@login_required
+def create_template():
     if request.method == 'POST':
         title = request.form.get('title')
         target_class = request.form.get('class')
         team = int(request.form.get('team'))
         coma = int(request.form.get('coma'))
         sharedFolderInput = request.form.get('sharedFolderInput')
+        owner = str(session.get("user_name"))
         
+        cur = mysql.get_db().cursor()
+        
+        cur.execute("SELECT userNumber FROM student WHERE class = (%s)", (target_class,))
+        userNumber = cur.fetchall()
+        
+        # 指定されたチーム数から、チームごとの人数を計算
+        number_of_team = int(len(userNumber) / team)
+        count = 0
+        # チームへ割り振りが完了したユーザーのリスト
+        endUserNumber = []
+        
+        for i in range(0, team):
+            cur.execute("INSERT INTO project(name, owner, start_date, finish_date, googleDrive) VALUES (%s, %s, %s, %s, %s)", (title + str(i), owner, "2020-01-01", "2020-01-01", sharedFolderInput))
+            mysql.get_db().commit()
+            
+            projectId = cur.lastrowid
+            
+            # チームごとの人数分だけユーザーを割り振る
+            for j in range(0, number_of_team):
+                cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (title + str(i), userNumber[count][0], projectId))
+                mysql.get_db().commit()
+                endUserNumber.append(userNumber[count][0])
+                count += 1
+            # チームごとの人数が割り振り終わった後、残りの人数を割り振る
+            # if i < (len(userNumber) % team):
+            #     cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (title, userNumber[count][0], projectId))
+            #     mysql.get_db().commit()
+            #     endUserNumber.append(userNumber[count][0])
+            #     count += 1
         
         return render_template('/project/createproject2.html')
     else:
-        return render_template('/project/createproject2.html')
+        return "render_template('/project/createproject2.html')"
 
 @apple.route('/create_project99')
 def create_project99():
