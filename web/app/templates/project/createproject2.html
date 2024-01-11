@@ -1,1 +1,41 @@
-2
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Project 2</title>
+    <link rel="stylesheet" href="../static/css/createproject1.css">
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
+        <!-- ヘッダー -->
+        <h1>新規授業の開始</h1>
+
+        <!-- プロジェクト情報入力フォーム -->
+        <form id="projectForm" method="POST" action="/action/create_project1">
+            <label for="title">授業タイトル:</label>
+            <input type="text" id="title" name="title">
+
+            <label for="target_class">対象クラス:</label>
+            <input type="text" id="target_class" name="target_class">
+
+            <label for="team">チーム数:</label>
+            <input type="text" id="team" name="team">
+
+            <label for="coma">授業コマ数:</label>
+            <input type="text" id="coma" name="coma">
+
+            <label for="sharedFolderInput">授業フォルダ:</label>
+            <input type="text" id="sharedFolderInput" name="sharedFolderInput">
+
+            <input type="submit" value="授業を準備する">
+        </form>
+    </div>
+
+</body>
+
+</html>
