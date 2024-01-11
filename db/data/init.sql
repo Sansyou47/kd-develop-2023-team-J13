@@ -197,3 +197,11 @@ create table persona(
 );
 
 INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
+
+drop table if exists student;
+create table student(
+    userNumber  int primary key,
+    studentNumber   varchar(10),
+    class   varchar(10),
+    number  varchar(10)
+);
