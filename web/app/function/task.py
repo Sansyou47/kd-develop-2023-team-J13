@@ -45,7 +45,18 @@ def action_add_task():
     )
     conn.commit()
     cur.close()
-    return redirect("/report_task")
+
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("SELECT name FROM task WHERE projectNumber = %s", (projectNumber))
+    taskName = cur.fetchall()
+
+    conn.commit()
+    cur.close()
+    return render_template("stories/create_stories.html", project=projectNumber, taskName=taskName, persona=session.get("persona"))
+    #return redirect("/report_task")
 
 # タスク一覧取得
 @task.route("/get_task")

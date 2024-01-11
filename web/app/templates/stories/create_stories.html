@@ -100,9 +100,18 @@
                 </div>
                 <div class="task-area">
                     <h2>タスク</h2>
-                    <button class="task-button">
-                        <p>タスク名</p>
-                    </button>
+                    <div class="task-area">
+                        {% if taskName %}
+                        {% for row in taskName %}
+                        <div class="task-button">
+                            <p>{{ row[0] }}</p>
+                            <input type="hidden" name="storyName" value="{{ row[0] }}">
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>タスクがありません</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
