@@ -81,7 +81,7 @@
 .login-form input[type="password"]:focus {
     border-color: #90ee90;
     /* フォーカス時の明るい緑 */
-    color: #333333;
+    color: #ffffff;
     /* テキストの色 */
 }
 

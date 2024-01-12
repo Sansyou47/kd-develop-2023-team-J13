@@ -1,12 +1,14 @@
-/* ログインフォームのスタイル */
+/* 新規ユーザー登録フォームのスタイル */
 .register-form {
+    width: 100%;
     max-width: 400px;
-    margin: 200px auto;
+    margin: auto;
     padding: 30px;
-    background: linear-gradient(135deg, #1456ff, #4076ff);
+    background: linear-gradient(135deg, #c6edff, #009dff);
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     text-align: center;
+    box-sizing: border-box;
 }
 
 /* 見出しのスタイル */
@@ -15,44 +17,63 @@
     font-weight: 500;
 }
 
-.register-form p {
-    color: #ffffff;
-}
-
 /* ラベルのスタイル */
 .register-form label {
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 18px;
-    color: #fffcfc;
-    display: block;
+    color: #ffffff;
     text-align: left;
+    display: block;
+}
+
+/* エラーメッセージのスタイル */
+.register-form .error {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+/* 入力項目のスタイル */
+.register-form p {
+    margin-bottom: 15px;
 }
 
 /* テキスト入力欄のスタイル */
 .register-form input[type="text"],
-.register-form input[type="password"] {
+.register-form input[type="password"],
+.register-form input[type="file"] {
     border: 0;
     background: none;
     display: block;
-    margin: 20px auto;
+    margin: 10px auto;
     border: 2px solid #3cb371;
-    /* 緑のボーダー */
     padding: 15px 10px;
-    width: 200px;
+    width: calc(100% - 40px);
     outline: none;
     border-radius: 24px;
     transition: 0.25s;
     text-align: center;
-    color: #fffbfb;
-    /*opacity: 0.6;*/
+    color: #ffffff;
+    opacity: 0.6;
+    box-sizing: border-box;
+}
+
+
+/* 区分選択のセレクトボックススタイル */
+.register-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .register-form input[type="text"]:focus,
 .register-form input[type="password"]:focus {
     border-color: #90ee90;
-    /* フォーカス時の明るい緑 */
-    color: #fffcfc;
+    color: #ffffff;
 }
 
 /* 送信ボタンのスタイル */
@@ -62,36 +83,32 @@
     display: block;
     margin: 20px auto;
     border: 2px solid #3cb371;
-    /* 緑のボーダー */
     padding: 15px 10px;
-    width: 200px;
+    width: calc(100% - 40px);
     outline: none;
     color: #ffffff;
     border-radius: 25px;
     transition: 0.25s;
     text-align: center;
     cursor: pointer;
-    background-color: #3cb371;
-    /* 緑の背景 */
+    background-color: #32a852;
 }
 
 .register-form input[type="submit"]:hover {
-    background-color: #54e37a;
-    border: 2px solid #54e37a;
+    background-color: #3cb371;
+    border: 2px solid #3cb371;
 }
 
 /* リンクのスタイル */
 .register-form a {
     display: block;
     margin-top: 25px;
-    color: #ffffff;
-    /* 青いリンク */
+    color: #1881f1;
     text-decoration: none;
     font-size: 18px;
 }
 
 .register-form a:hover {
     text-decoration: underline;
-    color: #5efaff;
-    /* ホバー時の濃い青 */
+    color: #5294da;
 }
