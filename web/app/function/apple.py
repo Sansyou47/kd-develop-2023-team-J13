@@ -81,7 +81,7 @@ def create_template():
         userNumber = cur.fetchall()
         
         # 指定されたチーム数から、チームごとの人数を計算
-        number_of_team = 4
+        number_of_team = int(len(userNumber) / team)
         count = 0
         # チームへ割り振りが完了したユーザーのリスト
         endUserNumber = []
@@ -93,8 +93,6 @@ def create_template():
             # プロジェクトオーナーに作成した先生を追加
             cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (title + str(i), owner, projectId))
             
-            
-            
             # チームごとの人数分だけユーザーを割り振る
             for j in range(0, number_of_team):
                 user = userNumber[count][0]
@@ -104,11 +102,14 @@ def create_template():
                 mysql.get_db().commit()
                 count += 1
             # チームごとの人数が割り振り終わった後、残りの人数を割り振る
-            # if i < (len(userNumber) % team):
-            #     cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (title, userNumber[count][0], projectId))
-            #     mysql.get_db().commit()
-            #     endUserNumber.append(userNumber[count][0])
-            #     count += 1
+            if i < (len(userNumber) % team):
+                user = userNumber[count][0]
+                cur.execute("SELECT userId FROM users WHERE userNumber = (%s)", (user,))
+                uid = cur.fetchone()
+                cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (title + str(i), uid, projectId))
+                mysql.get_db().commit()
+                endUserNumber.append(userNumber[count][0])
+                count += 1
         
         return redirect("/select_project")
     else:
