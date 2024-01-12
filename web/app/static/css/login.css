@@ -1,93 +1,146 @@
 /* ログインフォームのスタイル */
 .login-form {
+    width: 100%;
+    /* 要素を親要素の100%幅に設定 */
     max-width: 400px;
-    margin: 100px auto;
+    /* 最大幅を400pxに制限 */
+    margin: auto;
+    /* 自動マージンで中央配置 */
     padding: 30px;
-    background: linear-gradient(135deg, #000000, #545454);
+    /* 内部余白 */
+    background: linear-gradient(135deg, #ffffff, #ffffff);
+    /* グラデーション背景 */
     border-radius: 8px;
+    /* 角丸 */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    /* 軽い影 */
     text-align: center;
+    /* 中央配置 */
+    box-sizing: border-box;
+    /* 要素の幅にpaddingやborderを含める */
 }
 
 /* 見出しのスタイル */
 .login-form h1 {
-    color: #ffffff;
+    color: #101010;
+    /* 白色の文字 */
     font-weight: 500;
+    /* フォントの太さ */
 }
 
 /* ラベルのスタイル */
 .login-form label {
     font-weight: bold;
+    /* 太字 */
     margin-bottom: 10px;
+    /* 下の余白 */
     font-size: 18px;
-    color: #fffcfc;
+    /* フォントサイズ */
+    color: #ffffff;
+    /* 白色の文字 */
     display: block;
+    /* ブロック要素化 */
     text-align: left;
+    /* 左寄せ */
 }
 
 /* テキスト入力欄のスタイル */
 .login-form input[type="text"],
 .login-form input[type="password"] {
     border: 0;
+    /* ボーダーなし */
     background: none;
+    /* 背景なし */
     display: block;
+    /* ブロック要素化 */
     margin: 20px auto;
+    /* 上下20px、左右は自動マージン */
     border: 2px solid #3cb371;
     /* 緑のボーダー */
     padding: 15px 10px;
-    width: 200px;
+    /* 内部余白 */
+    width: calc(100% - 40px);
+    /* 幅から左右のpaddingを引く */
     outline: none;
+    /* フォーカス時の枠線を消す */
     border-radius: 24px;
+    /* 角丸 */
     transition: 0.25s;
+    /* アニメーション効果 */
     text-align: center;
-    color: #fffbfb;
-    /*opacity: 0.6;*/
+    /* 中央配置 */
+    color: #333333;
+    /* テキストの色 */
+    opacity: 0.6;
+    /* 不透明度 */
+    box-sizing: border-box;
+    /* 要素の幅にpaddingやborderを含める */
 }
 
 .login-form input[type="text"]:focus,
 .login-form input[type="password"]:focus {
     border-color: #90ee90;
     /* フォーカス時の明るい緑 */
-    color: #fffcfc;
+    color: #ffffff;
+    /* テキストの色 */
 }
 
 /* 送信ボタンのスタイル */
 .login-form input[type="submit"] {
     border: 0;
+    /* ボーダーなし */
     background: none;
+    /* 背景なし */
     display: block;
+    /* ブロック要素化 */
     margin: 20px auto;
+    /* 上下20px、左右は自動マージン */
     border: 2px solid #3cb371;
     /* 緑のボーダー */
     padding: 15px 10px;
-    width: 200px;
+    /* 内部余白 */
+    width: calc(100% - 40px);
+    /* 幅から左右のpaddingを引く */
     outline: none;
+    /* フォーカス時の枠線を消す */
     color: #ffffff;
+    /* テキストの色 */
     border-radius: 25px;
+    /* 角丸 */
     transition: 0.25s;
+    /* アニメーション効果 */
     text-align: center;
+    /* 中央配置 */
     cursor: pointer;
-    background-color: #3cb371;
+    /* カーソルを指示する */
+    background-color: #32a852;
     /* 緑の背景 */
 }
 
 .login-form input[type="submit"]:hover {
-    background-color: #54e37a;
-    border: 2px solid #54e37a;
+    background-color: #3cb371;
+    /* ホバー時の濃い緑 */
+    border: 2px solid #3cb371;
+    /* ホバー時の濃い緑のボーダー */
 }
 
 /* リンクのスタイル */
 .login-form a {
     display: block;
+    /* ブロック要素化 */
     margin-top: 25px;
-    color: #1586ff;
+    /* 上の余白 */
+    color: #1881f1;
     /* 青いリンク */
     text-decoration: none;
+    /* テキストの装飾を消す */
     font-size: 18px;
+    /* フォントサイズ */
 }
 
 .login-form a:hover {
     text-decoration: underline;
-    color: #5eacff;
+    /* ホバー時の下線 */
+    color: #5294da;
     /* ホバー時の濃い青 */
 }

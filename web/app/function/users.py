@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, session
 from flaskext.mysql import MySQL
 from werkzeug.security import generate_password_hash
+from function import send_email
 from flask_login import current_user
 
 users = Blueprint("users", __name__)
@@ -21,7 +22,6 @@ def register():
         kana = request.form.get("kana")
         userClass = request.form.get("class")
         gitId = request.form.get("gitAccount")
-        image = request.files.get('image')
         
         # テーブルに入力されたメールアドレスが存在するか確認
         cur.execute("SELECT * FROM users WHERE userId = %s", (userid,))
@@ -51,6 +51,9 @@ def register():
             
             cur.close()
             conn.close()
+            
+            #send_email.create_email(userid, "【GitStory】ユーザー登録完了のお知らせ", "ユーザー登録が完了しました。")
+            
             return redirect('/login')
     # POSTメソッドに値が渡されていない場合、登録画面へ遷移
     else:

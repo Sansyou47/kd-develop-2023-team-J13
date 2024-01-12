@@ -18,7 +18,9 @@ INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd129
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1334632@st.kobedenshi.ac.jp', '林敦啓', 'ハヤシノブヒロ', 'scrypt:32768:8:1$YFOF58vV6KrvfaJ9$91f033aaf573cdee4205125032428971047de6be96d4a215f66ca0a3052ebdc7887266becc850e0d94665c4aa73a8cd51d928ab7633d29b858e8886c72057f52', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1334992@st.kobedenshi.ac.jp', '山田真豊', 'ヤマダマナト', 'scrypt:32768:8:1$ZM50DjEFuu3yhuo7$e53f0e89ef03af15855237b35f41f87eefc29ad0152f0dba806e65918e0ad35ef9d8a94e41d981bd1e6718d28f5dc3dd66c629498324bfa0eae7d7437338bb50', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1329246@st.kobedenshi.ac.jp', '米津大也', 'ヨネヅダイヤ', 'scrypt:32768:8:1$hFMD67rQ4UYQE2W6$f945fdf490bfe657b987b8d1d887dba2e988ef54573728a1e14863520f457edd6f7650ed2ba8e7acca4b84ed22f20595a3194b7c6786e8a21bfcb9c18fc4f930', 0, 'student');
-
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000001@st.kobedenshi.ac.jp', 'デバッグ一郎', 'デバッグイチロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000002@st.kobedenshi.ac.jp', 'デバッグ二郎', 'デバッグジロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'student');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000003@st.kobedenshi.ac.jp', 'デバッグ三郎', 'デバッグサブロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'teacher');
 drop table if exists project;
 create table project(
     projectNumber  int auto_increment primary key,
@@ -177,10 +179,13 @@ INSERT INTO achievement(userNumber, productOwner, developer, teamLeader) VALUES(
 INSERT INTO achievement(userNumber, developer, presenter, teamLeader) VALUES(5, 3, 4, 3);
 INSERT INTO achievement(userNumber, developer, presenter) VALUES(6, 3, 1);
 INSERT INTO achievement(userNumber, productOwner, developer, presenter) VALUES(7, 3, 2, 1);
+INSERT INTO achievement(userNumber, developer, presenter) VALUES(8, 3, 1);
+INSERT INTO achievement(userNumber, developer, presenter) VALUES(9, 3, 1);
+INSERT INTO achievement(userNumber, developer, presenter) VALUES(10, 3, 1);
 
 drop table if exists persona;
 create table persona(
-    personaNumber int auto_increment primary key,
+    projectNumber int primary key,
     name    varchar(50),
     age     int,
     gender  int,
@@ -191,4 +196,12 @@ create table persona(
     note    varchar(2000)
 );
 
-INSERT INTO persona(name, age, gender, job, hobby, income, family, note) VALUES('神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
+INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
+
+drop table if exists student;
+create table student(
+    userNumber  int primary key,
+    studentNumber   varchar(10),
+    class   varchar(10),
+    number  varchar(10)
+);

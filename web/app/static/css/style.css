@@ -1,17 +1,57 @@
-.sidebar {
+html {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+#overlay {
+    transition: all 0.5s ease;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 黒色の半透明 */
+    z-index: 998;
+    /* 他の要素より前面に表示 */
+}
+
+.sidebar {
+    margin-right: 10px;
     height: 100%;
     width: 280px;
-    background-color: #f8f9fa;
-    overflow: auto;
-    padding: 20px;
-    margin-top: 80px;
+    background-color: #cdcdcd;
+    flex-shrink: 0;
 }
 
 .side-head {
     text-align: center;
+    margin-top: 20px;
+}
+
+.side-head-source {
+    display: flex;
+    text-align: center;
+}
+
+.project-title {
+    font-size: 20px;
+    margin-bottom: 0px;
+    margin-left: 2px;
+    display: block;
+}
+
+.project-title a {
+    display: flex;
 }
 
 .side-userinfo-body {
@@ -23,7 +63,6 @@
 }
 
 .header {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -43,14 +82,40 @@
 
 .product-backlog {
     margin-top: 80px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .product-backlog .caption {
     border-bottom: solid 1px #000000;
+    margin-bottom: 3px;
+    font-size: 16px;
 }
 
-.sprint-backlog .caption {
+.product-backlog .caption-content {
+    font-size: 14px;
+    margin-left: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.task {
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.task .caption {
     border-bottom: solid 1px #000000;
+    margin-bottom: 3px;
+    font-size: 16px;
+}
+
+.task .caption-content {
+    font-size: 14px;
+    margin-left: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .task .caption {
@@ -71,6 +136,12 @@
 
 .header-title-outproject {
     font-size: 30px;
+}
+
+.contents {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 80px);
 }
 
 .login-user {
@@ -100,13 +171,18 @@
     float: right;
 }
 
-/* .content {
-    margin: 20px; /* Add some margin to the content for better spacing
+.page-content {
+    display: flex;
 }
-*/
-.content {
-    margin-left: 300px;
-    margin-top: 90px;
+
+.main-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.project-list-area {
+    width: 100%;
 }
 
 .new-project {
@@ -158,12 +234,6 @@
 
 }
 
-.project-title {
-    font-size: 20px;
-    margin-bottom: 0px;
-    margin-left: 2px;
-}
-
 .project-click-area p {
     color: #000000;
     font-size: 12px;
@@ -181,6 +251,10 @@
     text-align: right;
 }
 
+.project-info:hover .project-logo {
+    animation: bounce 0.3s;
+}
+
 .project-resource {
     margin-left: 12px;
     width: 300px;
@@ -192,7 +266,7 @@
     margin-right: 5px;
 }
 
-.content .error {
+.contents .error {
     color: red;
 }
 
@@ -214,43 +288,85 @@
     font-size: 16px;
 }
 
-
-/* <--- これより下はcreate_story.cssの内容をコピペ ---> */
-body,
-h2,
-p,
-div,
-select,
-label {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* Include padding and border in the element's total width and height */
+.story {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
 }
 
-.story_body .body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+
+.persona-area {
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #fffca4;
+    width: 220px;
+    height: 95%;
+    border-radius: 10px;
+    cursor: default;
+    text-align: center;
 }
 
-.story_body .h2 {
-    color: #333;
+/* .persona-area :hover {
+    background-color: #ffffff;
+} */
+
+
+.persona-area img {
+    border-radius: 50%;
+    background-color: rgb(255, 139, 97);
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.persona-area img:hover {
+    animation: bounce 0.3s;
+}
+
+.persona-area h2 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.persona-area p {
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.story-body {
+    width: 100%;
+    height: 100%;
 }
 
 .story-area {
+    transition: all 0.3s ease;
     width: 100%;
-    height: 600px;
-    background-color: rgb(191, 211, 220);
-    display: inline-block;
+    height: 300px;
+    background-color: rgb(165, 203, 221);
+    /* display: inline-block; */
     cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+}
+
+.story-area:hover {
+    background-color: rgb(191, 211, 220);
+}
+
+.story-area h2 {
+    text-align: center;
+    margin-top: 10px;
 }
 
 .story-button {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    width: 300px;
-    height: 150px;
+    width: 210px;
+    height: 180px;
     background-color: hsl(82, 89%, 79%);
     border-radius: 15px;
     float: left;
@@ -261,6 +377,10 @@ label {
 .story-button:hover {
     background-color: hsl(82, 89%, 69%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.story-button p {
+    font-size: 18px;
 }
 
 .story-info {
@@ -280,6 +400,41 @@ label {
     font-size: 20px;
     margin: 0;
     text-align: center;
+}
+
+.task-area {
+    width: 100%;
+    height: 400px;
+    background-color: rgb(255, 215, 114);
+    cursor: default;
+    border-radius: 10px;
+}
+
+.task-area h2 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.task-button {
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 210px;
+    height: 100px;
+    background-color: hsl(255, 86%, 93%);
+    border-radius: 15px;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.task-button:hover {
+    background-color: hsl(255, 86%, 93%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.task-button p {
+    font-size: 18px;
 }
 
 .textbox-001 {
@@ -346,46 +501,171 @@ select {
 
 .contextmenu {
     display: none;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 250px;
-    height: 150px;
+    position: absolute;
+    /* 要素を絶対位置に配置 */
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    /* 白い背景色 */
+    border: 1px solid #ccc;
+    /* 薄い灰色の境界線 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 軽い影 */
+    padding: 10px;
+    /* 内部余白 */
+    z-index: 1000;
+    /* 他の要素よりも手前に表示 */
 }
 
 .contextmenu p {
+    display: flex;
+    /* フレックスボックスレイアウト */
+    align-items: center;
+    /* アイテムを中央揃え */
+    padding: 8px;
+    /* 内部余白 */
+    margin: 0;
+    /* マージンなし */
     cursor: pointer;
-    margin-left: 10px;
-    margin-top: 5px;
-    font-size: 16px;
+    /* カーソルをポインターに変更 */
 }
 
+.contextmenu img {
+    margin-right: 8px;
+    /* 画像とテキストの間隔 */
+}
+
+.contextmenu p:hover {
+    background-color: #f5f5f5;
+    /* ホバー時の背景色 */
+}
+
+.contextmenu .rename a {
+    text-decoration: none;
+    /* リンクの下線をなくす */
+    color: #333333;
+    /* テキストの色 */
+}
+
+.contextmenu .delete {
+    color: #ff0000;
+    /* 赤いテキスト色 */
+}
+
+.contextmenu .delete:hover {
+    background-color: #ffebeb;
+    /* 削除項目のホバー時の背景色 */
+}
+
+/* プロジェクト名変更フォームのスタイル */
 .projectrename-form {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 320px;
-    height: 150px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
 }
 
+/* タイトルのスタイル */
 .projectrename-form .title {
-    margin-left: 10px;
-    margin-top: 5px;
-    font-size: 22px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-.projectrename-form input {
-    font-size: 20px;
-    margin-top: 10px;
-    margin-left: 10px;
+/* テキスト入力欄のスタイル */
+.projectrename-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* ボタンのスタイル */
+.projectrename-form .button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.projectrename-form .button:hover {
+    background-color: #0056b3;
+}
+
+
+/* 警告文全体のスタイル */
+.projectdelete-caution {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* Caution!!のスタイル */
+.caution1 {
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 警告メッセージのスタイル */
+.projectdelete-caution p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+/* ボタンのスタイル */
+.projectdelete-caution input[type="submit"] {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.projectdelete-caution input[type="submit"]:hover {
+    background-color: #c82333;
+}
+
+.projectdelete-caution input[type="submit"][name="ng"] {
+    background-color: #6c757d;
+}
+
+.projectdelete-caution input[type="submit"][name="ng"]:hover {
+    background-color: #5a6268;
+}
+
+
+.context-add-story-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 280px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 10px;
+    z-index: 999;
 }
 
 .context-add-task-menu {
@@ -395,10 +675,63 @@ select {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 380px;
-    height: 280px;
+    height: 330px;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     padding: 10px;
+    z-index: 999;
+}
+
+.context-add-persona-menu {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 650px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 10px;
+    z-index: 999;
+}
+
+/* 弾むアニメーションを定義 */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+
+.test1 {
+    background-color: rgb(255, 0, 0);
+    width: 100%;
+    height: 150px;
+}
+
+.test2 {
+    background-color: rgb(0, 255, 0);
+    width: 150px;
+    height: 150px;
+}
+
+.test3 {
+    background-color: rgb(0, 0, 255);
+    width: 150px;
+    height: 150px;
+}
+
+.test4 {
+    display: flex;
 }

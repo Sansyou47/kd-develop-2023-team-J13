@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-<link rel="stylesheet" href="../static/css/style.css">
-
 <div class="header">
     <div class="header-main">
         <div class="header-title">
@@ -27,7 +23,6 @@
         </div>
     </div>
     <div class="header-tab">
-        
         {% if session['project'] %}
         <p><a href="/select_project">HOME</a></p>
         <p><a href="/taskboard">タスクボード</a></p>
@@ -35,7 +30,7 @@
         <p><a href="/task_catch">タスク更新</a></p>
         <p><a href="/graph">進捗状況表</a></p>
         {% else %}
-        <p><a href="/create_project">新規プロジェクト</a></p>
+        <p><a href="/select_project">HOME</a></p>
         {% endif %}
     </div>
 </div>

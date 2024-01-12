@@ -1,45 +1,83 @@
-{% include 'header.html' %}
-
-{% include 'sidebar.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
+<link rel="stylesheet" href="../static/css/register.css">
 
 <body>
-    <h1>新規ユーザー登録</h1>
-    <form action="/register" method="post">
-        <!-- 同じメールアドレスが使用されたらエラーの表示と名前、読みがなを入力状態に戻す -->
-        {% if error_message %}
-        <p class="error">{{ error_message }}</p>
-        <p>メールアドレス：<input type="text" name="userId" value={{email}} required></p>
-        <p>パスワード：<input type="password" name="password" required></p>
-        <p>名前：<input type="text" name="name" value={{name}} required></p>
-        <p>よみがな：<input type="text" name="kana" value={{kana}} required></p>
-        <p>区分を選択：
-            <select name="class" id="class">
-                {% for class in userClass %}
-                <option value="{{class[0]}}">{{class[0]}}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <p>GitHubアカウント名：<input type="text" name="gitAccount"></p>
-        <p>ユーザーロゴ：<input type="file" name="image"></p>
-        <p><input type="submit" value="新規登録"></p>
-        {% else %}
-        <p>メールアドレス：<input type="text" name="userId" required></p>
-        <p>パスワード：<input type="password" name="password" required></p>
-        <p>名前：<input type="text" name="name" required></p>
-        <p>よみがな：<input type="text" name="kana" required></p>
-        <p>区分を選択：
-            <select name="class" id="class">
-                {% for class in userClass %}
-                <option value="{{class[0]}}">{{class[0]}}</option>
-                {% endfor %}
-            </select>
-        </p>
-        <p>GitHubアカウント名：<input type="text" name="gitAccount"></p>
-        <p>ユーザーロゴ：<input type="file" name="image"></p>
-        <p><input type="submit" value="新規登録"></p>
-        {% endif %}
-    </form>
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
+        <form action="/register" method="post" class="register-form">
+            <h1>新規ユーザー登録</h1>
+            <!-- 同じメールアドレスが使用されたらエラーの表示と名前、読みがなを入力状態に戻す -->
+            {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+            <div class="input-wrapper">
+                <input type="text" id="userId" name="userId" value="{{ email }}" required placeholder="メールアドレス">
+            </div>
+
+            <div class="input-wrapper">
+                <input type="password" id="password" name="password" required placeholder="パスワード">
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="name" name="name" required placeholder="名前">
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="kana" name="kana" required placeholder="よみがな">
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="gitAccount" name="gitAccount" required placeholder="GitHubアカウント名">
+            </div>
+
+            <div class="input-wrapper">
+                <select id="class" name="class">
+                    {% for class in userClass %}
+                    <option value="{{class[0]}}">{{class[0]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-wrapper">
+                <input type="submit" value="新規登録">
+            </div>
+            {% else %}
+            <div class="input-wrapper">
+                <input type="text" id="userId" name="userId" value="{{ email }}" required placeholder="メールアドレス">
+            </div>
+
+            <div class="input-wrapper">
+                <input type="password" id="password" name="password" required placeholder="パスワード">
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="name" name="name" required placeholder="名前">
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="kana" name="kana" required placeholder="よみがな">
+            </div>
+
+            <div class="input-wrapper">
+                <input type="text" id="gitAccount" name="gitAccount" required placeholder="GitHubアカウント名">
+            </div>
+
+            <div class="input-wrapper">
+                <select id="class" name="class">
+                    {% for class in userClass %}
+                    <option value="{{class[0]}}">{{class[0]}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-wrapper">
+                <input type="submit" value="新規登録">
+            </div>
+            {% endif %}
+        </form>
+    </div>
 </body>
-</div>
 
 </html>

@@ -3,37 +3,40 @@
     {% if session['project'] %}
     <div class="side-head">
         <div class="project-title">
-            <img src="../static/images/{{session['project_icon']}}" alt="arrow" width="100" height="100">
-            {% if session['project_github'] %}
-            <a href="{{ session['project_github'] }}" target="_blank">
-                <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
-            </a>
-            {% endif %}
-            {% if session['project_googleDrive'] %}
-            <a href="{{ session['project_googledrive'] }}" target="_blank">
-                <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
-                    height="25">
-            </a>
-            {% endif %}
+            <div class="side-head-source">
+                <img src="../static/images/{{session['project_icon']}}" alt="arrow" width="100" height="100">
+                {% if session['project_github'] %}
+                <a href="{{ session['project_github'] }}" target="_blank">
+                    <img src="../static/images/github-mark.svg" alt="GitHub Mark" width="25" height="25">
+                </a>
+                {% endif %}
+                {% if session['project_googleDrive'] %}
+                <a href="{{ session['project_googledrive'] }}" target="_blank">
+                    <img src="../static/images/Google_Drive_icon_(2020).svg.png" alt="GoogleDrive Mark" width="25"
+                        height="25">
+                </a>
+                {% endif %}
+            </div>
+            {{session['project']}}
         </div>
-        <div class="project-title">{{session['project']}}</div>
 
     </div>
     <div class="product-backlog">
-        <p class="caption">プロダクトバックログ</p>
-        {% if story_data %}
-        {% for row in story_data %}
+        <p class="caption">
+            プロダクトバックログ
+            <img src="../static/images/arrow_in_circle.svg" alt="arrow" width="16" height="16">
+        </p>
+        {% if session['backlog'] %}
+        {% for row in session['backlog'] %}
         <p class="caption-content">
             {{ row[0] }}<br>
         </p>
         {% endfor %}
-        {% endif %}
-    </div>
-    <div class="sprint-backlog">
-        <p class="caption">スプリントバックログ</p>
+        {% else %}
         <p class="caption-content">
-            test
+            プロダクトバックログがありません
         </p>
+        {% endif %}
     </div>
     <div class="task">
         <p class="caption">タスク</p>
@@ -79,7 +82,4 @@
     </div>
     {% endif %}
     {% endif %}
-
-
 </div>
-<div class="content">
