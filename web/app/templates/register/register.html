@@ -13,73 +13,65 @@
             {% if error_message %}
             <p class="error">{{ error_message }}</p>
             <div class="input-wrapper">
-                <input type="text" id="userId" name="userId" value="{{ email }}" required placeholder=" ">
-                <label for="userId">メールアドレス：</label>
+                <input type="text" id="userId" name="userId" value="{{ email }}" required placeholder="メールアドレス">
             </div>
+
             <div class="input-wrapper">
-                <label for="password">パスワード：</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" required placeholder="パスワード">
             </div>
+
             <div class="input-wrapper">
-                <label for="name">名前：</label>
-                <input type="text" id="name" name="name" value={{name}} required>
+                <input type="text" id="name" name="name" required placeholder="名前">
             </div>
+
             <div class="input-wrapper">
-                <label for="kana">よみがな：</label>
-                <input type="text" id="kana" name="kana" value={{kana}} required>
+                <input type="text" id="kana" name="kana" required placeholder="よみがな">
             </div>
+
             <div class="input-wrapper">
-                <label for="class">区分を選択：</label>
+                <input type="text" id="gitAccount" name="gitAccount" required placeholder="GitHubアカウント名">
+            </div>
+
+            <div class="input-wrapper">
                 <select id="class" name="class">
                     {% for class in userClass %}
                     <option value="{{class[0]}}">{{class[0]}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="input-wrapper">
-                <label for="gitAccount">GitHubアカウント名：</label>
-                <input type="text" id="gitAccount" name="gitAccount">
-            </div>
-            <div class="input-wrapper">
-                <label for="image">ユーザーロゴ：</label>
-                <input type="file" id="image" name="image">
-            </div>
+
             <div class="input-wrapper">
                 <input type="submit" value="新規登録">
             </div>
             {% else %}
             <div class="input-wrapper">
-                <input type="text" id="userId" name="userId" value="{{ email }}" required placeholder=" ">
-                <label for="userId">メールアドレス：</label>
+                <input type="text" id="userId" name="userId" value="{{ email }}" required placeholder="メールアドレス">
             </div>
+
             <div class="input-wrapper">
-                <label for="password">パスワード：</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" required placeholder="パスワード">
             </div>
+
             <div class="input-wrapper">
-                <label for="name">名前：</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required placeholder="名前">
             </div>
+
             <div class="input-wrapper">
-                <label for="kana">よみがな：</label>
-                <input type="text" id="kana" name="kana" required>
+                <input type="text" id="kana" name="kana" required placeholder="よみがな">
             </div>
+
             <div class="input-wrapper">
-                <label for="class">区分を選択：</label>
+                <input type="text" id="gitAccount" name="gitAccount" required placeholder="GitHubアカウント名">
+            </div>
+
+            <div class="input-wrapper">
                 <select id="class" name="class">
                     {% for class in userClass %}
                     <option value="{{class[0]}}">{{class[0]}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="input-wrapper">
-                <label for="gitAccount">GitHubアカウント名：</label>
-                <input type="text" id="gitAccount" name="gitAccount">
-            </div>
-            <div class="input-wrapper">
-                <label for="image">ユーザーロゴ：</label>
-                <input type="file" id="image" name="image">
-            </div>
+
             <div class="input-wrapper">
                 <input type="submit" value="新規登録">
             </div>

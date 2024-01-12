@@ -8,8 +8,8 @@
     /* 自動マージンで中央配置 */
     padding: 30px;
     /* 内部余白 */
-    background: linear-gradient(135deg, #000000, #545454);
-    /* 黒から灰色へのグラデーション背景 */
+    background: linear-gradient(135deg, #ffffff, #ffffff);
+    /* グラデーション背景 */
     border-radius: 8px;
     /* 角丸 */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -22,7 +22,7 @@
 
 /* 見出しのスタイル */
 .login-form h1 {
-    color: #ffffff;
+    color: #101010;
     /* 白色の文字 */
     font-weight: 500;
     /* フォントの太さ */
