@@ -23,7 +23,16 @@
             <div class="substance">
                 {% for row in task %}
                 {% if row[1] == 2 %}
-                <p>{{row[0]}}<br></p>
+                    {% if row[3] == 2 %}
+                        <p>{{row[0]}}<input type="hidden" id="1"name="1"value=""><br></p>
+                        <style>
+                        </style>
+                    {% endif %}
+                    {% if row[3] == 2 %}
+                        <p>{{row[0]}}<input type="hidden" id="1"name="1"value=""><br></p>
+                        <style>
+                        </style>
+                    {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>

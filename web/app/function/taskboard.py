@@ -12,6 +12,7 @@ def outtaskboard():
     cur = conn.cursor()
     # SQL実行
     # ストーリーの名前を取得
+#16～23行だけいじる（タスクボードのストーリーごとにタスクを表示する処理）
     cur.execute("SELECT name FROM story WHERE projectNumber = %s",projectNumber)
     Story = cur.fetchall()
 
