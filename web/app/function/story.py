@@ -9,6 +9,8 @@ mysql = None
 @story.route("/create_stories", methods=["GET", "POST"])  # ストーリー追加、表示処理
 @login_required
 def storeis():
+    stories = None
+    priority = None
     projectNumber = str(session.get("project_number"))
     conn = mysql.get_db()
     cur = conn.cursor()

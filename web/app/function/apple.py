@@ -71,6 +71,7 @@ def create_template():
         title = request.form.get('title')
         target_class = request.form.get('target_class')
         team = int(request.form.get('team'))
+        sorting = request.form.get('gen')
         coma = int(request.form.get('coma'))
         sharedFolderInput = request.form.get('sharedFolderInput')
         owner = str(session.get("user_id"))
@@ -80,12 +81,18 @@ def create_template():
         cur.execute("SELECT userNumber FROM student WHERE class = (%s)", (target_class,))
         userNumber = cur.fetchall()
         
+        # タプルからリストに変換
+        userNumber = list(userNumber)
+        
         # 指定されたチーム数から、チームごとの人数を計算
         number_of_team = int(len(userNumber) / team)
         count = 0
         # チームへ割り振りが完了したユーザーのリスト
         endUserNumber = []
         
+        if sorting == "random":
+            # ランダムにユーザーを割り振る
+            random.shuffle(userNumber)
         for i in range(0, team):
             cur.execute("INSERT INTO project(name, owner, start_date, finish_date, googleDrive) VALUES (%s, %s, %s, %s, %s)", (title + str(i), owner, "2020-01-01", "2020-01-01", sharedFolderInput))
             mysql.get_db().commit()
@@ -110,7 +117,6 @@ def create_template():
                 mysql.get_db().commit()
                 endUserNumber.append(userNumber[count][0])
                 count += 1
-        
         return redirect("/select_project")
     else:
         return "render_template('/project/createproject2.html')"
