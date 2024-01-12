@@ -40,6 +40,21 @@ form {
 /* 大見出しのスタイル */
 h1 {
     text-align: center;
+}
+
+form {
+    width: 80%;
+    /* border外の余白 */
+    margin: 0 auto;
+    /* 背景色 */
+    background-color: white;
+    /* 境界線 */
+    border: none;
+    /* 境線の角の丸み */
+    border-radius: 4px;
+    /* border内の余白 */
+    padding: 20px;
+    box-sizing: border-box;
     margin: 30px 0 50px;
     /* 上30px、下50px */
     font-size: 42px;
@@ -61,23 +76,26 @@ label {
     color: #555;
 }
 
-/* テキスト入力とセレクトボックスのスタイル */
-input[type="text"],
-select {
-    width: calc(100% - 24px);
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+
+
+form input[type="text"] {
+    padding: 10px;
+    width: 65%;
+    margin: 10px;
 }
 
-/* 送信ボタンのスタイル */
-input[type="submit"] {
-    width: 100%;
-    background-color: #4caf50;
-    color: #ffffff;
-    padding: 15px;
+form input[type="submit"] {
+    /* 背景色 */
+    background: #007bff;
+    /* 文字色 */
+    color: white;
+    /* 文字サイズ */
+    font-size: 16px;
+    /* 文字の太さ */
+    font-weight: bold;
+    /* 文字の位置 */
+    text-align: center;
+    /* 境界線の種類 */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -85,18 +103,14 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
-    background-color: #45a049;
+label {
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 30px;
+    font-weight: bold;
 }
 
-/* 小さい画面に対するレスポンシブ対応 */
-@media (max-width: 600px) {
-    form {
-        padding: 20px;
-    }
-
-    input[type="text"],
-    select {
-        width: 100%;
-    }
+input[type="text"],
+select {
+    width: 100%;
 }

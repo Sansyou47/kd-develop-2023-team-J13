@@ -1,0 +1,52 @@
+{% include 'header.html' %}
+
+{% include 'sidebar.html' %}
+<!-- タスクの追加を行う画面　タスクの遷移などは別画面-->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>削除フォーム</title>
+    <link rel="stylesheet" href="../static/css/delete_data.css">
+</head>
+
+
+<body>
+    <h1>削除フォーム</h1>
+    <!-- <h3>numStory:{{ numStory }}</h3>
+    <h3>numTask:{{ numTask }}</h3>
+    <h3>spanProject:{{ spanProject }}</h3> -->
+    {% set w1 = namespace(total = 0) %}
+    {% set w2 = namespace(total = 0) %}
+
+
+    <table border="3">
+        <tr>
+            <th>プロジェクト</th>
+            <th>ストーリー</th>
+            <th>タスク</th>
+        </tr>
+        <tr>
+            {% for i in range(lenProject) %}
+            <td rowspan="{{ spanProject[i] }}">{{ projectName[i] }}</td>
+            {% for j in range(numStory[i]) %}
+            <td rowspan="{{ numTask[w1.total] }}">{{ storyName[w1.total] }}</td>
+            {% set w1.total = w1.total + 1 %}
+            {% set w3 = w1.total - 1 %}
+            {% for k in range(numTask[w3]) %}
+            <td> {{ taskName[w2.total] }} </td>
+            {% set w2.total = w2.total + 1 %}
+        </tr>
+        <tr>
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
+        </tr>
+    </table>
+    <br><br>
+
+    {{ data }}
+</body>
+
+</html>

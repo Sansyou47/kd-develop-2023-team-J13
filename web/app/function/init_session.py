@@ -12,10 +12,17 @@ def set_session():
     session.pop('project_users', None)
     project_number = int(request.args.get("project_number"))
     cur = mysql.get_db().cursor()
+    # 基本的なプロジェクトの情報を取得
     cur.execute("SELECT name, github, googleDrive, logo FROM project WHERE projectNumber = %s", (project_number))
     data = cur.fetchone()
+    # プロジェクトに参加しているユーザーを取得
     cur.execute("SELECT userId FROM project_users WHERE projectNumber = %s", (project_number))
     userId = cur.fetchall()
+    # プロジェクトのユーザーストーリーを取得
+    cur.execute("SELECT name FROM story WHERE projectNumber = %s", (project_number))
+    storyName = cur.fetchall()
+    if storyName:
+        session['backlog'] = storyName
     uName = []
     for userid in userId:
         cur.execute("SELECT userName FROM users WHERE userId = %s", (userid[0]))
