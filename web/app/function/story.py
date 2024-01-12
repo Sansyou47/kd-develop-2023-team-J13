@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session ,url_for
 from flaskext.mysql import MySQL
 from flask_login import login_required, current_user
 
@@ -19,6 +19,7 @@ def storeis():
         # projectの追加が必要
         cur.execute("INSERT INTO story(name,projectNumber,priorit) VALUES(%s,%s,%s)", (stories, projectNumber,priority))
         conn.commit()
+        return redirect(url_for('story.storeis'))  # POST後にリダイレクト
     # 共通の処理（GETメソッドでの処理）
     cur.execute("SELECT name FROM story WHERE projectNumber = %s", projectNumber)
     story_data = cur.fetchall()
