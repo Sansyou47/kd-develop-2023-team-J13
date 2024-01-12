@@ -501,46 +501,106 @@ select {
 
 .contextmenu {
     display: none;
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 250px;
-    height: 150px;
+    position: absolute;
+    /* 要素を絶対位置に配置 */
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    /* 白い背景色 */
+    border: 1px solid #ccc;
+    /* 薄い灰色の境界線 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 軽い影 */
+    padding: 10px;
+    /* 内部余白 */
+    z-index: 1000;
+    /* 他の要素よりも手前に表示 */
 }
 
 .contextmenu p {
-    transition: all 0.3s ease;
+    display: flex;
+    /* フレックスボックスレイアウト */
+    align-items: center;
+    /* アイテムを中央揃え */
+    padding: 8px;
+    /* 内部余白 */
+    margin: 0;
+    /* マージンなし */
     cursor: pointer;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-left: 5px;
-    height: 32px;
-    line-height: 32px;
-    font-size: 16px;
+    /* カーソルをポインターに変更 */
+}
+
+.contextmenu img {
+    margin-right: 8px;
+    /* 画像とテキストの間隔 */
 }
 
 .contextmenu p:hover {
-    background-color: #e6e6e6;
+    background-color: #f5f5f5;
+    /* ホバー時の背景色 */
 }
 
+.contextmenu .rename a {
+    text-decoration: none;
+    /* リンクの下線をなくす */
+    color: #333333;
+    /* テキストの色 */
+}
+
+.contextmenu .delete {
+    color: #ff0000;
+    /* 赤いテキスト色 */
+}
+
+.contextmenu .delete:hover {
+    background-color: #ffebeb;
+    /* 削除項目のホバー時の背景色 */
+}
+
+/* プロジェクト名変更フォームのスタイル */
 .projectrename-form {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 320px;
-    height: 150px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
 }
 
-/* デリート処理前の警告文 */
+/* タイトルのスタイル */
+.projectrename-form .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* テキスト入力欄のスタイル */
+.projectrename-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+/* ボタンのスタイル */
+.projectrename-form .button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.projectrename-form .button:hover {
+    background-color: #0056b3;
+}
+
+
+/* 警告文全体のスタイル */
 .projectdelete-caution {
     display: none;
     position: fixed;
@@ -548,28 +608,49 @@ select {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 200px;
+    padding: 20px;
     background-color: #ffffff;
-    border-radius: 5%;
+    border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
 }
 
+/* Caution!!のスタイル */
 .caution1 {
     color: red;
+    font-size: 24px;
+    font-weight: bold;
 }
 
-
-.projectrename-form .title {
-    margin-left: 10px;
-    margin-top: 5px;
-    font-size: 22px;
+/* 警告メッセージのスタイル */
+.projectdelete-caution p {
+    font-size: 18px;
+    margin-bottom: 15px;
 }
 
-.projectrename-form input {
-    font-size: 20px;
-    margin-top: 10px;
-    margin-left: 10px;
+/* ボタンのスタイル */
+.projectdelete-caution input[type="submit"] {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
 }
+
+.projectdelete-caution input[type="submit"]:hover {
+    background-color: #c82333;
+}
+
+.projectdelete-caution input[type="submit"][name="ng"] {
+    background-color: #6c757d;
+}
+
+.projectdelete-caution input[type="submit"][name="ng"]:hover {
+    background-color: #5a6268;
+}
+
 
 .context-add-story-menu {
     display: none;
@@ -580,7 +661,7 @@ select {
     width: 380px;
     height: 280px;
     background-color: #ffffff;
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
     padding: 10px;
