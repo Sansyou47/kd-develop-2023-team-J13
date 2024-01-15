@@ -58,6 +58,11 @@
                 inputElement.value = projectTitle;
                 hiddenElement.value = projectNumber;
 
+                // テキストを選択します。
+                setTimeout(function () {
+                    inputElement.select();
+                }, 0);
+
                 renameForm.style.display = 'block';
                 contextMenu.style.display = 'none';
             });
