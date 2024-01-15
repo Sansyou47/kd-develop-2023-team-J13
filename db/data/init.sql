@@ -162,33 +162,12 @@ CREATE TABLE skill(
 
 INSERT INTO skill(userNumber) VALUES('1');
 
-drop table if exists achievement;
-create table achievement(
-    userNumber  int,
-    scrumMaster int default 0,
-    productOwner int default 0,
-    developer   int default 0,
-    presenter   int default 0,
-    teamLeader  int default 0
-);
-
-INSERT INTO achievement(userNumber, scrumMaster, developer, presenter) VALUES(1, 3, 1, 3);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(2, 3, 1);
-INSERT INTO achievement(userNumber, developer, productOwner, presenter) VALUES(3, 3, 1, 1);
-INSERT INTO achievement(userNumber, productOwner, developer, teamLeader) VALUES(4, 3, 1, 3);
-INSERT INTO achievement(userNumber, developer, presenter, teamLeader) VALUES(5, 3, 4, 3);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(6, 3, 1);
-INSERT INTO achievement(userNumber, productOwner, developer, presenter) VALUES(7, 3, 2, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(8, 3, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(9, 3, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(10, 3, 1);
-
 drop table if exists persona;
 create table persona(
     projectNumber int primary key,
     name    varchar(50),
     age     int,
-    gender  int,
+    gender  varchar(10),
     job     varchar(50),
     hobby   varchar(50),
     income  int,
@@ -196,7 +175,7 @@ create table persona(
     note    varchar(2000)
 );
 
-INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
+INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, '男', '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
 
 drop table if exists student;
 create table student(
