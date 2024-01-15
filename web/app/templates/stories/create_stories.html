@@ -11,6 +11,7 @@
             var addstoryForm = document.querySelector('.context-add-story-menu');
             var addpersonaForm = document.querySelector('.context-add-persona-menu');
             var addtaskForm = document.querySelector('.context-add-task-menu');
+            var adduserForm = document.querySelector('.context-add-user-form');
             var overlay = document.getElementById('overlay');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
@@ -192,6 +193,19 @@
             <label for="note">その他</label>
             <textarea name="note" placeholder="備考など記述"></textarea><br>
             <input type="submit" value="登録">
+        </form>
+    </div>
+
+    <div class="context-add-user-form">
+        <form action="/action/project/addusers" method="post">
+            <div class="addusers">
+                <p>招待するユーザーのメールアドレスを入力してください</p>
+                {% if error_message %}
+                <p class="error">{{ error_message }}</p>
+                {% endif %}
+                <input type="text" name="email" placeholder="メールアドレス" required>
+                <input type="submit" value="招待">
+            </div>
         </form>
     </div>
 </body>

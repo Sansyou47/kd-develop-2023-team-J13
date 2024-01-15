@@ -71,6 +71,7 @@ def create_template():
         title = request.form.get('title')
         target_class = request.form.get('target_class')
         team = int(request.form.get('team'))
+        sorting = request.form.get('gen')
         coma = int(request.form.get('coma'))
         sharedFolderInput = request.form.get('sharedFolderInput')
         owner = str(session.get("user_id"))
@@ -80,20 +81,24 @@ def create_template():
         cur.execute("SELECT userNumber FROM student WHERE class = (%s)", (target_class,))
         userNumber = cur.fetchall()
         
+        # タプルからリストに変換
+        userNumber = list(userNumber)
+        
         # 指定されたチーム数から、チームごとの人数を計算
-        number_of_team = 4
+        number_of_team = int(len(userNumber) / team)
         count = 0
         # チームへ割り振りが完了したユーザーのリスト
         endUserNumber = []
         
+        if sorting == "random":
+            # ランダムにユーザーを割り振る
+            random.shuffle(userNumber)
         for i in range(0, team):
             cur.execute("INSERT INTO project(name, owner, start_date, finish_date, googleDrive) VALUES (%s, %s, %s, %s, %s)", (title + str(i), owner, "2020-01-01", "2020-01-01", sharedFolderInput))
             mysql.get_db().commit()
             projectId = cur.lastrowid
             # プロジェクトオーナーに作成した先生を追加
             cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (title + str(i), owner, projectId))
-            
-            
             
             # チームごとの人数分だけユーザーを割り振る
             for j in range(0, number_of_team):
@@ -104,12 +109,14 @@ def create_template():
                 mysql.get_db().commit()
                 count += 1
             # チームごとの人数が割り振り終わった後、残りの人数を割り振る
-            # if i < (len(userNumber) % team):
-            #     cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (title, userNumber[count][0], projectId))
-            #     mysql.get_db().commit()
-            #     endUserNumber.append(userNumber[count][0])
-            #     count += 1
-        
+            if i < (len(userNumber) % team):
+                user = userNumber[count][0]
+                cur.execute("SELECT userId FROM users WHERE userNumber = (%s)", (user,))
+                uid = cur.fetchone()
+                cur.execute("INSERT INTO project_users(projectName, userId, projectNumber) VALUES (%s, %s, %s)", (title + str(i), uid, projectId))
+                mysql.get_db().commit()
+                endUserNumber.append(userNumber[count][0])
+                count += 1
         return redirect("/select_project")
     else:
         return "render_template('/project/createproject2.html')"
