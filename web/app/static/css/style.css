@@ -288,7 +288,154 @@ body {
     font-size: 16px;
 }
 
+.story {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+}
 
+
+.persona-area {
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #fffca4;
+    width: 220px;
+    height: 95%;
+    border-radius: 10px;
+    cursor: default;
+    text-align: center;
+}
+
+/* .persona-area :hover {
+    background-color: #ffffff;
+} */
+
+
+.persona-area img {
+    border-radius: 50%;
+    background-color: rgb(255, 139, 97);
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.persona-area img:hover {
+    animation: bounce 0.3s;
+}
+
+.persona-area h2 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.persona-area p {
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.story-body {
+    width: 100%;
+    height: 100%;
+}
+
+.story-area {
+    transition: all 0.3s ease;
+    width: 100%;
+    height: 300px;
+    background-color: rgb(165, 203, 221);
+    /* display: inline-block; */
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+}
+
+.story-area:hover {
+    background-color: rgb(191, 211, 220);
+}
+
+.story-area h2 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.story-button {
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 210px;
+    height: 180px;
+    background-color: hsl(82, 89%, 79%);
+    border-radius: 15px;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.story-button:hover {
+    background-color: hsl(82, 89%, 69%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.story-button p {
+    font-size: 18px;
+}
+
+.story-info {
+    width: 300px;
+    height: 150px;
+    white-space: normal;
+    position: relative;
+    overflow: hidden;
+}
+
+.story-info p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000;
+    font-size: 20px;
+    margin: 0;
+    text-align: center;
+}
+
+.task-area {
+    width: 100%;
+    height: 400px;
+    background-color: rgb(255, 215, 114);
+    cursor: default;
+    border-radius: 10px;
+}
+
+.task-area h2 {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.task-button {
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 210px;
+    height: 100px;
+    background-color: hsl(255, 86%, 93%);
+    border-radius: 15px;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+.task-button:hover {
+    background-color: hsl(255, 86%, 93%);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.task-button p {
+    font-size: 18px;
+}
 
 .textbox-001 {
     width: 75%;
