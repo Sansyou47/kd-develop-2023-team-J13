@@ -88,13 +88,14 @@ drop table if exists story;
 create table story(
     name    varchar(2000),
     projectNumber int,
-    priorit int
+    priorit int,
+    sprint  int
 );
 
-INSERT INTO story(name, projectNumber,priorit) VALUES('ファイルを一括で管理したい',1 ,0);
-INSERT INTO story(name, projectNumber,priorit) VALUES('各員の進行状況を逐次把握したい', 1,1);
-INSERT INTO story(name, projectNumber,priorit) VALUES('キノコ派救済作業', 2,1);
-INSERT INTO story(name, projectNumber,priorit) VALUES('キノコ派救済作業', 19,1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('ファイルを一括で管理したい',1 ,0, 1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('各員の進行状況を逐次把握したい', 1,1, 1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('キノコ派救済作業', 2,1, 1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('キノコ派救済作業', 19,1, 1);
 
 
 drop table if exists class;
