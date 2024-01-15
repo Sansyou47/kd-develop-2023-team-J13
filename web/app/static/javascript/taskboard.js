@@ -31,7 +31,7 @@ window.onload = function () {
             var id = e.dataTransfer.getData('text');
             if (id) {
                 var elem = document.getElementById(id);
-
+                console.log(id); // 追加
                 element.appendChild(elem);
 
                 var st = element;
@@ -58,7 +58,9 @@ window.onload = function () {
                             throw new Error("HTTP error " + response.status);
                         }
                         // リクエストが成功したらページをリロード
+                        // 下のリロードのlocationを無効にしたらDoneからDoingに戻る処理が増えるけど画面のリロードが要らなくなる
                         location.reload();
+                        console.log('reload');
                     })
                     .catch(function (error) {
                         console.log('Request failed: ', error.message);
