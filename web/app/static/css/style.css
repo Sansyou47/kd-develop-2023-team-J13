@@ -301,7 +301,7 @@ body {
     margin-right: 10px;
     background-color: #fffca4;
     width: 220px;
-    height: 95%;
+    height: 100%;
     border-radius: 10px;
     cursor: default;
     text-align: center;
@@ -341,47 +341,60 @@ body {
     height: 100%;
 }
 
+/* ストーリーエリア全体のスタイル */
 .story-area {
     transition: all 0.3s ease;
     width: 100%;
-    height: 300px;
-    background-color: rgb(165, 203, 221);
-    /* display: inline-block; */
+    height: auto;
+    background-color: #a5cbdd;
+    /* ライトブルー */
     cursor: pointer;
     border-radius: 10px;
     display: flex;
+    flex-wrap: wrap;
+    /* 要素が折り返されるようにする */
 }
 
+/* ストーリーエリアのホバースタイル */
 .story-area:hover {
-    background-color: rgb(191, 211, 220);
+    background-color: #bfd3dc;
+    /* ライトグレー */
 }
 
+/* ストーリーエリア内の見出しのスタイル */
 .story-area h2 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
+/* ストーリーボタンのスタイル */
 .story-button {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    width: 210px;
-    height: 180px;
-    background-color: hsl(82, 89%, 79%);
+    width: 150px;
+    /* 小さなサイズに調整 */
+    height: 120px;
+    /* 小さなサイズに調整 */
+    background-color: #d3e3eb;
+    /* ライトグレーシャンパン */
     border-radius: 15px;
-    float: left;
-    margin-left: 15px;
-    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
+/* ストーリーボタンのホバースタイル */
 .story-button:hover {
-    background-color: hsl(82, 89%, 69%);
+    background-color: #c2d9e1;
+    /* ライトブルーグレー */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
+/* ストーリーボタン内の段落のスタイル */
 .story-button p {
-    font-size: 18px;
+    font-size: 16px;
 }
+
 
 .story-info {
     width: 300px;
@@ -402,39 +415,54 @@ body {
     text-align: center;
 }
 
+/* タスクエリア全体のスタイル */
 .task-area {
     width: 100%;
-    height: 400px;
-    background-color: rgb(255, 215, 114);
+    height: auto;
+    background-color: #ffd772;
+    /* ライトイエロー */
     cursor: default;
     border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    /* フレックスアイテムが折り返されるようにする */
+    justify-content: space-around;
+    /* フレックスアイテムの配置を調整 */
+    padding: 1px;
+    /* タスクボタンとの隙間を調整 */
 }
 
+/* タスクエリア内の見出しのスタイル */
 .task-area h2 {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    width: 100%;
 }
 
+/* タスクボタンのスタイル */
 .task-button {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
     width: 210px;
     height: 100px;
-    background-color: hsl(255, 86%, 93%);
+    background-color: #ffe0bb;
+    /* ライトピーチ */
     border-radius: 15px;
-    float: left;
-    margin-left: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    margin-right: 20px;
 }
 
+/* タスクボタンのホバースタイル */
 .task-button:hover {
-    background-color: hsl(255, 86%, 93%);
+    background-color: #ffd9c3;
+    /* ライトオレンジピーチ */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
+/* タスクボタン内の段落のスタイル */
 .task-button p {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .textbox-001 {
