@@ -31,7 +31,8 @@ create table project(
     finish_date DATETIME,
     github  varchar(200),
     googleDrive varchar(200),
-    logo    varchar(200)
+    logo    varchar(200),
+    sprint  int
 );
 
 INSERT INTO project(name, owner, finish_date, github, googleDrive, logo) VALUES('開発支援アプリ', '橋本俊平', '2024-01-15', 'https://github.com/Sansyou47/kd-develop-2023-team-J13.git', 'https://drive.google.com/drive/folders/0AOWOMUXeZizTUk9PVA', 'bird.png');
