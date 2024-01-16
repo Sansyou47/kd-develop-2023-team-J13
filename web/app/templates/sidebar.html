@@ -20,21 +20,19 @@
             {{session['project']}}
         </div>
     </div>
-    <form action="/action/change_sprint" method="post">
-        <label>
-            スプリント
-            <select name="ppp">
-                {% for row in range(1, session['total_sprint'] + 1) %}
-                {% if row == session['now_sprint'] %}
-                <option value="{{ row }}" selected>{{ row }}</option>
-                {% else %}
-                <option value="{{ row }}">{{ row }}</option>
-                {% endif %}
-                {% endfor %}
-            </select>
-            / {{ session['total_sprint'] }}
-        </label>
-    </form>
+    <label>
+        スプリント
+        <select name="ppp">
+            {% for row in range(1, session['total_sprint'] + 1) %}
+            {% if row == session['now_sprint'] %}
+            <option value="{{ row }}" selected>{{ row }}</option>
+            {% else %}
+            <option value="{{ row }}">{{ row }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        / {{ session['total_sprint'] }}
+    </label>
     <div class="product-backlog">
         <p class="caption">
             プロダクトバックログ

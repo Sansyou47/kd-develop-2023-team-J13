@@ -33,7 +33,7 @@ def add_task():
 @login_required
 def action_add_task():
     taskName = request.form.get("taskName")
-    sprint = int(request.form.get("sprint"))
+    sprint = int(session.get("now_sprint"))
     storyName = request.form.get("storyName")
     projectNumber = str(session.get("project_number"))
     # MySQLへ接続
@@ -57,7 +57,7 @@ def action_add_task():
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("SELECT name FROM task WHERE projectNumber = %s", (projectNumber))
+    cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
     taskName = cur.fetchall()
 
     conn.commit()
