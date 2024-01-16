@@ -1,15 +1,26 @@
-{% include 'header.html' %}
-{% include 'sidebar.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
 
 <body>
-    <form action="/action/project/addusers" method="post">
-        <div class="addusers">
-            <p>招待するユーザーのメールアドレスを入力してください</p>
-            {% if error_message %}
-            <p class="error">{{ error_message }}</p>
-            {% endif %}
-            <input type="text" name="email" placeholder="メールアドレス" required>
-            <input type="submit" value="招待">
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
+        <div class="register-user-form">
+            <form action="/action/project/addusers" method="post">
+                <div class="addusers">
+                    <p>ユーザーの招待</p>
+                    {% if error_message %}
+                    <p class="error">{{ error_message }}</p>
+                    {% endif %}
+                    <input type="text" name="email" placeholder="E-mailアドレスを入力" required>
+                    <input type="hidden" name="pid">
+                    <input type="hidden" name="projectTitle">
+                    <input type="submit" value="招待">
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </body>
+
+</html>

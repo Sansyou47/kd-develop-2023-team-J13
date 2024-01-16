@@ -90,6 +90,7 @@ def login():
             session['user_id'] = uid
             session['user_name'] = userInfo[1]
             session['git_account'] = userInfo[2]
+            session['now_sprint'] = 1
             if userInfo[3] is None:
                 session['user_icon'] = "default.svg"
             else:

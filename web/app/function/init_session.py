@@ -13,13 +13,13 @@ def set_session():
     project_number = int(request.args.get("project_number"))
     cur = mysql.get_db().cursor()
     # 基本的なプロジェクトの情報を取得
-    cur.execute("SELECT name, github, googleDrive, logo FROM project WHERE projectNumber = %s", (project_number))
+    cur.execute("SELECT name, github, googleDrive, logo, sprint FROM project WHERE projectNumber = %s", (project_number))
     data = cur.fetchone()
     # プロジェクトに参加しているユーザーを取得
     cur.execute("SELECT userId FROM project_users WHERE projectNumber = %s", (project_number))
     userId = cur.fetchall()
-    # プロジェクトのユーザーストーリーを取得
-    cur.execute("SELECT name FROM story WHERE projectNumber = %s", (project_number))
+    # プロジェクトのユーザーストーリーを取得(デフォルトでは第1スプリントを表示)
+    cur.execute("SELECT name FROM story WHERE projectNumber = %s AND sprint = %s", (project_number, 1))
     storyName = cur.fetchall()
     if storyName:
         session['backlog'] = storyName
@@ -37,6 +37,7 @@ def set_session():
     session['project_googleDrive'] = data[2]
     session['project_users'] = uName
     session["project"] = data[0]
+    session['total_sprint'] = data[4]
     session["project_number"] = project_number
-    # テストのため一時的に変更
+    # redirectを使用しているため、この後の処理はstory.pyを参照
     return redirect("/create_stories")
