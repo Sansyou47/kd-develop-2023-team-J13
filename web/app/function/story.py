@@ -12,13 +12,13 @@ def get_story(sprint):
     cur = conn.cursor()
     cur.execute("SELECT name FROM story WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
     story = cur.fetchall()
+    session.pop("backlog", None)
     if story:
-        session.pop("backlog", None)
         session["backlog"] = story
     cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
     task = cur.fetchall()
+    session.pop("task", None)
     if task:
-        session.pop("task", None)
         session["taskName"] = task
     cur.close()
     conn.close()
