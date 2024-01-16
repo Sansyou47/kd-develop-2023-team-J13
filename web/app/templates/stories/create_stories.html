@@ -8,12 +8,15 @@
         window.onload = function () {
             var storyArea = document.querySelector('.story-area');
             var storyButton = document.getElementsByClassName('story-button');
+            var taskArea = document.querySelector('.task-area');
+            var taskButton = document.getElementsByClassName('task-button');
             var personaImage = document.querySelector('.persona-img');
             var personaInfo = document.querySelector('.persona-area');
             var addstoryForm = document.querySelector('.context-add-story-menu');
             var addpersonaForm = document.querySelector('.context-add-persona-menu');
             var addtaskForm = document.querySelector('.context-add-task-menu');
             var adduserForm = document.querySelector('.context-add-user-form');
+            var contextmenu = document.querySelector('.contextmenu');
             var personacontextMenu = document.querySelector('.personaContextmenu');
             var overlay = document.getElementById('overlay');
 
@@ -29,6 +32,7 @@
                 }
             });
 
+            // タスクボタンを右クリックの動作
             for (var i = 0; i < storyButton.length; i++) {
                 storyButton[i].addEventListener('click', function (e) {
                     e.preventDefault();
@@ -41,6 +45,19 @@
                         overlay.style.display = 'block';
                         isFormVisible = true; // フォームが表示されていることを示す
                     }
+                });
+            }
+
+            for (var i = 0; i < taskButton.length; i++) {
+                taskButton[i].addEventListener('contextmenu', function (e) {
+                    e.preventDefault();
+                    var taskName = this.querySelector('input[type="hidden"]').value;
+                    window.taskName = taskName;
+                    console.log(taskName);
+
+                    contextmenu.style.top = e.clientY + 'px';
+                    contextmenu.style.left = e.clientX + 'px';
+                    contextmenu.style.display = 'block';
                 });
             }
 
@@ -80,6 +97,7 @@
             // 他の場所をクリックしたときにメニューを非表示にする
             window.addEventListener('click', function (e) {
                 if (e.button !== 2) { // Not right click
+                    contextmenu.style.display = 'none';
                     personacontextMenu.style.display = 'none';
                 }
             });
