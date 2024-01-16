@@ -294,14 +294,32 @@ body {
     height: 100%;
 }
 
+.persona {
+    background-color: #fffca4;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.persona-img {
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(255, 139, 97);
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.persona-img:hover {
+    animation: bounce 0.3s;
+}
 
 .persona-area {
     transition: all 0.3s ease;
+    display: none;
     margin-top: 10px;
     margin-right: 10px;
     background-color: #fffca4;
     width: 220px;
-    height: 95%;
+    height: 80%;
     border-radius: 10px;
     cursor: default;
     text-align: center;
@@ -310,19 +328,6 @@ body {
 /* .persona-area :hover {
     background-color: #ffffff;
 } */
-
-
-.persona-area img {
-    border-radius: 50%;
-    background-color: rgb(255, 139, 97);
-    text-align: center;
-    margin-top: 10px;
-    cursor: pointer;
-}
-
-.persona-area img:hover {
-    animation: bounce 0.3s;
-}
 
 .persona-area h2 {
     text-align: center;
@@ -555,6 +560,39 @@ select {
     /* 削除項目のホバー時の背景色 */
 }
 
+.personaContextmenu {
+    display: none;
+    position: absolute;
+    /* 要素を絶対位置に配置 */
+    background-color: #ffffff;
+    /* 白い背景色 */
+    border: 1px solid #ccc;
+    /* 薄い灰色の境界線 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 軽い影 */
+    padding: 10px;
+    /* 内部余白 */
+    z-index: 1000;
+    /* 他の要素よりも手前に表示 */
+}
+
+.personaContextmenu p {
+    display: flex;
+    /* フレックスボックスレイアウト */
+    align-items: center;
+    /* アイテムを中央揃え */
+    padding: 8px;
+    /* 内部余白 */
+    margin: 0;
+    /* マージンなし */
+    cursor: pointer;
+    /* カーソルをポインターに変更 */
+}
+
+.personaContextmenu p:hover {
+    background-color: #f5f5f5;
+}
+
 /* プロジェクト名変更フォームのスタイル */
 .projectrename-form {
     display: none;
@@ -568,6 +606,7 @@ select {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
+    z-index: 999;
 }
 
 /* タイトルのスタイル */
@@ -613,6 +652,7 @@ select {
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
+    z-index: 999;
 }
 
 /* Caution!!のスタイル */
@@ -699,6 +739,72 @@ select {
     padding: 10px;
     z-index: 999;
 }
+
+/* コンテキスト内のユーザー登録フォームスタイル */
+
+.context-register-user-form {
+    display: none;
+    /* 初めは非表示 */
+    position: fixed;
+    /* 画面固定位置に配置 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 中央寄せ */
+    width: 380px;
+    height: 200px;
+    background-color: #ffffff;
+    /* 白い背景色 */
+    border-radius: 15px;
+    /* 丸みを帯びた角丸 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    /* 軽い影の効果 */
+    text-align: center;
+    /* 中央寄せ */
+    padding: 20px;
+    /* 内側の余白を増やして視認性向上 */
+    z-index: 999;
+    /* 重なり順を設定 */
+}
+
+/* フォーム内のテキストのスタイル */
+.context-register-user-form p {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+    /* テキストカラーを指定 */
+}
+
+/* フォーム内の入力欄のスタイル */
+.context-register-user-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* フォーム内の送信ボタンのスタイル */
+.context-register-user-form input[type="submit"] {
+    background-color: #3498db;
+    /* オシャレな青色 */
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    /* ホバー時のトランジション */
+}
+
+/* フォーム内の送信ボタンのホバースタイル */
+.context-register-user-form input[type="submit"]:hover {
+    background-color: #2980b9;
+    /* ホバー時の色の変更 */
+}
+
 
 /* 弾むアニメーションを定義 */
 @keyframes bounce {

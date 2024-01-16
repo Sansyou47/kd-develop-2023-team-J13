@@ -1,4 +1,6 @@
-{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
 
 <head>
     <meta charset="UTF-8">
@@ -7,55 +9,57 @@
 </head>
 
 <body>
-    <!-- ヘッダー -->
-    <h1>プロジェクト情報を入力してください</h1>
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
 
-    <!-- プロジェクト情報入力フォーム -->
-    <form id="projectForm" method="POST" action="/action/create_project1">
-        <label for="projectTitle">プロジェクトタイトル:</label>
-        <input type="text" id="projectTitle" name="projectTitle">
 
-        <label for="startDate">プロジェクト開始日:</label>
-        <input type="date" id="startDate" name="startDate" value="">
+        <!-- プロジェクト情報入力フォーム -->
+        <form id="projectForm" method="POST" action="/action/create_project1">
+            <label for="projectTitle">プロジェクトタイトル:</label>
+            <input type="text" id="projectTitle" name="projectTitle">
 
-        <label for="endDate">リリース予定日:</label>
-        <input type="date" id="endDate" name="endDate">
+            <label for="startDate">プロジェクト開始日:</label>
+            <input type="date" id="startDate" name="startDate" value="">
 
-        <label for="sprint">スプリント回数:</label>
-        <input type="text" id="sprint" name="sprint">
+            <label for="endDate">リリース予定日:</label>
+            <input type="date" id="endDate" name="endDate">
 
-        <label for="urlInput">GitHubリポジトリ:</label>
-        <input type="url" id="urlInput" name="urlInput">
+            <label for="sprint">スプリント回数:</label>
+            <input type="text" id="sprint" name="sprint">
 
-        <label for="sharedFolderInput">共有フォルダ:</label>
-        <input type="text" id="sharedFolderInput" name="sharedFolderInput">
+            <label for="urlInput">GitHubリポジトリ:</label>
+            <input type="url" id="urlInput" name="urlInput">
 
-        <input type="submit" value="プロジェクトを開始する">
-    </form>
+            <label for="sharedFolderInput">共有フォルダ:</label>
+            <input type="text" id="sharedFolderInput" name="sharedFolderInput">
 
-    <!-- スクリプト -->
-    <script>
-        // プロジェクト開始日に現在の日時をセットする
-        document.getElementById('startDate').valueAsDate = new Date();
+            <input type="submit" value="プロジェクトを開始する">
+        </form>
 
-        // プロジェクト開始日とプロジェクト完成予定日の変更を監視して、チェックを行う関数を呼び出す
-        document.getElementById('startDate').addEventListener('change', checkDateValidity);
-        document.getElementById('endDate').addEventListener('change', checkDateValidity);
+        <!-- スクリプト -->
+        <script>
+            // プロジェクト開始日に現在の日時をセットする
+            document.getElementById('startDate').valueAsDate = new Date();
 
-        // 関数: プロジェクト開始日とプロジェクト完成予定日をチェックする
-        function checkDateValidity() {
-            var startDate = new Date(document.getElementById('startDate').value);
-            var endDate = new Date(document.getElementById('endDate').value);
-            var sevenDaysLater = new Date();
-            sevenDaysLater.setDate(sevenDaysLater.getDate() + 6);
+            // プロジェクト開始日とプロジェクト完成予定日の変更を監視して、チェックを行う関数を呼び出す
+            document.getElementById('startDate').addEventListener('change', checkDateValidity);
+            document.getElementById('endDate').addEventListener('change', checkDateValidity);
 
-            // プロジェクト開始日とプロジェクト完成予定日が7日以内の場合、エラーメッセージを表示する
-            if (startDate <= sevenDaysLater && endDate <= sevenDaysLater) {
-                alert("プロジェクト開始日とプロジェクト完成予定日は7日以上で設定してください。");
+            // 関数: プロジェクト開始日とプロジェクト完成予定日をチェックする
+            function checkDateValidity() {
+                var startDate = new Date(document.getElementById('startDate').value);
+                var endDate = new Date(document.getElementById('endDate').value);
+                var sevenDaysLater = new Date();
+                sevenDaysLater.setDate(sevenDaysLater.getDate() + 6);
+
+                // プロジェクト開始日とプロジェクト完成予定日が7日以内の場合、エラーメッセージを表示する
+                if (startDate <= sevenDaysLater && endDate <= sevenDaysLater) {
+                    alert("プロジェクト開始日とプロジェクト完成予定日は7日以上で設定してください。");
+                }
             }
-        }
-    </script>
-
+        </script>
+    </div>
 </body>
 
 </html>

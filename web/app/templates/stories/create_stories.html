@@ -2,18 +2,26 @@
 <html lang="ja">
 <link rel="stylesheet" href="../static/css/style.css">
 
+
 <head>
     <script>
         window.onload = function () {
             var storyArea = document.querySelector('.story-area');
             var storyButton = document.getElementsByClassName('story-button');
+            var taskArea = document.querySelector('.task-area');
+            var taskButton = document.getElementsByClassName('task-button');
             var personaImage = document.querySelector('.persona-img');
+            var personaInfo = document.querySelector('.persona-area');
             var addstoryForm = document.querySelector('.context-add-story-menu');
             var addpersonaForm = document.querySelector('.context-add-persona-menu');
             var addtaskForm = document.querySelector('.context-add-task-menu');
+            var adduserForm = document.querySelector('.context-add-user-form');
+            var contextmenu = document.querySelector('.contextmenu');
+            var personacontextMenu = document.querySelector('.personaContextmenu');
             var overlay = document.getElementById('overlay');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
+            var isPersonaVisible = false;
 
             storyArea.addEventListener('click', function (e) {
                 if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
@@ -24,6 +32,7 @@
                 }
             });
 
+            // タスクボタンを右クリックの動作
             for (var i = 0; i < storyButton.length; i++) {
                 storyButton[i].addEventListener('click', function (e) {
                     e.preventDefault();
@@ -39,12 +48,57 @@
                 });
             }
 
+            for (var i = 0; i < taskButton.length; i++) {
+                taskButton[i].addEventListener('contextmenu', function (e) {
+                    e.preventDefault();
+                    var taskName = this.querySelector('input[type="hidden"]').value;
+                    window.taskName = taskName;
+                    console.log(taskName);
+
+                    contextmenu.style.top = e.clientY + 'px';
+                    contextmenu.style.left = e.clientX + 'px';
+                    contextmenu.style.display = 'block';
+                });
+            }
+
             personaImage.addEventListener('click', function (e) {
+                if (isPersonaVisible) {
+                    personaInfo.style.display = 'none';
+                    isPersonaVisible = false;
+                } else {
+                    personaInfo.style.display = 'block';
+                    isPersonaVisible = true;
+                }
+                // if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
+                //     addpersonaForm.style.display = 'block';
+                //     overlay.style.display = 'block';
+                //     isFormVisible = true; // フォームが表示されていることを示す
+                //     e.stopPropagation();
+                // }
+            });
+
+            personaImage.addEventListener('contextmenu', function (e) {
+                e.preventDefault(); // デフォルトの右クリックメニューを無効化
+                personacontextMenu.style.display = 'block'; // contextmenu要素を表示
+                personacontextMenu.style.left = e.pageX + 'px'; // contextmenu要素の位置をマウスの位置に設定
+                personacontextMenu.style.top = e.pageY + 'px'; // contextmenu要素の位置をマウスの位置に設定
+            });
+
+            personacontextMenu.children[0].addEventListener('click', function (e) {
                 if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
                     addpersonaForm.style.display = 'block';
                     overlay.style.display = 'block';
                     isFormVisible = true; // フォームが表示されていることを示す
+                    personacontextMenu.style.display = 'none';
                     e.stopPropagation();
+                }
+            });
+
+            // 他の場所をクリックしたときにメニューを非表示にする
+            window.addEventListener('click', function (e) {
+                if (e.button !== 2) { // Not right click
+                    contextmenu.style.display = 'none';
+                    personacontextMenu.style.display = 'none';
                 }
             });
 
@@ -66,23 +120,24 @@
     <div class="contents">
         {% include 'sidebar.html' %}
         <div class="story">
-            <div class="persona-area">
-                {% if persona %}
+            <div class="persona">
                 <img class="persona-img" src="../../static/images/human.svg" width="80px" height="80px">
-                <div class="persona-info">
-                    <p class="name">名前：{{persona[1]}}</p>
-                    <p class="age">年齢：{{persona[2]}}</p>
-                    <p class="gender">性別：{{persona[3]}}</p>
-                    <p class="job">職業：{{persona[4]}}</p>
-                    <p class="hobby">趣味：{{persona[5]}}</p>
-                    <p class="income">年収：{{persona[6]}}</p>
-                    <p class="family">家族構成：{{persona[7]}}</p>
-                    <p class="note">その他：<br>{{persona[8]}}</p>
+                <div class="persona-area">
+                    {% if persona %}
+                    <div class="persona-info">
+                        <p class="name">名前：{{persona[1]}}</p>
+                        <p class="age">年齢：{{persona[2]}}</p>
+                        <p class="gender">性別：{{persona[3]}}</p>
+                        <p class="job">職業：{{persona[4]}}</p>
+                        <p class="hobby">趣味：{{persona[5]}}</p>
+                        <p class="income">年収：{{persona[6]}}</p>
+                        <p class="family">家族構成：{{persona[7]}}</p>
+                        <p class="note">その他：<br>{{persona[8]}}</p>
+                    </div>
+                    {% else %}
+                    <p>ペルソナを定義しましょう。</p>
+                    {% endif %}
                 </div>
-                {% else %}
-                <img class="persona-img" src="../../static/images/human.svg" width="80px" height="80px">
-                <p>ペルソナを定義しましょう。</p>
-                {% endif %}
             </div>
             <div class="story-body">
                 <h2>ユーザーストーリー</h2>
@@ -193,5 +248,24 @@
             <textarea name="note" placeholder="備考など記述"></textarea><br>
             <input type="submit" value="登録">
         </form>
+    </div>
+
+    <div class="context-register-user-form">
+        <form action="/action/project/addusers" method="post">
+            <div class="addusers">
+                <p>ユーザーの招待</p>
+                {% if error_message %}
+                <p class="error">{{ error_message }}</p>
+                {% endif %}
+                <input type="text" name="email" placeholder="E-mailアドレスを入力" required>
+                <input type="submit" value="招待">
+            </div>
+        </form>
+    </div>
+
+    <div class="personaContextmenu">
+        <p class="edit">
+            ペルソナを変更
+        </p>
     </div>
 </body>

@@ -21,6 +21,7 @@ INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd132
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000001@st.kobedenshi.ac.jp', 'デバッグ一郎', 'デバッグイチロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000002@st.kobedenshi.ac.jp', 'デバッグ二郎', 'デバッグジロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000003@st.kobedenshi.ac.jp', 'デバッグ三郎', 'デバッグサブロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'teacher');
+
 drop table if exists project;
 create table project(
     projectNumber  int auto_increment primary key,
@@ -31,7 +32,8 @@ create table project(
     finish_date DATETIME,
     github  varchar(200),
     googleDrive varchar(200),
-    logo    varchar(200)
+    logo    varchar(200),
+    sprint  int
 );
 
 INSERT INTO project(name, owner, finish_date, github, googleDrive, logo) VALUES('開発支援アプリ', '橋本俊平', '2024-01-15', 'https://github.com/Sansyou47/kd-develop-2023-team-J13.git', 'https://drive.google.com/drive/folders/0AOWOMUXeZizTUk9PVA', 'bird.png');
@@ -87,13 +89,14 @@ drop table if exists story;
 create table story(
     name    varchar(2000),
     projectNumber int,
-    priorit int
+    priorit int,
+    sprint  int
 );
 
-INSERT INTO story(name, projectNumber,priorit) VALUES('ファイルを一括で管理したい',1 ,0);
-INSERT INTO story(name, projectNumber,priorit) VALUES('各員の進行状況を逐次把握したい', 1,1);
-INSERT INTO story(name, projectNumber,priorit) VALUES('キノコ派救済作業', 2,1);
-INSERT INTO story(name, projectNumber,priorit) VALUES('キノコ派救済作業', 19,1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('ファイルを一括で管理したい',1 ,0, 1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('各員の進行状況を逐次把握したい', 1,1, 1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('キノコ派救済作業', 2,1, 1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('キノコ派救済作業', 19,1, 1);
 
 
 drop table if exists class;
@@ -162,33 +165,12 @@ CREATE TABLE skill(
 
 INSERT INTO skill(userNumber) VALUES('1');
 
-drop table if exists achievement;
-create table achievement(
-    userNumber  int,
-    scrumMaster int default 0,
-    productOwner int default 0,
-    developer   int default 0,
-    presenter   int default 0,
-    teamLeader  int default 0
-);
-
-INSERT INTO achievement(userNumber, scrumMaster, developer, presenter) VALUES(1, 3, 1, 3);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(2, 3, 1);
-INSERT INTO achievement(userNumber, developer, productOwner, presenter) VALUES(3, 3, 1, 1);
-INSERT INTO achievement(userNumber, productOwner, developer, teamLeader) VALUES(4, 3, 1, 3);
-INSERT INTO achievement(userNumber, developer, presenter, teamLeader) VALUES(5, 3, 4, 3);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(6, 3, 1);
-INSERT INTO achievement(userNumber, productOwner, developer, presenter) VALUES(7, 3, 2, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(8, 3, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(9, 3, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(10, 3, 1);
-
 drop table if exists persona;
 create table persona(
     projectNumber int primary key,
     name    varchar(50),
     age     int,
-    gender  int,
+    gender  varchar(10),
     job     varchar(50),
     hobby   varchar(50),
     income  int,
@@ -196,7 +178,7 @@ create table persona(
     note    varchar(2000)
 );
 
-INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
+INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, '男', '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
 
 drop table if exists student;
 create table student(

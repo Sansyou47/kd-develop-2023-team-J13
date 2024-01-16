@@ -6,9 +6,29 @@ story = Blueprint("story", __name__)
 
 mysql = None
 
+# 指定されたスプリントからストーリーとタスクを取得する
+def get_story(sprint):
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT name FROM story WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
+    story = cur.fetchall()
+    if story:
+        session.pop("backlog", None)
+        session["backlog"] = story
+    cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
+    task = cur.fetchall()
+    if task:
+        session.pop("task", None)
+        session["taskName"] = task
+    cur.close()
+    conn.close()
+    return
+
 @story.route("/create_stories", methods=["GET", "POST"])  # ストーリー追加、表示処理
 @login_required
 def storeis():
+    stories = None
+    priority = None
     projectNumber = str(session.get("project_number"))
     conn = mysql.get_db()
     cur = conn.cursor()
