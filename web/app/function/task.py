@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, session
 from flask_login import login_required
 from flaskext.mysql import MySQL
+from datetime import timedelta
 
 task = Blueprint("task", __name__)
 
@@ -39,9 +40,15 @@ def action_add_task():
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
+    cur.execute("SELECT start_date FROM project WHERE projectNumber = %s", (projectNumber))
+    Stert_date = cur.fetchone()[0]  # fetchone()を使って一つの値を取得
+    delta_days = (sprint - 1) * 7
+    stert_day = Stert_date + timedelta(days=delta_days)
+    end_day = stert_day + timedelta(days=6)
+    # SQL実行
     cur.execute(
-        "INSERT INTO task(name, story, sprint, projectNumber) VALUES(%s, %s ,%s ,%s)",
-        (taskName, storyName, sprint, projectNumber)
+        "INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES(%s, %s ,%s ,%s,%s,%s)",
+        (taskName, storyName, stert_day, end_day, sprint, projectNumber)
     )
     conn.commit()
     cur.close()
