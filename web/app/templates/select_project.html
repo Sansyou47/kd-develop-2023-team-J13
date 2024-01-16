@@ -65,11 +65,18 @@
                 }, 0);
 
                 renameForm.style.display = 'block';
+                overlay.style.display = 'block';
                 contextMenu.style.display = 'none';
             });
 
             // プロジェクトに招待するの<p>タグをクリックしたらcontext-register-user-form要素を表示
             contextMenu.children[1].addEventListener('click', function (e) {
+                var hiddenPid = document.querySelector('input[name="pid"]');
+                var hiddenTitle = document.querySelector('input[name="projectTitle"]');
+
+                hiddenPid.value = projectNumber;
+                hiddenTitle.value = projectTitle;
+
                 registerUserForm.style.display = 'block';
                 overlay.style.display = 'block';
                 contextMenu.style.display = 'none';
@@ -215,6 +222,8 @@
                 <p class="error">{{ error_message }}</p>
                 {% endif %}
                 <input type="text" name="email" placeholder="E-mailアドレスを入力" required>
+                <input type="hidden" name="pid">
+                <input type="hidden" name="projectTitle">
                 <input type="submit" value="招待">
             </div>
         </form>
