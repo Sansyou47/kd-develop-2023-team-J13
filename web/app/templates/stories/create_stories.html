@@ -23,6 +23,11 @@
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
 
+            document.querySelector('select[name="ppp"]').addEventListener('change', function () {
+                window.location.href = "/action/change_sprint?ppp=" + this.value;
+                console.log('選択肢が変更されました。');
+            });
+
             storyArea.addEventListener('click', function (e) {
                 if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
                     addstoryForm.style.display = 'block';
