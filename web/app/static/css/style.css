@@ -555,6 +555,55 @@ select {
     /* 削除項目のホバー時の背景色 */
 }
 
+.taskcontextmenu {
+    display: none;
+    position: absolute;
+    /* 要素を絶対位置に配置 */
+    background-color: #ffffff;
+    /* 白い背景色 */
+    border: 1px solid #ccc;
+    /* 薄い灰色の境界線 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 軽い影 */
+    padding: 10px;
+    /* 内部余白 */
+    z-index: 1000;
+    /* 他の要素よりも手前に表示 */
+}
+
+.taskcontextmenu p {
+    display: flex;
+    /* フレックスボックスレイアウト */
+    align-items: center;
+    /* アイテムを中央揃え */
+    padding: 8px;
+    /* 内部余白 */
+    margin: 0;
+    /* マージンなし */
+    cursor: pointer;
+    /* カーソルをポインターに変更 */
+}
+
+.taskcontextmenu img {
+    margin-right: 8px;
+    /* 画像とテキストの間隔 */
+}
+
+.taskcontextmenu p:hover {
+    background-color: #f5f5f5;
+    /* ホバー時の背景色 */
+}
+
+.taskcontextmenu .delete {
+    color: #ff0000;
+    /* 赤いテキスト色 */
+}
+
+.taskcontextmenu .delete:hover {
+    background-color: #ffebeb;
+    /* 削除項目のホバー時の背景色 */
+}
+
 /* プロジェクト名変更フォームのスタイル */
 .projectrename-form {
     display: none;
@@ -602,6 +651,36 @@ select {
 
 /* 警告文全体のスタイル */
 .projectdelete-caution {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* ストーリー削除の警告文スタイル */
+.storydelete-caution {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* タスク削除の警告文スタイル */
+.taskdelete-caution {
     display: none;
     position: fixed;
     top: 50%;

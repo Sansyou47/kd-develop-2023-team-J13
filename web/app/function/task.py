@@ -33,7 +33,7 @@ def add_task():
 def action_add_task():
     taskName = request.form.get("taskName")
     sprint = int(request.form.get("sprint"))
-    storyName = request.form.get("storyName")
+    storyName = request.form.get("story_Name")
     projectNumber = str(session.get("project_number"))
     # MySQLへ接続
     conn = mysql.get_db()

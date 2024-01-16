@@ -150,3 +150,25 @@ def delete_project():
             cur.close()
 
     return redirect("/select_project")
+
+@delete.route("/action/delete_story", methods=["POST"])
+@login_required
+def delete_story():
+    ok = request.form.get("ok")
+    story_name = request.form.get("story-name")
+    project_number = session['project_number']
+    #ok 変数に値が入っているならDELETE処理実行
+    if ok :
+        # MySQLへ接続
+        conn = mysql.get_db()
+        cur = conn.cursor()
+
+        # SQL実行
+        cur.execute("DELETE FROM task WHERE projectNumber = %s AND story = %s", (project_number, story_name))
+        cur.execute("DELETE FROM story WHERE projectNumber = %s AND name = %s", (project_number, story_name))
+
+        conn.commit()
+        cur.close()
+        
+
+    return redirect("/create_stories")
