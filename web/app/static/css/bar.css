@@ -1,6 +1,9 @@
 .gantt .grid-background {
-    fill: none; }
+    fill: none; } 
   
+  .gantt-wrap{
+    overflow: scroll;
+    }
   .gantt .grid-header {
     fill: #ffffff;
     stroke: #e0e0e0;
@@ -95,7 +98,7 @@
   
   .gantt-container {
     position: relative;
-    overflow: auto;
+    
     font-size: 12px; }
     .gantt-container .popup-wrapper {
       position: absolute;
