@@ -22,7 +22,6 @@ def register():
         kana = request.form.get("kana")
         userClass = request.form.get("class")
         gitId = request.form.get("gitAccount")
-        image = request.files.get('image')
         
         # テーブルに入力されたメールアドレスが存在するか確認
         cur.execute("SELECT * FROM users WHERE userId = %s", (userid,))

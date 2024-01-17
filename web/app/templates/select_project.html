@@ -22,6 +22,7 @@
             var renameForm = document.querySelector('.projectrename-form');
             var overlay = document.getElementById('overlay');
             var projectDelete = document.querySelector('.projectdelete-caution')
+            var registerUserForm = document.querySelector('.context-register-user-form');
 
             for (var i = 0; i < elements.length; i++) {
                 elements[i].addEventListener('contextmenu', function (e) {
@@ -58,9 +59,29 @@
                 inputElement.value = projectTitle;
                 hiddenElement.value = projectNumber;
 
+                // テキストを選択します。
+                setTimeout(function () {
+                    inputElement.select();
+                }, 0);
+
                 renameForm.style.display = 'block';
+                overlay.style.display = 'block';
                 contextMenu.style.display = 'none';
             });
+
+            // プロジェクトに招待するの<p>タグをクリックしたらcontext-register-user-form要素を表示
+            contextMenu.children[1].addEventListener('click', function (e) {
+                var hiddenPid = document.querySelector('input[name="pid"]');
+                var hiddenTitle = document.querySelector('input[name="projectTitle"]');
+
+                hiddenPid.value = projectNumber;
+                hiddenTitle.value = projectTitle;
+
+                registerUserForm.style.display = 'block';
+                overlay.style.display = 'block';
+                contextMenu.style.display = 'none';
+            });
+
             contextMenu.children[3].addEventListener('click', function (e) {
                 // input要素を取得します。ここではname属性が"project_number"の要素を取得します。
                 var hiddenElement = document.querySelector('input[name="projectNumber"]');
@@ -69,6 +90,7 @@
                 hiddenElement.value = projectNumber;
 
                 projectDelete.style.display = 'block';
+                overlay.style.display = 'block';
                 contextMenu.style.display = 'none';
             });
 
@@ -78,8 +100,16 @@
                     contextMenu.style.display = 'none';
                 }
             });
-        }
 
+            window.addEventListener('click', function (e) {
+                if (e.target == overlay) {
+                    renameForm.style.display = 'none';
+                    projectDelete.style.display = 'none';
+                    registerUserForm.style.display = 'none';
+                    overlay.style.display = 'none';
+                }
+            });
+        }
     </script>
 </head>
 
@@ -142,6 +172,7 @@
             </div>
         </div>
     </div>
+
     <div id="overlay"></div>
 
     <div class="contextmenu">
@@ -180,6 +211,21 @@
             <input type="hidden" name="projectNumber">
             <input type="submit" name="ok" value="OK">
             <input type="submit" name="ng" value="キャンセル">
+        </form>
+    </div>
+
+    <div class="context-register-user-form">
+        <form action="/action/project/addusers" method="post">
+            <div class="addusers">
+                <p>ユーザーの招待</p>
+                {% if error_message %}
+                <p class="error">{{ error_message }}</p>
+                {% endif %}
+                <input type="text" name="email" placeholder="E-mailアドレスを入力" required>
+                <input type="hidden" name="pid">
+                <input type="hidden" name="projectTitle">
+                <input type="submit" value="招待">
+            </div>
         </form>
     </div>
 

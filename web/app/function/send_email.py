@@ -45,6 +45,12 @@ def acaddusers():
     email = request.form.get('email')
     project = str(session.get('project'))
     projectNumber = str(session.get("project_number"))
+    
+    # プロジェクトを非選択状態で招待された場合
+    # is noneを使わないのは変数をキャストした後だから
+    if projectNumber == 'None':
+        project = str(request.form.get('projectTitle'))
+        projectNumber = int(request.form.get('pid'))  
         
     # 入力されたメールアドレスが登録されているか確認
     cur.execute("SELECT * FROM users WHERE userId = %s", (email))
