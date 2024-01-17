@@ -3,6 +3,7 @@ from flaskext.mysql import MySQL
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 from function import story, select_project, task, init_session, apple, mypage, graph, users,taskboard, send_email, delete, debug
 from werkzeug.security import check_password_hash
+from secrets import token_hex
 import os
 
 app = Flask(__name__)
@@ -13,7 +14,7 @@ app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("MYSQL_PASSWORD")
 app.config["MYSQL_DATABASE_DB"] = os.getenv("MYSQL_DATABASE")
 app.config["MYSQL_DATABASE_HOST"] = "mysql"
 
-app.secret_key = os.getenv("SECRET_KEY")
+app.secret_key = token_hex(128)
 
 mysql = MySQL(app)
 

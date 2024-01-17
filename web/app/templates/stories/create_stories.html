@@ -23,9 +23,12 @@
             var contextMenu = document.querySelector('.contextmenu');
             var storyDelete = document.querySelector('.storydelete-caution')
             var taskDelete = document.querySelector('.taskdelete-caution')
+            var persona = document.querySelector('.persona');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
+
+
 
             document.querySelector('select[name="ppp"]').addEventListener('change', function () {
                 window.location.href = "/action/change_sprint?ppp=" + this.value;
@@ -103,6 +106,9 @@
                 contextmenu.style.display = 'none';
             });
 
+            // .persona-areaを最初は非表示にする
+            personaInfo.classList.add('hidden');
+
             personaImage.addEventListener('click', function (e) {
                 if (isPersonaVisible) {
                     personaInfo.style.display = 'none';
@@ -172,8 +178,7 @@
                 isFormVisible = true; // フォームが表示されていることを示す
                 storyContextmenu.style.display = 'none';
             });
-
-            // contextmenu以外の場所をクリックしたときにメニューを非表示にする
+            // 他の場所をクリックしたときにメニューを非表示にする
             window.addEventListener('click', function (e) {
                 if (e.button !== 2) { // Not right click
                     contextmenu.style.display = 'none';
@@ -197,6 +202,8 @@
                     overlay.style.display = 'none';
                 }
             });
+
+
 
 
         }
