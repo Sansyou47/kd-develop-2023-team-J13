@@ -74,3 +74,4 @@ def mypage_skill():
     cur.close()
 
     return render_template("/mypage/mypage_skill.html")
+#画面更新処理が未実装
