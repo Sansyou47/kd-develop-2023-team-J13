@@ -6,6 +6,24 @@ story = Blueprint("story", __name__)
 
 mysql = None
 
+# 指定されたスプリントからストーリーとタスクを取得する
+def get_story(sprint):
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT name FROM story WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
+    story = cur.fetchall()
+    session.pop("backlog", None)
+    if story:
+        session["backlog"] = story
+    cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
+    task = cur.fetchall()
+    session.pop("task", None)
+    if task:
+        session["taskName"] = task
+    cur.close()
+    conn.close()
+    return task
+
 @story.route("/create_stories", methods=["GET", "POST"])  # ストーリー追加、表示処理
 @login_required
 def storeis():
@@ -19,11 +37,11 @@ def storeis():
         stories = request.form.get("stories")
         priority = request.form.get("priority")
         # projectの追加が必要
-        cur.execute("INSERT INTO story(name,projectNumber,priorit) VALUES(%s,%s,%s)", (stories, projectNumber,priority))
+        cur.execute("INSERT INTO story(name,projectNumber,priorit, sprint) VALUES(%s,%s,%s, %s)", (stories, projectNumber,priority, session.get("now_sprint")))
         conn.commit()
         return redirect(url_for('story.storeis'))  # POST後にリダイレクト
     # 共通の処理（GETメソッドでの処理）
-    cur.execute("SELECT name FROM story WHERE projectNumber = %s", projectNumber)
+    cur.execute("SELECT name FROM story WHERE projectNumber = %s AND sprint = %s", (projectNumber, (session.get("now_sprint"))))
     story_data = cur.fetchall()
     if story_data:
         session.pop("backlog", None)
@@ -32,7 +50,7 @@ def storeis():
     cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
     persona = cur.fetchone()
     session["persona"] = persona
-    cur.execute("SELECT name FROM task WHERE projectNumber = %s", (projectNumber))
+    cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
     taskName = cur.fetchall()
     session["taskName"] = taskName
     cur.close()
@@ -88,3 +106,11 @@ def register_persona():
         conn.close()
         
     return render_template("stories/create_stories.html", project=session.get("project_number"), persona=persona, taskName=session.get("taskName"))
+
+@story.route("/action/change_sprint", methods=["GET"])
+@login_required
+def change_sprint():
+    sprint = int(request.args.get("ppp"))
+    session["now_sprint"] = sprint
+    taskName = get_story(sprint)
+    return render_template("stories/create_stories.html", project=session.get("project_number"), persona=session.get("persona"), taskName=taskName)

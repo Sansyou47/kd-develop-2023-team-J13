@@ -86,14 +86,11 @@ def login():
             # ユーザー情報を取得
             cursor.execute("SELECT userNumber, userName, gitAccount, userIcon FROM users WHERE userId = %s", (userid))
             userInfo = cursor.fetchone()
-            # アチーブメント情報を取得
-            cursor.execute("SELECT * FROM achievement WHERE userNumber = %s", (userInfo[0]))
-            achieve = cursor.fetchone()
             # セッションに情報を格納
             session['user_id'] = uid
             session['user_name'] = userInfo[1]
             session['git_account'] = userInfo[2]
-            session['achievement'] = achieve
+            session['now_sprint'] = 1
             if userInfo[3] is None:
                 session['user_icon'] = "default.svg"
             else:
