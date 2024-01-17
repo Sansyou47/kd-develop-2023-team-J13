@@ -175,4 +175,9 @@ window.onload = function () {
             e.dataTransfer.setData('text', e.target.id);
         });
     });
+
+    document.querySelector('select[name="ppp"]').addEventListener('change', function () {
+        window.location.href = "/action/changetaskboard_sprint?ppp=" + this.value;
+        console.log('選択肢が変更されました。');
+    });
 };

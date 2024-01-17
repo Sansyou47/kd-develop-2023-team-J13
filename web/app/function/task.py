@@ -89,7 +89,7 @@ def report_task():
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("SELECT * FROM task")
+    cur.execute("SELECT name, status, manager, story, sprint, comment FROM task")
     taskData = cur.fetchall()
 
     conn.commit()
@@ -107,13 +107,14 @@ def report():
 @login_required
 def action_report():
     report = request.form.get("report")
-    taskName = request.form.get("taskName")
+    taskName = request.form.get("task-Name")
+    projectNumber = str(session.get("project_number"))
 
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("UPDATE task SET comment = %s WHERE name = %s", (report, taskName))
+    cur.execute("UPDATE task SET comment = %s WHERE name = %s AND projectNumber = %s", (report, taskName, projectNumber))
 
     conn.commit()
     cur.close()
