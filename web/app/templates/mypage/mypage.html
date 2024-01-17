@@ -1,15 +1,18 @@
-{% include 'header.html' %}
 
-{% include 'sidebar.html' %}
 <!DOCTYPE html>
 <html lang="ja">
+<link rel="stylesheet" href="../static/css/style.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mypage</title>
     <link rel="stylesheet" href="../static/css/mypage.css">
+    
 </head>
 <body>
+    {% include 'header.html' %}
+    <div class="contents">
+        {% include 'sidebar.html' %}
     <h1>MySkill</h1>
     <form action="/register_skill" method="post">
         <table>
@@ -37,5 +40,6 @@
         </table>
         <td><input type="submit" value="送信"></td>
     </form>
+    </div>
 </body>
 </html>

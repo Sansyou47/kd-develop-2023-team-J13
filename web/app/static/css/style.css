@@ -295,7 +295,6 @@ body {
 }
 
 .persona {
-    background-color: #fffca4;
     text-align: center;
     margin-right: 10px;
 }
@@ -560,6 +559,98 @@ select {
     /* 削除項目のホバー時の背景色 */
 }
 
+.storyContextmenu {
+    display: none;
+    position: absolute;
+    /* 要素を絶対位置に配置 */
+    background-color: #ffffff;
+    /* 白い背景色 */
+    border: 1px solid #ccc;
+    /* 薄い灰色の境界線 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 軽い影 */
+    padding: 10px;
+    /* 内部余白 */
+    z-index: 1000;
+    /* 他の要素よりも手前に表示 */
+}
+
+.storyContextmenu p {
+    display: flex;
+    /* フレックスボックスレイアウト */
+    align-items: center;
+    /* アイテムを中央揃え */
+    padding: 8px;
+    /* 内部余白 */
+    margin: 0;
+    /* マージンなし */
+    cursor: pointer;
+    /* カーソルをポインターに変更 */
+}
+
+.storyContextmenu p:hover {
+    background-color: #f5f5f5;
+}
+
+.storyContextmenu .delete {
+    color: #ff0000;
+    /* 赤いテキスト色 */
+}
+
+.storyContextmenu .delete:hover {
+    background-color: #ffebeb;
+    /* 削除項目のホバー時の背景色 */
+}
+
+.taskcontextmenu {
+    display: none;
+    position: absolute;
+    /* 要素を絶対位置に配置 */
+    background-color: #ffffff;
+    /* 白い背景色 */
+    border: 1px solid #ccc;
+    /* 薄い灰色の境界線 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* 軽い影 */
+    padding: 10px;
+    /* 内部余白 */
+    z-index: 1000;
+    /* 他の要素よりも手前に表示 */
+}
+
+.taskcontextmenu p {
+    display: flex;
+    /* フレックスボックスレイアウト */
+    align-items: center;
+    /* アイテムを中央揃え */
+    padding: 8px;
+    /* 内部余白 */
+    margin: 0;
+    /* マージンなし */
+    cursor: pointer;
+    /* カーソルをポインターに変更 */
+}
+
+.taskcontextmenu img {
+    margin-right: 8px;
+    /* 画像とテキストの間隔 */
+}
+
+.taskcontextmenu p:hover {
+    background-color: #f5f5f5;
+    /* ホバー時の背景色 */
+}
+
+.taskcontextmenu .delete {
+    color: #ff0000;
+    /* 赤いテキスト色 */
+}
+
+.taskcontextmenu .delete:hover {
+    background-color: #ffebeb;
+    /* 削除項目のホバー時の背景色 */
+}
+
 .personaContextmenu {
     display: none;
     position: absolute;
@@ -655,6 +746,38 @@ select {
     z-index: 999;
 }
 
+/* タスク削除の警告文スタイル */
+.taskdelete-caution {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 999;
+}
+
+/* ストーリー削除の警告文スタイル */
+.storydelete-caution {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 999;
+}
+
 /* Caution!!のスタイル */
 .caution1 {
     color: red;
@@ -699,14 +822,74 @@ select {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 380px;
-    height: 280px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #f8f9fa;
+    /* ソフトなグレー */
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    /* より柔らかい影 */
     text-align: center;
-    padding: 10px;
+    padding: 20px;
+    /* パディングを増やして余白を追加 */
     z-index: 999;
 }
+
+.context-add-story-menu h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.context-add-story-menu form {
+    text-align: left;
+}
+
+.context-add-story-menu label {
+    display: block;
+    margin-top: 15px;
+    /* より多くのマージン */
+}
+
+.context-add-story-menu input {
+    width: calc(100% - 20px);
+    padding: 12px;
+    /* パディングを増やしてフォーム項目を大きくする */
+    margin-top: 8px;
+    /* より小さなマージン */
+    border: 1px solid #ced4da;
+    /* より明るいボーダー */
+    border-radius: 8px;
+    /* より丸い角 */
+    font-size: 14px;
+    /* より大きなフォント */
+}
+
+.context-add-story-menu select {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.context-add-story-menu input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #007bff;
+    /* ブルーのボタン */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    /* より大きなフォント */
+}
+
+.context-add-story-menu input[type="submit"]:hover {
+    background-color: #0056b3;
+    /* ホバー時の色変更 */
+}
+
 
 .context-add-task-menu {
     display: none;
@@ -715,14 +898,66 @@ select {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 380px;
-    height: 330px;
-    background-color: #ffffff;
+    background-color: #f8f9fa;
+    /* ソフトなグレー */
     border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    /* より柔らかい影 */
     text-align: center;
-    padding: 10px;
+    padding: 20px;
+    /* パディングを増やして余白を追加 */
     z-index: 999;
 }
+
+.context-add-task-menu h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.context-add-task-menu form {
+    text-align: left;
+}
+
+.context-add-task-menu label {
+    display: block;
+    margin-top: 15px;
+    /* より多くのマージン */
+}
+
+.context-add-task-menu input,
+.context-add-task-menu textarea {
+    width: calc(100% - 20px);
+    padding: 12px;
+    /* パディングを増やしてフォーム項目を大きくする */
+    margin-top: 8px;
+    /* より小さなマージン */
+    border: 1px solid #ced4da;
+    /* より明るいボーダー */
+    border-radius: 8px;
+    /* より丸い角 */
+    font-size: 14px;
+    /* より大きなフォント */
+}
+
+.context-add-task-menu input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #007bff;
+    /* ブルーのボタン */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    /* より大きなフォント */
+}
+
+.context-add-task-menu input[type="submit"]:hover {
+    background-color: #0056b3;
+    /* ホバー時の色変更 */
+}
+
 
 .context-add-persona-menu {
     display: none;
@@ -731,14 +966,96 @@ select {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 380px;
-    height: 650px;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     z-index: 999;
 }
+
+.context-add-persona-menu h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.context-add-persona-menu form {
+    text-align: center;
+    /* 中央寄せに変更 */
+}
+
+.context-add-persona-menu label {
+    display: block;
+    margin-top: 10px;
+}
+
+.context-add-persona-menu .gender-options {
+    margin-top: 10px;
+}
+
+.context-add-persona-menu .gender-options label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.context-add-persona-menu .gender-options input[type="radio"] {
+    display: none;
+}
+
+.context-add-persona-menu .gender-options .custom-radio {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #4caf50;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.context-add-persona-menu .gender-options .custom-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.context-add-persona-menu .gender-options input[type="radio"]:checked+.custom-radio::after {
+    opacity: 1;
+}
+
+.context-add-persona-menu input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.context-add-persona-menu input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.context-add-persona-menu textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+
+
 
 .register-user-form {
     width: 380px;
