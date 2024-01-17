@@ -19,6 +19,7 @@
             var contextmenu = document.querySelector('.contextmenu');
             var personacontextMenu = document.querySelector('.personaContextmenu');
             var overlay = document.getElementById('overlay');
+            var addmessage = document.querySelector('.context-add-message-form');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
@@ -260,6 +261,14 @@
                 <input type="text" name="email" placeholder="E-mailアドレスを入力" required>
                 <input type="submit" value="招待">
             </div>
+        </form>
+    </div>
+
+    <div class="context-add-message-form">
+        <form action="/action/report" method="post">
+            <p>タスクにメッセージを追加</p>
+            <textarea name=”report”></textarea>
+            <input type="submit" value="追加">
         </form>
     </div>
 
