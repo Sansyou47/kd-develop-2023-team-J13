@@ -43,9 +43,8 @@ def storeis():
     # 共通の処理（GETメソッドでの処理）
     cur.execute("SELECT name FROM story WHERE projectNumber = %s AND sprint = %s", (projectNumber, (session.get("now_sprint"))))
     story_data = cur.fetchall()
-    if story_data:
-        session.pop("backlog", None)
-        session["backlog"] = story_data
+    session.pop("backlog", None)
+    session["backlog"] = story_data
     # ペルソナの情報を取得
     cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
     persona = cur.fetchone()
