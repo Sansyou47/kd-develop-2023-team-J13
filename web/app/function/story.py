@@ -83,9 +83,9 @@ def register_persona():
         gender = request.form.get('gender')
         if gender is not None:
             if gender == 'men':
-                persona.append(0)
+                persona.append('男性')
             else:
-                persona.append(1)
+                persona.append('女性')
         persona.append(request.form.get('job'))
         persona.append(request.form.get('hobby'))
         persona.append(int(request.form.get('income')))
