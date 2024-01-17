@@ -172,3 +172,24 @@ def delete_story():
         
 
     return redirect("/create_stories")
+
+@delete.route("/action/delete_task", methods=["POST"])
+@login_required
+def delete_task():
+    ok = request.form.get("ok")
+    task_name = request.form.get("task-name")
+    project_number = session['project_number']
+    #ok 変数に値が入っているならDELETE処理実行
+    if ok :
+        # MySQLへ接続
+        conn = mysql.get_db()
+        cur = conn.cursor()
+
+        # SQL実行
+        cur.execute("DELETE FROM task WHERE projectNumber = %s AND name = %s", (project_number, task_name))
+
+        conn.commit()
+        cur.close()
+        
+
+    return redirect("/create_stories")
