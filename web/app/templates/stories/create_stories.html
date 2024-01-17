@@ -41,19 +41,14 @@
                 }
             });
 
-            // ストーリーボタンクリックの動作
+
+            // タスクボタンを右クリックの動作
             for (var i = 0; i < storyButton.length; i++) {
                 storyButton[i].addEventListener('click', function (e) {
                     e.preventDefault();
-                    var storyArea = e.target.closest('.story-button');
-                    var storyName = storyArea.querySelector('input[type="hidden"]').value;
+                    var storyName = this.querySelector('input[type="hidden"]').value;
                     window.storyName = storyName;
                     console.log(storyName);
-                    // input要素を取得します。ここではname属性が"storyName"の要素を取得します。
-                    var hiddenElement = document.querySelector('input[name="story_Name"]');
-
-                    // hidden要素のvalue属性にstoryNameを設定します。
-                    hiddenElement.value = storyName;
                     // フォームが表示されていないときだけ処理を実行
                     if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
                         addtaskForm.style.display = 'block';
