@@ -27,6 +27,11 @@
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
 
+            document.querySelector('select[name="ppp"]').addEventListener('change', function () {
+                window.location.href = "/action/change_sprint?ppp=" + this.value;
+                console.log('選択肢が変更されました。');
+            });
+
             storyArea.addEventListener('click', function (e) {
                 if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
                     addstoryForm.style.display = 'block';
@@ -287,12 +292,7 @@
             </h3>
             <label for="task">タスク名:</label>
             <input type="text" name="taskName" required><br>
-            <label>スプリント <select name="sprint">
-                    {% for i in range(1,11) %}
-                    <option value="{{ i }}">{{ i }}</option>
-                    {% endfor %}
-                </select></label>
-            <input type="hidden" name="story_Name">
+            <input type="hidden" name="storyName" value="{{ storyName }}">
             <div class="submit"><input type="submit" value="登録"></div>
         </form>
     </div>

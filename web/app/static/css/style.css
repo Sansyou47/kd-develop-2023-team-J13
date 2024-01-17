@@ -864,6 +864,20 @@ select {
     z-index: 999;
 }
 
+.register-user-form {
+    width: 380px;
+    height: 200px;
+    background-color: #ffffff;
+    /* 白い背景色 */
+    border-radius: 15px;
+    /* 丸みを帯びた角丸 */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    /* 軽い影の効果 */
+    text-align: center;
+    /* 中央寄せ */
+    padding: 20px;
+}
+
 /* コンテキスト内のユーザー登録フォームスタイル */
 
 .context-register-user-form {
