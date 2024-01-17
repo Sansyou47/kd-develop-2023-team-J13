@@ -21,6 +21,7 @@ INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd132
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000001@st.kobedenshi.ac.jp', 'デバッグ一郎', 'デバッグイチロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000002@st.kobedenshi.ac.jp', 'デバッグ二郎', 'デバッグジロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000003@st.kobedenshi.ac.jp', 'デバッグ三郎', 'デバッグサブロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'teacher');
+
 drop table if exists project;
 create table project(
     projectNumber  int auto_increment primary key,
@@ -31,34 +32,35 @@ create table project(
     finish_date DATETIME,
     github  varchar(200),
     googleDrive varchar(200),
-    logo    varchar(200)
+    logo    varchar(200),
+    sprint  int
 );
 
-INSERT INTO project(name, owner, finish_date, github, googleDrive, logo) VALUES('開発支援アプリ', '橋本俊平', '2024-01-15', 'https://github.com/Sansyou47/kd-develop-2023-team-J13.git', 'https://drive.google.com/drive/folders/0AOWOMUXeZizTUk9PVA', 'bird.png');
-INSERT INTO project(name, owner, finish_date, github) VALUES('タスク管理アプリ', '中井禅', '2024-01-15', 'https://github.com/Sansyou47/team-J13-shooting-range.git');
-INSERT INTO project(name, owner, finish_date, github) VALUES('シフト表作成支援アプリ', '嫁阪雄大', '2024-01-15', 'https://github.com/Sansyou47/PythonWebApp.git');
-INSERT INTO project(name, owner, finish_date, github, logo) VALUES('マインクラフトサーバー', '嫁阪雄大', '2024-01-15', 'https://github.com/Sansyou47/Minecraftserver-for-Docker.git', 'minecraft.png');
-INSERT INTO project(name, owner, finish_date) VALUES('音楽再生ソフト', '米津大也', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('音楽編集ソフト', '米津大也', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('音楽リミックスソフト', '米津大也', '2024-01-15');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('原神聖遺物計算アプリ', '中川浩太郎', '2024-01-15', 'java_logo.png');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('原神ガチャ課金計算', '中川浩太郎', '2024-01-15', 'java_logo.png');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('原神キャラクター育成計算', '中川浩太郎', '2024-01-15', 'java_logo.png');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('原神武器育成計算', '中川浩太郎', '2024-01-15', 'java_logo.png');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('原神素材計算', '中川浩太郎', '2024-01-15', 'java_logo.png');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('ビジュネル暗号計算機', '林敦啓', '2024-01-15', 'lambda_logo.png');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('ビジュネル暗号解読機', '林敦啓', '2024-01-15', 'lambda_logo.png');
-INSERT INTO project(name, owner, finish_date) VALUES('デレステキャラ育成計画表', '中井禅', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('デレステガチャ課金計算', '中井禅', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('デレステガチャ確率計算', '中井禅', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('デレステガチャユニット編成表', '中井禅', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('ブルアカロリボイス集', '橋本俊平', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('ブルアカガチャ課金計算', '橋本俊平', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('ブルアカガチャ確率計算', '橋本俊平', '2024-01-15');
-INSERT INTO project(name, owner, finish_date) VALUES('ブルアカユニット編成表', '橋本俊平', '2024-01-15');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('漫画感想共有アプリ', '山田真豊', '2024-01-15', 'flask_logo.png');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('漫画価格一覧アプリ', '山田真豊', '2024-01-15', 'flask_logo.png');
-INSERT INTO project(name, owner, finish_date, logo) VALUES('漫画ガチャ課金計算', '山田真豊', '2024-01-15', 'flask_logo.png');
+INSERT INTO project(name, owner, finish_date, github, googleDrive, logo, sprint) VALUES('開発支援アプリ', '橋本俊平', '2024-01-15', 'https://github.com/Sansyou47/kd-develop-2023-team-J13.git', 'https://drive.google.com/drive/folders/0AOWOMUXeZizTUk9PVA', 'bird.png', 3);
+INSERT INTO project(name, owner, finish_date, github, sprint) VALUES('タスク管理アプリ', '中井禅', '2024-01-15', 'https://github.com/Sansyou47/team-J13-shooting-range.git', 3);
+INSERT INTO project(name, owner, finish_date, github, sprint) VALUES('シフト表作成支援アプリ', '嫁阪雄大', '2024-01-15', 'https://github.com/Sansyou47/PythonWebApp.git', 3);
+INSERT INTO project(name, owner, finish_date, github, logo, sprint) VALUES('マインクラフトサーバー', '嫁阪雄大', '2024-01-15', 'https://github.com/Sansyou47/Minecraftserver-for-Docker.git', 'minecraft.png', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('音楽再生ソフト', '米津大也', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('音楽編集ソフト', '米津大也', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('音楽リミックスソフト', '米津大也', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('原神聖遺物計算アプリ', '中川浩太郎', '2024-01-15', 'java_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('原神ガチャ課金計算', '中川浩太郎', '2024-01-15', 'java_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('原神キャラクター育成計算', '中川浩太郎', '2024-01-15', 'java_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('原神武器育成計算', '中川浩太郎', '2024-01-15', 'java_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('原神素材計算', '中川浩太郎', '2024-01-15', 'java_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('ビジュネル暗号計算機', '林敦啓', '2024-01-15', 'lambda_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('ビジュネル暗号解読機', '林敦啓', '2024-01-15', 'lambda_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('デレステキャラ育成計画表', '中井禅', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('デレステガチャ課金計算', '中井禅', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('デレステガチャ確率計算', '中井禅', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('デレステガチャユニット編成表', '中井禅', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('ブルアカロリボイス集', '橋本俊平', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('ブルアカガチャ課金計算', '橋本俊平', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('ブルアカガチャ確率計算', '橋本俊平', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, sprint) VALUES('ブルアカユニット編成表', '橋本俊平', '2024-01-15', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('漫画感想共有アプリ', '山田真豊', '2024-01-15', 'flask_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('漫画価格一覧アプリ', '山田真豊', '2024-01-15', 'flask_logo.png', 3);
+INSERT INTO project(name, owner, finish_date, logo, sprint) VALUES('漫画ガチャ課金計算', '山田真豊', '2024-01-15', 'flask_logo.png', 3);
 
 drop table if exists task;
 create table task(
@@ -87,13 +89,14 @@ drop table if exists story;
 create table story(
     name    varchar(2000),
     projectNumber int,
-    priorit int
+    priorit int,
+    sprint  int
 );
 
-INSERT INTO story(name, projectNumber,priorit) VALUES('ファイルを一括で管理したい',1 ,0);
-INSERT INTO story(name, projectNumber,priorit) VALUES('各員の進行状況を逐次把握したい', 1,1);
-INSERT INTO story(name, projectNumber,priorit) VALUES('キノコ派救済作業', 2,1);
-INSERT INTO story(name, projectNumber,priorit) VALUES('キノコ派救済作業', 19,1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('ファイルを一括で管理したい',1 ,0, 1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('各員の進行状況を逐次把握したい', 1,1, 2);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('キノコ派救済作業', 2,1, 1);
+INSERT INTO story(name, projectNumber, priorit, sprint) VALUES('キノコ派救済作業', 19,1, 1);
 
 
 drop table if exists class;
@@ -162,33 +165,12 @@ CREATE TABLE skill(
 
 INSERT INTO skill(userNumber) VALUES('1');
 
-drop table if exists achievement;
-create table achievement(
-    userNumber  int,
-    scrumMaster int default 0,
-    productOwner int default 0,
-    developer   int default 0,
-    presenter   int default 0,
-    teamLeader  int default 0
-);
-
-INSERT INTO achievement(userNumber, scrumMaster, developer, presenter) VALUES(1, 3, 1, 3);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(2, 3, 1);
-INSERT INTO achievement(userNumber, developer, productOwner, presenter) VALUES(3, 3, 1, 1);
-INSERT INTO achievement(userNumber, productOwner, developer, teamLeader) VALUES(4, 3, 1, 3);
-INSERT INTO achievement(userNumber, developer, presenter, teamLeader) VALUES(5, 3, 4, 3);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(6, 3, 1);
-INSERT INTO achievement(userNumber, productOwner, developer, presenter) VALUES(7, 3, 2, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(8, 3, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(9, 3, 1);
-INSERT INTO achievement(userNumber, developer, presenter) VALUES(10, 3, 1);
-
 drop table if exists persona;
 create table persona(
     projectNumber int primary key,
     name    varchar(50),
     age     int,
-    gender  int,
+    gender  varchar(10),
     job     varchar(50),
     hobby   varchar(50),
     income  int,
@@ -196,7 +178,7 @@ create table persona(
     note    varchar(2000)
 );
 
-INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, 0, '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
+INSERT INTO persona(projectNumber, name, age, gender, job, hobby, income, family, note) VALUES(1, '神戸太郎', 20, '男', '学生', 'ゲーム', 50, '父、母、姉', 'KD学生であり、スクラム開発に興味がある。');
 
 drop table if exists student;
 create table student(

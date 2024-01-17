@@ -15,14 +15,30 @@
                 </div>
                 <div class="substance">
                     {% for row in story %}
-                    <p>{{row[0]}}<br></p>
+                    <p class="story-{{ index }}">{{row[0]}}<br></p>
+                    <input type="hidden" class="story_name_{{ loop.index }}" value="{{ row[0] }}">
                     {% endfor %}
                 </div>
             </div>
 
+<<<<<<< HEAD
         <div class="Task">    
             <div class="subtitle">
                 <h1>Task</h1>
+=======
+            <div class="Task">
+                <div class="subtitle">
+                    <h1>Task</h1>
+                </div>
+                <div class="substance">
+                    {% for row in task %}
+                    {% if row[1] == 2 %}
+                    <p class="task-{{task[3]}}">{{row[0]}}<br></p>
+                    <input type="hidden" id="task_name_{{ loop.index }}" value="{{ row[3] }}">
+                    {% endif %}
+                    {% endfor %}
+                </div>
+>>>>>>> develop
             </div>
             <div class="substance">
                 {% for row in task %}
@@ -49,7 +65,8 @@
                 <div class="substance">
                     {% for row in task %}
                     {% if row[1] == 1 %}
-                    <p>{{row[0]}}<br></p>
+                    <p class="doing-{{task[3]}}">{{row[0]}}<br></p>
+                    <input type="hidden" id="doing_name_{{ loop.index }}" value="{{ row[3] }}">
                     {% endif %}
                     {% endfor %}
                 </div>
@@ -62,7 +79,8 @@
                 <div class="substance"></div>
                 {% for row in task %}
                 {% if row[1] == 0 %}
-                <p>{{row[0]}}<br></p>
+                <p class="done-{{task[3]}}">{{row[0]}}<br></p>
+                <input type="hidden" id="done_name_{{ loop.index }}" value="{{ row[3] }}">
                 {% endif %}
                 {% endfor %}
             </div>

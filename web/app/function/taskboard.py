@@ -24,7 +24,7 @@ def outtaskboard():
 
     conn.commit()
     cur.close()
-
+    
     return render_template("/taskboard.html", story=Story,task=all_tasks)
 
 # taskbordをDoingやDoneに移動させる
@@ -40,3 +40,5 @@ def taskboardjs():
 
     conn.commit()
     cur.close()
+
+    return '', 200  # HTTPステータスコード200（成功）を返す
