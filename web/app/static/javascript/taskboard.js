@@ -55,7 +55,7 @@ window.onload = function () {
     for (c = 0; c < storyNames.length; c++) {
         try {
             var hue = c * 360 / stories_color.length;
-            co = 'hsl(' + hue + ', 100%, 75%)';
+            co = 'hsl(' + hue + ', 100%, 90%)';
             stories_color[c].style.backgroundColor = co;
 
             for (let index = 0; index < taskNames.length; index++) {

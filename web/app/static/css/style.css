@@ -791,28 +791,45 @@ select {
     margin-bottom: 15px;
 }
 
-/* ボタンのスタイル */
-.projectdelete-caution input[type="submit"] {
+/* 共通のボタンスタイル */
+.projectdelete-caution input[type="submit"],
+.taskdelete-caution input[type="submit"],
+.storydelete-caution input[type="submit"] {
+    display: block;
+    /* ボタンをブロック要素に変更 */
+    margin: 0 auto;
+    /* 左右中央に寄せる */
+    width: 150px;
+    /* 共通のボタン幅 */
     background-color: #dc3545;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px;
+    margin-top: 10px;
+    /* ボタン間の余白 */
 }
 
-.projectdelete-caution input[type="submit"]:hover {
+.projectdelete-caution input[type="submit"]:hover,
+.taskdelete-caution input[type="submit"]:hover,
+.storydelete-caution input[type="submit"]:hover {
     background-color: #c82333;
 }
 
-.projectdelete-caution input[type="submit"][name="ng"] {
+.projectdelete-caution input[type="submit"][name="ng"],
+.taskdelete-caution input[type="submit"][name="ng"],
+.storydelete-caution input[type="submit"][name="ng"] {
     background-color: #6c757d;
 }
 
-.projectdelete-caution input[type="submit"][name="ng"]:hover {
+.projectdelete-caution input[type="submit"][name="ng"]:hover,
+.taskdelete-caution input[type="submit"][name="ng"]:hover,
+.storydelete-caution input[type="submit"][name="ng"]:hover {
     background-color: #5a6268;
 }
+
+
 
 
 .context-add-story-menu {
