@@ -18,9 +18,11 @@
             var adduserForm = document.querySelector('.context-add-user-form');
             var contextmenu = document.querySelector('.contextmenu');
             var personacontextMenu = document.querySelector('.personaContextmenu');
+            var storyContextmenu = document.querySelector('.storyContextmenu');
             var overlay = document.getElementById('overlay');
             var contextMenu = document.querySelector('.contextmenu');
             var storyDelete = document.querySelector('.storydelete-caution')
+            var taskDelete = document.querySelector('.taskdelete-caution')
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
@@ -66,8 +68,30 @@
                     contextmenu.style.top = e.clientY + 'px';
                     contextmenu.style.left = e.clientX + 'px';
                     contextmenu.style.display = 'block';
+
+                    // マウスオーバーしている要素内のinput hidden要素の内容を取得
+                    var taskArea = e.target.closest('.task-button');
+                    var taskName = taskArea.querySelector('input[type="hidden"]').value;
+
+                    // 他の要素から使用できるようにする
+                    window.taskName = taskName;
+
                 });
             }
+            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+            contextmenu.children[1].addEventListener('click', function (e) {
+
+                // input要素を取得します。ここではname属性が"storyName"の要素を取得します。
+                var hiddenElement = document.querySelector('input[name="task-name"]');
+
+                // input要素のvalue属性にstoryNameを設定します。
+                hiddenElement.value = taskName;
+
+                taskDelete.style.display = 'block';
+                overlay.style.display = 'block';
+                isFormVisible = true; // フォームが表示されていることを示す
+                contextmenu.style.display = 'none';
+            });
 
             personaImage.addEventListener('click', function (e) {
                 if (isPersonaVisible) {
@@ -102,32 +126,15 @@
                 }
             });
 
-            // 他の場所をクリックしたときにメニューを非表示にする
-            window.addEventListener('click', function (e) {
-                if (e.button !== 2) { // Not right click
-                    contextmenu.style.display = 'none';
-                    personacontextMenu.style.display = 'none';
-                }
-            });
-
-            window.addEventListener('click', function (e) {
-                if (e.target == overlay) {
-                    addstoryForm.style.display = 'none';
-                    addtaskForm.style.display = 'none';
-                    addpersonaForm.style.display = 'none';
-                    isFormVisible = false; // フォームが非表示になったことを示す
-                    overlay.style.display = 'none';
-                }
-            });
-
+            //右クリックストーリー削除
             for (var i = 0; i < storyButton.length; i++) {
                 storyButton[i].addEventListener('contextmenu', function (e) {
-                    e.preventDefault();
+                    e.preventDefault(); // デフォルトの右クリックメニューを無効化
 
                     // メニューをマウスポインタの座標に表示
-                    contextMenu.style.top = e.clientY + 'px';
-                    contextMenu.style.left = e.clientX + 'px';
-                    contextMenu.style.display = 'block';
+                    storyContextmenu.style.top = e.clientY + 'px';
+                    storyContextmenu.style.left = e.clientX + 'px';
+                    storyContextmenu.style.display = 'block';
 
                     // マウスオーバーしている要素内のinput hidden要素の内容を取得
                     var storyArea = e.target.closest('.story-button');
@@ -138,12 +145,11 @@
 
                     console.log(storyName);
 
-                    return false;
                 });
             }
 
             // ストーリー削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
-            contextMenu.children[0].addEventListener('click', function (e) {
+            storyContextmenu.children[0].addEventListener('click', function (e) {
 
                 // input要素を取得します。ここではname属性が"storyName"の要素を取得します。
                 var hiddenElement = document.querySelector('input[name="story-name"]');
@@ -152,15 +158,37 @@
                 hiddenElement.value = storyName;
 
                 storyDelete.style.display = 'block';
-                contextMenu.style.display = 'none';
+                overlay.style.display = 'block';
+                isFormVisible = true; // フォームが表示されていることを示す
+                storyContextmenu.style.display = 'none';
             });
 
-            // 他の場所をクリックしたときにメニューを非表示にする
+            // contextmenu以外の場所をクリックしたときにメニューを非表示にする
             window.addEventListener('click', function (e) {
                 if (e.button !== 2) { // Not right click
-                    contextMenu.style.display = 'none';
+                    contextmenu.style.display = 'none';
+                    personacontextMenu.style.display = 'none';
+                    storyContextmenu.style.display = 'none';
                 }
             });
+
+
+
+
+            //背景を触った時の処理
+            window.addEventListener('click', function (e) {
+                if (e.target == overlay) {
+                    addstoryForm.style.display = 'none';
+                    addtaskForm.style.display = 'none';
+                    addpersonaForm.style.display = 'none';
+                    storyDelete.style.display = 'none';
+                    taskDelete.style.display = 'none';
+                    isFormVisible = false; // フォームが非表示になったことを示す
+                    overlay.style.display = 'none';
+                }
+            });
+
+
         }
     </script>
 </head>
@@ -223,6 +251,17 @@
     </div>
 
     <div id="overlay"></div>
+
+    <div class="contextmenu">
+        <p class="properties" onclick="redirectToPage(projectNumber)">
+            <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
+            タスクにメッセージを追加
+        </p>
+        <p class="delete">
+            <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
+            タスクを削除
+        </p>
+    </div>
 
 
     <div class="context-add-story-menu">
@@ -301,8 +340,8 @@
         </p>
     </div>
 
-    <!-- 右クリックした時に表示するメニュー -->
-    <div class="contextmenu">
+    <!-- ストーリーボタン右クリックした時に表示するメニュー -->
+    <div class="storyContextmenu">
         <p class="delete">
             <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
             ストーリーを削除
@@ -316,6 +355,18 @@
             <p class="caution2">ストーリーが削除されます!!!</p>
             <p>本当にストーリーを削除しますか?</p>
             <input type="hidden" name="story-name">
+            <input type="submit" name="ok" value="OK">
+            <input type="submit" name="ng" value="キャンセル">
+        </form>
+    </div>
+
+    <!-- ストーリー削除確認 -->
+    <div class="taskdelete-caution">
+        <form action="/action/delete_task" method="post">
+            <p class="caution1">Caution!!</p>
+            <p class="caution2">タスクが削除されます!!!</p>
+            <p>本当にタスクを削除しますか?</p>
+            <input type="hidden" name="task-name">
             <input type="submit" name="ok" value="OK">
             <input type="submit" name="ng" value="キャンセル">
         </form>

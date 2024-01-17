@@ -50,6 +50,7 @@ def storeis():
     cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
     persona = cur.fetchone()
     session["persona"] = persona
+    #taskの名前取得
     cur.execute("SELECT name FROM task WHERE projectNumber = %s", (projectNumber))
     taskName = cur.fetchall()
     session["taskName"] = taskName
