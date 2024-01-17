@@ -51,6 +51,16 @@
                     console.log(storyName);
                     // フォームが表示されていないときだけ処理を実行
                     if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
+                        // input要素を取得します。ここではname属性が"storyName"の要素を取得します。
+                        var hiddenElement = document.querySelector('input[name="story_Name"]');
+
+                        // input要素のvalue属性にstoryNameを設定します。
+                        hiddenElement.value = storyName;
+
+                        // target-storyにstoryNameを表示
+                        var targetStoryElement = document.querySelector('.target-story');
+                        targetStoryElement.textContent = '対象ストーリー：' + storyName;
+
                         addtaskForm.style.display = 'block';
                         overlay.style.display = 'block';
                         isFormVisible = true; // フォームが表示されていることを示す
@@ -81,10 +91,10 @@
             // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
             contextmenu.children[1].addEventListener('click', function (e) {
 
-                // input要素を取得します。ここではname属性が"storyName"の要素を取得します。
+                // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
                 var hiddenElement = document.querySelector('input[name="task-name"]');
 
-                // input要素のvalue属性にstoryNameを設定します。
+                // input要素のvalue属性にtaskNameを設定します。
                 hiddenElement.value = taskName;
 
                 taskDelete.style.display = 'block';
@@ -282,12 +292,11 @@
     <div class="context-add-task-menu">
         <h1>タスクを設定</h1>
         <form action="/action/add_task" method="post">
-            <h3>
-                対象ストーリー：{{ storyName }}
+            <h3 class="target-story">
             </h3>
             <label for="task">タスク名:</label>
             <input type="text" name="taskName" required><br>
-            <input type="hidden" name="storyName" value="{{ storyName }}">
+            <input type="hidden" name="story_Name">
             <div class="submit"><input type="submit" value="登録"></div>
         </form>
     </div>
