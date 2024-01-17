@@ -295,7 +295,6 @@ body {
 }
 
 .persona {
-    background-color: #fffca4;
     text-align: center;
     margin-right: 10px;
 }
@@ -346,60 +345,47 @@ body {
     height: 100%;
 }
 
-/* ストーリーエリア全体のスタイル */
 .story-area {
     transition: all 0.3s ease;
     width: 100%;
-    height: auto;
-    background-color: #a5cbdd;
-    /* ライトブルー */
+    height: 300px;
+    background-color: rgb(165, 203, 221);
+    /* display: inline-block; */
     cursor: pointer;
     border-radius: 10px;
     display: flex;
-    flex-wrap: wrap;
-    /* 要素が折り返されるようにする */
 }
 
-/* ストーリーエリアのホバースタイル */
 .story-area:hover {
-    background-color: #bfd3dc;
-    /* ライトグレー */
+    background-color: rgb(191, 211, 220);
 }
 
-/* ストーリーエリア内の見出しのスタイル */
 .story-area h2 {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
-/* ストーリーボタンのスタイル */
 .story-button {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    width: 150px;
-    /* 小さなサイズに調整 */
-    height: 120px;
-    /* 小さなサイズに調整 */
-    background-color: #d3e3eb;
-    /* ライトグレーシャンパン */
+    width: 210px;
+    height: 180px;
+    background-color: hsl(82, 89%, 79%);
     border-radius: 15px;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }
 
-/* ストーリーボタンのホバースタイル */
 .story-button:hover {
-    background-color: #c2d9e1;
-    /* ライトブルーグレー */
+    background-color: hsl(82, 89%, 69%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* ストーリーボタン内の段落のスタイル */
 .story-button p {
-    font-size: 16px;
+    font-size: 18px;
 }
-
 
 .story-info {
     width: 300px;
@@ -420,54 +406,39 @@ body {
     text-align: center;
 }
 
-/* タスクエリア全体のスタイル */
 .task-area {
     width: 100%;
-    height: auto;
-    background-color: #ffd772;
-    /* ライトイエロー */
+    height: 400px;
+    background-color: rgb(255, 215, 114);
     cursor: default;
     border-radius: 10px;
-    display: flex;
-    flex-wrap: wrap;
-    /* フレックスアイテムが折り返されるようにする */
-    justify-content: space-around;
-    /* フレックスアイテムの配置を調整 */
-    padding: 1px;
-    /* タスクボタンとの隙間を調整 */
 }
 
-/* タスクエリア内の見出しのスタイル */
 .task-area h2 {
     text-align: center;
-    margin-top: 15px;
-    width: 100%;
+    margin-top: 10px;
 }
 
-/* タスクボタンのスタイル */
 .task-button {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
     width: 210px;
     height: 100px;
-    background-color: #ffe0bb;
-    /* ライトピーチ */
+    background-color: hsl(255, 86%, 93%);
     border-radius: 15px;
-    margin-bottom: 20px;
-    margin-right: 20px;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }
 
-/* タスクボタンのホバースタイル */
 .task-button:hover {
-    background-color: #ffd9c3;
-    /* ライトオレンジピーチ */
+    background-color: hsl(255, 86%, 93%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* タスクボタン内の段落のスタイル */
 .task-button p {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .textbox-001 {
@@ -727,14 +698,74 @@ select {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 380px;
-    height: 280px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: #f8f9fa;
+    /* ソフトなグレー */
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    /* より柔らかい影 */
     text-align: center;
-    padding: 10px;
+    padding: 20px;
+    /* パディングを増やして余白を追加 */
     z-index: 999;
 }
+
+.context-add-story-menu h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.context-add-story-menu form {
+    text-align: left;
+}
+
+.context-add-story-menu label {
+    display: block;
+    margin-top: 15px;
+    /* より多くのマージン */
+}
+
+.context-add-story-menu input {
+    width: calc(100% - 20px);
+    padding: 12px;
+    /* パディングを増やしてフォーム項目を大きくする */
+    margin-top: 8px;
+    /* より小さなマージン */
+    border: 1px solid #ced4da;
+    /* より明るいボーダー */
+    border-radius: 8px;
+    /* より丸い角 */
+    font-size: 14px;
+    /* より大きなフォント */
+}
+
+.context-add-story-menu select {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin-top: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.context-add-story-menu input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #007bff;
+    /* ブルーのボタン */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    /* より大きなフォント */
+}
+
+.context-add-story-menu input[type="submit"]:hover {
+    background-color: #0056b3;
+    /* ホバー時の色変更 */
+}
+
 
 .context-add-task-menu {
     display: none;
@@ -743,14 +774,66 @@ select {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 380px;
-    height: 330px;
-    background-color: #ffffff;
+    background-color: #f8f9fa;
+    /* ソフトなグレー */
     border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    /* より柔らかい影 */
     text-align: center;
-    padding: 10px;
+    padding: 20px;
+    /* パディングを増やして余白を追加 */
     z-index: 999;
 }
+
+.context-add-task-menu h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.context-add-task-menu form {
+    text-align: left;
+}
+
+.context-add-task-menu label {
+    display: block;
+    margin-top: 15px;
+    /* より多くのマージン */
+}
+
+.context-add-task-menu input,
+.context-add-task-menu textarea {
+    width: calc(100% - 20px);
+    padding: 12px;
+    /* パディングを増やしてフォーム項目を大きくする */
+    margin-top: 8px;
+    /* より小さなマージン */
+    border: 1px solid #ced4da;
+    /* より明るいボーダー */
+    border-radius: 8px;
+    /* より丸い角 */
+    font-size: 14px;
+    /* より大きなフォント */
+}
+
+.context-add-task-menu input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #007bff;
+    /* ブルーのボタン */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    /* より大きなフォント */
+}
+
+.context-add-task-menu input[type="submit"]:hover {
+    background-color: #0056b3;
+    /* ホバー時の色変更 */
+}
+
 
 .context-add-persona-menu {
     display: none;
@@ -759,14 +842,96 @@ select {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 380px;
-    height: 650px;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     z-index: 999;
 }
+
+.context-add-persona-menu h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.context-add-persona-menu form {
+    text-align: center;
+    /* 中央寄せに変更 */
+}
+
+.context-add-persona-menu label {
+    display: block;
+    margin-top: 10px;
+}
+
+.context-add-persona-menu .gender-options {
+    margin-top: 10px;
+}
+
+.context-add-persona-menu .gender-options label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.context-add-persona-menu .gender-options input[type="radio"] {
+    display: none;
+}
+
+.context-add-persona-menu .gender-options .custom-radio {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 1px solid #4caf50;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.context-add-persona-menu .gender-options .custom-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.context-add-persona-menu .gender-options input[type="radio"]:checked+.custom-radio::after {
+    opacity: 1;
+}
+
+.context-add-persona-menu input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.context-add-persona-menu input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.context-add-persona-menu textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+
+
 
 .register-user-form {
     width: 380px;

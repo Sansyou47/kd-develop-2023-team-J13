@@ -19,9 +19,12 @@
             var contextmenu = document.querySelector('.contextmenu');
             var personacontextMenu = document.querySelector('.personaContextmenu');
             var overlay = document.getElementById('overlay');
+            var persona = document.querySelector('.persona');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
+
+
 
             document.querySelector('select[name="ppp"]').addEventListener('change', function () {
                 window.location.href = "/action/change_sprint?ppp=" + this.value;
@@ -66,6 +69,9 @@
                 });
             }
 
+            // .persona-areaを最初は非表示にする
+            personaInfo.classList.add('hidden');
+
             personaImage.addEventListener('click', function (e) {
                 if (isPersonaVisible) {
                     personaInfo.style.display = 'none';
@@ -99,6 +105,7 @@
                 }
             });
 
+
             // 他の場所をクリックしたときにメニューを非表示にする
             window.addEventListener('click', function (e) {
                 if (e.button !== 2) { // Not right click
@@ -116,6 +123,8 @@
                     overlay.style.display = 'none';
                 }
             });
+
+
         }
     </script>
 </head>
