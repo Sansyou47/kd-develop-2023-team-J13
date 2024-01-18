@@ -5,7 +5,7 @@ html {
 body {
     width: 100%;
     height: 100%;
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
     display: block;
     margin: 0;
     padding: 0;
@@ -349,7 +349,7 @@ body {
     transition: all 0.3s ease;
     width: 100%;
     height: 300px;
-    background-color: rgb(165, 203, 221);
+    background-color: #EBF4EF;
     /* display: inline-block; */
     cursor: pointer;
     border-radius: 10px;
@@ -357,7 +357,7 @@ body {
 }
 
 .story-area:hover {
-    background-color: rgb(191, 211, 220);
+    background-color: rgb(177, 222, 206);
 }
 
 .story-area h2 {
@@ -365,13 +365,14 @@ body {
     margin-top: 10px;
 }
 
+
 .story-button {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
     width: 210px;
     height: 180px;
-    background-color: hsl(82, 89%, 79%);
+    background-color: #69BD83;
     border-radius: 15px;
     float: left;
     margin-left: 15px;
@@ -379,12 +380,13 @@ body {
 }
 
 .story-button:hover {
-    background-color: hsl(82, 89%, 69%);
+    background-color: hsl(145, 60%, 47%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .story-button p {
     font-size: 18px;
+    color: #ffffff;
 }
 
 .story-info {
@@ -409,7 +411,7 @@ body {
 .task-area {
     width: 100%;
     height: 400px;
-    background-color: rgb(255, 215, 114);
+    background-color: #F4F4F4;
     cursor: default;
     border-radius: 10px;
 }
@@ -425,7 +427,7 @@ body {
     cursor: pointer;
     width: 210px;
     height: 100px;
-    background-color: hsl(255, 86%, 93%);
+    background-color: #7CD0F1;
     border-radius: 15px;
     float: left;
     margin-left: 15px;
@@ -433,12 +435,13 @@ body {
 }
 
 .task-button:hover {
-    background-color: hsl(255, 86%, 93%);
+    background-color: hsl(211, 67%, 68%);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .task-button p {
     font-size: 18px;
+    color: #ffffff;
 }
 
 .textbox-001 {
@@ -654,35 +657,36 @@ select {
 .personaContextmenu {
     display: none;
     position: absolute;
-    /* 要素を絶対位置に配置 */
-    background-color: #ffffff;
-    /* 白い背景色 */
-    border: 1px solid #ccc;
-    /* 薄い灰色の境界線 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* 軽い影 */
-    padding: 10px;
-    /* 内部余白 */
+    background-color: #ff8b61;
+    /* ダークトーンの背景色 */
+    border: 1px solid #526980;
+    /* ボーダー色を変更 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 15px;
     z-index: 1000;
-    /* 他の要素よりも手前に表示 */
+    border-radius: 10px;
 }
 
 .personaContextmenu p {
     display: flex;
-    /* フレックスボックスレイアウト */
     align-items: center;
-    /* アイテムを中央揃え */
-    padding: 8px;
-    /* 内部余白 */
+    padding: 12px;
     margin: 0;
-    /* マージンなし */
     cursor: pointer;
-    /* カーソルをポインターに変更 */
+    transition: background-color 0.3s ease;
+    color: #ecf0f1;
+    /* テキスト色を変更 */
+    border-radius: 8px;
 }
 
 .personaContextmenu p:hover {
-    background-color: #f5f5f5;
+    background-color: #ff7644;
+    /* ホバーエフェクトのアクセント色 */
 }
+
+
+
+
 
 /* プロジェクト名変更フォームのスタイル */
 .projectrename-form {
@@ -835,14 +839,53 @@ select {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
+    width: 500px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     text-align: center;
     z-index: 999;
 }
+
+.context-add-message-form p {
+    font-size: 18px;
+    /* フォントサイズを拡大 */
+    margin-bottom: 15px;
+    /* マージンを拡大 */
+    color: #333;
+}
+
+.context-add-message-form textarea {
+    width: 80%;
+    padding: 12px;
+    /* パディングを調整 */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 14px;
+}
+
+.context-add-message-form input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    /* フォントサイズを拡大 */
+}
+
+.context-add-message-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+
+
 
 
 
