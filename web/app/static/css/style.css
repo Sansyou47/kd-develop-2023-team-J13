@@ -731,39 +731,9 @@ select {
 
 
 /* 警告文全体のスタイル */
-.projectdelete-caution {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    z-index: 999;
-}
-
-/* タスク削除の警告文スタイル */
+.projectdelete-caution,
+.storydelete-caution,
 .taskdelete-caution {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    z-index: 999;
-}
-
-/* ストーリー削除の警告文スタイル */
-.storydelete-caution {
     display: none;
     position: fixed;
     top: 50%;
@@ -827,6 +797,23 @@ select {
 .taskdelete-caution input[type="submit"][name="ng"]:hover,
 .storydelete-caution input[type="submit"][name="ng"]:hover {
     background-color: #5a6268;
+}
+
+
+/* コメントの表示スタイル */
+.show-report-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 999;
 }
 
 .context-add-message-form {
