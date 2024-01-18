@@ -63,7 +63,6 @@ def action_add_task():
     conn.commit()
     cur.close()
     return render_template("stories/create_stories.html", project=projectNumber, taskName=taskName, persona=session.get("persona"))
-    #return redirect("/report_task")
 
 # タスク一覧取得
 @task.route("/get_task")
@@ -131,7 +130,7 @@ def action_report():
     conn.commit()
     cur.close()
 
-    return redirect("/report_task")
+    return redirect("/create_stories")
 
 
 @task.route("/update_status", methods=["POST"])

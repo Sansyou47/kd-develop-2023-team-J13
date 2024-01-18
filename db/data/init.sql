@@ -71,7 +71,7 @@ create table task(
     sprint  int,
     start_task_date DATE,
     finish_task_date DATE,
-    comment varchar(2000),
+    comment varchar(2000) default 'コメントはまだありません',
     projectNumber int
 );
 
