@@ -24,6 +24,7 @@
             var storyDelete = document.querySelector('.storydelete-caution')
             var taskDelete = document.querySelector('.taskdelete-caution')
             var persona = document.querySelector('.persona');
+            var addmessage = document.querySelector('.context-add-message-form');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
@@ -91,6 +92,20 @@
 
                 });
             }
+            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+            contextmenu.children[0].addEventListener('click', function (e) {
+
+                // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
+                var hiddenElement = document.querySelector('input[name="task-Name"]');
+
+                // input要素のvalue属性にtaskNameを設定します。
+                hiddenElement.value = taskName;
+
+                addmessage.style.display = 'block';
+                overlay.style.display = 'block';
+                isFormVisible = true; // フォームが表示されていることを示す
+                contextmenu.style.display = 'none';
+            });
             // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
             contextmenu.children[1].addEventListener('click', function (e) {
 
@@ -198,6 +213,7 @@
                     addpersonaForm.style.display = 'none';
                     storyDelete.style.display = 'none';
                     taskDelete.style.display = 'none';
+                    addmessage.style.display = 'none';
                     isFormVisible = false; // フォームが非表示になったことを示す
                     overlay.style.display = 'none';
                 }
@@ -342,6 +358,15 @@
                 <input type="text" name="email" placeholder="E-mailアドレスを入力" required>
                 <input type="submit" value="招待">
             </div>
+        </form>
+    </div>
+
+    <div class="context-add-message-form">
+        <form action="/action/report" method="post">
+            <p>タスクにメッセージを追加</p>
+            <textarea name="report"></textarea>
+            <input type="hidden" name="task-Name">
+            <input type="submit" value="追加">
         </form>
     </div>
 

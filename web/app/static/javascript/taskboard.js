@@ -55,7 +55,7 @@ window.onload = function () {
     for (c = 0; c < storyNames.length; c++) {
         try {
             var hue = c * 360 / stories_color.length;
-            co = 'hsl(' + hue + ', 100%, 75%)';
+            co = 'hsl(' + hue + ', 100%, 90%)';
             stories_color[c].style.backgroundColor = co;
 
             for (let index = 0; index < taskNames.length; index++) {
@@ -174,5 +174,10 @@ window.onload = function () {
             console.log('Drag started, target id:', taskname); // 追加
             e.dataTransfer.setData('text', e.target.id);
         });
+    });
+
+    document.querySelector('select[name="ppp"]').addEventListener('change', function () {
+        window.location.href = "/action/changetaskboard_sprint?ppp=" + this.value;
+        console.log('選択肢が変更されました。');
     });
 };
