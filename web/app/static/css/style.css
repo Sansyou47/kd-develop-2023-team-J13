@@ -427,7 +427,7 @@ body {
     cursor: pointer;
     width: 210px;
     height: 100px;
-    background-color: #7CD0F1;
+    background-color: #71a0eb;
     border-radius: 15px;
     float: left;
     margin-left: 15px;
@@ -435,7 +435,7 @@ body {
 }
 
 .task-button:hover {
-    background-color: hsl(211, 67%, 68%);
+    background-color: #518be9;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
