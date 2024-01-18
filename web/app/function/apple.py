@@ -36,7 +36,7 @@ def action_create_project1():
         # collaborator = request.form.get('collaborator')
         urlInput = request.form.get('urlInput')
         sharedFolderInput = request.form.get('sharedFolderInput')
-        sprint = request.form.get('sprint')
+        sprint = int(request.form.get('sprint'))
 
         # プロジェクト情報を保存
         cur.execute("INSERT INTO project(name, owner, start_date, finish_date, github, googleDrive, sprint) VALUES (%s, %s, %s, %s, %s, %s, %s)", (projectTitle, uName, startDate, endDate, urlInput, sharedFolderInput, sprint))
@@ -57,7 +57,7 @@ def action_create_project1():
     session['project_icon'] = "default.svg"
     # ペルソナはデフォルトで未定義にする
     session['persona_number'] = None
-    session['sprint'] = 1
+    session['total_sprint'] = sprint
     return redirect("/create_stories")
 
 # テンプレートから作成する

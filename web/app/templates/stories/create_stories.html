@@ -2,7 +2,6 @@
 <html lang="ja">
 <link rel="stylesheet" href="../static/css/style.css">
 
-
 <head>
     <script>
         window.onload = function () {
@@ -21,11 +20,19 @@
             var storyContextmenu = document.querySelector('.storyContextmenu');
             var overlay = document.getElementById('overlay');
             var contextMenu = document.querySelector('.contextmenu');
-            var storyDelete = document.querySelector('.storydelete-caution')
-            var taskDelete = document.querySelector('.taskdelete-caution')
+            var storyDelete = document.querySelector('.storydelete-caution');
+            var taskDelete = document.querySelector('.taskdelete-caution');
+            var persona = document.querySelector('.persona');
+            var addmessage = document.querySelector('.context-add-message-form');
+            var showReport = document.querySelector('.show-report-form');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
+
+            var showReportTimer; //タイマーを保持する変数
+
+            // taskコメントの情報を取得するためのurlを設定
+            const reportUrl = '/report';
 
             document.querySelector('select[name="ppp"]').addEventListener('change', function () {
                 window.location.href = "/action/change_sprint?ppp=" + this.value;
@@ -40,7 +47,6 @@
                     e.stopPropagation();
                 }
             });
-
 
             // ストーリーボタンクリックの動作
             for (var i = 0; i < storyButton.length; i++) {
@@ -87,9 +93,88 @@
                     window.taskName = taskName;
 
                 });
+
+                //カーソルがタスクボタンの中に入った時の処理
+                taskButton[i].addEventListener('mouseover', function (e) {
+                    clearTimeout(showReportTimer);
+
+                    // 一定時間後に情報を表示する関数を呼び出し
+                    showReportTimer = setTimeout(function () {
+                        // マウスオーバーしている要素内のinput hidden要素の内容を取得
+                        var taskArea = e.target.closest('.task-button');
+                        var taskName = taskArea.querySelector('input[type="hidden"]').value;
+                        // target-taskにtaskNameを表示
+                        var targetTaskElement = document.querySelector('.target-task');
+
+                        //Postを送る関数を使用
+                        callFlaskReport(taskName).then(reportData => {
+                            console.log(reportData)
+                            if (reportData == null || reportData == '') {
+                                reportData = 'メッセージはありません。'
+                            }
+                            // report-dataにreportDataを表示
+                            var reportDataElement = document.querySelector('.report-data');
+                            reportDataElement.textContent = reportData;
+                        });
+
+                        // task-button要素の右上の座標を取得
+                        var rect = taskArea.getBoundingClientRect();
+                        var rightTop = {
+                            x: rect.right,
+                            y: rect.top
+                        };
+
+                        // マウスオーバーしているタスクボタンのメッセージを表示
+                        showReport.style.top = rightTop.y - 50 + 'px';
+                        showReport.style.left = rightTop.x - 50 + 'px';
+                        showReport.style.display = 'block';
+
+                    }, 500);// 0.5秒後に表示
+                });
+
+                //カーソルがタスクボタンから出た時の処理
+                taskButton[i].addEventListener('mouseout', function (e) {
+                    // マウスがtask-button要素内で移動している場合は、showReportを表示し続ける
+                    if (!e.relatedTarget.closest('.task-button')) {
+                        // タイマーをクリアして表示をキャンセル
+                        clearTimeout(showReportTimer);
+                        showReport.style.display = 'none';
+                    }
+                });
             }
-            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+
+            // メッセージを追加の<p>タグをクリックしたらstorydelete-cotion要素を表示
+            contextmenu.children[0].addEventListener('click', function (e) {
+
+                // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
+                var hiddenElement = document.querySelector('input[name="task-Name"]');
+
+                // input要素のvalue属性にtaskNameを設定します。
+                hiddenElement.value = taskName;
+
+                addmessage.style.display = 'block';
+                overlay.style.display = 'block';
+                isFormVisible = true; // フォームが表示されていることを示す
+                contextmenu.style.display = 'none';
+            });
+
             contextmenu.children[1].addEventListener('click', function (e) {
+                fetch('/update_status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ taskName: window.taskName })
+                })
+                    .then(response => response.json())
+                    .then(data => console.log('Success:', data))
+                    .catch((error) => console.error('Error:', error));
+
+                console.log('タスクを受領しました。');
+            });
+
+            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+            contextmenu.children[2].addEventListener('click', function (e) {
 
                 // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
                 var hiddenElement = document.querySelector('input[name="task-name"]');
@@ -103,6 +188,9 @@
                 contextmenu.style.display = 'none';
             });
 
+            // .persona-areaを最初は非表示にする
+            personaInfo.classList.add('hidden');
+
             personaImage.addEventListener('click', function (e) {
                 if (isPersonaVisible) {
                     personaInfo.style.display = 'none';
@@ -111,12 +199,6 @@
                     personaInfo.style.display = 'block';
                     isPersonaVisible = true;
                 }
-                // if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
-                //     addpersonaForm.style.display = 'block';
-                //     overlay.style.display = 'block';
-                //     isFormVisible = true; // フォームが表示されていることを示す
-                //     e.stopPropagation();
-                // }
             });
 
             personaImage.addEventListener('contextmenu', function (e) {
@@ -172,8 +254,7 @@
                 isFormVisible = true; // フォームが表示されていることを示す
                 storyContextmenu.style.display = 'none';
             });
-
-            // contextmenu以外の場所をクリックしたときにメニューを非表示にする
+            // 他の場所をクリックしたときにメニューを非表示にする
             window.addEventListener('click', function (e) {
                 if (e.button !== 2) { // Not right click
                     contextmenu.style.display = 'none';
@@ -181,9 +262,6 @@
                     storyContextmenu.style.display = 'none';
                 }
             });
-
-
-
 
             //背景を触った時の処理
             window.addEventListener('click', function (e) {
@@ -193,12 +271,29 @@
                     addpersonaForm.style.display = 'none';
                     storyDelete.style.display = 'none';
                     taskDelete.style.display = 'none';
+                    addmessage.style.display = 'none';
                     isFormVisible = false; // フォームが非表示になったことを示す
                     overlay.style.display = 'none';
                 }
             });
 
+            //flaskのreport関数を呼び出す関数
+            async function callFlaskReport(value) {
+                console.log(value);
+                //Fetch APIを使用してリクエストを送信
+                const reportResponse = await fetch(reportUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: value.toString()
+                });
 
+                // レスポンスのテキストデータを取得
+                const reportData = await reportResponse.json();
+
+                return reportData[0];
+            }
         }
     </script>
 </head>
@@ -247,7 +342,14 @@
                         {% if taskName %}
                         {% for row in taskName %}
                         <div class="task-button">
-                            <p>{{ row[0] }}</p>
+                            <p class="task-name">{{ row[0] }}</p>
+                            {% if row[1] == 0 %}
+                            <p class="task-status">完了</p>
+                            {% elif row[1] == 1 %}
+                            <p class="task-status">作業中<br>担当者：{{ row[2] }}</p>
+                            {% else %}
+                            <p class="task-status">未着手</p>
+                            {% endif %}
                             <input type="hidden" name="storyName" value="{{ row[0] }}">
                         </div>
                         {% endfor %}
@@ -267,6 +369,9 @@
             <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
             タスクにメッセージを追加
         </p>
+        <p class="task-receive">
+            <img src="../static/images/trashbox.svg" alt="receive" width="14" height="14">
+            タスクを受領
         <p class="delete">
             <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
             タスクを削除
@@ -336,6 +441,19 @@
                 <input type="submit" value="招待">
             </div>
         </form>
+    </div>
+
+    <div class="context-add-message-form">
+        <form action="/action/report" method="post">
+            <p>タスクにメッセージを追加</p>
+            <textarea name="report"></textarea>
+            <input type="hidden" name="task-Name">
+            <input type="submit" value="追加">
+        </form>
+    </div>
+
+    <div class="show-report-form">
+        <p class="report-data"></p>
     </div>
 
     <div class="personaContextmenu">

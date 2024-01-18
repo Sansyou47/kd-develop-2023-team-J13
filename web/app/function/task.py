@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, jsonify
 from flask_login import login_required
 from flaskext.mysql import MySQL
 from datetime import timedelta
@@ -57,13 +57,12 @@ def action_add_task():
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
+    cur.execute("SELECT name, status, manager FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
     taskName = cur.fetchall()
 
     conn.commit()
     cur.close()
     return render_template("stories/create_stories.html", project=projectNumber, taskName=taskName, persona=session.get("persona"))
-    #return redirect("/report_task")
 
 # タスク一覧取得
 @task.route("/get_task")
@@ -89,7 +88,7 @@ def report_task():
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("SELECT * FROM task")
+    cur.execute("SELECT name, status, manager, story, sprint, comment FROM task")
     taskData = cur.fetchall()
 
     conn.commit()
@@ -100,46 +99,74 @@ def report_task():
 @task.route("/report", methods=["POST"])
 @login_required
 def report():
-    taskName = request.form.get("taskName")
-    return render_template("/tasks/report.html", taskName=taskName)
+    taskName = request.data.decode('utf-8')
+    
+    projectNumber = str(session.get("project_number"))
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("SELECT comment FROM task WHERE name = %s AND projectNumber = %s", (taskName, projectNumber))
+    comment = cur.fetchall()
+
+    conn.commit()
+    cur.close()
+    print(jsonify(comment), flush=True)
+    return jsonify(comment)
 
 @task.route("/action/report", methods=["POST"])
 @login_required
 def action_report():
     report = request.form.get("report")
-    taskName = request.form.get("taskName")
+    taskName = request.form.get("task-Name")
+    projectNumber = str(session.get("project_number"))
 
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("UPDATE task SET comment = %s WHERE name = %s", (report, taskName))
+    cur.execute("UPDATE task SET comment = %s WHERE name = %s AND projectNumber = %s", (report, taskName, projectNumber))
 
     conn.commit()
     cur.close()
 
-    return redirect("/report_task")
+    return redirect("/create_stories")
 
 
 @task.route("/update_status", methods=["POST"])
 @login_required
 def update_status():
-    task_name = request.form["name"]
-    task_status = request.form["status"]
-    task_users = request.form["users"]
-    start_date = request.form.get('start_date')
-    finish_date = request.form.get('finish_date')
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
-
-    cur.execute(
-        "UPDATE task SET status = %s ,manager = %s ,start_task_date = %s, finish_task_date = %s WHERE name = %s ",
-        (task_status, task_users, start_date, finish_date, task_name),
-    )
-    conn.commit()
-    cur.close()
-    return redirect("/task_catch")
+    
+    task_name = request.form.get("name")
+    task_status = request.form.get("status")
+    task_users = request.form.get("users")
+    start_date = request.form.get('start_date')
+    finish_date = request.form.get('finish_date')
+    
+    if task_status is None:
+        task_status = 2
+        task_users = session.get("user_id")
+        
+        cur.execute(
+            "UPDATE task SET status = %s ,manager = %s ,start_task_date = %s, finish_task_date = %s WHERE name = %s ",
+            (task_status, task_users, start_date, finish_date, task_name),
+        )
+        conn.commit()
+        cur.close()
+        
+        return redirect('/create_stories')
+        
+    else:
+        cur.execute(
+            "UPDATE task SET status = %s ,manager = %s ,start_task_date = %s, finish_task_date = %s WHERE name = %s ",
+            (task_status, task_users, start_date, finish_date, task_name),
+        )
+        conn.commit()
+        cur.close()
+        return redirect("/task_catch")
 
 
 @task.route("/task_catch", methods=["GET"])

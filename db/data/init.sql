@@ -20,7 +20,7 @@ INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd133
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd1329246@st.kobedenshi.ac.jp', '米津大也', 'ヨネヅダイヤ', 'scrypt:32768:8:1$hFMD67rQ4UYQE2W6$f945fdf490bfe657b987b8d1d887dba2e988ef54573728a1e14863520f457edd6f7650ed2ba8e7acca4b84ed22f20595a3194b7c6786e8a21bfcb9c18fc4f930', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000001@st.kobedenshi.ac.jp', 'デバッグ一郎', 'デバッグイチロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'student');
 INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000002@st.kobedenshi.ac.jp', 'デバッグ二郎', 'デバッグジロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'student');
-INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000003@st.kobedenshi.ac.jp', 'デバッグ三郎', 'デバッグサブロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'teacher');
+INSERT INTO users(userId, userName, kana, password, gender, class) VALUES('kd0000003@st.kobedenshi.ac.jp', '神戸太郎', 'コウベタロウ', 'scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75', 0, 'teacher');
 
 drop table if exists project;
 create table project(
@@ -80,8 +80,8 @@ INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, project
 INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('ストーリー登録画面', 'ファイルを一括で管理したい', '2023-12-17', '2024-01-3', 1, 1);
 INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('タスク登録画面', 'ファイルを一括で管理したい', '2023-12-18', '2024-01-4', 1, 1);
 INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('タスクを受ける画面', 'ファイルを一括で管理したい', '2023-12-19', '2024-01-5', 1, 1);
-INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('進捗状況のグラフ化', '各員の進行状況を逐次把握したい', '2023-12-20', '2024-01-6', 1, 1);
-INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('タスクボード出力画面', '各員の進行状況を逐次把握したい', '2023-12-21', '2024-01-7', 1, 1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('進捗状況のグラフ化', '各員の進行状況を逐次把握したい', '2023-12-20', '2024-01-6', 2, 1);
+INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('タスクボード出力画面', '各員の進行状況を逐次把握したい', '2023-12-21', '2024-01-7', 2, 1);
 INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('キノコ派選別作業', 'キノコ派救済作業', '2023-12-22', '2024-01-8', 1, 2);
 INSERT INTO task(name, story, start_task_date, finish_task_date, sprint, projectNumber) VALUES('キノコ派偽装作業', 'キノコ派救済作業', '2023-12-16', '2023-12-31', 1, 19);
 
@@ -123,6 +123,7 @@ INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支�
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1334632@st.kobedenshi.ac.jp',1);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1334992@st.kobedenshi.ac.jp',1);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1329246@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd0000003@st.kobedenshi.ac.jp',1);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1297401@st.kobedenshi.ac.jp',2);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1323949@st.kobedenshi.ac.jp',2);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1293049@st.kobedenshi.ac.jp',2);
