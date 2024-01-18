@@ -57,7 +57,7 @@ def action_add_task():
     conn = mysql.get_db()
     cur = conn.cursor()
     # SQL実行
-    cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
+    cur.execute("SELECT name, manager FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
     taskName = cur.fetchall()
 
     conn.commit()

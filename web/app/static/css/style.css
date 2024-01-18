@@ -439,8 +439,13 @@ body {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
-.task-button p {
-    font-size: 18px;
+.task-name {
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.task-status {
+    font-size: 12px;
     color: #ffffff;
 }
 
