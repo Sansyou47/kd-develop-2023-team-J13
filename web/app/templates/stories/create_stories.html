@@ -100,33 +100,46 @@
 
                     // 一定時間後に情報を表示する関数を呼び出し
                     showReportTimer = setTimeout(function () {
-
                         // マウスオーバーしている要素内のinput hidden要素の内容を取得
                         var taskArea = e.target.closest('.task-button');
                         var taskName = taskArea.querySelector('input[type="hidden"]').value;
                         // target-taskにtaskNameを表示
                         var targetTaskElement = document.querySelector('.target-task');
-                        targetTaskElement.textContent = 'タスク名：' + taskName;
 
                         //Postを送る関数を使用
                         callFlaskReport(taskName).then(reportData => {
                             console.log(reportData)
+                            if (reportData == null || reportData == '') {
+                                reportData = 'メッセージはありません。'
+                            }
                             // report-dataにreportDataを表示
                             var reportDataElement = document.querySelector('.report-data');
                             reportDataElement.textContent = reportData;
                         });
 
-                        // 画面中央にコメントを表示
+                        // task-button要素の右上の座標を取得
+                        var rect = taskArea.getBoundingClientRect();
+                        var rightTop = {
+                            x: rect.right,
+                            y: rect.top
+                        };
+
+                        // マウスオーバーしているタスクボタンのメッセージを表示
+                        showReport.style.top = rightTop.y - 50 + 'px';
+                        showReport.style.left = rightTop.x - 50 + 'px';
                         showReport.style.display = 'block';
 
-                    }, 1000);// 1秒後に表示
+                    }, 500);// 0.5秒後に表示
                 });
 
                 //カーソルがタスクボタンから出た時の処理
                 taskButton[i].addEventListener('mouseout', function (e) {
-                    // タイマーをクリアして表示をキャンセル
-                    clearTimeout(showReportTimer);
-                    showReport.style.display = 'none';
+                    // マウスがtask-button要素内で移動している場合は、showReportを表示し続ける
+                    if (!e.relatedTarget.closest('.task-button')) {
+                        // タイマーをクリアして表示をキャンセル
+                        clearTimeout(showReportTimer);
+                        showReport.style.display = 'none';
+                    }
                 });
             }
 
@@ -281,8 +294,6 @@
 
                 return reportData[0];
             }
-
-
         }
     </script>
 </head>
@@ -440,8 +451,6 @@
     </div>
 
     <div class="show-report-form">
-        <h3 class="target-task"></h3>
-        <h3>コメント</h3>
         <p class="report-data"></p>
     </div>
 
