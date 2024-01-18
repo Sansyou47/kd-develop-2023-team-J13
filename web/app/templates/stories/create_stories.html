@@ -24,9 +24,15 @@
             var taskDelete = document.querySelector('.taskdelete-caution');
             var persona = document.querySelector('.persona');
             var addmessage = document.querySelector('.context-add-message-form');
+            var showReport = document.querySelector('.show-report-form');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
+
+            var showReportTimer; //タイマーを保持する変数
+
+            // taskコメントの情報を取得するためのurlを設定
+            const reportUrl = '/report';
 
             document.querySelector('select[name="ppp"]').addEventListener('change', function () {
                 window.location.href = "/action/change_sprint?ppp=" + this.value;
@@ -87,7 +93,43 @@
                     window.taskName = taskName;
 
                 });
+
+                //カーソルがタスクボタンの中に入った時の処理
+                taskButton[i].addEventListener('mouseover', function (e) {
+                    clearTimeout(showReportTimer);
+
+                    // 一定時間後に情報を表示する関数を呼び出し
+                    showReportTimer = setTimeout(function () {
+
+                        // マウスオーバーしている要素内のinput hidden要素の内容を取得
+                        var taskArea = e.target.closest('.task-button');
+                        var taskName = taskArea.querySelector('input[type="hidden"]').value;
+                        // target-taskにtaskNameを表示
+                        var targetTaskElement = document.querySelector('.target-task');
+                        targetTaskElement.textContent = 'タスク名：' + taskName;
+
+                        //Postを送る関数を使用
+                        callFlaskReport(taskName).then(reportData => {
+                            console.log(reportData)
+                            // report-dataにreportDataを表示
+                            var reportDataElement = document.querySelector('.report-data');
+                            reportDataElement.textContent = reportData;
+                        });
+
+                        // 画面中央にコメントを表示
+                        showReport.style.display = 'block';
+
+                    }, 1000);// 1秒後に表示
+                });
+
+                //カーソルがタスクボタンから出た時の処理
+                taskButton[i].addEventListener('mouseout', function (e) {
+                    // タイマーをクリアして表示をキャンセル
+                    clearTimeout(showReportTimer);
+                    showReport.style.display = 'none';
+                });
             }
+
             // メッセージを追加の<p>タグをクリックしたらstorydelete-cotion要素を表示
             contextmenu.children[0].addEventListener('click', function (e) {
 
@@ -221,6 +263,26 @@
                     overlay.style.display = 'none';
                 }
             });
+
+            //flaskのreport関数を呼び出す関数
+            async function callFlaskReport(value) {
+                console.log(value);
+                //Fetch APIを使用してリクエストを送信
+                const reportResponse = await fetch(reportUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain',
+                    },
+                    body: value.toString()
+                });
+
+                // レスポンスのテキストデータを取得
+                const reportData = await reportResponse.json();
+
+                return reportData[0];
+            }
+
+
         }
     </script>
 </head>
@@ -375,6 +437,12 @@
             <input type="hidden" name="task-Name">
             <input type="submit" value="追加">
         </form>
+    </div>
+
+    <div class="show-report-form">
+        <h3 class="target-task"></h3>
+        <h3>コメント</h3>
+        <p class="report-data"></p>
     </div>
 
     <div class="personaContextmenu">

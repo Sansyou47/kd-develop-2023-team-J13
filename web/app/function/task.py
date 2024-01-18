@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session
+from flask import Blueprint, render_template, request, redirect, session, jsonify
 from flask_login import login_required
 from flaskext.mysql import MySQL
 from datetime import timedelta
@@ -63,7 +63,6 @@ def action_add_task():
     conn.commit()
     cur.close()
     return render_template("stories/create_stories.html", project=projectNumber, taskName=taskName, persona=session.get("persona"))
-    #return redirect("/report_task")
 
 # タスク一覧取得
 @task.route("/get_task")
@@ -100,8 +99,20 @@ def report_task():
 @task.route("/report", methods=["POST"])
 @login_required
 def report():
-    taskName = request.form.get("taskName")
-    return render_template("/tasks/report.html", taskName=taskName)
+    taskName = request.data.decode('utf-8')
+    
+    projectNumber = str(session.get("project_number"))
+    # MySQLへ接続
+    conn = mysql.get_db()
+    cur = conn.cursor()
+    # SQL実行
+    cur.execute("SELECT comment FROM task WHERE name = %s AND projectNumber = %s", (taskName, projectNumber))
+    comment = cur.fetchall()
+
+    conn.commit()
+    cur.close()
+    print(jsonify(comment), flush=True)
+    return jsonify(comment)
 
 @task.route("/action/report", methods=["POST"])
 @login_required
@@ -119,7 +130,7 @@ def action_report():
     conn.commit()
     cur.close()
 
-    return redirect("/report_task")
+    return redirect("/create_stories")
 
 
 @task.route("/update_status", methods=["POST"])
