@@ -2,7 +2,6 @@
 <html lang="ja">
 <link rel="stylesheet" href="../static/css/style.css">
 
-
 <head>
     <script>
         window.onload = function () {
@@ -21,15 +20,13 @@
             var storyContextmenu = document.querySelector('.storyContextmenu');
             var overlay = document.getElementById('overlay');
             var contextMenu = document.querySelector('.contextmenu');
-            var storyDelete = document.querySelector('.storydelete-caution')
-            var taskDelete = document.querySelector('.taskdelete-caution')
+            var storyDelete = document.querySelector('.storydelete-caution');
+            var taskDelete = document.querySelector('.taskdelete-caution');
             var persona = document.querySelector('.persona');
             var addmessage = document.querySelector('.context-add-message-form');
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
-
-
 
             document.querySelector('select[name="ppp"]').addEventListener('change', function () {
                 window.location.href = "/action/change_sprint?ppp=" + this.value;
@@ -44,7 +41,6 @@
                     e.stopPropagation();
                 }
             });
-
 
             // ストーリーボタンクリックの動作
             for (var i = 0; i < storyButton.length; i++) {
@@ -92,7 +88,7 @@
 
                 });
             }
-            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+            // メッセージを追加の<p>タグをクリックしたらstorydelete-cotion要素を表示
             contextmenu.children[0].addEventListener('click', function (e) {
 
                 // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
@@ -106,8 +102,24 @@
                 isFormVisible = true; // フォームが表示されていることを示す
                 contextmenu.style.display = 'none';
             });
-            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+
             contextmenu.children[1].addEventListener('click', function (e) {
+                fetch('/update_status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ taskName: window.taskName })
+                })
+                    .then(response => response.json())
+                    .then(data => console.log('Success:', data))
+                    .catch((error) => console.error('Error:', error));
+
+                console.log('タスクを受領しました。');
+            });
+
+            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+            contextmenu.children[2].addEventListener('click', function (e) {
 
                 // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
                 var hiddenElement = document.querySelector('input[name="task-name"]');
@@ -132,12 +144,6 @@
                     personaInfo.style.display = 'block';
                     isPersonaVisible = true;
                 }
-                // if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
-                //     addpersonaForm.style.display = 'block';
-                //     overlay.style.display = 'block';
-                //     isFormVisible = true; // フォームが表示されていることを示す
-                //     e.stopPropagation();
-                // }
             });
 
             personaImage.addEventListener('contextmenu', function (e) {
@@ -202,9 +208,6 @@
                 }
             });
 
-
-
-
             //背景を触った時の処理
             window.addEventListener('click', function (e) {
                 if (e.target == overlay) {
@@ -218,10 +221,6 @@
                     overlay.style.display = 'none';
                 }
             });
-
-
-
-
         }
     </script>
 </head>
@@ -270,7 +269,12 @@
                         {% if taskName %}
                         {% for row in taskName %}
                         <div class="task-button">
-                            <p>{{ row[0] }}</p>
+                            <p class="task-name">{{ row[0] }}</p>
+                            {% if row[1] is none %}
+                            <p class="task-status">未着手</p>
+                            {% else %}
+                            <p class="task-status">{{ row[1] }}</p>
+                            {% endif %}
                             <input type="hidden" name="storyName" value="{{ row[0] }}">
                         </div>
                         {% endfor %}
@@ -290,6 +294,9 @@
             <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
             タスクにメッセージを追加
         </p>
+        <p class="task-receive">
+            <img src="../static/images/trashbox.svg" alt="receive" width="14" height="14">
+            タスクを受領
         <p class="delete">
             <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
             タスクを削除

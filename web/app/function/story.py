@@ -49,7 +49,7 @@ def storeis():
     cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
     persona = cur.fetchone()
     session["persona"] = persona
-    cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
+    cur.execute("SELECT name, manager FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
     taskName = cur.fetchall()
     session["taskName"] = taskName
     cur.close()
@@ -83,9 +83,9 @@ def register_persona():
         gender = request.form.get('gender')
         if gender is not None:
             if gender == 'men':
-                persona.append(0)
+                persona.append('男性')
             else:
-                persona.append(1)
+                persona.append('女性')
         persona.append(request.form.get('job'))
         persona.append(request.form.get('hobby'))
         persona.append(int(request.form.get('income')))
