@@ -125,22 +125,37 @@ def action_report():
 @task.route("/update_status", methods=["POST"])
 @login_required
 def update_status():
-    task_name = request.form["name"]
-    task_status = request.form["status"]
-    task_users = request.form["users"]
-    start_date = request.form.get('start_date')
-    finish_date = request.form.get('finish_date')
     # MySQLへ接続
     conn = mysql.get_db()
     cur = conn.cursor()
-
-    cur.execute(
-        "UPDATE task SET status = %s ,manager = %s ,start_task_date = %s, finish_task_date = %s WHERE name = %s ",
-        (task_status, task_users, start_date, finish_date, task_name),
-    )
-    conn.commit()
-    cur.close()
-    return redirect("/task_catch")
+    
+    task_name = request.form.get("name")
+    task_status = request.form.get("status")
+    task_users = request.form.get("users")
+    start_date = request.form.get('start_date')
+    finish_date = request.form.get('finish_date')
+    
+    if task_status is None:
+        task_status = 2
+        task_users = session.get("user_id")
+        
+        cur.execute(
+            "UPDATE task SET status = %s ,manager = %s ,start_task_date = %s, finish_task_date = %s WHERE name = %s ",
+            (task_status, task_users, start_date, finish_date, task_name),
+        )
+        conn.commit()
+        cur.close()
+        
+        return redirect('/create_stories')
+        
+    else:
+        cur.execute(
+            "UPDATE task SET status = %s ,manager = %s ,start_task_date = %s, finish_task_date = %s WHERE name = %s ",
+            (task_status, task_users, start_date, finish_date, task_name),
+        )
+        conn.commit()
+        cur.close()
+        return redirect("/task_catch")
 
 
 @task.route("/task_catch", methods=["GET"])

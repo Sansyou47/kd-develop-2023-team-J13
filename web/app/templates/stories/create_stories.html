@@ -92,7 +92,7 @@
 
                 });
             }
-            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+            // メッセージを追加の<p>タグをクリックしたらstorydelete-cotion要素を表示
             contextmenu.children[0].addEventListener('click', function (e) {
 
                 // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
@@ -106,8 +106,24 @@
                 isFormVisible = true; // フォームが表示されていることを示す
                 contextmenu.style.display = 'none';
             });
-            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+
             contextmenu.children[1].addEventListener('click', function (e) {
+                fetch('/update_status', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ taskName: window.taskName })
+                })
+                    .then(response => response.json())
+                    .then(data => console.log('Success:', data))
+                    .catch((error) => console.error('Error:', error));
+
+                console.log('タスクを受領しました。');
+            });
+
+            // タスク削除の<p>タグをクリックしたらstorydelete-cotion要素を表示
+            contextmenu.children[2].addEventListener('click', function (e) {
 
                 // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
                 var hiddenElement = document.querySelector('input[name="task-name"]');
@@ -132,12 +148,6 @@
                     personaInfo.style.display = 'block';
                     isPersonaVisible = true;
                 }
-                // if (!isFormVisible) { // フォームが表示されていないときだけ処理を実行
-                //     addpersonaForm.style.display = 'block';
-                //     overlay.style.display = 'block';
-                //     isFormVisible = true; // フォームが表示されていることを示す
-                //     e.stopPropagation();
-                // }
             });
 
             personaImage.addEventListener('contextmenu', function (e) {
@@ -202,9 +212,6 @@
                 }
             });
 
-
-
-
             //背景を触った時の処理
             window.addEventListener('click', function (e) {
                 if (e.target == overlay) {
@@ -218,10 +225,6 @@
                     overlay.style.display = 'none';
                 }
             });
-
-
-
-
         }
     </script>
 </head>
@@ -290,6 +293,9 @@
             <img src="../static/images/setting.svg" alt="setting" width="14" height="14">
             タスクにメッセージを追加
         </p>
+        <p class="task-receive">
+            <img src="../static/images/trashbox.svg" alt="receive" width="14" height="14">
+            タスクを受領
         <p class="delete">
             <img src="../static/images/trashbox.svg" alt="delete" width="14" height="14">
             タスクを削除
