@@ -273,7 +273,7 @@
                             {% if row[1] is none %}
                             <p class="task-status">未着手</p>
                             {% else %}
-                            <p class="task-status">{{ row[1] }}</p>
+                            <p class="task-status">担当者：{{ row[1] }}</p>
                             {% endif %}
                             <input type="hidden" name="storyName" value="{{ row[0] }}">
                         </div>
