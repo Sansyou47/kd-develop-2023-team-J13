@@ -15,7 +15,7 @@ def get_story(sprint):
     session.pop("backlog", None)
     if story:
         session["backlog"] = story
-    cur.execute("SELECT name FROM task WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
+    cur.execute("SELECT name, manager FROM task WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
     task = cur.fetchall()
     session.pop("task", None)
     if task:
