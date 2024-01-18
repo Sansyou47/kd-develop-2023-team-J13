@@ -343,10 +343,12 @@
                         {% for row in taskName %}
                         <div class="task-button">
                             <p class="task-name">{{ row[0] }}</p>
-                            {% if row[1] is none %}
-                            <p class="task-status">未着手</p>
+                            {% if row[1] == 0 %}
+                            <p class="task-status">完了</p>
+                            {% elif row[1] == 1 %}
+                            <p class="task-status">作業中<br>担当者：{{ row[2] }}</p>
                             {% else %}
-                            <p class="task-status">担当者：{{ row[1] }}</p>
+                            <p class="task-status">未着手</p>
                             {% endif %}
                             <input type="hidden" name="storyName" value="{{ row[0] }}">
                         </div>
