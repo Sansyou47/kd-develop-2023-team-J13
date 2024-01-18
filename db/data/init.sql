@@ -71,7 +71,7 @@ create table task(
     sprint  int,
     start_task_date DATE,
     finish_task_date DATE,
-    comment varchar(2000) default 'コメントはまだありません',
+    comment varchar(2000),
     projectNumber int
 );
 
@@ -123,6 +123,7 @@ INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支�
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1334632@st.kobedenshi.ac.jp',1);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1334992@st.kobedenshi.ac.jp',1);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd1329246@st.kobedenshi.ac.jp',1);
+INSERT INTO project_users(projectName, userId, projectNumber) VALUES('開発支援アプリ', 'kd0000003@st.kobedenshi.ac.jp',1);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1297401@st.kobedenshi.ac.jp',2);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1323949@st.kobedenshi.ac.jp',2);
 INSERT INTO project_users(projectName, userId, projectNumber) VALUES('タスク管理アプリ', 'kd1293049@st.kobedenshi.ac.jp',2);
