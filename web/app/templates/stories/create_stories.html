@@ -128,41 +128,6 @@
                     clearTimeout(showReportTimer);
                     showReport.style.display = 'none';
                 });
-
-                //カーソルがタスクボタンの中に入った時の処理
-                taskButton[i].addEventListener('mouseover', function (e) {
-                    clearTimeout(showReportTimer);
-
-                    // 一定時間後に情報を表示する関数を呼び出し
-                    showReportTimer = setTimeout(function () {
-
-                        // マウスオーバーしている要素内のinput hidden要素の内容を取得
-                        var taskArea = e.target.closest('.task-button');
-                        var taskName = taskArea.querySelector('input[type="hidden"]').value;
-                        // target-taskにtaskNameを表示
-                        var targetTaskElement = document.querySelector('.target-task');
-                        targetTaskElement.textContent = 'タスク名：' + taskName;
-
-                        //Postを送る関数を使用
-                        callFlaskReport(taskName).then(reportData => {
-                            console.log(reportData)
-                            // report-dataにreportDataを表示
-                            var reportDataElement = document.querySelector('.report-data');
-                            reportDataElement.textContent = reportData;
-                        });
-
-                        // 画面中央にコメントを表示
-                        showReport.style.display = 'block';
-
-                    }, 1000);// 1秒後に表示
-                });
-
-                //カーソルがタスクボタンから出た時の処理
-                taskButton[i].addEventListener('mouseout', function (e) {
-                    // タイマーをクリアして表示をキャンセル
-                    clearTimeout(showReportTimer);
-                    showReport.style.display = 'none';
-                });
             }
 
             // メッセージを追加の<p>タグをクリックしたらstorydelete-cotion要素を表示
