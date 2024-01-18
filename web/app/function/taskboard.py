@@ -34,12 +34,15 @@ def outtaskboard():
 # taskbordをDoingやDoneに移動させる
 @taskboard.route("/taskboardjs", methods=["POST"])
 def taskboardjs():
+    uid = session.get("user_id")
     conn = mysql.get_db()
     cur = conn.cursor()
+    cur.execute("SELECT userName FROM users WHERE userId = %s", (uid))
+    uname = cur.fetchone()
     data = request.get_json()
     cur.execute(
-        "UPDATE task SET status = %s WHERE name = %s ",
-        (data['st'] ,data['taskname']),
+        "UPDATE task SET status = %s, manager = %s WHERE name = %s ",
+        (data['st'], uname[0], data['taskname']),
     )
 
     conn.commit()
