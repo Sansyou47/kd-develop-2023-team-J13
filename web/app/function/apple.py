@@ -128,7 +128,7 @@ def create_template():
 def create_project99():
     cur = mysql.get_db().cursor()
     for i in range(0, 100):
-        cur.execute("INSERT INTO users(userId, userName, kana, password, gender, class) VALUES (%s, %s, %s, %s, %s, %s)", ("test" + str(i) + "@st.jp", "生徒" + str(i), "セイト" + str(i), "scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75", 0, "student"))
+        cur.execute("INSERT INTO users(userId, userName, kana, password, gender, class) VALUES (%s, %s, %s, %s, %s, %s)", ("test" + str(i) + "@st.jp", "学生" + str(i), "ガクセイ" + str(i), "scrypt:32768:8:1$L2mjfpTmVhyNbN2q$5bf4d6b94f85e10c3fa9a63adddecdd9c2cb919162164bdea0713af1da5fd042578115b0759fd2a1812ff970b6da4318ee3fd369ef5e3e4afa0791ea13948d75", 0, "student"))
         mysql.get_db().commit()
         if i < 25:
             cur.execute("INSERT INTO student(userNumber, studentNumber, class, number) VALUES (%s, %s, %s, %s)", (i + 11, "kd1290" + str(i), "0J01", "0J010" + str(i)))
