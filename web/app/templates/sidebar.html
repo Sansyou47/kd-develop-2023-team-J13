@@ -53,7 +53,11 @@
     <div class="task">
         <p class="caption">タスク</p>
         <p class="caption-content">
-            test
+            {% if taskName %}
+            {% for row in taskName %}
+            {{ row[0] }}<br>
+            {% endfor %}
+            {% endif %}
         </p>
     </div>
     <details>

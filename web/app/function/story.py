@@ -15,7 +15,7 @@ def get_story(sprint):
     session.pop("backlog", None)
     if story:
         session["backlog"] = story
-    cur.execute("SELECT name, manager FROM task WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
+    cur.execute("SELECT name, status, manager, comment FROM task WHERE projectNumber = %s AND sprint = %s", (session.get("project_number"), sprint))
     task = cur.fetchall()
     session.pop("task", None)
     if task:
@@ -49,7 +49,7 @@ def storeis():
     cur.execute("SELECT * FROM persona WHERE projectNumber = %s", (session.get("project_number")))
     persona = cur.fetchone()
     session["persona"] = persona
-    cur.execute("SELECT name, status, manager FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
+    cur.execute("SELECT name, status, manager, comment FROM task WHERE projectNumber = %s AND sprint = %s", (projectNumber, session.get("now_sprint")))
     taskName = cur.fetchall()
     session["taskName"] = taskName
     cur.close()
