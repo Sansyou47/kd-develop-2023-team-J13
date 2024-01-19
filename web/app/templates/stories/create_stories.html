@@ -342,7 +342,11 @@
                         {% if taskName %}
                         {% for row in taskName %}
                         <div class="task-button">
-                            <p class="task-name">{{ row[0] }}</p>
+                            <p class="task-name">{{ row[0] }}
+                                {% if row[3] %}
+                                <img src="../static/images/exclamation.svg" alt="arrow" width="16" height="16">
+                                {% endif %}
+                            </p>
                             {% if row[1] == 0 %}
                             <p class="task-status">完了</p>
                             {% elif row[1] == 1 %}
