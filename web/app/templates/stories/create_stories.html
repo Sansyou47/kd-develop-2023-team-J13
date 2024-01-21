@@ -25,6 +25,7 @@
             var persona = document.querySelector('.persona');
             var addmessage = document.querySelector('.context-add-message-form');
             var showReport = document.querySelector('.show-report-form');
+            var userName = "{{ session['user_name'] }}";
 
             var isFormVisible = false; // フォームが表示されているかどうかを示すフラグ
             var isPersonaVisible = false;
@@ -75,6 +76,14 @@
             }
 
             for (var i = 0; i < taskButton.length; i++) {
+                // タスクステータスが完了ならボタンの色を薄くする
+                var manager = taskButton[i].querySelector('.task-status').textContent;
+                console.log(manager);
+                if (manager == 'タスクは完了しました。') {
+                    taskButton[i].style.pointerEvents = 'none';
+                    taskButton[i].style.opacity = '0.5';
+                }
+
                 taskButton[i].addEventListener('contextmenu', function (e) {
                     e.preventDefault();
                     var taskName = this.querySelector('input[type="hidden"]').value;
@@ -91,7 +100,6 @@
 
                     // 他の要素から使用できるようにする
                     window.taskName = taskName;
-
                 });
 
                 //カーソルがタスクボタンの中に入った時の処理
@@ -254,6 +262,7 @@
                 isFormVisible = true; // フォームが表示されていることを示す
                 storyContextmenu.style.display = 'none';
             });
+
             // 他の場所をクリックしたときにメニューを非表示にする
             window.addEventListener('click', function (e) {
                 if (e.button !== 2) { // Not right click
@@ -294,6 +303,62 @@
 
                 return reportData[0];
             }
+
+            document.querySelector('.status-sieving').addEventListener('change', function (e) {
+                var selectedValue = e.target.value;
+                //console.log(selectedValue);
+                var replaceWords = "状況：作業中担当："
+
+                if (selectedValue == 0) {
+                    for (var i = 0; i < taskButton.length; i++) {
+                        taskButton[i].style.display = 'block';
+                    }
+                } else if (selectedValue == 1) {
+                    for (var i = 0; i < taskButton.length; i++) {
+                        var status = taskButton[i].querySelector('.task-status').textContent;
+                        if (status == 'タスクは完了しました。') {
+                            taskButton[i].style.display = 'none';
+                        } else {
+                            taskButton[i].style.display = 'block';
+                        }
+                    }
+                } else if (selectedValue == 2) {
+                    for (var i = 0; i < taskButton.length; i++) {
+                        var status = taskButton[i].querySelector('.task-status').textContent;
+                        if (status != '未着手') {
+                            taskButton[i].style.display = 'none';
+                        } else {
+                            taskButton[i].style.display = 'block';
+                        }
+                    }
+                } else if (selectedValue == 3) {
+                    for (var i = 0; i < taskButton.length; i++) {
+                        var status = taskButton[i].querySelector('.task-status').textContent;
+                        if (status == 'タスクは完了しました。') {
+                            taskButton[i].style.display = 'block';
+                        } else {
+                            taskButton[i].style.display = 'none';
+                        }
+                    }
+                } else if (selectedValue == 4) {
+                    for (var i = 0; i < taskButton.length; i++) {
+                        var status = taskButton[i].querySelector('.task-status').textContent;
+                        if (status == 'タスクは完了しました。') {
+                            taskButton[i].style.display = 'none';
+                        } else if (status == '未着手') {
+                            taskButton[i].style.display = 'none';
+                        } else {
+                            status = status.replace(replaceWords, "");
+                            console.log(status);
+                            if (status == userName) {
+                                taskButton[i].style.display = 'block';
+                            } else {
+                                taskButton[i].style.display = 'none';
+                            }
+                        }
+                    }
+                }
+            });
         }
     </script>
 </head>
@@ -336,25 +401,37 @@
                     <p>ストーリーがありません</p>
                     {% endif %}
                 </div>
-                <div class="task-area">
+                <div class="task-head">
                     <h2>タスク</h2>
+                    <select class="status-sieving" name="status-sieving">
+                        <option value="0">すべて表示</option>
+                        <option value="1">完了したタスクを非表示</option>
+                        <option value="2">未着手のタスク</option>
+                        <option value="3">完了したタスク</option>
+                        <option value="4">自分のタスク</option>
+                    </select>
+                </div>
+                <div class="task-area">
                     <div class="task-area">
                         {% if taskName %}
                         {% for row in taskName %}
                         <div class="task-button">
                             <p class="task-name">{{ row[0] }}
                                 {% if row[3] %}
+                                {% if row[1] != 0 %}
                                 <img src="../static/images/exclamation.svg" alt="arrow" width="16" height="16">
+                                {% endif %}
                                 {% endif %}
                             </p>
                             {% if row[1] == 0 %}
-                            <p class="task-status">完了</p>
+                            <p class="task-status">タスクは完了しました。</p>
                             {% elif row[1] == 1 %}
-                            <p class="task-status">作業中<br>担当者：{{ row[2] }}</p>
+                            <p class="task-status">状況：作業中<br>担当：{{ row[2] }}</p>
                             {% else %}
                             <p class="task-status">未着手</p>
                             {% endif %}
                             <input type="hidden" name="storyName" value="{{ row[0] }}">
+                            <input type="hidden" name="manager" value="{{ row[2] }}">
                         </div>
                         {% endfor %}
                         {% else %}
