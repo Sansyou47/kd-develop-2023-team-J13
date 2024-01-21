@@ -443,8 +443,10 @@ body {
 }
 
 .task-name {
-    font-size: 16px;
+    font-size: 14px;
     color: #ffffff;
+    width: 200px;
+    height: 29px;
 }
 
 .task-status {

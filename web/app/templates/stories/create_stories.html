@@ -75,6 +75,16 @@
             }
 
             for (var i = 0; i < taskButton.length; i++) {
+
+                // タスクステータスが完了ならボタンの色を薄くする
+                var manager = taskButton[i].querySelector('.task-status').textContent;
+                console.log(manager);
+                if (manager == '完了') {
+                    //taskButton[i].style.backgroundColor = '#b6c9e7';
+                    taskButton[i].style.pointerEvents = 'none';
+                    taskButton[i].style.backgroundColor = '#b6c9e7';
+                }
+
                 taskButton[i].addEventListener('contextmenu', function (e) {
                     e.preventDefault();
                     var taskName = this.querySelector('input[type="hidden"]').value;
@@ -91,7 +101,6 @@
 
                     // 他の要素から使用できるようにする
                     window.taskName = taskName;
-
                 });
 
                 //カーソルがタスクボタンの中に入った時の処理
@@ -254,6 +263,7 @@
                 isFormVisible = true; // フォームが表示されていることを示す
                 storyContextmenu.style.display = 'none';
             });
+
             // 他の場所をクリックしたときにメニューを非表示にする
             window.addEventListener('click', function (e) {
                 if (e.button !== 2) { // Not right click
@@ -344,7 +354,9 @@
                         <div class="task-button">
                             <p class="task-name">{{ row[0] }}
                                 {% if row[3] %}
+                                {% if row[1] != 0 %}
                                 <img src="../static/images/exclamation.svg" alt="arrow" width="16" height="16">
+                                {% endif %}
                                 {% endif %}
                             </p>
                             {% if row[1] == 0 %}
