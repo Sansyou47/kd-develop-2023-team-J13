@@ -84,6 +84,35 @@
                     taskButton[i].style.opacity = '0.5';
                 }
 
+                taskButton[i].addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var taskName = this.querySelector('input[type="hidden"]').value;
+                    window.taskName = taskName;
+                    console.log(taskName);
+
+                    contextmenu.style.top = e.clientY + 'px';
+                    contextmenu.style.left = e.clientX + 'px';
+                    contextmenu.style.display = 'block';
+
+                    // マウスオーバーしている要素内のinput hidden要素の内容を取得
+                    var taskArea = e.target.closest('.task-button');
+                    var taskName = taskArea.querySelector('input[type="hidden"]').value;
+
+                    // 他の要素から使用できるようにする
+                    window.taskName = taskName;
+
+                    // input要素を取得します。ここではname属性が"taskName"の要素を取得します。
+                    var hiddenElement = document.querySelector('input[name="task-Name"]');
+
+                    // input要素のvalue属性にtaskNameを設定します。
+                    hiddenElement.value = taskName;
+
+                    addmessage.style.display = 'block';
+                    overlay.style.display = 'block';
+                    isFormVisible = true; // フォームが表示されていることを示す
+                    contextmenu.style.display = 'none';
+                });
+
                 taskButton[i].addEventListener('contextmenu', function (e) {
                     e.preventDefault();
                     var taskName = this.querySelector('input[type="hidden"]').value;
