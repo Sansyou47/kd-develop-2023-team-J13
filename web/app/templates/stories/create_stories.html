@@ -134,7 +134,6 @@
                 //カーソルがタスクボタンの中に入った時の処理
                 taskButton[i].addEventListener('mouseover', function (e) {
                     clearTimeout(showReportTimer);
-
                     // 一定時間後に情報を表示する関数を呼び出し
                     showReportTimer = setTimeout(function () {
                         // マウスオーバーしている要素内のinput hidden要素の内容を取得
@@ -441,32 +440,30 @@
                     </select>
                 </div>
                 <div class="task-area">
-                    <div class="task-area">
-                        {% if taskName %}
-                        {% for row in taskName %}
-                        <div class="task-button">
-                            <p class="task-name">{{ row[0] }}
-                                {% if row[3] %}
-                                {% if row[1] != 0 %}
-                                <img src="../static/images/exclamation.svg" alt="arrow" width="16" height="16">
-                                {% endif %}
-                                {% endif %}
-                            </p>
-                            {% if row[1] == 0 %}
-                            <p class="task-status">タスクは完了しました。</p>
-                            {% elif row[1] == 1 %}
-                            <p class="task-status">状況：作業中<br>担当：{{ row[2] }}</p>
-                            {% else %}
-                            <p class="task-status">未着手</p>
+                    {% if taskName %}
+                    {% for row in taskName %}
+                    <div class="task-button">
+                        <p class="task-name">{{ row[0] }}
+                            {% if row[3] %}
+                            {% if row[1] != 0 %}
+                            <img src="../static/images/exclamation.svg" alt="arrow" width="16" height="16">
                             {% endif %}
-                            <input type="hidden" name="storyName" value="{{ row[0] }}">
-                            <input type="hidden" name="manager" value="{{ row[2] }}">
-                        </div>
-                        {% endfor %}
+                            {% endif %}
+                        </p>
+                        {% if row[1] == 0 %}
+                        <p class="task-status">タスクは完了しました。</p>
+                        {% elif row[1] == 1 %}
+                        <p class="task-status">状況：作業中<br>担当：{{ row[2] }}</p>
                         {% else %}
-                        <p>タスクがありません</p>
+                        <p class="task-status">未着手</p>
                         {% endif %}
+                        <input type="hidden" name="storyName" value="{{ row[0] }}">
+                        <input type="hidden" name="manager" value="{{ row[2] }}">
                     </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>タスクがありません</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
