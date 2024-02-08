@@ -10,27 +10,24 @@ send_email = Blueprint("send_email", __name__)
 
 mysql = None
 
-sendAddress = os.getenv("SEND_MAIL_ADDRESS")
-password = os.getenv("SEND_MAIL_PASSWORD")
+# def create_email(to, subject, body):
+#     # SMTPサーバに接続
+#     smtpobj = smtplib.SMTP('smtp.gmail.com', 587)
+#     smtpobj.starttls()
+#     smtpobj.login(sendAddress, password)
 
-def create_email(to, subject, body):
-    # SMTPサーバに接続
-    smtpobj = smtplib.SMTP('smtp.gmail.com', 587)
-    smtpobj.starttls()
-    smtpobj.login(sendAddress, password)
+#     # メール作成
+#     msg = MIMEText(body)
+#     msg['Subject'] = subject
+#     msg['From'] = sendAddress
+#     msg['To'] = to
+#     msg['Date'] = formatdate()
 
-    # メール作成
-    msg = MIMEText(body)
-    msg['Subject'] = subject
-    msg['From'] = sendAddress
-    msg['To'] = to
-    msg['Date'] = formatdate()
-
-    # 作成したメールを送信
-    smtpobj.send_message(msg)
-    smtpobj.close()
+#     # 作成したメールを送信
+#     smtpobj.send_message(msg)
+#     smtpobj.close()
     
-    return
+#     return
 
 @send_email.route('/project/addusers')
 @login_required
