@@ -81,7 +81,7 @@ body {
 }
 
 .product-backlog {
-    margin-top: 80px;
+    margin-top: 30px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -89,11 +89,11 @@ body {
 .product-backlog .caption {
     border-bottom: solid 1px #000000;
     margin-bottom: 3px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .product-backlog .caption-content {
-    font-size: 14px;
+    font-size: 12px;
     margin-left: 5px;
     margin-top: 0;
     margin-bottom: 0;
@@ -108,11 +108,11 @@ body {
 .task .caption {
     border-bottom: solid 1px #000000;
     margin-bottom: 3px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .task .caption-content {
-    font-size: 14px;
+    font-size: 12px;
     margin-left: 5px;
     margin-top: 0;
     margin-bottom: 0;
@@ -120,7 +120,6 @@ body {
 
 .task .caption {
     border-bottom: solid 1px #000000;
-
 }
 
 .header-title {
@@ -345,10 +344,16 @@ body {
     height: 100%;
 }
 
+.story-body h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
 .story-area {
     transition: all 0.3s ease;
     width: 100%;
-    height: 300px;
+    height: 250px;
     background-color: #EBF4EF;
     /* display: inline-block; */
     cursor: pointer;
@@ -365,20 +370,18 @@ body {
     margin-top: 10px;
 }
 
-
 .story-button {
     transition: all 0.3s ease;
     padding: 10px;
     border: none;
     cursor: pointer;
     width: 200px;
-    height: 170px;
+    height: 160px;
     background-color: #69BD83;
     border-radius: 15px;
     float: left;
     margin-top: 15px;
     margin-left: 15px;
-    margin-bottom: 15px;
 }
 
 .story-button:hover {
@@ -387,7 +390,7 @@ body {
 }
 
 .story-button p {
-    font-size: 16px;
+    font-size: 14px;
     color: #ffffff;
 }
 
@@ -410,9 +413,17 @@ body {
     text-align: center;
 }
 
+.task-head {
+    display: flex;
+}
+
+.task-head h2 {
+    margin-right: 20px;
+}
+
 .task-area {
     width: 100%;
-    height: 400px;
+    height: 490px;
     background-color: #F4F4F4;
     cursor: default;
     border-radius: 10px;
@@ -428,13 +439,13 @@ body {
     padding: 5px;
     border: none;
     cursor: pointer;
-    width: 200px;
-    height: 90px;
+    width: 190px;
+    height: 80px;
     background-color: #71a0eb;
     border-radius: 15px;
     float: left;
     margin-left: 15px;
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .task-button:hover {
@@ -443,12 +454,16 @@ body {
 }
 
 .task-name {
-    font-size: 16px;
+    margin-top: 2px;
+    font-size: 13px;
     color: #ffffff;
+    width: 200px;
+    height: 26px;
 }
 
 .task-status {
-    font-size: 12px;
+    margin-top: 2px;
+    font-size: 11px;
     color: #ffffff;
 }
 
@@ -493,12 +508,17 @@ label {
 }
 
 select {
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #969da3;
-    border-radius: 25px;
+    border-radius: 20px;
     color: #333;
     font-size: 1em;
-    line-height: 1.5;
+}
+
+.status-sieving {
+    font-size: 14px;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 /* Responsive styles */
